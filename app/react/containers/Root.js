@@ -3,4 +3,4 @@
 // } else {
   
 // }
-module.exports = require('./Root.dev');
+module.exports = require('./Root.prod');
