@@ -36,9 +36,6 @@ module.exports = {
     new webpack.ProvidePlugin({
       React: 'react',
       ReactDOM: 'react-dom'
-    }),
-    new ExtractTextPlugin('../stylesheets/react_bundle.css', {
-      allChunks: true
     })
   ]
 };

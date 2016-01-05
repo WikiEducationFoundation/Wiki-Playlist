@@ -8,6 +8,7 @@ import PlaylistEditor from './components/PlaylistEditor';
 
 class PlaylistApp extends React.Component{
   render() {
+    console.log(`Running ${process.env.NODE_ENV} env.`)
     return (
       <Router history={browserHistory}>
         <Route path="/" component={Root}>
