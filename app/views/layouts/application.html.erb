@@ -4,12 +4,13 @@
   <title>WikiPlaylist</title>
   <link href="//d2v52k3cl9vedd.cloudfront.net/basscss/7.0.4/basscss.min.css" rel="stylesheet">
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= render 'layouts/react_hot_assets' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
 <%= yield %>
-<%= render 'layouts/react_hot_assets' %>
+
 </body>
 </html>

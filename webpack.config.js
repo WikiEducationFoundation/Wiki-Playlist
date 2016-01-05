@@ -1,4 +1,5 @@
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var poststylus = require('poststylus');
 var webpack = require('webpack');
 
 module.exports = {
@@ -18,24 +19,28 @@ module.exports = {
         loaders: ['babel-loader']
       },
       {
-        key: 'scss',
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('css!sass')
-      },
-      {
         key: 'css',
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('css!sass')
+        loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+      },
+      {
+        test: /\.styl$/, 
+        loader: ExtractTextPlugin.extract("stylus", "css-loader!stylus-loader")
       }
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx', '.js.jsx']
+    extensions: ['', '.js', '.jsx', '.js.jsx', 'css', 'stylus']
   },
   plugins: [
     new webpack.ProvidePlugin({
       React: 'react',
       ReactDOM: 'react-dom'
     })
-  ]
+  ],
+  stylus: {
+    use: [
+      poststylus([ 'autoprefixer'])
+    ]
+  }
 };

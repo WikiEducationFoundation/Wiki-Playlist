@@ -1,5 +1,6 @@
 var config = require('./dev.config');
 const webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var jsxLoader = config.module.loaders.filter(function(loader) { return loader.key == 'jsx' })[0]
 jsxLoader.loaders.unshift('react-hot');
@@ -7,6 +8,7 @@ jsxLoader.loaders.unshift('react-hot');
 config.output.publicPath = 'http://localhost:8080/assets/'
 
 config.plugins.push(
+  new ExtractTextPlugin("[name].css", {allChunks: true}),
   new webpack.DefinePlugin({
     'process.env': {
       'NODE_ENV': JSON.stringify("development")

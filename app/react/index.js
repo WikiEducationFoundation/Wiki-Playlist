@@ -5,6 +5,7 @@ import Root from './containers/Root';
 import Home from './components/Home';
 import PlaylistEditor from './components/PlaylistEditor';
 
+require('./styles/index.styl');
 
 class PlaylistApp extends React.Component{
   render() {
