@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 
 class PlaylistEditor extends React.Component {
   render() {
-    console.log('PlaylistEditor', this.props);
     return (
       <div>
         <SearchForm {...this.props}/>
