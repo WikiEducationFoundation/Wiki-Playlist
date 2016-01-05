@@ -15,7 +15,7 @@ gem 'foreman'
 gem 'react_webpack_rails'
 gem 'devise'
 gem 'puma'
-
+gem 'mediawiki_api'
 gem 'rails_12factor', group: :production
 
 group :development, :test do

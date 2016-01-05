@@ -22,10 +22,18 @@
     "node-sass": "^3.3.3",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
-    "react-router": "1.0.0-rc3",
+    "react-router": "^1.0.0-rc3",
     "react-tools": "*",
     "sass-loader": "^3.0.0",
-    "webpack": "^1.12.1"
+    "webpack": "^1.12.1",
+    "superagent": "^1.6.1",
+    "superagent-jsonp": "0.0.6",
+    "redux-thunk": "^1.0.3",
+    "redux-devtools": "^3.0.1",
+    "redux-devtools-dock-monitor": "^1.0.1",
+    "redux-devtools-log-monitor": "^1.0.1",
+    "react-redux": "^4.0.4",
+    "redux": "^3.0.5"
   },
   "scripts": {
     "test": "karma start",
