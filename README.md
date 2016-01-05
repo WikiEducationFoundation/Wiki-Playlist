@@ -4,7 +4,7 @@
 
 1. Install Ruby 2.2.0 using [RVM](https://rvm.io/rvm/install)
 2. Install [Node](https://nodejs.org/en/)
-3. Install [Postgres App](http://postgresapp.com/)
+3. Install [Postgres App](http://postgresapp.com/) or [install PostgreSQL some other way](http://www.postgresql.org/download/)
 4. Clone this repository and cd into directory
 5. Run `bundle install`
 6. Run `npm install`
