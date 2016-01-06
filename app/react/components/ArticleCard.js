@@ -15,6 +15,6 @@ export default class ArticleCard extends React.Component {
   handleClick() {
     const {index, dispatch} = this.props;
     dispatch(updateCurrentEditingArticle(index));
-    dispatch(pushPath('/playlist/article-editor'))
+    dispatch(pushPath('/playlist/new/article'))
   }
 }
