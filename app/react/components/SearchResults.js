@@ -14,11 +14,15 @@ export default class SearchResults extends React.Component {
       const {pages, redirects} = query;
       let results = [];
       for(var key in pages) {
-        const {title, thumbnail} = pages[key];
+        const {title, thumbnail, terms} = pages[key];
         const thumb = (thumbnail !== undefined ? <img src={thumbnail.source}/> : null)
-        results.push(<div key={`result_${key}`} className='p1 border-bottom'>
-          <h3 style={{margin: 0}}>{title}</h3>
+        const description = (terms !== undefined && terms.description !== undefined ? <p>{terms.description}</p> : null)
+        results.push(<div key={`result_${key}`} className='p1 border-bottom flex'>
           {thumb}
+          <div className={(thumb ? 'px2' : '')}>
+            <h3 style={{margin: 0}}>{title}</h3>
+            {description}
+          </div>
         </div>)
       }
       return results;
