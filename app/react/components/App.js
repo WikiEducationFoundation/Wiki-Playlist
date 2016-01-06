@@ -7,7 +7,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="p2">
-        <h1>PlaylistApp</h1>
+        <h1>Wikipedia Playlist</h1>
         <nav className="py2 flex">
           <div className="px1">
             <Link to="/">Home</Link>
