@@ -26,8 +26,8 @@ class PlaylistApp extends React.Component{
         <Router history={history}>
           <Route path="/" component={App}>
             <IndexRoute component={Home} />
-            <Route path="/playlist-editor" component={PlaylistEditor} />
-            <Route path="/article-editor" component={ArticleEditor} />
+            <Route path="/playlist/editor" component={PlaylistEditor} />
+            <Route path="/playlist/article-editor" component={ArticleEditor} />
           </Route>
         </Router>
       </Provider>
