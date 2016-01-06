@@ -10,16 +10,16 @@ export default class SearchForm extends React.Component {
                onKeyDown={this._handleKeyDown.bind(this)}
                id='Search' 
                type='text'
-               defaultValue={this.props.searchApp.query}
+               defaultValue={this.props.Search.queries[this.props.index]}
                className='field ml1'/>
       </form>
     );
   }
 
   _handleKeyUp(e) {
-    const {dispatch} = this.props;
+    const {dispatch, index} = this.props;
     const query = e.target.value;
-    dispatch(updateQuery(query))
+    dispatch(updateQuery(index, query))
     this.queryTimeout = setTimeout(()=>{
       dispatch(fetchQuery(query, this._handleResults.bind(this)))
     }, 300)
@@ -30,6 +30,6 @@ export default class SearchForm extends React.Component {
   }
 
   _handleResults(results) {
-    this.props.dispatch(addSearch(results))
+    this.props.dispatch(addSearch(results, this.props.index))
   }
 }

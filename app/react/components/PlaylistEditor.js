@@ -1,11 +1,19 @@
 import ArticleCard from './ArticleCard';
 import { connect } from 'react-redux';
+import { updateCurrentEditingArticle, updateQuery } from '../actions';
 
 
 class PlaylistEditor extends React.Component {
 
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+    const {dispatch} = this.props;
+    const {editingArticle} = this.props.Playlist;
+    dispatch(updateCurrentEditingArticle(null));
+    // dispatch(updateQuery(editingArticle, ''))
   }
 
   render() {
@@ -17,7 +25,7 @@ class PlaylistEditor extends React.Component {
   }
 
   _articles() {
-    const {articles, editingArticle} = this.props.userArticles;
+    const {articles, editingArticle} = this.props.Playlist;
     let _articles = [];
     articles.map((article, i) =>{
       _articles.push(
@@ -30,10 +38,6 @@ class PlaylistEditor extends React.Component {
     })
     return _articles;
   }
-}
-
-PlaylistEditor.contextTypes - {
-  router: React.PropTypes.func.isRequired
 }
 
 export default connect( state => {return state})(PlaylistEditor);
