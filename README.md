@@ -4,15 +4,17 @@
 
 1. Install Ruby 2.2.0 using [RVM](https://rvm.io/rvm/install)
 2. Install [Node](https://nodejs.org/en/)
-3. Install [Postgres App](http://postgresapp.com/)
+3. Install [Postgres App](http://postgresapp.com/) or [install PostgreSQL some other way](http://www.postgresql.org/download/)
 4. Clone this repository and cd into directory
 5. Run `bundle install`
 6. Run `npm install`
+7. Run `npm install babel -g`
 7. Setup Local Postgres Database
   1. In a new terminal window type `psql` to start the Postgres cli
   2. Enter `CREATE USER craig WITH PASSWORD 'Password';`
   3. Enter `CREATE DATABASE wiki_playlist_development;`
   4. Enter `GRANT ALL PRIVILEGES ON DATABASE wiki_playlist_development to craig;` (replace craig with username)
+8. Run `rake db:migrate`
 
 ## Start the Rails App and Front End Build
 

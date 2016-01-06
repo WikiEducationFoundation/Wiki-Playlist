@@ -4,10 +4,13 @@ export const UPDATE_QUERY = 'UPDATE_QUERY';
 export const FETCH_QUERY = 'FETCH_QUERY';
 export const RECEIVE_RESULTS = 'RECEIVE_RESULTS';
 export const ADD_SEARCH = 'ADD_SEARCH';
+export const SET_EDIT_ARTICLE = 'SET_EDIT_ARTICLE';
+export const UPDATE_PATH = 'UPDATE_PATH';
 
 
 // Action Creators
 
+// — Search
 export function updateQuery(query) {
   return {
     type: UPDATE_QUERY,
@@ -36,6 +39,16 @@ export function receiveResults(results) {
     results: results
   }
 }
+
+// — Article
+export function updateCurrentEditingArticle(index) {
+  return {
+    type: SET_EDIT_ARTICLE,
+    index
+  }
+}
+
+
 
 /* Wiki Search
 --------------------------------------------- */

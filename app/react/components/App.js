@@ -1,11 +1,10 @@
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import childrenWithProps from '../utils/childrenWithProps';
+import DevTools from '../containers/DevTools';
 
 class App extends React.Component {
   render() {
-    // console.log(this.props);
-    console.log('App', this.props)
     return (
       <div className="p2">
         <h1>PlaylistApp</h1>
@@ -14,12 +13,21 @@ class App extends React.Component {
             <Link to="/">Home</Link>
           </div>
           <div className="px1">
-            <Link to="/editor">Playlist Editor</Link>
+            <Link to="/playlist-editor">Playlist Editor</Link>
           </div>
         </nav>
         {this.props.children}
+        {this._devTools()}
       </div>
     )
+  }
+
+  _devTools() {
+    if(process.env.NODE_ENV === 'development') {
+      return <DevTools/>
+    } else {
+      return null;
+    }
   }
 }
 

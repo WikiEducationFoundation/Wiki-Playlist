@@ -1,14 +1,18 @@
 import { combineReducers } from 'redux';
+import { routeReducer } from 'redux-simple-router';
 import {
-  UPDATE_QUERY, FETCH_QUERY, ADD_SEARCH, search
+  UPDATE_QUERY, 
+  FETCH_QUERY, 
+  ADD_SEARCH, 
+  search, 
+  SET_EDIT_ARTICLE
 } from '../actions';
 
-const initialState = {
+
+function searchApp(state = {
   query: '',
   history: {}
-}
-
-function searchApp(state = initialState, action) {
+}, action) {
 
   switch (action.type) {
   
@@ -30,8 +34,33 @@ function searchApp(state = initialState, action) {
 
 }
 
+const article = {
+  title: 'Find an article',
+  description: '',
+  image: '',
+  thumbnail: '',
+  url: ''
+}
+
+function userArticles(state = {
+  articles: [article, article, article],
+  editingArticle: null
+}, action) {
+  switch (action.type) {
+    case SET_EDIT_ARTICLE:
+      state = Object.assign({}, state, {editingArticle: action.index})
+    default:
+      return state;
+  }
+}
+
+
+/* Root Reducer
+--------------------------------------------- */
 const rootReducer = combineReducers({
-  searchApp
+  routing: routeReducer,
+  searchApp,
+  userArticles
 });
 
 export default rootReducer;
