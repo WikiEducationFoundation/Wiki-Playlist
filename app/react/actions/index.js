@@ -7,6 +7,8 @@ export const ADD_SEARCH = 'ADD_SEARCH';
 export const SET_EDIT_ARTICLE = 'SET_EDIT_ARTICLE';
 export const UPDATE_PATH = 'UPDATE_PATH';
 export const ADD_ARTICLE = 'ADD_ARTICLE';
+export const ADD_ARTICLE_IMAGES = 'ADD_ARTICLE_IMAGES';
+export const SET_ARTICLE_IMAGE = 'SET_ARTICLE_IMAGE';
 
 
 // Action Creators
@@ -49,6 +51,22 @@ export function addArticle(index, article) {
     type: ADD_ARTICLE,
     index,
     article
+  }
+}
+
+export function addArticleImages(index, images) {
+  return {
+    type: ADD_ARTICLE_IMAGES,
+    index,
+    images
+  }
+}
+
+export function setArticleImage(index, url) {
+  return {
+    type: SET_ARTICLE_IMAGE,
+    index,
+    url
   }
 }
 
@@ -98,18 +116,32 @@ export function search(query, callback) {
   }
 }
 
-const query_article = `${wiki_api}query&`
-const query_props = `&prop=info|images|pageprops`
+// Fetch Article images
+const exclude_images = require('../data/exclude_images');
+const query_article_images = `${wiki_api}query&redirects&generator=images&prop=imageinfo&&iiprop=url&format=json&titles=`
 
-export function fetchArticle(query, callback) {
-  const title = `&titles=${query}`;
-  superagent(query_article + query_props + title)
+export function fetchArticleImages(title, callback) {
+  superagent(query_article_images + title)
   .use(jsonp)
   .end((err, res) => {
     if(err) {
-      console.log('error fetching search', err);
+      console.log('error fetching article images', err);
     } else {
-      console.log('article data', res.body);
+      const imageObjects = _.values(res.body.query.pages);
+      let images = [];
+      imageObjects.map(obj => {
+        const url = obj.imageinfo[0].url;
+        var exclude = false
+        exclude_images.map(exl => {
+          if(exl.indexOf(url) !== -1) {exclude = true;}
+        });
+        if(!exclude) {
+          images.push(url);
+        }
+        
+      });
+      callback(images);
     }
   })
 }
+

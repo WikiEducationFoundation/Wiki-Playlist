@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
-import { addArticle, updateQuery } from '../actions';
+import { pushPath } from 'redux-simple-router';
+import { addArticle, updateQuery, addArticleImages, fetchArticleImages } from '../actions';
 
 class SearchResult extends React.Component {
   render() {
@@ -22,7 +23,14 @@ class SearchResult extends React.Component {
     const {dispatch, article, Playlist} = this.props;
     const index = Playlist.editingArticle;
     dispatch(addArticle(index, article))
-    
+    fetchArticleImages(article.title, this.addArticleImages.bind(this));
+  }
+
+  addArticleImages(images) {
+    const {dispatch, Playlist} = this.props;
+    const index = Playlist.editingArticle;
+    dispatch(addArticleImages(index, images))
+    dispatch(pushPath('/playlist/new/article/images'))
   }
 }
 

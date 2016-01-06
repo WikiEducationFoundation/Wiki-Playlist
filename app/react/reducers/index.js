@@ -7,7 +7,9 @@ import {
   ADD_SEARCH, 
   search, 
   SET_EDIT_ARTICLE,
-  ADD_ARTICLE
+  ADD_ARTICLE,
+  ADD_ARTICLE_IMAGES,
+  SET_ARTICLE_IMAGE
 } from '../actions';
 
 const TOTAL_ARTICLES = 3;
@@ -50,6 +52,7 @@ const defaultArticle = {
   title: 'Find an article',
   description: '',
   image: '',
+  images: [],
   thumbnail: '',
   url: ''
 }
@@ -71,7 +74,7 @@ function Playlist(state = {
       return Object.assign({}, state, {editingArticle: action.index})
 
     case ADD_ARTICLE:
-      const {article, index} = action;
+      let {article, index} = action;
       const {title, fullurl} = article;
       const url = fullurl;
       const thumbnail = _.deepGet(article, 'thumbnail.source');
@@ -80,6 +83,18 @@ function Playlist(state = {
       var articles = state.articles.slice(0);
       articles[index] = _article;
       return Object.assign({}, state, {articles: articles})
+
+    case ADD_ARTICLE_IMAGES:
+      let {images} = action;
+      var articles = state.articles.slice(0);
+      articles[action.index].images = images;
+      return Object.assign({}, state, {articles: articles})
+
+    case SET_ARTICLE_IMAGE:
+      var articles = state.articles.slice(0);
+      articles[action.index].image = action.url;
+      return Object.assign({}, state, {articles: articles})
+
     default:
       return state;
   }
