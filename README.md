@@ -14,8 +14,13 @@
   2. Enter `CREATE USER craig WITH PASSWORD 'Password';`
   3. Enter `CREATE DATABASE wiki_playlist_development;`
   4. Enter `GRANT ALL PRIVILEGES ON DATABASE wiki_playlist_development to craig;` (replace craig with username)
-9. Run `mv config/application.sample.yml config/application.yml` and update with your wikimedia oauth token and secret. [See here](https://github.com/WikiEducationFoundation/WikiEduDashboard/blob/master/docs/oauth.md) for details on obtaining these credentials.
+9. Setup OAuth
+  1.  Run `mv config/application.sample.yml config/application.yml`
+  2. Update `config/application.yml` with your wikimedia oauth token and secret. [See here](https://github.com/WikiEducationFoundation/WikiEduDashboard/blob/master/docs/oauth.md) for details on obtaining these credentials.
+  3. Update `config/application.yml` with Facebook and Twitter app key and secret values
+  4. See [devise wiki](https://github.com/plataformatec/devise/wiki) for troubleshooting.
 10. Run `rake db:migrate`
+11. Kapow! You should be ready to roll
 
 
 ## Start the Rails App and Front End Build
