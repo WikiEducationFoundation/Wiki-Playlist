@@ -258,6 +258,9 @@ Devise.setup do |config|
                     signup: true
                   }
 
+  config.omniauth :facebook, Figaro.env.facebook_app_id, Figaro.env.facebook_app_secret
+  config.omniauth :twitter, Figaro.env.twitter_key, Figaro.env.twitter_secret
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
