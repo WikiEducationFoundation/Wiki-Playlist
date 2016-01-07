@@ -9,12 +9,14 @@
 5. Run `bundle install`
 6. Run `npm install`
 7. Run `npm install babel -g`
-7. Setup Local Postgres Database
+8. Setup Local Postgres Database
   1. In a new terminal window type `psql` to start the Postgres cli
   2. Enter `CREATE USER craig WITH PASSWORD 'Password';`
   3. Enter `CREATE DATABASE wiki_playlist_development;`
   4. Enter `GRANT ALL PRIVILEGES ON DATABASE wiki_playlist_development to craig;` (replace craig with username)
-8. Run `rake db:migrate`
+9. Run `mv config/application.sample.yml config/application.yml` and update with your wikimedia oauth token and secret. [See here](https://github.com/WikiEducationFoundation/WikiEduDashboard/blob/master/docs/oauth.md) for details on obtaining these credentials.
+10. Run `rake db:migrate`
+
 
 ## Start the Rails App and Front End Build
 

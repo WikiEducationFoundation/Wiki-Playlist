@@ -17,6 +17,11 @@ gem 'devise'
 gem 'puma'
 gem 'mediawiki_api'
 gem 'rails_12factor', group: :production
+gem 'figaro'
+gem 'omniauth'
+gem 'omniauth-mediawiki', git: 'https://github.com/ragesoss/omniauth-mediawiki.git'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
 
 group :development, :test do
   gem 'byebug'

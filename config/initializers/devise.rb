@@ -239,6 +239,24 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
+  config.omniauth :mediawiki,
+                  Figaro.env.wikipedia_token,
+                  Figaro.env.wikipedia_secret,
+                  client_options: {
+                    callback_url: Figaro.env.mediawiki_callback_url,
+                    site: "https://#{Figaro.env.wikipedia_language}.wikipedia.org"
+                  }
+
+
+  config.omniauth :mediawiki_signup,
+                  Figaro.env.wikipedia_token,
+                  Figaro.env.wikipedia_secret,
+                  name: 'mediawiki_signup',
+                  strategy_class: OmniAuth::Strategies::Mediawiki,
+                  client_options: {
+                    site: "https://#{Figaro.env.wikipedia_language}.wikipedia.org",
+                    signup: true
+                  }
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
