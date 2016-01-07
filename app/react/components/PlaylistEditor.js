@@ -33,7 +33,9 @@ class PlaylistEditor extends React.Component {
           index={i} 
           key={`article_${i}`}
           dispatch={this.props.dispatch}
-          {...article} />
+          editing={editingArticle}
+          {...article}>
+          {(editingArticle === i ? this.props.children : null)}</ArticleCard>
       )
     })
     return _articles;

@@ -13,7 +13,7 @@ class App extends React.Component {
             <Link to="/">Home</Link>
           </div>
           <div className="px1">
-            <Link to="/playlist/new">Playlist Editor</Link>
+            <Link to="/playlist/new">Create a Playlist</Link>
           </div>
         </nav>
         {this.props.children}
