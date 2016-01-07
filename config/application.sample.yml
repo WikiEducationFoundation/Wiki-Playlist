@@ -1,3 +1,10 @@
 wikipedia_token: <token>
 wikipedia_secret: <secret>
 wikipedia_language: en
+
+facebook_app_id: <id>
+facebook_app_secret: <secret>
+
+twitter_key: <id>
+twitter_secret: <secret>
+
