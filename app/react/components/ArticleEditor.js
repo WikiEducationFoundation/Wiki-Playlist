@@ -6,19 +6,20 @@ class ArticleEditor extends React.Component {
   render() {
     return (
       <div>
-        <SearchForm {...this.props}/>
+        <SearchForm index={this.props.Playlist.editingArticle} {...this.props}/>
         {this._currentQuery()}
       </div>
     )
   }
 
   _currentQuery() {
-    const {query, history} = this.props.searchApp;
+    const {queries, history} = this.props.Search;
+    const query = queries[this.props.Playlist.editingArticle];
     if(query !== undefined && query.length) {
       return (
         <div>
           <h2>Search For: "{query}"</h2>
-          <SearchResults query={history[query]}/>
+          <SearchResults dispatch={this.props.dispatch} query={history[query]}/>
         </div>
       );
       

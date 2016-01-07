@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.2.0'
+ruby '2.3.0'
 gem 'rails', '4.2.5'
 gem 'pg', '~> 0.15'
 gem 'sass-rails', '~> 5.0'
@@ -17,6 +17,11 @@ gem 'devise'
 gem 'puma'
 gem 'mediawiki_api'
 gem 'rails_12factor', group: :production
+gem 'figaro'
+gem 'omniauth'
+gem 'omniauth-mediawiki', git: 'https://github.com/ragesoss/omniauth-mediawiki.git'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
 
 group :development, :test do
   gem 'byebug'

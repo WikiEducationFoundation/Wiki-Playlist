@@ -1,17 +1,24 @@
+// Style
+require('./styles/index.styl');
+
+
 window.React = React;
 window.ReactDOM = ReactDOM;
+
 import { Provider } from 'react-redux';
 import DevTools from './containers/DevTools';
 import {Router, Route, Link, browserHistory, IndexRoute} from 'react-router';
 import { syncReduxAndRouter } from 'redux-simple-router'
-import Root from './containers/Root';
+
+// Components
 import App from './components/App';
 import Home from './components/Home';
 import PlaylistEditor from './components/PlaylistEditor';
 import ArticleEditor from './components/ArticleEditor';
+import ImageSelector from './components/ImageSelector';
+
 import { createHistory } from 'history';
 import configureStore from './store/configureStore';
-require('./styles/index.styl');
 
 const store = configureStore();
 const history = createHistory();
@@ -28,6 +35,7 @@ class PlaylistApp extends React.Component{
             <IndexRoute component={Home} />
             <Route path="/playlist/new" component={PlaylistEditor} />
             <Route path="/playlist/new/article" component={ArticleEditor} />
+            <Route path="/playlist/new/article/images" component={ImageSelector} />
           </Route>
         </Router>
       </Provider>

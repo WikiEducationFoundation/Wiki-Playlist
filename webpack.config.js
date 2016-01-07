@@ -35,7 +35,8 @@ module.exports = {
   plugins: [
     new webpack.ProvidePlugin({
       React: 'react',
-      ReactDOM: 'react-dom'
+      ReactDOM: 'react-dom',
+      _: 'lodash'
     })
   ],
   stylus: {
