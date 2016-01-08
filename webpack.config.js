@@ -36,7 +36,9 @@ module.exports = {
     new webpack.ProvidePlugin({
       React: 'react',
       ReactDOM: 'react-dom',
-      _: 'lodash'
+      _: 'lodash',
+      Slider: 'react-slick',
+      es6BindAll: 'es6bindall'
     })
   ]
 };

@@ -1,0 +1,51 @@
+.image-selector
+  flex 1
+
+.image-selector__image
+  display inline-block
+  vertical-align top
+  position relative
+  height 200px
+  width 300px
+  background-position top center
+  background-size cover
+  img
+    max-height 100%
+  
+.slick-slider
+  position relative
+  width 100%
+
+.slick-dots
+  margin 0
+  padding 0
+  list-style none
+  text-align center
+  
+  li
+    display inline-block
+  
+  button
+    position relative
+    background none
+    border none
+    display block
+    color transparent
+    
+    &:focus
+      outline 0
+
+    &:after
+      content ''
+      position absolute
+      top 0
+      left 0
+      display block
+      width 8px
+      height 8px
+      background white
+      border 1px solid rgba(black, .5)
+      border-radius 50%
+  
+  li.slick-active button:after
+    background rgba(black, .5)
