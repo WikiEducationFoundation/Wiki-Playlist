@@ -1,8 +1,10 @@
 .article-card
   height 400px
-  width 320px
-  float left
+  width 300px
+  display inline-block
+  vertical-align top
   margin-right 1em
+  transition 300ms linear
 
 .article-card__container
   border-radius 10px
@@ -11,7 +13,17 @@
   background white
   height 100%
   width 100%
+  overflow-y auto
+  
 
 .article-card__summary
   flex 1 0 auto
   justify-content center
+  text-align center
+  white-space normal
+
+.article-card__image
+  border-top-left-radius 10px
+  border-top-right-radius 10px
+  background-position top center
+  background-size cover

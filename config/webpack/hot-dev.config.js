@@ -5,6 +5,11 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var jsxLoader = config.module.loaders.filter(function(loader) { return loader.key == 'jsx' })[0]
 jsxLoader.loaders.unshift('react-hot');
 
+config.module.loaders.push({
+  test: /\.styl$/, 
+  loader: "style-loader!css-loader!stylus-loader"
+})
+
 config.output.publicPath = 'http://localhost:8080/assets/'
 
 config.plugins.push(

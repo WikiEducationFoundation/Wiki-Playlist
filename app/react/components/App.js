@@ -23,6 +23,7 @@ class App extends React.Component {
   }
 
   _devTools() {
+    // return null;
     if(process.env.NODE_ENV === 'development') {
       return <DevTools/>
     } else {

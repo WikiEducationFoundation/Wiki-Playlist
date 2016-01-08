@@ -4,7 +4,7 @@ import SearchResult from './SearchResult';
 export default class SearchResults extends React.Component {
   render() {
     return (
-      <div className="border-top">
+      <div className="search-results">
       {this._results()}
       </div>
     )

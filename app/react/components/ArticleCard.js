@@ -1,5 +1,6 @@
 import GSAP from 'react-gsap-enhancer'
 import { updateCurrentEditingArticle, expandArticle, collapseArticle } from '../actions';
+import { Link } from 'react-router';
 import { pushPath } from 'redux-simple-router';
 import { connect } from 'react-redux';
 import es6BindAll from "es6bindall"; 
@@ -41,9 +42,9 @@ class ArticleCard extends React.Component {
   componentWillReceiveProps(nextProps) {
     const {path} = nextProps.routing;
     const {index, Playlist, open} = this.props;
-    if(nextProps.open && !this.state.open) {
+    if(nextProps.open && !this.state.open && !this.animating) {
       this.constroller = this.addAnimation(this._expand);
-    } else if(!nextProps.open && this.state.open) {
+    } else if(!nextProps.open && this.state.open && !this.animating) {
       this.controller = this.addAnimation(this._collapse);
     }
   }
@@ -59,15 +60,21 @@ class ArticleCard extends React.Component {
       );
     }
 
+    let add_button = null;
+    if(!has_article) {
+      add_button = (
+        <button className='btn btn-outline bg-silver flex-end' 
+                  onClick={() => {this.dispatch(expandArticle(index))}}>
+                  Add Article</button>);
+    }
+
     if(editing !== index) {
       return (
         <div className="article-card__content flex flex-grow flex-column flex-stretch" ref={c => {this.cardContent = c}}>
           {this._articleImage()}
           <div className='flex flex-column flex-center article-card__summary'>
             {content}
-            <button className='btn btn-outline bg-silver flex-end' 
-                  onClick={() => {this.dispatch(expandArticle(index))}}>
-                  Add Article</button>
+            {add_button}
           </div>
         </div>)
     } else {
@@ -76,19 +83,27 @@ class ArticleCard extends React.Component {
   }
 
   _articleImage() {
-    const {image} = this.props;
+    const {image, images} = this.props;
     let style = {
       backgroundColor: '#aaa',
       height: '200px'
     }
-    if(image !== '') {
+    let link_to_image_selector = null;
+    if(image !== undefined && image !== '') {
       style.backgroundImage = `url(${image})`
+    } else if (images.length) {
+      style.backgroundImage = `url(${images[0]})`;
+      // link_to_image_selector = (
+      //   <Link to='/playlist/article/images'>Choose Image</Link>
+      // );
     }
-    return <div className='article-card__image' style={style}/>
+
+    return (<div className='article-card__image' style={style}>{link_to_image_selector}</div>)
   }
 
 
   _expand() {
+    this.animating = true;
     const target = this.cardElement;
     const {top, left, height, width} = target.getBoundingClientRect();
     this.startY = top;
@@ -115,20 +130,22 @@ class ArticleCard extends React.Component {
       ease: Power3.easeInOut,
       onStart: () => {
         TweenMax.to(this.cardContent, 1,  
-          {opacity: 0, y: -100, ease: Power3.easeOut})
+          {opacity: 0, ease: Power3.easeOut})
       },
       onComplete: () => {
         this.setState({open: true});
         this.dispatch(updateCurrentEditingArticle(this.props.index));
         this.dispatch(pushPath('/playlist/article/search'))
+        this.animating = false;
       }
     })
   }
 
-  _collapse() {
-    console.log('card collapsing')
-    const target = this.cardElement;
-    return TweenMax.to(target, 1, {
+  _collapse({target}) {
+    this.animating = true;
+    const card = this.cardElement;
+
+    return TweenMax.to(card, 1, {
       top: this.startY, 
       left: this.startX, 
       width: this.startWidth, 
@@ -137,15 +154,14 @@ class ArticleCard extends React.Component {
       ease: Power3.easeInOut,
       onStart: () => {
         this.dispatch(collapseArticle(this.props.index));
-        TweenMax.to(this.cardContent, 1,  
-          {opacity: 1, y: 0, ease: Power3.easeOut})
-        
       },
       onComplete: () => {
         if(this.alive) {
           this.setState({open: false})
-          target.style.position = 'static';
+          this.animating = false;
+          card.removeAttribute('style')
         }
+        
       }
     })
   }

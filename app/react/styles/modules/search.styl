@@ -1,11 +1,42 @@
-.search__result
-  img
-    max-width 100%
-    height auto
-
 .search__input
   display block
   border-radius 0
   width 100%
   border none
   border-bottom 1px solid black
+  max-width 500px
+  font-size 22px
+  line-height 22px
+
+.search-results
+  max-width 500px
+
+.search-result
+  border-radius 10px
+  
+  img
+    max-width 100%
+    height auto
+  
+  p
+    margin-bottom 0
+    font-size 12px
+
+.search-result__description
+  overflow: hidden
+  display: block
+  width: 270px
+  white-space: nowrap
+  text-overflow: ellipsis
+
+.search-result__actions
+  align-items stretch
+
+.search-result__actions .btn
+  display block
+  flex 1
+  text-align center
+  transition 300ms linear
+  
+  &:hover
+    background rgba(#ccc, .2)

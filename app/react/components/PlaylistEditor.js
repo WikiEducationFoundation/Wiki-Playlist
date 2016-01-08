@@ -7,7 +7,7 @@ class PlaylistEditor extends React.Component {
 
   render() {
     return (
-      <div className=''>
+      <div className='articles'>
         {this._articles()}
       </div>
     )
