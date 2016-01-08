@@ -5,13 +5,13 @@ export default class SearchForm extends React.Component {
     // console.log('searchform', this.props);
     return (
       <form onSubmit={e => e.preventDefault()}>
-        <label htmlFor='Search'>Search Wikipedia</label>
         <input onKeyUp={this._handleKeyUp.bind(this)}
                onKeyDown={this._handleKeyDown.bind(this)}
                id='Search' 
                type='text'
+               placeholder='Search Wikipedia'
                defaultValue={this.props.Search.queries[this.props.index]}
-               className='field ml1'/>
+               className='field border-bottom search__input'/>
       </form>
     );
   }

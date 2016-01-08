@@ -9,6 +9,8 @@ export const UPDATE_PATH = 'UPDATE_PATH';
 export const ADD_ARTICLE = 'ADD_ARTICLE';
 export const ADD_ARTICLE_IMAGES = 'ADD_ARTICLE_IMAGES';
 export const SET_ARTICLE_IMAGE = 'SET_ARTICLE_IMAGE';
+export const EXPAND_ARTICLE = 'EXPAND_ARTICLE';
+export const COLLAPSE_ARTICLE = 'COLLAPSE_ARTICLE';
 
 
 // Action Creators
@@ -67,6 +69,20 @@ export function setArticleImage(index, url) {
     type: SET_ARTICLE_IMAGE,
     index,
     url
+  }
+}
+
+export function expandArticle(index) {
+  console.log('expandArticle')
+  return {
+    type: EXPAND_ARTICLE,
+    index
+  }
+}
+export function collapseArticle(index) {
+  return {
+    type: COLLAPSE_ARTICLE,
+    index
   }
 }
 

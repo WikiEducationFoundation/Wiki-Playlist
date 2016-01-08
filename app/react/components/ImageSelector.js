@@ -22,11 +22,12 @@ class ImageSelector extends React.Component {
     let _images = [];
     images.map(img => {
       const selected = (img === currentImage ? true : false);
-      _images.push(<ArticleImage key={img} 
-                                 dispatch={this.props.dispatch} 
-                                 articleIndex={editingArticle} 
-                                 src={img} 
-                                 selected={selected}/>)
+      _images.push(
+        <ArticleImage key={img} 
+                      dispatch={this.props.dispatch} 
+                      articleIndex={editingArticle} 
+                      src={img} 
+                      selected={selected}/>)
     });
     return _images;
   }

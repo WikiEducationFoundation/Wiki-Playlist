@@ -14,7 +14,8 @@ import { syncReduxAndRouter } from 'redux-simple-router'
 import App from './components/App';
 import Home from './components/Home';
 import PlaylistEditor from './components/PlaylistEditor';
-import ArticleEditor from './components/ArticleEditor';
+import ArticleSearch from './components/ArticleSearch';
+import ArticlePreview from './components/ArticlePreview';
 import ImageSelector from './components/ImageSelector';
 
 import { createHistory } from 'history';
@@ -33,9 +34,10 @@ class PlaylistApp extends React.Component{
         <Router history={history}>
           <Route path="/" component={App}>
             <IndexRoute component={Home} />
-            <Route path="/playlist/new" component={PlaylistEditor}>
-              <Route path="/playlist/new/article" component={ArticleEditor} />
-              <Route path="/playlist/new/article/images" component={ImageSelector} />
+            <Route path="/playlist" component={PlaylistEditor}>
+              <Route path="/playlist/article/search" component={ArticleSearch} />
+              <Route path="/playlist/article/preview" component={ArticlePreview} />
+              <Route path="/playlist/article/images" component={ImageSelector} />
             </Route>
           </Route>
         </Router>

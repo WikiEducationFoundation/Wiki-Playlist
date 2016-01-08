@@ -1,6 +1,6 @@
 _.mixin(require("lodash-deep"));
 import { combineReducers } from 'redux';
-import { routeReducer } from 'redux-simple-router';
+import { routeReducer, UPDATE_PATH } from 'redux-simple-router';
 import {
   UPDATE_QUERY, 
   FETCH_QUERY, 
@@ -9,7 +9,9 @@ import {
   SET_EDIT_ARTICLE,
   ADD_ARTICLE,
   ADD_ARTICLE_IMAGES,
-  SET_ARTICLE_IMAGE
+  SET_ARTICLE_IMAGE,
+  EXPAND_ARTICLE,
+  COLLAPSE_ARTICLE
 } from '../actions';
 
 const TOTAL_ARTICLES = 3;
@@ -48,20 +50,21 @@ function Search(state = {
 
 }
 
-const defaultArticle = {
-  title: 'Find an article',
-  description: '',
-  image: '',
-  images: [],
-  thumbnail: '',
-  url: ''
-}
 
 
 let j = 0;
 let initialArticles = [];
 while(j < TOTAL_ARTICLES) {
-  initialArticles.push(defaultArticle);
+  initialArticles.push({
+    title: 'Article',
+    description: '',
+    image: '',
+    images: [],
+    thumbnail: '',
+    url: '',
+    open: false,
+    has_article: false
+  });
   j++;
 }
 
@@ -80,6 +83,7 @@ function Playlist(state = {
       const thumbnail = _.deepGet(article, 'thumbnail.source');
       const description = _.deepGet(article, 'terms.description.0'); 
       var _article = {title, url, thumbnail, description};
+      _article.has_article = true;
       var articles = state.articles.slice(0);
       articles[index] = _article;
       return Object.assign({}, state, {articles: articles})
@@ -95,11 +99,38 @@ function Playlist(state = {
       articles[action.index].image = action.url;
       return Object.assign({}, state, {articles: articles})
 
+    case EXPAND_ARTICLE:
+      var articles = state.articles.slice(0);
+      articles[action.index].open = true;
+      return Object.assign({}, state, {articles: articles})
+
+    case COLLAPSE_ARTICLE:
+      var articles = state.articles.slice(0);
+      articles[action.index].open = false;
+      return Object.assign({}, state, {articles: articles})
+
+    case UPDATE_PATH:
+      if(action.payload.path === '/playlist') {
+        var articles = state.articles.slice(0);
+        articles.map(article =>{
+          if(article.open) {
+            article.open = false;
+          }
+        });
+        return Object.assign({}, state, {
+          articles: articles,
+          editingArticle: null
+        })
+      } else {
+        return state;
+      }
+      
+
+
     default:
       return state;
   }
 }
-
 
 /* Root Reducer
 --------------------------------------------- */

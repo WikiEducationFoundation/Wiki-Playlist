@@ -3,19 +3,25 @@ import SearchForm from './SearchForm';
 import SearchResults from './SearchResults';
 import { connect } from 'react-redux';
 
-class ArticleEditor extends React.Component {
+class ArticleSearch extends React.Component {
   
   componentDidMount() {
+    console.log('article search')
     this.addAnimation(fadeIn);
   }
 
   render() {
     return (
       <div className='intially-hidden p2'>
+        <h3>Add Article</h3>
         <SearchForm index={this.props.Playlist.editingArticle} {...this.props}/>
         {this._currentQuery()}
       </div>
     )
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const {path} = nextProps.routing;
   }
 
   _currentQuery() {
@@ -40,10 +46,23 @@ function fadeIn({target}) {
     opacity: 0,
     ease: Power2.easeOut,
     onStart: () => {
-      // console.log(target)
       target[0].style.visibility = 'visible';
     }
   })
 }
 
-export default connect( state => {return state})(GSAP()(ArticleEditor));
+function fadeOut({target}) {
+  console.log('fadeout', target)
+  return TweenMax.fromTo(target, 1, {
+      opacity: 0,
+      ease: Power2.easeOut,
+    },
+    {
+      opacity: 1,
+      onComplete: () => {
+       target[0].style.visibility = 'hidden';
+      }
+    })
+}
+
+export default connect( state => {return state})(GSAP()(ArticleSearch));
