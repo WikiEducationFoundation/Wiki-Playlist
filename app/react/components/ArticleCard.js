@@ -61,12 +61,12 @@ class ArticleCard extends React.Component {
     }
 
     let add_button = null;
-    if(!has_article) {
-      add_button = (
-        <button className='btn btn-outline bg-silver flex-end' 
+    const search_button_text = (has_article ? 'Change Article' : 'Add Article')
+    const search_button_class = (has_article ? '' : 'bg-silver')
+    let search_button = (
+      <button className={`btn btn-outline flex-end ${search_button_class}`} 
                   onClick={() => {this.dispatch(expandArticle(index))}}>
-                  Add Article</button>);
-    }
+                  {search_button_text}</button>);
 
     if(editing !== index) {
       return (
@@ -74,7 +74,7 @@ class ArticleCard extends React.Component {
           {this._articleImage()}
           <div className='flex flex-column flex-center article-card__summary'>
             {content}
-            {add_button}
+            {search_button}
           </div>
         </div>)
     } else {

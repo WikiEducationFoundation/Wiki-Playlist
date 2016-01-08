@@ -2,7 +2,6 @@ import {updateQuery, fetchQuery, addSearch, search} from '../actions';
 
 export default class SearchForm extends React.Component {
   render() {
-    // console.log('searchform', this.props);
     return (
       <form onSubmit={e => e.preventDefault()}>
         <input onKeyUp={this._handleKeyUp.bind(this)}

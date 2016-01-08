@@ -1,6 +1,12 @@
 import { connect } from 'react-redux';
 import { pushPath } from 'redux-simple-router';
-import { addArticle, updateQuery, addArticleImages, fetchArticleImages, updateCurrentEditingArticle } from '../actions';
+import {
+  addArticle, 
+  updateQuery,
+  addArticleImages,
+  fetchArticleImages,
+  updateCurrentEditingArticle
+} from '../actions';
 
 class SearchResult extends React.Component {
   render() {
@@ -36,6 +42,7 @@ class SearchResult extends React.Component {
     dispatch(addArticleImages(index, images))
     dispatch(pushPath('/playlist'))
     dispatch(updateCurrentEditingArticle(null));
+    dispatch(updateQuery(index, ''));
   }
 }
 

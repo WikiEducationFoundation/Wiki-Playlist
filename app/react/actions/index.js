@@ -73,7 +73,6 @@ export function setArticleImage(index, url) {
 }
 
 export function expandArticle(index) {
-  console.log('expandArticle')
   return {
     type: EXPAND_ARTICLE,
     index
