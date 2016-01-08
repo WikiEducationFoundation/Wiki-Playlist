@@ -157,9 +157,11 @@ class ArticleCard extends React.Component {
       },
       onComplete: () => {
         if(this.alive) {
-          this.setState({open: false})
-          this.animating = false;
-          card.removeAttribute('style')
+          this.setState({open: false}, ()=> {
+            this.animating = false;
+            card.removeAttribute('style')
+          })
+          
         }
         
       }
