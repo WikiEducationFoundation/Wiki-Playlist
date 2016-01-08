@@ -14,6 +14,7 @@
   2. Enter `CREATE USER craig WITH PASSWORD 'Password';`
   3. Enter `CREATE DATABASE wiki_playlist_development;`
   4. Enter `GRANT ALL PRIVILEGES ON DATABASE wiki_playlist_development to craig;` (replace craig with username)
+  5. Repeat steps 3 and 4 for the test database `wiki_playlist_test`.
 9. Setup OAuth
   1. Run `cp config/application.sample.yml config/application.yml`
   2. Update `config/application.yml` with your wikimedia oauth token and secret. [See here](https://github.com/WikiEducationFoundation/WikiEduDashboard/blob/master/docs/oauth.md) for details on obtaining these credentials.

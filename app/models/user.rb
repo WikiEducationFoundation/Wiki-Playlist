@@ -6,8 +6,7 @@ class User < ActiveRecord::Base
          :omniauthable, omniauth_providers: [:mediawiki, :mediawiki_signup, :twitter, :facebook]
 
   def self.from_omniauth(auth)
-
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    where( email: auth.provider, uid: auth.uid).first_or_create do |user|
       email = auth.info.email
       if email.nil?
         email = auth.extra.raw_info.email
