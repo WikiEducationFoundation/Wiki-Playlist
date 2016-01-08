@@ -12,6 +12,7 @@
     "eslint": "^1.7.3",
     "eslint-plugin-react": "^3.6.3",
     "expect": "^1.12.2",
+    "history": "^1.17.0",
     "karma": "^0.13.13",
     "karma-chrome-launcher": "^0.2.1",
     "karma-mocha": "^0.2.0",
