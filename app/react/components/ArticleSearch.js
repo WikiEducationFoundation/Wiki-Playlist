@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 class ArticleSearch extends React.Component {
   
   componentDidMount() {
-    console.log('article search')
     this.addAnimation(fadeIn);
   }
 
@@ -52,7 +51,6 @@ function fadeIn({target}) {
 }
 
 function fadeOut({target}) {
-  console.log('fadeout', target)
   return TweenMax.fromTo(target, 1, {
       opacity: 0,
       ease: Power2.easeOut,

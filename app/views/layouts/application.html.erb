@@ -6,6 +6,9 @@
   <link rel="apple-touch-icon" href="//www.wikipedia.org/static/apple-touch/wikipedia.png">
   <link rel="shortcut icon" href="//www.wikipedia.org/static/favicon/wikipedia.ico">
   <link href="//d2v52k3cl9vedd.cloudfront.net/basscss/7.0.4/basscss.min.css" rel="stylesheet">
+  <% if Rails.env.production? || Rails.env.test? %>
+  <%= stylesheet_link_tag 'application', 'data-turbolinks-track' => true %>
+  <% end %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TweenMax.min.js"></script>
   <%= render 'layouts/react_hot_assets' %>
