@@ -5,9 +5,9 @@ module.exports = function (config) {
     browsers: ['Chrome'],
     singleRun: true,
     frameworks: ['mocha', 'sinon'],
-    files: ['webpack/tests.config.js'],
+    files: ['config/webpack/tests.config.js'],
     preprocessors: {
-      'webpack/tests.config.js': ['webpack', 'sourcemap']
+      'config/webpack/tests.config.js': ['webpack', 'sourcemap']
     },
     reporters: ['dots'],
     webpack: {
@@ -24,6 +24,13 @@ module.exports = function (config) {
         extensions: ["", ".js", ".jsx", ".js.jsx"]
       },
       devtool: 'inline-source-map',
+      plugins: [
+        new webpack.ProvidePlugin({
+          React: 'react',
+          ReactDOM: 'react-dom',
+          _: 'lodash'
+        })
+      ]
     },
     webpackServer: {
       noInfo: true
