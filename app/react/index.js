@@ -2,6 +2,7 @@
 require('./styles/index.styl');
 
 
+
 window.React = React;
 window.ReactDOM = ReactDOM;
 
@@ -16,6 +17,7 @@ import Home from './components/Home';
 import PlaylistEditor from './components/PlaylistEditor';
 import ArticleSearch from './components/ArticleSearch';
 import ArticlePreview from './components/ArticlePreview';
+import ArticleCaption from './components/ArticleCaption';
 import ImageSelector from './components/ImageSelector';
 
 import { createHistory } from 'history';
@@ -28,7 +30,6 @@ syncReduxAndRouter(history, store)
 
 class PlaylistApp extends React.Component{
   render() {
-    console.log(`Running ${process.env.NODE_ENV} env.`)
     return (
       <Provider store={store}>
         <Router history={history}>
@@ -38,6 +39,7 @@ class PlaylistApp extends React.Component{
               <Route path="/playlist/article/search" component={ArticleSearch} />
               <Route path="/playlist/article/preview" component={ArticlePreview} />
               <Route path="/playlist/article/images" component={ImageSelector} />
+              <Route path="/playlist/article/caption" component={ArticleCaption} />
             </Route>
           </Route>
         </Router>

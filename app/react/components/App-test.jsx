@@ -7,7 +7,6 @@ const store = configureStore();
 
 describe('App', () => {
   const component = TestUtils.renderIntoDocument(<App store={store} />);
-
   it('renders', () => {
     expect(TestUtils.findRenderedComponentWithType(component, App)).toExist();
   });

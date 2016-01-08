@@ -10,7 +10,14 @@ class ArticleCard extends React.Component {
   constructor(props) {
     super();
     this.dispatch = props.dispatch;
-    es6BindAll(this,['_expand', '_collapse'])
+
+    es6BindAll(this, [
+        '_expand', 
+       '_collapse',
+       '_openImageSelector', 
+       '_hideContent'
+      ]);
+
     this.state = {
       open: false
     }
@@ -93,12 +100,21 @@ class ArticleCard extends React.Component {
       style.backgroundImage = `url(${image})`
     } else if (images.length) {
       style.backgroundImage = `url(${images[0]})`;
-      // link_to_image_selector = (
-      //   <Link to='/playlist/article/images'>Choose Image</Link>
-      // );
+      link_to_image_selector = (
+        <button className='btn btn-outline' 
+                onClick={this._openImageSelector}>Choose Image</button>
+      );
     }
 
     return (<div className='article-card__image' style={style}>{link_to_image_selector}</div>)
+  }
+
+  _hideContent(callback = null) {
+    this.addAnimation(() =>{
+      return TweenMax.to(this.cardContent, 1,  
+        {opacity: 0, ease: Power3.easeOut, onComplete: callback})
+    });
+    
   }
 
   _expand() {
@@ -128,8 +144,7 @@ class ArticleCard extends React.Component {
       zIndex: 20,
       ease: Power3.easeInOut,
       onStart: () => {
-        TweenMax.to(this.cardContent, 1,  
-          {opacity: 0, ease: Power3.easeOut})
+        this._hideContent();
       },
       onComplete: () => {
         this.setState({open: true});
@@ -160,10 +175,15 @@ class ArticleCard extends React.Component {
             this.animating = false;
             card.removeAttribute('style')
           })
-          
         }
-        
       }
+    })
+  }
+
+  _openImageSelector() {
+    this._hideContent(()=>{
+      this.dispatch(updateCurrentEditingArticle(this.props.index));
+      this.dispatch(pushPath('/playlist/article/images'));
     })
   }
 }
