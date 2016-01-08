@@ -22,9 +22,13 @@ gem 'omniauth'
 gem 'omniauth-mediawiki', git: 'https://github.com/ragesoss/omniauth-mediawiki.git'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
+gem "cancancan"
 
 group :development, :test do
   gem 'byebug'
+  gem 'rspec-rails', '~> 3.0'
+  gem 'factory_girl_rails'
+  gem 'faker'
 end
 
 group :development do

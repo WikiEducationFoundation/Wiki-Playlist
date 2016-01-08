@@ -101,7 +101,6 @@ class ArticleCard extends React.Component {
     return (<div className='article-card__image' style={style}>{link_to_image_selector}</div>)
   }
 
-
   _expand() {
     this.animating = true;
     const target = this.cardElement;
