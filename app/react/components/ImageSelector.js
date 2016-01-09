@@ -82,7 +82,7 @@ class ImageSelector extends React.Component {
         <ArticleImage key={img} 
                       dispatch={this.props.dispatch} 
                       articleIndex={editingArticle} 
-                      src={img} 
+                      img={img}
                       selected={selected}/>)
     });
     return _images;
@@ -96,8 +96,9 @@ export default connect( state => {return state})(ImageSelector);
 --------------------------------------------- */
 class ArticleImage extends React.Component {
   render() {
+    const {url, description} = this.props.img;
     const style = {
-      backgroundImage: `url(${this.props.src})`
+      backgroundImage: `url(${url})`
     }
     return (
       <div style={style} className={'image-selector__image' + (this.props.selected ? ' bg-aqua' : '')} />
