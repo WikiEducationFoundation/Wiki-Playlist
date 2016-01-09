@@ -102,10 +102,10 @@ class ArticleCard extends React.Component {
       );
     if(image !== undefined && image !== '') {
       link = link_to_image_selector
-      style.backgroundImage = `url(${image})`
+      style.backgroundImage = `url(${image.url})`
     } else if (images.length) {
       link = link_to_image_selector
-      style.backgroundImage = `url(${images[0]})`;
+      style.backgroundImage = `url(${images[0].url})`;
     }
 
     return (<div className='article-card__image' style={style}>{link}</div>)
