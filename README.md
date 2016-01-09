@@ -33,6 +33,8 @@
 
 ## Deploy to Heroku
 
+*Run `npm run build` before deploying to production if any of the front-end javascript has changed.
+
 1. Initialize a git repo in the current directory and commit all files.
 2. Install the [heroku toolbelt](https://toolbelt.heroku.com/)
 3. `heroku create`
