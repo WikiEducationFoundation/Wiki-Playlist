@@ -9,6 +9,7 @@ export const UPDATE_PATH = 'UPDATE_PATH';
 export const ADD_ARTICLE = 'ADD_ARTICLE';
 export const ADD_ARTICLE_IMAGES = 'ADD_ARTICLE_IMAGES';
 export const SET_ARTICLE_IMAGE = 'SET_ARTICLE_IMAGE';
+export const SET_ARTICLE_CAPTION = 'SET_ARTICLE_CAPTION';
 export const EXPAND_ARTICLE = 'EXPAND_ARTICLE';
 export const COLLAPSE_ARTICLE = 'COLLAPSE_ARTICLE';
 
@@ -69,6 +70,14 @@ export function setArticleImage(index, url) {
     type: SET_ARTICLE_IMAGE,
     index,
     url
+  }
+}
+
+export function setArticleCaption(index, text) {
+  return {
+    type: SET_ARTICLE_CAPTION,
+    index,
+    text
   }
 }
 
@@ -148,7 +157,7 @@ export function fetchArticleImages(title, callback) {
         const url = obj.imageinfo[0].url;
         var exclude = false
         exclude_images.map(exl => {
-          if(exl.indexOf(url) !== -1) {exclude = true;}
+          if(url.indexOf(exl) !== -1) {exclude = true;}
         });
         if(!exclude) {
           images.push(url);

@@ -1,6 +1,9 @@
 import { connect } from 'react-redux';
 import { pushPath } from 'redux-simple-router';
 import es6BindAll from "es6bindall"; 
+import TextArea from './TextArea';
+import { setArticleCaption } from '../actions'
+
 class ArticleCaption extends React.Component {
   
   constructor(props) {
@@ -10,17 +13,27 @@ class ArticleCaption extends React.Component {
 
     es6BindAll(this, [
       '_goToImageSelector',
-      '_saveCaption'
+      '_saveCaption',
+      '_storeCaption'
     ]);
+
+    this.state = {
+      caption: ''
+    }
   }
 
   render() {
     return (
-      <div className='flex flex-column flex-justify'>
-        Add Article Caption!
+      <div className='full-height flex flex-column flex-justify'>
+        <div className='article-caption__input p1'>
+          <TextArea max={200}
+            callback={this._storeCaption}
+            placeholder='Add a caption'/>
+          <div><small className='gray'>Your response will be added to the playlist.</small></div>
+        </div>
         <div className='flex actions border-top'>
           <button className='btn border-right' onClick={this._goToImageSelector}>Back</button>
-          <button className='btn' onClick={this._saveCaption}>Select</button>
+          <button className='btn' onClick={this._saveCaption}>Continue</button>
         </div>
       </div>)
   }
@@ -30,9 +43,19 @@ class ArticleCaption extends React.Component {
   }
 
   _saveCaption() {
-    console.log('saveCaption')
-    // pushPath('/playlist/article/images')
+    const articleIndex = this.props.Playlist.editingArticle;
+    this.dispatch(setArticleCaption(articleIndex, this.state.caption))
+    this.dispatch(pushPath('/playlist'));
+  }
+
+  _storeCaption(caption) {
+    this.setState({
+      caption: caption
+    })
   }
 }
+
+
+
 
 export default connect( state => {return state})(ArticleCaption);
