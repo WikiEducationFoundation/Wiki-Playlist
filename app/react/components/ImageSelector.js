@@ -17,7 +17,8 @@ class ImageSelector extends React.Component {
     es6BindAll(this, [
         '_updateImage', 
         '_selectImage',
-        '_cancel'
+        '_cancel',
+        '_getImages'
       ]);
   }
 
@@ -52,7 +53,8 @@ class ImageSelector extends React.Component {
   }
 
   _selectImage() {
-    this.dispatch(setArticleImage(this.state.currentIndex));
+    const {images, articleIndex} = this._getImages();
+    this.dispatch(setArticleImage(articleIndex, images[this.state.currentIndex]));
     this.dispatch(pushPath('/playlist/article/caption'));
   }
 
@@ -62,10 +64,17 @@ class ImageSelector extends React.Component {
     })
   }
 
-  _images() {
+  _getImages() {
     const {editingArticle, articles} = this.props.Playlist;
-    const images = articles[editingArticle].images;
-    const currentImage = articles[editingArticle].image;
+    return {
+      images: articles[editingArticle].images,
+      currentImage: articles[editingArticle].image,
+      articleIndex: editingArticle
+    }
+  }
+
+  _images() {
+    const {images, currentImage, editingArticle} = this._getImages();
     let _images = [];
     images.map(img => {
       const selected = (img === currentImage ? true : false);
@@ -91,12 +100,7 @@ class ArticleImage extends React.Component {
       backgroundImage: `url(${this.props.src})`
     }
     return (
-      <div style={style} className={'image-selector__image' + (this.props.selected ? ' bg-aqua' : '')}  onClick={this.handleClick.bind(this)}/>
+      <div style={style} className={'image-selector__image' + (this.props.selected ? ' bg-aqua' : '')} />
     )
-  }
-
-  handleClick() {
-    const {dispatch, src, articleIndex} = this.props;
-    dispatch(setArticleImage(articleIndex, src));
   }
 }

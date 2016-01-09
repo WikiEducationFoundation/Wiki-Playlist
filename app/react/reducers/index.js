@@ -1,4 +1,5 @@
 _.mixin(require("lodash-deep"));
+import { moveArrayItem } from '../utils/Array';
 import { combineReducers } from 'redux';
 import { routeReducer, UPDATE_PATH } from 'redux-simple-router';
 import {
@@ -10,6 +11,7 @@ import {
   ADD_ARTICLE,
   ADD_ARTICLE_IMAGES,
   SET_ARTICLE_IMAGE,
+  SET_ARTICLE_CAPTION,
   EXPAND_ARTICLE,
   COLLAPSE_ARTICLE
 } from '../actions';
@@ -58,6 +60,7 @@ while(j < TOTAL_ARTICLES) {
   initialArticles.push({
     title: 'Article',
     description: '',
+    caption: '',
     image: '',
     images: [],
     thumbnail: '',
@@ -96,7 +99,15 @@ function Playlist(state = {
 
     case SET_ARTICLE_IMAGE:
       var articles = state.articles.slice(0);
-      articles[action.index].image = action.url;
+      var article = articles[action.index];
+      article.image = action.url;
+      const imageIndex = article.images.indexOf(action.url);
+      moveArrayItem(article.images, imageIndex, 0);
+      return Object.assign({}, state, {articles: articles})
+
+    case SET_ARTICLE_CAPTION:
+      var articles = state.articles.slice(0);
+      articles[action.index].caption = action.text;
       return Object.assign({}, state, {articles: articles})
 
     case EXPAND_ARTICLE:

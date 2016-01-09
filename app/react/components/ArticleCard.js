@@ -95,18 +95,20 @@ class ArticleCard extends React.Component {
       backgroundColor: '#aaa',
       height: '200px'
     }
-    let link_to_image_selector = null;
+    let link = null;
+    const link_to_image_selector = (
+        <a href='#' className='article-card__image__edit-button' 
+                onClick={this._openImageSelector}>Edit Image</a>
+      );
     if(image !== undefined && image !== '') {
+      link = link_to_image_selector
       style.backgroundImage = `url(${image})`
     } else if (images.length) {
+      link = link_to_image_selector
       style.backgroundImage = `url(${images[0]})`;
-      link_to_image_selector = (
-        <button className='btn btn-outline' 
-                onClick={this._openImageSelector}>Choose Image</button>
-      );
     }
 
-    return (<div className='article-card__image' style={style}>{link_to_image_selector}</div>)
+    return (<div className='article-card__image' style={style}>{link}</div>)
   }
 
   _hideContent(callback = null) {
@@ -181,10 +183,11 @@ class ArticleCard extends React.Component {
   }
 
   _openImageSelector() {
-    this._hideContent(()=>{
-      this.dispatch(updateCurrentEditingArticle(this.props.index));
-      this.dispatch(pushPath('/playlist/article/images'));
-    })
+    // this._hideContent(()=>{
+
+    // })
+    this.dispatch(pushPath('/playlist/article/images'));
+    this.dispatch(updateCurrentEditingArticle(this.props.index));
   }
 }
 
