@@ -13,13 +13,14 @@ class ArticleCard extends React.Component {
 
     es6BindAll(this, [
         '_expand', 
-       '_collapse',
-       '_openImageSelector', 
-       '_hideContent'
+        '_collapse',
+        '_openImageSelector', 
+        '_hideContent'
       ]);
 
     this.state = {
-      open: false
+      open: false,
+      editing_options: false
     }
   }
 
@@ -50,30 +51,51 @@ class ArticleCard extends React.Component {
     const {path} = nextProps.routing;
     const {index, Playlist, open} = this.props;
     if(nextProps.open && !this.state.open && !this.animating) {
-      this.constroller = this.addAnimation(this._expand);
+      this.controller = this.addAnimation(this._expand);
     } else if(!nextProps.open && this.state.open && !this.animating) {
       this.controller = this.addAnimation(this._collapse);
+    }
+
+    const route = _.compact(path.split('/')).pop();
+    if(route === 'playlist' && this.state.editing_options) {
+      this.setState({ editing_options: false });
     }
   }
 
   _articleContent() {
-    const {title, index, editing, open, has_article} = this.props;
+    const { editing_options } = this.state;
+    const { title, description, index, editing, open, has_article, caption } = this.props;
+    const truncated_description = (description.length > 150 ? `${description.substr(0,150)}...` : description)
+
     let content = null;
     if(has_article) {
       content = (
         <div>
           <h2 className="m0">{title}</h2>
+          <div className="px1 mb2 article-card__excerpt"><small>{truncated_description}</small></div>
         </div>
       );
     }
 
-    let add_button = null;
-    const search_button_text = (has_article ? 'Change Article' : 'Add Article')
-    const search_button_class = (has_article ? '' : 'bg-silver')
-    let search_button = (
-      <button className={`btn btn-outline flex-end ${search_button_class}`} 
-                  onClick={() => {this.dispatch(expandArticle(index))}}>
-                  {search_button_text}</button>);
+    const search_button = (<button className='btn btn-outline flex-end bg-silver'
+              onClick={() => {this.dispatch(expandArticle(index))}}>Add Article</button>);
+    
+    const edit_button = (
+      <button className='article-card__edit-button btn btn-outline' 
+              onClick={() => { this.setState({editing_options: true})}}>Edit</button>)
+
+    let button = search_button;
+    if(has_article) { button = edit_button; }
+    
+    if(editing_options) { 
+      button = null; 
+      content = (
+        <button className='btn btn-outline'
+              onClick={() => {this.dispatch(expandArticle(index))}}>Change Article</button>
+      )
+
+    }
+
 
     if(editing !== index) {
       return (
@@ -81,7 +103,7 @@ class ArticleCard extends React.Component {
           {this._articleImage()}
           <div className='flex flex-column flex-center article-card__summary'>
             {content}
-            {search_button}
+            {button}
           </div>
         </div>)
     } else {
@@ -90,25 +112,40 @@ class ArticleCard extends React.Component {
   }
 
   _articleImage() {
+    const { editing_options } = this.state;
     const {image, images} = this.props;
+
     let style = {
       backgroundColor: '#aaa',
       height: '200px'
     }
+
+    let imageClass = '';
+
+    // Change Thumbnail LInk
     let link = null;
     const link_to_image_selector = (
-        <a href='#' className='article-card__image__edit-button' 
-                onClick={this._openImageSelector}>Edit Image</a>
+        <a href='#' className='article-card__image__edit-button btn btn-outline white' 
+                onClick={this._openImageSelector}>Change Thumbnail</a>
       );
+
+    // Background Image
     if(image !== undefined && image !== '') {
-      link = link_to_image_selector
       style.backgroundImage = `url(${image.url})`
     } else if (images.length) {
-      link = link_to_image_selector
       style.backgroundImage = `url(${images[0].url})`;
     }
 
-    return (<div className='article-card__image' style={style}>{link}</div>)
+    let cancel = null;
+    if(editing_options) {
+      link = link_to_image_selector;
+      imageClass += 'editing ';
+      cancel = (
+        <button className='article-card__cancel-button'
+                onClick={()=>{this.setState({editing_options: false})}}>&#215;</button>)
+    }
+
+    return (<div className={'article-card__image ' + imageClass} style={style}>{link}{cancel}</div>)
   }
 
   _hideContent(callback = null) {
@@ -183,12 +220,10 @@ class ArticleCard extends React.Component {
   }
 
   _openImageSelector() {
-    // this._hideContent(()=>{
-
-    // })
     this.dispatch(pushPath('/playlist/article/images'));
     this.dispatch(updateCurrentEditingArticle(this.props.index));
   }
+
 }
 
 export default connect( state => {return state})(GSAP()(ArticleCard))

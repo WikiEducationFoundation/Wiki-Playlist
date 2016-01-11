@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { setArticleImage } from '../actions';
+import { setArticleImage, updateCurrentEditingArticle } from '../actions';
 import es6BindAll from "es6bindall"; 
 import { pushPath } from 'redux-simple-router';
 
@@ -53,9 +53,15 @@ class ImageSelector extends React.Component {
   }
 
   _selectImage() {
-    const {images, articleIndex} = this._getImages();
+    const { images, articleIndex, article } = this._getImages();
     this.dispatch(setArticleImage(articleIndex, images[this.state.currentIndex]));
-    this.dispatch(pushPath('/playlist/article/caption'));
+    if(article.caption !== undefined) {
+      this.dispatch(updateCurrentEditingArticle(null));
+      this.dispatch(pushPath('/playlist/'));
+    } else {
+      this.dispatch(pushPath('/playlist/article/caption'));
+    }
+    
   }
 
   _updateImage(index) {
@@ -65,16 +71,17 @@ class ImageSelector extends React.Component {
   }
 
   _getImages() {
-    const {editingArticle, articles} = this.props.Playlist;
+    const { editingArticle, articles } = this.props.Playlist;
     return {
       images: articles[editingArticle].images,
       currentImage: articles[editingArticle].image,
-      articleIndex: editingArticle
+      articleIndex: editingArticle,
+      article: articles[editingArticle]
     }
   }
 
   _images() {
-    const {images, currentImage, editingArticle} = this._getImages();
+    const { images, currentImage, editingArticle } = this._getImages();
     let _images = [];
     images.map(img => {
       const selected = (img === currentImage ? true : false);
@@ -101,7 +108,7 @@ class ArticleImage extends React.Component {
       backgroundImage: `url(${url})`
     }
     return (
-      <div style={style} className={'image-selector__image' + (this.props.selected ? ' bg-aqua' : '')} />
+      <div style={style} className={'image-selector__image' + (this.props.selected ? ' bg-aqua' : '')}></div>
     )
   }
 }

@@ -103,8 +103,6 @@ export function updateCurrentEditingArticle(index) {
 }
 
 
-
-
 /* Wiki Search
 --------------------------------------------- */
 
@@ -113,7 +111,7 @@ let jsonp = require('superagent-jsonp');
 
 const wiki_api = "https://en.wikipedia.org/w/api.php?action=";
 const opensearch = `${wiki_api}opensearch&prop=pageimages|pageterms&format=json&search=`
-const query_titles = `${wiki_api}query&prop=pageimages|pageterms|info&inprop=url&format=json&piprop=thumbnail&pilimit=`
+const query_titles = `${wiki_api}query&prop=pageimages|pageterms|info|content|extracts&exintro=&explaintext=&inprop=url&format=json&piprop=thumbnail&pilimit=`
 const terms_description_titles = "&wbptterms=description&titles="
 const redirects = "&redirects="
 
@@ -154,7 +152,7 @@ export function fetchArticleImages(title, callback) {
       const imageObjects = _.values(res.body.query.pages);
       let images = [];
       imageObjects.map(obj => {
-        console.log('image info', obj);
+        // console.log('image info', obj);
         const {thumburl, extmetadata} = obj.imageinfo[0];
         const url = thumburl;
         var metadescription = extmetadata.ImageDescription;
