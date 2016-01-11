@@ -116,7 +116,6 @@ class ArticleCard extends React.Component {
     const {image, images} = this.props;
 
     let style = {
-      backgroundColor: '#aaa',
       height: '200px'
     }
 
