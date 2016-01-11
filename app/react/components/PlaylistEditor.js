@@ -1,6 +1,6 @@
 import ArticleCard from './ArticleCard';
 import { connect } from 'react-redux';
-import { updateCurrentEditingArticle, updateQuery } from '../actions';
+import { updateCurrentEditingArticle, updateQuery, addArticleCard } from '../actions';
 import { pushPath } from 'redux-simple-router';
 
 class PlaylistEditor extends React.Component {
@@ -10,16 +10,11 @@ class PlaylistEditor extends React.Component {
       <div>
         <div className='articles'>
           {this._articles()}
+          {this._addArticle()}
           <div>{this._captions()}</div>
         </div>
       </div>
     )
-  }
-
-  componentDidMount() {
-    const {dispatch} = this.props;
-    const {editingArticle} = this.props.Playlist;
-    
   }
 
   _articles() {
@@ -35,6 +30,23 @@ class PlaylistEditor extends React.Component {
             {(editingArticle === i ? this.props.children : null)}</ArticleCard>)
     })
     return _articles;
+  }
+
+  _addArticle() {
+    const {articles} = this.props.Playlist;
+    if(articles.length < 5) {
+      return (
+      <div className="article-card article-card--add flex-column flex-stretch">
+        <div className="article-card__container border flex flex-column flex-stretch flex-center" ref={card => {this.cardElement = card}}>
+          <div className="full-height flex flex-center center flex-justify-center">
+            <button className='btn btn-outline bg-white'
+                    onClick={()=>{this.props.dispatch(addArticleCard())}}>+</button>
+          </div>
+        </div>
+      </div>)
+    } else {
+      return null;
+    }
   }
 
   _captions() {

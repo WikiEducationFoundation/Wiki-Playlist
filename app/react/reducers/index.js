@@ -8,6 +8,7 @@ import {
   ADD_SEARCH, 
   search, 
   SET_EDIT_ARTICLE,
+  ADD_ARTICLE_CARD,
   ADD_ARTICLE,
   ADD_ARTICLE_IMAGES,
   SET_ARTICLE_IMAGE,
@@ -55,19 +56,21 @@ function Search(state = {
 
 
 let j = 0;
+var defaultArticle = {
+  title: 'Article',
+  description: '',
+  caption: '',
+  image: '',
+  images: [],
+  thumbnail: '',
+  url: '',
+  open: false,
+  has_article: false
+}
+
 let initialArticles = [];
 while(j < TOTAL_ARTICLES) {
-  initialArticles.push({
-    title: 'Article',
-    description: '',
-    caption: '',
-    image: '',
-    images: [],
-    thumbnail: '',
-    url: '',
-    open: false,
-    has_article: false
-  });
+  initialArticles.push(_.clone(defaultArticle));
   j++;
 }
 
@@ -78,6 +81,12 @@ function Playlist(state = {
   switch (action.type) {
     case SET_EDIT_ARTICLE:
       return Object.assign({}, state, {editingArticle: action.index})
+
+    case ADD_ARTICLE_CARD:
+      var articles = state.articles.slice(0);
+      console.log('ADD_ARTICLE_CARD')
+      articles.push(_.clone(defaultArticle));
+      return Object.assign({}, state, {articles: articles})
 
     case ADD_ARTICLE:
       let {article, index} = action;

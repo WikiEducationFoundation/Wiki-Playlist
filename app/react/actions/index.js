@@ -6,6 +6,7 @@ export const RECEIVE_RESULTS = 'RECEIVE_RESULTS';
 export const ADD_SEARCH = 'ADD_SEARCH';
 export const SET_EDIT_ARTICLE = 'SET_EDIT_ARTICLE';
 export const UPDATE_PATH = 'UPDATE_PATH';
+export const ADD_ARTICLE_CARD = 'ADD_ARTICLE_CARD';
 export const ADD_ARTICLE = 'ADD_ARTICLE';
 export const ADD_ARTICLE_IMAGES = 'ADD_ARTICLE_IMAGES';
 export const SET_ARTICLE_IMAGE = 'SET_ARTICLE_IMAGE';
@@ -49,6 +50,12 @@ export function receiveResults(results) {
 }
 
 // — Article
+export function addArticleCard() {
+  return {
+    type: ADD_ARTICLE_CARD
+  }
+}
+
 export function addArticle(index, article) {
   return {
     type: ADD_ARTICLE,
