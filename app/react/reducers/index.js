@@ -84,7 +84,10 @@ function Playlist(state = {
       const {title, fullurl} = article;
       const url = fullurl;
       const thumbnail = _.deepGet(article, 'thumbnail.source');
-      const description = _.deepGet(article, 'terms.description.0'); 
+      let description = _.deepGet(article, 'terms.description.0'); 
+      if(article.extract !== undefined) {
+        description = article.extract;
+      }
       var _article = {title, url, thumbnail, description};
       _article.has_article = true;
       var articles = state.articles.slice(0);

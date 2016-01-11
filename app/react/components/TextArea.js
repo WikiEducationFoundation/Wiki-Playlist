@@ -11,7 +11,7 @@ export default class TextArea extends React.Component {
     ]);
 
     this.state = {
-      text: '',
+      text: (props.value || ''),
       chars_left: this.max
     }
   }
@@ -22,6 +22,7 @@ export default class TextArea extends React.Component {
         <div><small className='gray'>Characters left: {this.state.chars_left}</small></div>
         <textarea className='field'
                   ref='textarea'
+                  value={this.props.value}
                   placeholder={this.props.placeholder}
                   onChange={this._handleChange} 
                   onKeyPress={this._handleInput}/>

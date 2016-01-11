@@ -10,6 +10,11 @@ class ArticleCaption extends React.Component {
     super();
 
     this.dispatch = props.dispatch;
+    const { editingArticle, articles } = props.Playlist;
+    let caption = '';
+    if(articles[editingArticle].caption !== undefined) {
+      caption = articles[editingArticle].caption;
+    }
 
     es6BindAll(this, [
       '_goToImageSelector',
@@ -18,7 +23,7 @@ class ArticleCaption extends React.Component {
     ]);
 
     this.state = {
-      caption: ''
+      caption: caption
     }
   }
 
@@ -28,6 +33,7 @@ class ArticleCaption extends React.Component {
         <div className='article-caption__input p1'>
           <TextArea max={200}
             callback={this._storeCaption}
+            value={this.state.caption}
             placeholder='Add a caption'/>
           <div><small className='gray'>Your response will be added to the playlist.</small></div>
         </div>

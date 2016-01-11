@@ -16,11 +16,18 @@
   overflow-y auto
   overflow-x hidden
 
+.article-card__edit-button
+  font-size 12px
+  padding .25rem 1rem
+
 .article-card__summary
   flex 1 0 auto
   justify-content center
   text-align center
   white-space normal
+
+.article-card__excerpt
+  line-height 1.2
 
 .article-card__image
   position relative
@@ -28,11 +35,44 @@
   border-top-right-radius 10px
   background-position top center
   background-size cover
+  display flex
+  flex-direction column
+  justify-content center
+  align-items center
+  
+  &.editing:after
+    content ''
+    display block
+    position absolute
+    z-index 1
+    top 0
+    left 0
+    width 100%
+    height 100%
+    background rgba(black, .5)
 
 .article-card__image__edit-button
-  font-size 12px
-  position absolute
-  bottom 0
-  padding .25rem .5rem
-  background rgba(black, .7)
+  position relative
+  background transparent
   color white
+  z-index 2
+
+.article-card__cancel-button
+  cursor pointer
+  position absolute
+  z-index 2
+  top 0px
+  right 5px
+  background none
+  border none
+  font-size 1.5rem
+  color white
+  &:focus
+    outline 0
+
+.article-card__caption
+  width 300px
+  display inline-block
+  vertical-align top
+  margin-right 1em
+  white-space normal

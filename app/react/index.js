@@ -37,11 +37,11 @@ class PlaylistApp extends React.Component{
             <IndexRoute component={Home} />
             <Route path="/playlist" component={PlaylistEditor}>
               <Route path="/playlist/article/search" component={ArticleSearch} />
-              <Route path="/playlist/article/preview" component={ArticlePreview} />
               <Route path="/playlist/article/images" component={ImageSelector} />
               <Route path="/playlist/article/caption" component={ArticleCaption} />
             </Route>
           </Route>
+
         </Router>
       </Provider>
       
