@@ -12,15 +12,41 @@ var PopupCenter = function(url, title, w, h) {
   }
 };
 
+
+
 $(function() {
 
   var $account = $('#account');
+  var $notice = $('.notice');
 
-  $(document).on('authSuccess', function() { $.get('/auth/logged_in'); });
+  $.get('/auth/status', function(data) {
+    console.log(data);
+    if(data.logged_in) {
+      var event = $.Event("authSuccess")
+      $(document).trigger(event)
+      flashMessage('You are logged in');
+    }
+  });
+
+  var flashMessage = function(msg) {
+    $notice.text(msg);
+    setTimeout(function(){$notice.text('')}, 1000);
+  }
   
-  $(document).on('click', '[data-login]', function(e) {
+  $(document).on('click', '[data-popup]', function(e) {
     e.preventDefault();
-    return PopupCenter(e.target.href, "Wikipedia Playlist Login", '500', '500');
+    var title = $(e.target).data('popup');
+    return PopupCenter(e.target.href, title, '500', '500');
+  });
+
+  $(document).on('authSuccess', function() { 
+    $.get('/auth/logged_in', function() {
+      flashMessage('Logged in successfully');
+    });
+    $.get('/auth/user', function(data) {
+      var event = $.Event("authUser", data)
+      $(document).trigger(event)
+    })
   });
 
   $(document).on('click', '[data-sign-out]', function(e) {
@@ -32,7 +58,11 @@ $(function() {
         'X-CSRF-Token': $account.find('meta[name="csrf-token"]').attr('content')
       }
     }).done(function(data) {
-      $.get('/auth/logged_out');
+      $.get('/auth/logged_out', function() {
+        var event = $.Event("authLogout")
+        $(document).trigger(event)
+        flashMessage('Logged out successfully');
+      });
     });
   });
 });
