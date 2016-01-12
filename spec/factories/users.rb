@@ -16,13 +16,18 @@
 FactoryGirl.define do
 
   factory :user, class: User do
-    email Faker::Internet.email
-    encrypted_password Devise.friendly_token[0,20]
+    email 'joe@shmo.com'
+    password Devise.friendly_token[0,20]
+  end
+
+  factory :user_gmail, class: User do
+    email 'joe@gmail.com'
+    password Devise.friendly_token[0,20]
   end
 
   factory :admin, class: User do
     email Faker::Internet.email
-    encrypted_password Devise.friendly_token[0,20]
+    password Devise.friendly_token[0,20]
     admin true
   end
 
