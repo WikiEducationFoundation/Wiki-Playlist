@@ -1,0 +1,6 @@
+<% if is_admin %>
+  <%= link_to "Admin", rails_admin_path %>
+<% end %>
+<% if current_user %>
+  <%= link_to "Sign out", destroy_user_session_path, :method => :delete, :remote => true %> 
+<% end %>

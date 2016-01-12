@@ -50,6 +50,7 @@ class ArticleCard extends React.Component {
   componentWillReceiveProps(nextProps) {
     const {path} = nextProps.routing;
     const {index, Playlist, open} = this.props;
+
     if(nextProps.open && !this.state.open && !this.animating) {
       this.controller = this.addAnimation(this._expand);
     } else if(!nextProps.open && this.state.open && !this.animating) {
@@ -64,15 +65,15 @@ class ArticleCard extends React.Component {
 
   _articleContent() {
     const { editing_options } = this.state;
-    const { title, description, index, editing, open, has_article, caption } = this.props;
+    const { title, description, index, editing, open, has_article, caption, url } = this.props;
     const truncated_description = (description.length > 150 ? `${description.substr(0,150)}...` : description)
-
+    const article_link = (!_.isEmpty(url) ? <a className='px1' href={url}>Read Article</a> : null)
     let content = null;
     if(has_article) {
       content = (
         <div>
           <h2 className="m0">{title}</h2>
-          <div className="px1 mb2 article-card__excerpt"><small>{truncated_description}</small></div>
+          <div className="px1 mb2 article-card__excerpt"><small>{truncated_description}{article_link}</small></div>
         </div>
       );
     }
@@ -80,8 +81,7 @@ class ArticleCard extends React.Component {
     const search_button = (<button className='btn btn-outline flex-end bg-silver'
               onClick={() => {this.dispatch(expandArticle(index))}}>Add Article</button>);
     
-    const edit_button = (
-      <button className='article-card__edit-button btn btn-outline' 
+    const edit_button = (<button className='article-card__edit-button btn btn-outline' 
               onClick={() => { this.setState({editing_options: true})}}>Edit</button>)
 
     let button = search_button;
@@ -91,7 +91,7 @@ class ArticleCard extends React.Component {
       button = null; 
       content = (
         <button className='btn btn-outline'
-              onClick={() => {this.dispatch(expandArticle(index))}}>Change Article</button>
+                onClick={() => {this.dispatch(expandArticle(index))}}>Change Article</button>
       )
 
     }

@@ -17,6 +17,18 @@
 <body>
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
+
+<div id="account">
+<% if is_admin %>
+  <%= link_to "Admin", rails_admin_path %>
+<% end %>
+<% if current_user %>
+  <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+<% else %>
+  <%= link_to "Login", new_user_session_path, :data => {:login => true} %>
+<% end %>
+</div>
+
 <%= yield %>
 
 </body>
