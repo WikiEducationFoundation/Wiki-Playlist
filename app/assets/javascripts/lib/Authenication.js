@@ -12,8 +12,6 @@ var PopupCenter = function(url, title, w, h) {
   }
 };
 
-
-
 $(function() {
 
   var $account = $('#account');

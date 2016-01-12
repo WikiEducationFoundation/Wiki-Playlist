@@ -258,7 +258,7 @@ Devise.setup do |config|
                     signup: true
                   }
 
-  config.omniauth :facebook, Figaro.env.facebook_app_id, Figaro.env.facebook_app_secret
+  config.omniauth :facebook, Figaro.env.facebook_app_id, Figaro.env.facebook_app_secret, scope: 'public_profile', info_fields: 'email,name,first_name,last_name,verified'
   config.omniauth :twitter, Figaro.env.twitter_key, Figaro.env.twitter_secret
 
   # ==> Warden configuration

@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
       email = auth.info.email
       email = auth.extra.raw_info.email if email.nil?
       user.username = auth.info.nickname if auth.info.nickname?
+      user.username = auth.info.name if auth.info.name?
       user.provider = auth.provider
       user.uid = auth.uid
       user.email = email
@@ -48,12 +49,14 @@ class User < ActiveRecord::Base
 
   def validate_username
     if User.where(email: username).exists?
-      errors.add(:username, :invalid)
+      errors.add(:username, 'is already taken')
     end
   end
 
-  after_initialize :create_login, :if => :new_record?
+  before_validation :create_login
 
+  protected
+  
   def create_login
     if self.username.blank? && self.email
       email = self.email.split(/@/)
