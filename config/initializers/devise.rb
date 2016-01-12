@@ -244,7 +244,6 @@ Devise.setup do |config|
                   Figaro.env.wikipedia_token,
                   Figaro.env.wikipedia_secret,
                   client_options: {
-                    callback_url: Figaro.env.mediawiki_callback_url,
                     site: "https://#{Figaro.env.wikipedia_language}.wikipedia.org"
                   }
 
