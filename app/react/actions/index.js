@@ -1,5 +1,8 @@
 // Actions Constants
 
+export const LOGIN = 'LOGIN';
+export const LOGOUT = 'LOGOUT';
+export const ADD_USER = 'ADD_USER';
 export const UPDATE_QUERY = 'UPDATE_QUERY';
 export const FETCH_QUERY = 'FETCH_QUERY';
 export const RECEIVE_RESULTS = 'RECEIVE_RESULTS';
@@ -16,6 +19,21 @@ export const COLLAPSE_ARTICLE = 'COLLAPSE_ARTICLE';
 
 
 // Action Creators
+
+
+// — Account
+
+export function login() {
+  return { type: LOGIN }
+}
+
+export function logout() {
+  return { type: LOGOUT }
+}
+
+export function addUser(user) {
+  return { type: ADD_USER, user }
+}
 
 // — Search
 export function updateQuery(index, query) {

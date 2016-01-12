@@ -3,6 +3,9 @@ import { moveArrayItem } from '../utils/Array';
 import { combineReducers } from 'redux';
 import { routeReducer, UPDATE_PATH } from 'redux-simple-router';
 import {
+  LOGIN,
+  LOGOUT,
+  ADD_USER,
   UPDATE_QUERY, 
   FETCH_QUERY, 
   ADD_SEARCH, 
@@ -16,6 +19,23 @@ import {
   EXPAND_ARTICLE,
   COLLAPSE_ARTICLE
 } from '../actions';
+
+
+function Account(state = {
+  logged_in: false,
+  current_user: null
+}, action) {
+  switch (action.type) {
+    case LOGIN:
+      return Object.assign({}, state, {logged_in: true});
+    case LOGOUT:
+      return Object.assign({}, state, {logged_in: false});
+    case ADD_USER:
+      return Object.assign({}, state, {current_user: action.user});
+    default:
+      return state;
+  }
+};
 
 const TOTAL_ARTICLES = 3;
 let i = 0;
@@ -160,7 +180,8 @@ function Playlist(state = {
 const rootReducer = combineReducers({
   routing: routeReducer,
   Search,
-  Playlist
+  Playlist,
+  Account
 });
 
 export default rootReducer;
