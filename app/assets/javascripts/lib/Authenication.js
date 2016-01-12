@@ -1,6 +1,4 @@
-var PopupCenter, getUserData;
-
-PopupCenter = function(url, title, w, h) {
+var PopupCenter = function(url, title, w, h) {
   var dualScreenLeft, dualScreenTop, height, left, newWindow, top, width;
   dualScreenLeft = window.screenLeft !== void 0 ? window.screenLeft : screen.left;
   dualScreenTop = window.screenTop !== void 0 ? window.screenTop : screen.top;
@@ -14,23 +12,27 @@ PopupCenter = function(url, title, w, h) {
   }
 };
 
-getUserData = function() {
-  return $.get('/current-user', function(data) {
-    return console.log('current user: ', data);
-  });
-};
-
 $(function() {
-  var $account;
-  $account = $('#account');
-  $('[data-login]').on('click', function(e) {
+
+  var $account = $('#account');
+
+  $(document).on('authSuccess', function() { $.get('/auth/logged_in'); });
+  
+  $(document).on('click', '[data-login]', function(e) {
     e.preventDefault();
     return PopupCenter(e.target.href, "Wikipedia Playlist Login", '500', '500');
   });
-  return document.addEventListener('authSuccess', function() {
-    $.get('/account', function(data) {
-      console.log(data);
+
+  $(document).on('click', '[data-sign-out]', function(e) {
+    e.preventDefault();
+    $.ajax({
+      url: '/users/sign_out',
+      method: 'DELETE',
+      headers: {
+        'X-CSRF-Token': $account.find('meta[name="csrf-token"]').attr('content')
+      }
+    }).done(function(data) {
+      $.get('/auth/logged_out');
     });
-    // return $account.empty().append("<%= escape_javascript(render(partial: 'shared/account')) %>");
   });
 });
