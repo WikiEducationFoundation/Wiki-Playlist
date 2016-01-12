@@ -7,5 +7,6 @@ module.exports = [
   'https://upload.wikimedia.org/wikipedia/en/4/48/Folder_Hexagonal_Icon.svg',
   'https://upload.wikimedia.org/wikipedia/commons/a/a8/Office-book.svg',
   '.tif',
-  'Commons-logo'
+  'Commons-logo',
+  'svg'
 ]

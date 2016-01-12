@@ -1,8 +1,6 @@
 // Style
 require('./styles/index.styl');
 
-
-
 window.React = React;
 window.ReactDOM = ReactDOM;
 
