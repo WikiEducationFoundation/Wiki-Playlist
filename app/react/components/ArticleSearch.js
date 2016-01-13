@@ -2,6 +2,7 @@ import GSAP from 'react-gsap-enhancer'
 import SearchForm from './SearchForm';
 import SearchResults from './SearchResults';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 class ArticleSearch extends React.Component {
   
@@ -15,6 +16,7 @@ class ArticleSearch extends React.Component {
         <h3>Add Article</h3>
         <SearchForm index={this.props.Playlist.editingArticle} {...this.props}/>
         {this._currentQuery()}
+        <Link className='close-button' to='/playlist'>&#215;</Link>
       </div>
     )
   }

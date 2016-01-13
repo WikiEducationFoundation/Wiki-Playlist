@@ -18,7 +18,8 @@ import {
   SET_ARTICLE_CAPTION,
   EXPAND_ARTICLE,
   COLLAPSE_ARTICLE,
-  COLLAPSE_COMPLETE
+  COLLAPSE_COMPLETE,
+  SET_PLAYLIST_CAPTION
 } from '../constants';
 
 
@@ -97,6 +98,7 @@ while(j < TOTAL_ARTICLES) {
 }
 
 function Playlist(state = {
+  caption: '',
   articles: initialArticles,
   editingArticle: null,
   animating: false
@@ -110,6 +112,10 @@ function Playlist(state = {
       console.log('ADD_ARTICLE_CARD')
       articles.push(_.clone(defaultArticle));
       return _.assign({}, state, {articles: articles})
+
+    case SET_PLAYLIST_CAPTION:
+      let { text } = action;
+      return _.assign({}, state, {caption: text})
 
     case ADD_ARTICLE:
       let {article, index} = action;
