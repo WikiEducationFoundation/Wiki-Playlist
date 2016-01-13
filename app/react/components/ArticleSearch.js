@@ -11,7 +11,7 @@ class ArticleSearch extends React.Component {
 
   render() {
     return (
-      <div className='intially-hidden p2'>
+      <div className='search__container intially-hidden p2 vertical-overflow'>
         <h3>Add Article</h3>
         <SearchForm index={this.props.Playlist.editingArticle} {...this.props}/>
         {this._currentQuery()}
@@ -21,6 +21,10 @@ class ArticleSearch extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const {path} = nextProps.routing;
+    const route = _.compact(path.split('/')).pop();
+    if(route === 'playlist' && this.state.editing_options) {
+      this.addAnimation(fadeOut)
+    }
   }
 
   _currentQuery() {

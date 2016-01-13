@@ -4,7 +4,7 @@ require 'factory_girl_rails'
 describe User do
   describe 'Normal user creation' do
 
-    it 'should create a new User' do
+    it "should create a new User that isn't an admin" do
       user = build(:user)
       expect(user.admin?).to be false
     end

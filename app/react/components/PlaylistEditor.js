@@ -7,12 +7,10 @@ class PlaylistEditor extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className='articles'>
-          {this._articles()}
-          {this._addArticle()}
-          <div>{this._captions()}</div>
-        </div>
+      <div className='playlist'>
+        {this._articles()}
+        {this._addArticle()}
+        <div>{this._captions()}</div>
       </div>
     )
   }
