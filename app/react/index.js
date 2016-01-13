@@ -1,6 +1,9 @@
 // Style
 require('./styles/index.styl');
 
+require('./utils/ObjectAssignPolyfill');
+
+
 window.React = React;
 window.ReactDOM = ReactDOM;
 

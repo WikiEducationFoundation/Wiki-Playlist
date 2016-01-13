@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import childrenWithProps from '../utils/childrenWithProps';
 import DevTools from '../containers/DevTools';
 import { login, logout, addUser } from '../actions';
+import {MD} from '../constants';
+import MediaQuery from 'react-responsive';
 
 class App extends React.Component {
   render() {
@@ -16,19 +18,21 @@ class App extends React.Component {
     }
 
     return (
-      <div className="p2">
-        <h1>Wikipedia Playlist</h1>
-        <nav className="py2 flex">
-          <div className="px1">
-            <Link to="/">Home</Link>
-          </div>
-          <div className="px1">
-            <Link to="/playlist">Create a Playlist</Link>
-          </div>
-          <div className="px1">
-            {account}
-          </div>
-        </nav>
+      <div className="p2 horizontal-overflow full-height">
+        <div className='site-header px2'>
+          <h1>Wikipedia Playlist</h1>
+          <nav className="py2 flex">
+            <div className="px1">
+              <Link to="/">Home</Link>
+            </div>
+            <div className="px1">
+              <Link to="/playlist">Create a Playlist</Link>
+            </div>
+            <div className="px1">
+              {account}
+            </div>
+          </nav>
+        </div>
         {this.props.children}
         {this._devTools()}
       </div>
@@ -38,7 +42,7 @@ class App extends React.Component {
   _devTools() {
     // return null;
     if(process.env.NODE_ENV === 'development') {
-      return <DevTools/>
+      return <MediaQuery query={`(min-device-width: ${MD})`}><DevTools/></MediaQuery>
     } else {
       return null;
     }

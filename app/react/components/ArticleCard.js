@@ -1,5 +1,5 @@
 import GSAP from 'react-gsap-enhancer'
-import { updateCurrentEditingArticle, expandArticle, collapseArticle } from '../actions';
+import { updateCurrentEditingArticle, expandArticle, collapseArticle, collapseComplete } from '../actions';
 import { Link } from 'react-router';
 import { pushPath } from 'redux-simple-router';
 import { connect } from 'react-redux';
@@ -19,7 +19,6 @@ class ArticleCard extends React.Component {
       ]);
 
     this.state = {
-      open: false,
       editing_options: false
     }
   }
@@ -51,10 +50,17 @@ class ArticleCard extends React.Component {
     const {path} = nextProps.routing;
     const {index, Playlist, open} = this.props;
 
-    if(nextProps.open && !this.state.open && !this.animating) {
-      this.controller = this.addAnimation(this._expand);
-    } else if(!nextProps.open && this.state.open && !this.animating) {
-      this.controller = this.addAnimation(this._collapse);
+    if(nextProps.open && !open && !this.animating) {
+      this.expandController = this.addAnimation(this._expand);
+    } else if(!nextProps.open && open && !this.animating) {
+      this.collapseController = this.addAnimation(this._collapse);
+    } else if (!nextProps.open && !open) {
+      this.cardElement.removeAttribute('style')
+    }
+
+    if(nextProps.Playlist.all_collapsed && this.controller !== undefined) {
+      
+      // this.controller.kill()
     }
 
     const route = _.compact(path.split('/')).pop();
@@ -66,7 +72,7 @@ class ArticleCard extends React.Component {
   _articleContent() {
     const { editing_options } = this.state;
     const { title, description, index, editing, open, has_article, caption, url } = this.props;
-    const truncated_description = (description.length > 150 ? `${description.substr(0,150)}...` : description)
+    const truncated_description = (description !== undefined && description.length > 150 ? `${description.substr(0,150)}...` : description)
     const article_link = (!_.isEmpty(url) ? <a className='px1' href={url}>Read Article</a> : null)
     let content = null;
     if(has_article) {
@@ -113,7 +119,7 @@ class ArticleCard extends React.Component {
 
   _articleImage() {
     const { editing_options } = this.state;
-    const {image, images} = this.props;
+    const {image, images, open} = this.props;
 
     let style = {
       height: '200px'
@@ -144,10 +150,15 @@ class ArticleCard extends React.Component {
                 onClick={()=>{this.setState({editing_options: false})}}>&#215;</button>)
     }
 
+    if(this.props.Playlist.animating && open) {
+      imageClass += 'hidden ';
+    }
+
     return (<div className={'article-card__image ' + imageClass} style={style}>{link}{cancel}</div>)
   }
 
   _hideContent(callback = null) {
+    console.log('hideContent', this.props.index)
     this.addAnimation(() =>{
       return TweenMax.to(this.cardContent, 1,  
         {opacity: 0, ease: Power3.easeOut, onComplete: callback})
@@ -155,7 +166,8 @@ class ArticleCard extends React.Component {
     
   }
 
-  _expand() {
+  _expand({}) {
+    console.log('expanding', this.props.index)
     this.animating = true;
     const target = this.cardElement;
     const {top, left, height, width} = target.getBoundingClientRect();
@@ -164,58 +176,70 @@ class ArticleCard extends React.Component {
     this.startWidth = width;
     this.startHeight = height;
 
-    TweenMax.set(target, {
-      position: 'fixed',
-      top: this.startY, 
-      left: this.startX,
-      width: this.startWidth,
-      height: this.startHeight,
-      zIndex: 20
-    })
-
-    return TweenMax.to(target, 1, {
-      top: 0, 
-      left: 0, 
-      position: 'fixed',
-      width: '100%', 
-      height: '100%',
-      zIndex: 20,
-      ease: Power3.easeInOut,
-      onStart: () => {
-        this._hideContent();
+    return TweenMax.fromTo(target, 1,
+      {
+        position: 'fixed',
+        top: this.startY, 
+        left: this.startX,
+        width: this.startWidth, 
+        height: this.startHeight,
+        zIndex: 20,
       },
-      onComplete: () => {
-        this.setState({open: true});
-        this.dispatch(updateCurrentEditingArticle(this.props.index));
-        this.dispatch(pushPath('/playlist/article/search'))
-        this.animating = false;
+      {
+        position: 'fixed',
+        top: 0, 
+        left: 0,
+        width: window.innerWidth, 
+        height: window.innerHeight,
+        zIndex: 20,
+        ease: Power3.easeInOut,
+        onStart: () => {
+          this._hideContent();
+        },
+        onComplete: () => {
+          this.setState({open: true});
+          this.dispatch(updateCurrentEditingArticle(this.props.index));
+          this.dispatch(pushPath('/playlist/article/search'))
+          this.animating = false;
+        }
       }
-    })
+    )
+
   }
 
   _collapse({target}) {
+    console.log('collapsing', this.props.index)
     this.animating = true;
-    const card = this.cardElement;
-
-    return TweenMax.to(card, 1, {
-      top: this.startY, 
-      left: this.startX, 
-      width: this.startWidth, 
-      height: this.startHeight,
-      zIndex: 1,
-      ease: Power3.easeInOut,
-      onStart: () => {
-        this.dispatch(collapseArticle(this.props.index));
-      },
-      onComplete: () => {
-        if(this.alive) {
-          this.setState({open: false}, ()=> {
-            this.animating = false;
-            card.removeAttribute('style')
-          })
-        }
-      }
-    })
+    var card = this.cardElement;
+    return TweenMax.fromTo(card, 1,
+        {
+          position: 'fixed',
+          top: 0, 
+          left: 0,
+          width: window.innerWidth, 
+          height: window.innerHeight,
+          zIndex: 20
+        },
+        {
+          position: 'fixed',
+          top: this.startY, 
+          left: this.startX, 
+          width: this.startWidth, 
+          height: this.startHeight,
+          zIndex: 1,
+          ease: Power3.easeInOut,
+          onStart: () => {
+            this.dispatch(collapseArticle(this.props.index));
+          },
+          onComplete: () => {
+            this.collapseController.kill()
+            this.expandController.kill()
+            this.dispatch(collapseComplete())
+            this.setState({open: false}, ()=> {
+              this.animating = false;
+            })
+          }
+        })
   }
 
   _openImageSelector() {
