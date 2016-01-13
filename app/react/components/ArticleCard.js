@@ -158,7 +158,6 @@ class ArticleCard extends React.Component {
   }
 
   _hideContent(callback = null) {
-    console.log('hideContent', this.props.index)
     this.addAnimation(() =>{
       return TweenMax.to(this.cardContent, 1,  
         {opacity: 0, ease: Power3.easeOut, onComplete: callback})
@@ -167,7 +166,6 @@ class ArticleCard extends React.Component {
   }
 
   _expand({}) {
-    console.log('expanding', this.props.index)
     this.animating = true;
     const target = this.cardElement;
     const {top, left, height, width} = target.getBoundingClientRect();
@@ -208,7 +206,6 @@ class ArticleCard extends React.Component {
   }
 
   _collapse({target}) {
-    console.log('collapsing', this.props.index)
     this.animating = true;
     var card = this.cardElement;
     return TweenMax.fromTo(card, 1,

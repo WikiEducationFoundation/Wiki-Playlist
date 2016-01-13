@@ -2,12 +2,14 @@ import ArticleCard from './ArticleCard';
 import { connect } from 'react-redux';
 import { updateCurrentEditingArticle, updateQuery, addArticleCard } from '../actions';
 import { pushPath } from 'redux-simple-router';
+import { Link } from 'react-router';
 
 class PlaylistEditor extends React.Component {
 
   render() {
     return (
       <div className='playlist'>
+        {this._titleCard()}
         {this._articles()}
         {this._addArticle()}
         <div>{this._captions()}</div>
@@ -28,6 +30,35 @@ class PlaylistEditor extends React.Component {
             {(editingArticle === i ? this.props.children : null)}</ArticleCard>)
     })
     return _articles;
+  }
+
+  _titleCard() {
+    const { logged_in, current_user } = this.props.Account;
+    let account = <Link to="/playlist/login">Login</Link>;
+    if(logged_in && current_user) {
+      account = <span>{current_user.username}</span>;
+    }
+
+    const { caption } = this.props.Playlist;
+    let renderCaption = <Link to='/playlist/caption'>Add Playlist Caption +</Link>;
+    if(!_.isEmpty(caption)) {
+      renderCaption = <p>{caption} <Link to='/playlist/caption'>edit</Link></p>
+    }
+
+    return (
+      <div className="article-card flex-column flex-stretch">
+        <div className="article-card__container border flex flex-column flex-stretch flex-center" ref={card => {this.cardElement = card}}>
+          <div className="article-card__content flex flex-grow flex-column flex-stretch" ref={c => {this.cardContent = c}}>
+            <div className={'article-card__header bg-navy px2'}>
+              <h1 className='white'>Playlist title</h1>
+              {account}
+            </div>
+            <div className='flex flex-column flex-center article-card__summary'>
+              {renderCaption}
+            </div>
+          </div>
+        </div>
+      </div>)
   }
 
   _addArticle() {

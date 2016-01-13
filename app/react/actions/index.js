@@ -15,6 +15,7 @@ import {
   ADD_ARTICLE_IMAGES,
   SET_ARTICLE_IMAGE,
   SET_ARTICLE_CAPTION,
+  SET_PLAYLIST_CAPTION,
   EXPAND_ARTICLE,
   COLLAPSE_ARTICLE,
   COLLAPSE_COMPLETE
@@ -67,6 +68,15 @@ export function receiveResults(results) {
   return {
     type: RECEIVE_RESULTS,
     results: results
+  }
+}
+
+// — Playlist
+
+export function setPlaylistCaption(text) {
+  return {
+    type: SET_PLAYLIST_CAPTION,
+    text
   }
 }
 

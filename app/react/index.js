@@ -19,6 +19,7 @@ import PlaylistEditor from './components/PlaylistEditor';
 import ArticleSearch from './components/ArticleSearch';
 import ArticlePreview from './components/ArticlePreview';
 import ArticleCaption from './components/ArticleCaption';
+import PlaylistCaption from './components/PlaylistCaption';
 import ImageSelector from './components/ImageSelector';
 import Login from './components/Login';
 
@@ -43,6 +44,7 @@ class PlaylistApp extends React.Component{
               <Route path="/playlist/article/caption" component={ArticleCaption} />
             </Route>
             <Route path="/playlist/login" component={Login}/>
+            <Route path="/playlist/caption" component={PlaylistCaption}/>
           </Route>
 
         </Router>

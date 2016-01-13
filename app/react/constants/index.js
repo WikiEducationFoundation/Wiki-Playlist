@@ -16,6 +16,7 @@ export const SET_ARTICLE_CAPTION = 'SET_ARTICLE_CAPTION';
 export const EXPAND_ARTICLE = 'EXPAND_ARTICLE';
 export const COLLAPSE_ARTICLE = 'COLLAPSE_ARTICLE';
 export const COLLAPSE_COMPLETE = 'COLLAPSE_COMPLETE';
+export const SET_PLAYLIST_CAPTION = 'SET_PLAYLIST_CAPTION';
 
 // Breakpoints
 export const MD = '756px';
