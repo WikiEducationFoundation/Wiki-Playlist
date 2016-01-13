@@ -19,7 +19,8 @@ import {
   EXPAND_ARTICLE,
   COLLAPSE_ARTICLE,
   COLLAPSE_COMPLETE,
-  SET_PLAYLIST_CAPTION
+  SET_PLAYLIST_CAPTION,
+  EDITING_PLAYLIST_CAPTION
 } from '../constants';
 
 
@@ -99,6 +100,7 @@ while(j < TOTAL_ARTICLES) {
 
 function Playlist(state = {
   caption: '',
+  editingCaption: false,
   articles: initialArticles,
   editingArticle: null,
   animating: false
@@ -116,6 +118,9 @@ function Playlist(state = {
     case SET_PLAYLIST_CAPTION:
       let { text } = action;
       return _.assign({}, state, {caption: text})
+
+    case EDITING_PLAYLIST_CAPTION:
+      return _.assign({}, state, {editingCaption: action.bool})
 
     case ADD_ARTICLE:
       let {article, index} = action;

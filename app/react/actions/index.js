@@ -16,6 +16,7 @@ import {
   SET_ARTICLE_IMAGE,
   SET_ARTICLE_CAPTION,
   SET_PLAYLIST_CAPTION,
+  EDITING_PLAYLIST_CAPTION,
   EXPAND_ARTICLE,
   COLLAPSE_ARTICLE,
   COLLAPSE_COMPLETE
@@ -73,6 +74,12 @@ export function receiveResults(results) {
 
 // — Playlist
 
+export function editingPlaylistCaption(bool) {
+  return {
+    type: EDITING_PLAYLIST_CAPTION,
+    bool
+  }
+}
 export function setPlaylistCaption(text) {
   return {
     type: SET_PLAYLIST_CAPTION,

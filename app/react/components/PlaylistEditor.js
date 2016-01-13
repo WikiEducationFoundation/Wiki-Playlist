@@ -1,6 +1,6 @@
 import ArticleCard from './ArticleCard';
 import { connect } from 'react-redux';
-import { updateCurrentEditingArticle, updateQuery, addArticleCard } from '../actions';
+import { updateCurrentEditingArticle, updateQuery, addArticleCard, editingPlaylistCaption } from '../actions';
 import { pushPath } from 'redux-simple-router';
 import { Link } from 'react-router';
 
@@ -33,16 +33,30 @@ class PlaylistEditor extends React.Component {
   }
 
   _titleCard() {
+    const { dispatch } = this.props;
     const { logged_in, current_user } = this.props.Account;
+
     let account = <Link to="/playlist/login">Login</Link>;
     if(logged_in && current_user) {
       account = <span>{current_user.username}</span>;
     }
 
-    const { caption } = this.props.Playlist;
-    let renderCaption = <Link to='/playlist/caption'>Add Playlist Caption +</Link>;
-    if(!_.isEmpty(caption)) {
-      renderCaption = <p>{caption} <Link to='/playlist/caption'>edit</Link></p>
+    const { caption, editingCaption } = this.props.Playlist;
+    const editButtonProps = {
+      href: '#',
+      onClick: ()=>{
+        dispatch(editingPlaylistCaption(true));
+        dispatch(pushPath('/playlist/caption'));
+      }
+    }
+
+    let renderCaption = <a {...editButtonProps}>Add Playlist Caption +</a>;
+    if(!_.isEmpty(caption) && !editingCaption) {
+      renderCaption = <p>{caption} <a {...editButtonProps}>edit</a></p>
+    }
+
+    if(editingCaption) {
+      renderCaption = <div className='flex-grow playlist__caption'>{this.props.children}</div>
     }
 
     return (
@@ -53,7 +67,7 @@ class PlaylistEditor extends React.Component {
               <h1 className='white'>Playlist title</h1>
               {account}
             </div>
-            <div className='flex flex-column flex-center article-card__summary'>
+            <div className='flex flex-column article-card__summary'>
               {renderCaption}
             </div>
           </div>
