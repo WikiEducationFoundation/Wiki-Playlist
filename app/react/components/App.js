@@ -18,8 +18,8 @@ class App extends React.Component {
     }
 
     return (
-      <div className="p2 horizontal-overflow full-height">
-        <div className='site-header px2'>
+      <div className="px2 horizontal-overflow full-height">
+        <div className='site__header px2'>
           <h1>Wikipedia Playlist</h1>
           <nav className="py2 flex">
             <div className="px1">
@@ -33,7 +33,11 @@ class App extends React.Component {
             </div>
           </nav>
         </div>
-        {this.props.children}
+
+        <div className='site__content'>
+          {this.props.children}
+        </div>
+        
         {this._devTools()}
       </div>
     )
