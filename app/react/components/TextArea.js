@@ -17,15 +17,26 @@ export default class TextArea extends React.Component {
   }
 
   render() {
+
+    const { inputType } = this.props;
+
+    const inputProps = {
+      className: 'field',
+      value: this.props.value,
+      placeholder: this.props.placeholder,
+      onChange: this._handleChange,
+      onKeyPress: this._handleInput
+    }
+
+    let input = <input {...inputProps} />;
+    if(inputType === 'textarea') {
+      input = <textarea {...inputProps} />;
+    }
+
     return (
       <div>
         <div><small className='gray'>Characters left: {this.state.chars_left}</small></div>
-        <textarea className='field'
-                  ref='textarea'
-                  value={this.props.value}
-                  placeholder={this.props.placeholder}
-                  onChange={this._handleChange} 
-                  onKeyPress={this._handleInput}/>
+        {input}
       </div>)
   }
 

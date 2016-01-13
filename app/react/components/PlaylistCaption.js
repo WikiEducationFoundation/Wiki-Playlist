@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { pushPath } from 'redux-simple-router';
 import es6BindAll from "es6bindall"; 
 import TextArea from './TextArea';
-import { setPlaylistCaption } from '../actions'
+import { setPlaylistCaption, editingPlaylistCaption } from '../actions'
 
 class PlaylistCaption extends React.Component {
   
@@ -26,12 +26,13 @@ class PlaylistCaption extends React.Component {
   render() {
     return (
       <div className='full-height flex flex-column flex-justify'>
-        <div className='article-caption__input p1'>
+        <div className='playlist__caption__input px1'>
           <TextArea max={200}
+            inputType='textarea'
             callback={this._storeCaption}
             value={this.state.caption}
             placeholder='Add a caption'/>
-          <button className='btn' onClick={this._saveCaption}>Save</button>
+          <button className='btn btn-outline' onClick={this._saveCaption}>Save</button>
         </div>
       </div>)
   }
@@ -42,6 +43,7 @@ class PlaylistCaption extends React.Component {
 
   _saveCaption() {
     this.dispatch(setPlaylistCaption(this.state.caption))
+    this.dispatch(editingPlaylistCaption(false))
     this.dispatch(pushPath('/playlist'));
   }
 

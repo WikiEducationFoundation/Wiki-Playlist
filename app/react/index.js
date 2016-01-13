@@ -39,12 +39,12 @@ class PlaylistApp extends React.Component{
           <Route path="/" component={App}>
             <IndexRoute component={Home} />
             <Route path="/playlist" component={PlaylistEditor}>
+              <Route path="/playlist/caption" component={PlaylistCaption}/>
               <Route path="/playlist/article/search" component={ArticleSearch} />
               <Route path="/playlist/article/images" component={ImageSelector} />
               <Route path="/playlist/article/caption" component={ArticleCaption} />
             </Route>
             <Route path="/playlist/login" component={Login}/>
-            <Route path="/playlist/caption" component={PlaylistCaption}/>
           </Route>
 
         </Router>
