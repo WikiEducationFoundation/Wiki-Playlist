@@ -23,7 +23,9 @@ class PlaylistEditor extends React.Component {
     this.dispatch = props.dispatch;
     this.state = {
       titleLimitHit: false,
-      captionLimitHit: false
+      captionLimitHit: false,
+      titleTyping: false,
+      captionTyping: false
     };
   }
 
@@ -66,20 +68,38 @@ class PlaylistEditor extends React.Component {
     const captionCharRemaining = CAPTION_LIMIT - stripTags(caption).length;
     const titleCharRemaining = TITLE_LIMIT - title.length;
 
+   
+
+    const titleCount = (this.state.titleTyping ? <span 
+                className='character-limit'
+                style={{
+                  color: (titleCharRemaining < 1 ? 'red' : 'white')
+                }}>{(titleCharRemaining)}</span> : null)
+    const captionCount = (this.state.captionTyping ? <span 
+                className='character-limit'
+                style={{
+                  color: (captionCharRemaining < 1 ? 'red' : 'green')
+                }}>{(captionCharRemaining)}</span> : null);
+
     return (
       <div className="article-card article-card--title flex-column flex-stretch">
         <div className="article-card__container border flex flex-column flex-stretch flex-center" ref={card => {this.cardElement = card}}>
           <div className="article-card__content flex flex-grow flex-column flex-stretch" ref={c => {this.cardContent = c}}>
             <div className={'article-card__header bg-navy px2 relative'}>
-              <span 
-                className='character-limit'
-                style={{
-                  color: (titleCharRemaining < 1 ? 'red' : 'white')
-                }}>{(titleCharRemaining)}</span>
+              
+              {titleCount}
               <Editor
+                onFocus={()=>{ this.setState({titleTyping: true}) }}
+                onBlur={()=> { this.setState({titleTyping: false}) }}
                 tag="h1"
                 className="white m0 mt1 mb1"
                 text={title}
+                onKeyDown={(e)=>{
+                  if(e.which === 13) {
+                    e.preventDefault;
+                    e.target.blur()
+                  }
+                }}
                 onKeyPress={(e) => {
                   if(titleCharRemaining < 1) {
                     e.preventDefault();
@@ -100,15 +120,19 @@ class PlaylistEditor extends React.Component {
               {account}
             </div>
             <div className='flex left flex-column article-card__summary relative'>
-              <span 
-                className='character-limit'
-                style={{
-                  color: (captionCharRemaining < 1 ? 'red' : 'green')
-                }}>{(captionCharRemaining)}</span>
+              {captionCount}
               <Editor
+                onFocus={()=>{ this.setState({captionTyping: true}) }}
+                onBlur={()=> { this.setState({captionTyping: false}) }}
                 tag="div"
                 className="p1 m1"
                 text={caption}
+                onKeyDown={(e)=>{
+                  if(e.which === 13) {
+                    e.preventDefault;
+                    e.target.blur()
+                  }
+                }}
                 onKeyPress={(e) => {
                   if(captionCharRemaining < 1) {
                     e.preventDefault();
