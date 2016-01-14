@@ -18,10 +18,48 @@ class App extends React.Component {
     }
 
     return (
-      <div className="px2 horizontal-overflow full-height">
-        <div className='site__header px2'>
+      <div className="px2">
+        
+        
+        <h1 className='m0'>Wikipedia Playlist</h1>
+        <nav className="flex">
+          <div className="px1">
+            <Link to="/">Home</Link>
+          </div>
+          <div className="px1">
+            <Link to="/playlist">Create a Playlist</Link>
+          </div>
+          <div className="px1">
+            {account}
+          </div>
+        </nav>
+        
+
+        
+        {this.props.children}
+        
+        
+        {this._devTools()}
+      </div>
+    )
+  }
+
+  _siteHeader() {
+
+    const { animating } = this.props.Playlist;
+    const { logged_in, current_user } = this.props.Account;
+
+    let account = <Link to="/playlist/login">Login</Link>;
+    if(logged_in && current_user) {
+      account = (
+        <span>Hi {current_user.username} <a href="#" data-sign-out>Logout</a></span>
+        );
+    }
+
+    const header = (
+        <div className='site__header px2' style={{}}>
           <h1 className='m0'>Wikipedia Playlist</h1>
-          <nav className="py2 flex">
+          <nav className="flex py1">
             <div className="px1">
               <Link to="/">Home</Link>
             </div>
@@ -32,15 +70,13 @@ class App extends React.Component {
               {account}
             </div>
           </nav>
-        </div>
+        </div>);
 
-        <div className='site__content'>
-          {this.props.children}
-        </div>
-        
-        {this._devTools()}
-      </div>
-    )
+    if(animating) {
+      return <MediaQuery query={`(min-device-width: ${MD})`}>{header}</MediaQuery>
+    } else {
+      return header;
+    }
   }
 
   _devTools() {
