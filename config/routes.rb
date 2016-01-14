@@ -8,9 +8,11 @@ Rails.application.routes.draw do
   get "/auth/login" => "auth#login"
   get "/auth/logged_in" => "auth#logged_in"
   get "/auth/logged_out" => "auth#logged_out"
+  get "/csrf-token" => "application#csrf_meta"
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   root 'page#index'
+  post 'playlists' => 'playlist#create'
   get "playlist(/*all)", to: redirect('/')
 end
