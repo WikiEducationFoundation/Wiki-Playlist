@@ -101,7 +101,7 @@ while(j < TOTAL_ARTICLES) {
 }
 
 function Playlist(state = {
-  title: 'Playlist Title',
+  title: 'Editable Playlist Title',
   editingTitle: false,
   caption: '',
   editingCaption: false,
