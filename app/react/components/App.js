@@ -20,7 +20,7 @@ class App extends React.Component {
     return (
       <div className="px2 horizontal-overflow full-height">
         <div className='site__header px2'>
-          <h1>Wikipedia Playlist</h1>
+          <h1 className='m0'>Wikipedia Playlist</h1>
           <nav className="py2 flex">
             <div className="px1">
               <Link to="/">Home</Link>
