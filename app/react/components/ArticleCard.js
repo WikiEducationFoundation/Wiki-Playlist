@@ -26,7 +26,7 @@ class ArticleCard extends React.Component {
   render() {
     return (
       <div className="article-card flex-column flex-stretch">
-        <div className="article-card__container border flex flex-column flex-stretch" ref={card => {this.cardElement = card}}>
+        <div className="article-card__container flex flex-column flex-stretch" ref={card => {this.cardElement = card}}>
           {this._articleContent()}
           {this.props.children}
         </div>

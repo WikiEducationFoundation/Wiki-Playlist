@@ -4,3 +4,35 @@
   right 1rem
   font-size 30px
   color black
+  
+.btn
+  cursor pointer
+  border 1px solid $color-primary
+  border-bottom 3px solid $color-primary--dark
+  font-weight 400
+  color #fff
+  background-color $color-primary
+  transition 100ms easeOutExpo
+  
+.btn:hover
+  border 1px solid $color-primary
+
+.btn--oauth
+  width 300px
+  border-radius 3px
+  cursor pointer
+
+  &.twitter
+    background $twitter
+    border-color $twitter
+    border-bottom 3px solid darken($twitter, 20%)
+
+  &.facebook
+    background $facebook
+    border-color $facebook
+    border-bottom 3px solid darken($facebook, 20%)
+
+  &.wiki
+    background $wiki
+    border-color $wiki
+    border-bottom 3px solid darken($wiki, 25%)

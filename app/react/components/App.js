@@ -21,11 +21,11 @@ class App extends React.Component {
       <div className="px2">
         
         
-        <h1 className='m0'>Wikipedia Playlist</h1>
-        <nav className="flex">
-          <div className="px1">
-            <Link to="/">Home</Link>
-          </div>
+        <h1 className="h4">
+            <Link to="/">Wikipedia Playlist</Link>
+          </h1>
+        <nav className="py2 flex">
+          
           <div className="px1">
             <Link to="/playlist">Create a Playlist</Link>
           </div>
@@ -44,40 +44,6 @@ class App extends React.Component {
     )
   }
 
-  _siteHeader() {
-
-    const { animating } = this.props.Playlist;
-    const { logged_in, current_user } = this.props.Account;
-
-    let account = <Link to="/playlist/login">Login</Link>;
-    if(logged_in && current_user) {
-      account = (
-        <span>Hi {current_user.username} <a href="#" data-sign-out>Logout</a></span>
-        );
-    }
-
-    const header = (
-        <div className='site__header px2' style={{}}>
-          <h1 className='m0'>Wikipedia Playlist</h1>
-          <nav className="flex py1">
-            <div className="px1">
-              <Link to="/">Home</Link>
-            </div>
-            <div className="px1">
-              <Link to="/playlist">Create a Playlist</Link>
-            </div>
-            <div className="px1">
-              {account}
-            </div>
-          </nav>
-        </div>);
-
-    if(animating) {
-      return <MediaQuery query={`(min-device-width: ${MD})`}>{header}</MediaQuery>
-    } else {
-      return header;
-    }
-  }
 
   _devTools() {
     // return null;
