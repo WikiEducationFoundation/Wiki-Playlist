@@ -55,12 +55,8 @@ class ImageSelector extends React.Component {
   _selectImage() {
     const { images, articleIndex, article } = this._getImages();
     this.dispatch(setArticleImage(articleIndex, images[this.state.currentIndex]));
-    if(article.caption !== undefined) {
-      this.dispatch(updateCurrentEditingArticle(null));
-      this.dispatch(pushPath('/playlist/'));
-    } else {
-      this.dispatch(pushPath('/playlist/article/caption'));
-    }
+    this.dispatch(updateCurrentEditingArticle(null));
+    this.dispatch(pushPath('/playlist/'));
     
   }
 
