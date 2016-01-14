@@ -1,5 +1,9 @@
 // Style
+require('medium-editor/dist/css/medium-editor.css');
+require('medium-editor/dist/css/themes/default.css');
 require('./styles/index.styl');
+
+
 
 require('./utils/ObjectAssignPolyfill');
 
@@ -18,6 +22,7 @@ import Home from './components/Home';
 import PlaylistEditor from './components/PlaylistEditor';
 import ArticleSearch from './components/ArticleSearch';
 import ArticlePreview from './components/ArticlePreview';
+import PlaylistTitle from './components/PlaylistTitle';
 import ArticleCaption from './components/ArticleCaption';
 import PlaylistCaption from './components/PlaylistCaption';
 import ImageSelector from './components/ImageSelector';
@@ -39,6 +44,7 @@ class PlaylistApp extends React.Component{
           <Route path="/" component={App}>
             <IndexRoute component={Home} />
             <Route path="/playlist" component={PlaylistEditor}>
+              <Route path="/playlist/title" component={PlaylistTitle}/>
               <Route path="/playlist/caption" component={PlaylistCaption}/>
               <Route path="/playlist/article/search" component={ArticleSearch} />
               <Route path="/playlist/article/images" component={ImageSelector} />

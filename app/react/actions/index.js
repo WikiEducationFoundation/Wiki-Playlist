@@ -17,6 +17,8 @@ import {
   SET_ARTICLE_CAPTION,
   SET_PLAYLIST_CAPTION,
   EDITING_PLAYLIST_CAPTION,
+  EDITING_PLAYLIST_TITLE,
+  SET_PLAYLIST_TITLE,
   EXPAND_ARTICLE,
   COLLAPSE_ARTICLE,
   COLLAPSE_COMPLETE
@@ -80,9 +82,24 @@ export function editingPlaylistCaption(bool) {
     bool
   }
 }
+
+export function editingPlaylistTitle(bool) {
+  return {
+    type: EDITING_PLAYLIST_TITLE,
+    bool
+  }
+}
+
 export function setPlaylistCaption(text) {
   return {
     type: SET_PLAYLIST_CAPTION,
+    text
+  }
+}
+
+export function setPlaylistTitle(text) {
+  return {
+    type: SET_PLAYLIST_TITLE,
     text
   }
 }

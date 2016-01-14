@@ -20,7 +20,9 @@ import {
   COLLAPSE_ARTICLE,
   COLLAPSE_COMPLETE,
   SET_PLAYLIST_CAPTION,
-  EDITING_PLAYLIST_CAPTION
+  EDITING_PLAYLIST_CAPTION,
+  EDITING_PLAYLIST_TITLE,
+  SET_PLAYLIST_TITLE
 } from '../constants';
 
 
@@ -99,6 +101,8 @@ while(j < TOTAL_ARTICLES) {
 }
 
 function Playlist(state = {
+  title: 'Playlist Title',
+  editingTitle: false,
   caption: '',
   editingCaption: false,
   articles: initialArticles,
@@ -115,8 +119,15 @@ function Playlist(state = {
       articles.push(_.clone(defaultArticle));
       return _.assign({}, state, {articles: articles})
 
+    case SET_PLAYLIST_TITLE:
+      var { text } = action;
+      return _.assign({}, state, {title: text})
+
+    case EDITING_PLAYLIST_TITLE:
+      return _.assign({}, state, {editingTitle: action.bool})
+
     case SET_PLAYLIST_CAPTION:
-      let { text } = action;
+      var { text } = action;
       return _.assign({}, state, {caption: text})
 
     case EDITING_PLAYLIST_CAPTION:

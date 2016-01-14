@@ -1,10 +1,31 @@
 import ArticleCard from './ArticleCard';
 import { connect } from 'react-redux';
-import { updateCurrentEditingArticle, updateQuery, addArticleCard, editingPlaylistCaption } from '../actions';
+import { truncateHTML, stripTags } from '../utils/Text';
+import { 
+  updateCurrentEditingArticle,
+  updateQuery,
+  addArticleCard,
+  setPlaylistCaption,
+  setPlaylistTitle
+} from '../actions';
+
+const TITLE_LIMIT = 40;
+const CAPTION_LIMIT = 200;
+
+import Editor from 'react-medium-editor';
 import { pushPath } from 'redux-simple-router';
 import { Link } from 'react-router';
 
 class PlaylistEditor extends React.Component {
+
+  constructor(props) {
+    super();
+    this.dispatch = props.dispatch;
+    this.state = {
+      titleLimitHit: false,
+      captionLimitHit: false
+    };
+  }
 
   render() {
     return (
@@ -41,34 +62,70 @@ class PlaylistEditor extends React.Component {
       account = <span>{current_user.username}</span>;
     }
 
-    const { caption, editingCaption } = this.props.Playlist;
-    const editButtonProps = {
-      href: '#',
-      onClick: ()=>{
-        dispatch(editingPlaylistCaption(true));
-        dispatch(pushPath('/playlist/caption'));
-      }
-    }
-
-    let renderCaption = <a {...editButtonProps}>Add Playlist Caption +</a>;
-    if(!_.isEmpty(caption) && !editingCaption) {
-      renderCaption = <p>{caption} <a {...editButtonProps}>edit</a></p>
-    }
-
-    if(editingCaption) {
-      renderCaption = <div className='flex-grow playlist__caption'>{this.props.children}</div>
-    }
+    const {title, caption, editingCaption } = this.props.Playlist;
+    const captionCharRemaining = CAPTION_LIMIT - stripTags(caption).length;
+    const titleCharRemaining = TITLE_LIMIT - title.length;
 
     return (
-      <div className="article-card flex-column flex-stretch">
+      <div className="article-card article-card--title flex-column flex-stretch">
         <div className="article-card__container border flex flex-column flex-stretch flex-center" ref={card => {this.cardElement = card}}>
           <div className="article-card__content flex flex-grow flex-column flex-stretch" ref={c => {this.cardContent = c}}>
-            <div className={'article-card__header bg-navy px2'}>
-              <h1 className='white'>Playlist title</h1>
+            <div className={'article-card__header bg-navy px2 relative'}>
+              <span 
+                className='character-limit'
+                style={{
+                  color: (titleCharRemaining < 1 ? 'red' : 'white')
+                }}>{(titleCharRemaining)}</span>
+              <Editor
+                tag="h1"
+                className="white m0 mt1 mb1"
+                text={title}
+                onKeyPress={(e) => {
+                  if(titleCharRemaining < 1) {
+                    e.preventDefault();
+                  }
+                }}
+                onChange={(text, medium)=>{
+                  var title = medium.elements[0].innerText;
+                  const count = title.length;
+                  this.setState({ titleLimitHit: (count > CAPTION_LIMIT) });
+                  const truncatedText = title.substr(0, TITLE_LIMIT);
+                  this.dispatch(setPlaylistTitle(truncatedText));
+                }}
+                options={{
+                  disableReturn: true,
+                  disableEditing: this.state.captionLimitHit,
+                  placeholder: {text: 'Add a playlist caption'},
+                  toolbar: {buttons: []}}}/>
               {account}
             </div>
-            <div className='flex flex-column article-card__summary'>
-              {renderCaption}
+            <div className='flex left flex-column article-card__summary relative'>
+              <span 
+                className='character-limit'
+                style={{
+                  color: (captionCharRemaining < 1 ? 'red' : 'green')
+                }}>{(captionCharRemaining)}</span>
+              <Editor
+                tag="div"
+                className="p1 m1"
+                text={caption}
+                onKeyPress={(e) => {
+                  if(captionCharRemaining < 1) {
+                    e.preventDefault();
+                  }
+                }}
+                onChange={(text, medium)=>{
+                  const count = medium.elements[0].innerText.length;
+                  this.setState({ captionLimitHit: (count > CAPTION_LIMIT) })
+                  const truncatedText = truncateHTML(text, CAPTION_LIMIT);
+                  this.dispatch(setPlaylistCaption(truncatedText));
+                }}
+                options={{
+                  disableReturn: true,
+                  disableEditing: this.state.captionLimitHit,
+                  placeholder: {text: 'Add a playlist caption'},
+                  toolbar: {buttons: ['bold', 'italic', 'underline']}}}
+              />
             </div>
           </div>
         </div>
