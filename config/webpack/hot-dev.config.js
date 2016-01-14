@@ -25,21 +25,6 @@ config.plugins.push(
       'NODE_ENV': JSON.stringify("development")
     }
   })
-  // ,
-  // new BrowserSyncPlugin(
-  //     // BrowserSync options 
-  //     {
-  //       host: 'localhost',
-  //       port: 3333,
-  //       proxy: 'http://0.0.0.0:3000/',
-  //       logLevel: 'debug',
-  //       tunnel: 'wiki'
-  //     },
-  //     // plugin options 
-  //     {
-  //       reload: false
-  //     }
-  //   )
 )
 
 config.entry.main.push(

@@ -1,10 +1,13 @@
 .article-card
   height 400px
-  width 300px
-  display inline-block
-  vertical-align top
-  margin-right 1em
+  width 100%
+  max-width 300px
+  margin-bottom 1em
   transition 300ms linear
+  +above(md)
+    display inline-block
+    vertical-align top
+    margin-right 1rem
   
 
 .article-card--title 
