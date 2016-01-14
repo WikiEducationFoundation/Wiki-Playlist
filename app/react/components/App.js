@@ -20,11 +20,10 @@ class App extends React.Component {
     return (
       <div className="px2 horizontal-overflow full-height">
         <div className='site__header px2'>
-          <h1>Wikipedia Playlist</h1>
+          <h1 className="h4">
+            <Link to="/">Wikipedia Playlist</Link>
+          </h1>
           <nav className="py2 flex">
-            <div className="px1">
-              <Link to="/">Home</Link>
-            </div>
             <div className="px1">
               <Link to="/playlist">Create a Playlist</Link>
             </div>
