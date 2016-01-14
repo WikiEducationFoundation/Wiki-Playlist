@@ -216,7 +216,6 @@ export function fetchArticleImages(title, callback) {
     if(err) {
       console.log('error fetching article images', err);
     } else {
-      console.log(res);
       const imageObjects = _.values(res.body.query.pages);
       let images = [];
       imageObjects.map(obj => {
@@ -246,3 +245,33 @@ export function fetchArticleImages(title, callback) {
   })
 }
 
+
+/* Playlist Actions
+--------------------------------------------- */
+
+function getCSRFToken(callback) {
+  superagent.get('/csrf-token').end(function(err, res) {
+    if(err || !res.ok) {
+      console.log('Error getting csrf', err);
+    } else {
+      callback(res.body);
+    }
+  })
+}
+
+export function createPlaylist(playlist, callback) {
+  getCSRFToken((res)=>{
+    superagent.post('/playlists')
+    .set('X-CSRF-Token', res.token)
+    .send(playlist)
+    .set('Accept', 'application/json')
+    .end(function(err, res) {
+      if(err || !res.ok) {
+        console.log('Error creating playlist', err);
+      } else {
+        callback(res.body);
+      }
+    })
+  });
+  
+}

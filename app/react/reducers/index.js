@@ -135,14 +135,15 @@ function Playlist(state = {
 
     case ADD_ARTICLE:
       let {article, index} = action;
-      const {title, fullurl} = article;
+      const {title, fullurl, pageid} = article;
+      const pageId = pageid;
       const url = fullurl;
       const thumbnail = _.deepGet(article, 'thumbnail.source');
       let description = _.deepGet(article, 'terms.description.0'); 
       if(article.extract !== undefined) {
         description = article.extract;
       }
-      var _article = {title, url, thumbnail, description};
+      var _article = {pageId, title, url, thumbnail, description};
       _article.has_article = true;
       var articles = state.articles.slice(0);
       articles[index] = _article;

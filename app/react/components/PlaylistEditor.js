@@ -61,7 +61,7 @@ class PlaylistEditor extends React.Component {
 
     let account = <Link to="/playlist/login">Login</Link>;
     if(logged_in && current_user) {
-      account = <span>{current_user.username}</span>;
+      account = <span>By {current_user.username}</span>;
     }
 
     const {title, caption, editingCaption } = this.props.Playlist;

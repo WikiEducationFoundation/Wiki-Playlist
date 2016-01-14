@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   # This is in addition to a real persisted field like 'username'
   attr_accessor :login
 
+  has_many :playlists
+
   validate :validate_username
   validates :username,
   :presence => true,

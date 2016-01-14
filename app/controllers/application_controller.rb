@@ -8,8 +8,21 @@ class ApplicationController < ActionController::Base
     redirect_to main_app.root_path, :alert => exception.message
   end
 
+  def csrf_meta
+    respond_to do |format|
+      format.json do
+        render json: {
+          param: request_forgery_protection_token,
+          token: form_authenticity_token
+        }
+      end
+    end
+  end
+
   def after_sign_in_path_for(resource)
-    if resource
+    if resource.admin
+      rails_admin_path
+    elsif resource
       oauth_success_path
     end
   end
