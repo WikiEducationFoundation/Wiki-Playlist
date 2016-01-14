@@ -11,6 +11,11 @@ config.module.loaders.push({
   loader: "style-loader!css-loader!stylus-loader"
 })
 
+config.module.loaders.push({
+  test: /\.css$/, 
+  loader: "style-loader!css-loader"
+})
+
 config.output.publicPath = 'http://localhost:8080/assets/'
 
 config.plugins.push(

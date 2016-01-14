@@ -7,6 +7,11 @@ config.module.loaders.push({
   loader: ExtractTextPlugin.extract("stylus", "css-loader!stylus-loader")
 })
 
+config.module.loaders.push({
+  test: /\.css$/, 
+  loader: ExtractTextPlugin.extract("css", "css-loader")
+})
+
 config.plugins.push(
   new ExtractTextPlugin("../stylesheets/[name].css", {allChunks: true}),
   new webpack.DefinePlugin({
