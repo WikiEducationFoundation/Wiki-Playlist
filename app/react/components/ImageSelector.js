@@ -31,6 +31,7 @@ class ImageSelector extends React.Component {
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
+      adaptiveHeight: true,
       afterChange: this._updateImage
     };
 
@@ -82,11 +83,13 @@ class ImageSelector extends React.Component {
     images.map(img => {
       const selected = (img === currentImage ? true : false);
       _images.push(
-        <ArticleImage key={img} 
-                      dispatch={this.props.dispatch} 
-                      articleIndex={editingArticle} 
-                      img={img}
-                      selected={selected}/>)
+        <div style={{display: 'inline-block', verticalAlign: 'top'}}>
+          <ArticleImage key={img} 
+            dispatch={this.props.dispatch} 
+            articleIndex={editingArticle} 
+            img={img}
+            selected={selected}/>
+        </div>)
     });
     return _images;
   }
@@ -104,7 +107,10 @@ class ArticleImage extends React.Component {
       backgroundImage: `url(${url})`
     }
     return (
-      <div style={style} className={'image-selector__image' + (this.props.selected ? ' bg-aqua' : '')}></div>
+      <div>
+        <div style={style} className={'image-selector__image' + (this.props.selected ? ' bg-aqua' : '')}></div>
+        <p className='image-selector__description p1'>{description}</p>
+      </div>
     )
   }
 }
