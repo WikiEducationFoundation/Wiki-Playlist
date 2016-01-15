@@ -25,7 +25,8 @@ import {
   SET_PLAYLIST_TITLE,
   RECEIVE_PLAYLIST_PERMALINK,
   RECEIVE_PLAYLIST_ERROR,
-  FLASH_MESSAGE
+  FLASH_MESSAGE,
+  HANDLE_DELETE
 } from '../constants';
 
 
@@ -97,7 +98,7 @@ function Search(state = {
 
 
 
-let j = 0;
+
 var defaultArticle = {
   title: 'Article',
   description: '',
@@ -111,24 +112,35 @@ var defaultArticle = {
   pageId: null
 }
 
-let initialArticles = [];
-while(j < TOTAL_ARTICLES) {
-  initialArticles.push(_.clone(defaultArticle));
-  j++;
+function createInitialArticles() {
+  let j = 0;
+  let initialArticles = [];
+  while(j < TOTAL_ARTICLES) {
+    initialArticles.push(_.clone(defaultArticle));
+    j++;
+  }
+  return initialArticles;
 }
 
-function Playlist(state = {
-  title: 'Editable Playlist Title',
-  editingTitle: false,
-  caption: '',
-  editingCaption: false,
-  articles: initialArticles,
-  editingArticle: null,
-  animating: false,
-  published: false,
-  server_info: {},
-  server_errors: []
-}, action) {
+
+function defaultPlaylist() {
+  var articles = createInitialArticles();
+  return {
+    title: 'Editable Playlist Title',
+    editingTitle: false,
+    caption: '',
+    editingCaption: false,
+    articles: articles,
+    editingArticle: null,
+    animating: false,
+    published: false,
+    server_info: {},
+    server_errors: []
+  }
+}
+
+var initialPlaylistState = defaultPlaylist();
+function Playlist(state = initialPlaylistState, action) {
   switch (action.type) {
     case SET_EDIT_ARTICLE:
       return _.assign({}, state, {editingArticle: action.index})
@@ -225,6 +237,11 @@ function Playlist(state = {
       
     case RECEIVE_PLAYLIST_PERMALINK:
       return _.assign({}, state, {published: true, server_info: action.data, server_errors:[]})
+
+    case HANDLE_DELETE:
+      var initialPlaylistState = defaultPlaylist();
+      console.log(initialPlaylistState);
+      return initialPlaylistState;
       
     default:
       return state;

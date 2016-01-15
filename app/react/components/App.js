@@ -1,8 +1,23 @@
+import { 
+  login,
+  logout,
+  addUser,
+  handleDelete,
+  receivePlaylistPermalink,
+  addFlashMessage,
+  flashMessage 
+} from '../actions';
+
+import {
+  createPlaylist,
+  updatePlaylist,
+  deletePlaylist
+} from '../actions/PlaylistAPI';
+
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import childrenWithProps from '../utils/childrenWithProps';
 import DevTools from '../containers/DevTools';
-import { login, logout, addUser, createPlaylist, receivePlaylistPermalink, addFlashMessage, flashMessage } from '../actions';
 import {MD} from '../constants';
 import MediaQuery from 'react-responsive';
 import FlashMessage from './FlashMessage';
@@ -28,6 +43,7 @@ class App extends React.Component {
     const { server_errors, published } = this.props.Playlist;
     const errors = (server_errors.length ? <p className='error'>{server_errors.pop()}</p> : null);
     const saveButton = (logged_in ? <button className='btn ml1' onClick={this._savePlaylist.bind(this)}>{(published ? 'Update' : 'Save')} Playlist</button> : null);
+    const deleteButton = (logged_in && published ? <a href='#' onClick={this._deletePlaylist.bind(this)}>Delete Playlist</a> : null);
 
     return (
       <div className="px2">
@@ -46,6 +62,7 @@ class App extends React.Component {
           </div>
 
           {saveButton}
+          {deleteButton}
         </nav>
         
 
@@ -60,12 +77,25 @@ class App extends React.Component {
 
   _savePlaylist() {
     const { published } = this.props.Playlist;
-    createPlaylist(this.props.Playlist, (data) => {
+    const saveMethod = (published ? updatePlaylist : createPlaylist)
+    saveMethod(this.props.Playlist, (data) => {
       if(data.error) {
         flashMessage(this.dispatch,  {text: data.error, type: 'error'});
       } else {
         this.dispatch(receivePlaylistPermalink(data.res.body));
         flashMessage(this.dispatch, {text: `Playlist ${(published ? 'updated' : 'saved')}!`, type: 'success'});
+      }
+    })
+  }
+
+  _deletePlaylist() {
+    const { id } = this.props.Playlist.server_info;
+    deletePlaylist(id, (data) => {
+      if(data.error) {
+        flashMessage(this.dispatch,  {text: data.error, type: 'error'});
+      } else {
+        this.dispatch(handleDelete());
+        flashMessage(this.dispatch, {text: 'Playlist deleted', type: 'success'});
       }
     })
   }
