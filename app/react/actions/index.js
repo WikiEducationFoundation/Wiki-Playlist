@@ -21,7 +21,9 @@ import {
   SET_PLAYLIST_TITLE,
   EXPAND_ARTICLE,
   COLLAPSE_ARTICLE,
-  COLLAPSE_COMPLETE
+  COLLAPSE_COMPLETE,
+  RECEIVE_PLAYLIST_PERMALINK,
+  RECEIVE_PLAYLIST_ERROR
 } from '../constants';
 
 
@@ -101,6 +103,20 @@ export function setPlaylistTitle(text) {
   return {
     type: SET_PLAYLIST_TITLE,
     text
+  }
+}
+
+export function receivePlaylistPermalink(data) {
+  return {
+    type: RECEIVE_PLAYLIST_PERMALINK,
+    data
+  }
+}
+
+export function receivePlaylistError(data) {
+  return {
+    type: RECEIVE_PLAYLIST_ERROR,
+    data
   }
 }
 
@@ -266,11 +282,15 @@ export function createPlaylist(playlist, callback) {
     .set('X-CSRF-Token', res.token)
     .send(playlist)
     .set('Accept', 'application/json')
+    .on('error', (err)=> {
+      console.log(err.status, err.response)
+      callback({ error: err.status })
+    })
     .end(function(err, res) {
       if(err || !res.ok) {
-        console.log('Error creating playlist', err);
+        callback({error: `${err.status} - ${err.response.statusText}`})
       } else {
-        callback(res.body);
+        callback({error: null, res});
       }
     })
   });

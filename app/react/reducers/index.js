@@ -22,7 +22,9 @@ import {
   SET_PLAYLIST_CAPTION,
   EDITING_PLAYLIST_CAPTION,
   EDITING_PLAYLIST_TITLE,
-  SET_PLAYLIST_TITLE
+  SET_PLAYLIST_TITLE,
+  RECEIVE_PLAYLIST_PERMALINK,
+  RECEIVE_PLAYLIST_ERROR
 } from '../constants';
 
 
@@ -108,7 +110,10 @@ function Playlist(state = {
   editingCaption: false,
   articles: initialArticles,
   editingArticle: null,
-  animating: false
+  animating: false,
+  published: false,
+  server_info: {},
+  server_errors: []
 }, action) {
   switch (action.type) {
     case SET_EDIT_ARTICLE:
@@ -204,7 +209,13 @@ function Playlist(state = {
         return state;
       }
       
-
+    case RECEIVE_PLAYLIST_PERMALINK:
+      return _.assign({}, state, {published: true, server_info: action.data, server_errors:[]})
+      
+    case RECEIVE_PLAYLIST_ERROR:
+      let server_errors = state.server_errors;
+      server_errors.push(action.data)
+      return _.assign({}, state, {published: false, server_errors: server_errors})
 
     default:
       return state;
