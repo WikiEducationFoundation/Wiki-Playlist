@@ -23,7 +23,8 @@ import {
   COLLAPSE_ARTICLE,
   COLLAPSE_COMPLETE,
   RECEIVE_PLAYLIST_PERMALINK,
-  FLASH_MESSAGE
+  FLASH_MESSAGE,
+  HANDLE_DELETE
 } from '../constants';
 
 
@@ -129,6 +130,10 @@ export function receivePlaylistPermalink(data) {
     type: RECEIVE_PLAYLIST_PERMALINK,
     data
   }
+}
+
+export function handleDelete() {
+  return { type: HANDLE_DELETE }
 }
 
 // — Article
@@ -270,40 +275,4 @@ export function fetchArticleImages(title, callback) {
       callback(images);
     }
   })
-}
-
-
-/* Playlist Actions
---------------------------------------------- */
-
-function getCSRFToken(callback) {
-  superagent.get('/csrf-token').end(function(err, res) {
-    if(err || !res.ok) {
-      console.log('Error getting csrf', err);
-    } else {
-      callback(res.body);
-    }
-  })
-}
-
-export function createPlaylist(playlist, callback) {
-  playlist.articles_attributes = playlist.articles;
-  getCSRFToken((res)=> {
-    superagent.post('/playlists')
-    .set('X-CSRF-Token', res.token)
-    .send(playlist)
-    .set('Accept', 'application/json')
-    .on('error', (err)=> {
-      console.log(err.status, err.response)
-      callback({ error: err.status })
-    })
-    .end(function(err, res) {
-      if(err || !res.ok) {
-        callback({error: `${err.status} - ${err.response.statusText}`})
-      } else {
-        callback({error: null, res});
-      }
-    })
-  });
-  
 }
