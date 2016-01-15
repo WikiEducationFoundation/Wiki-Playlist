@@ -1,0 +1,1 @@
+json.extract! @article, :title, :url, :thumbnail, :description, :pageId

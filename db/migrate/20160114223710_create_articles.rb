@@ -4,6 +4,7 @@ class CreateArticles < ActiveRecord::Migration
       t.belongs_to :playlist, index: true
       t.integer :pageId
       t.string :title
+      t.string :url
       t.string :description
       t.string :image
       t.timestamps null: false

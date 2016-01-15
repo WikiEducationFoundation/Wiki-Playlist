@@ -13,6 +13,6 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   root 'page#index'
-  post 'playlists' => 'playlist#create'
+  resources :playlists
   get "playlist(/*all)", to: redirect('/')
 end
