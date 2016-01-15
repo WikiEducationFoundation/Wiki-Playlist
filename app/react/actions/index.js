@@ -23,11 +23,29 @@ import {
   COLLAPSE_ARTICLE,
   COLLAPSE_COMPLETE,
   RECEIVE_PLAYLIST_PERMALINK,
-  RECEIVE_PLAYLIST_ERROR
+  FLASH_MESSAGE
 } from '../constants';
 
 
 // Action Creators
+
+// — Flash Message
+
+export function addFlashMessage(message) {
+  return {
+    type: FLASH_MESSAGE,
+    message
+  }
+}
+
+// (flashMessage Helper not an action creator)
+export function flashMessage(dispatch, message) {
+  const { text, type } = message;
+  dispatch(addFlashMessage({text: text, type: type}));
+  setTimeout(()=> {
+    dispatch(addFlashMessage({text: null, type: null}));
+  }, 2000)
+}
 
 
 // — Account
@@ -109,13 +127,6 @@ export function setPlaylistTitle(text) {
 export function receivePlaylistPermalink(data) {
   return {
     type: RECEIVE_PLAYLIST_PERMALINK,
-    data
-  }
-}
-
-export function receivePlaylistError(data) {
-  return {
-    type: RECEIVE_PLAYLIST_ERROR,
     data
   }
 }

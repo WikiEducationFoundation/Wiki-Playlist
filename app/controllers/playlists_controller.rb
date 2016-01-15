@@ -6,6 +6,7 @@ class PlaylistsController < ApplicationController
     @playlist.user_id = current_user.id
     params['articles'].each do |article| 
       @playlist.articles.build(article_params(article))
+      # remove me demo for errors:  @playlist.articles.build(article)
     end
     
     respond_to do |format|

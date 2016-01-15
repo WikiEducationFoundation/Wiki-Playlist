@@ -24,9 +24,23 @@ import {
   EDITING_PLAYLIST_TITLE,
   SET_PLAYLIST_TITLE,
   RECEIVE_PLAYLIST_PERMALINK,
-  RECEIVE_PLAYLIST_ERROR
+  RECEIVE_PLAYLIST_ERROR,
+  FLASH_MESSAGE
 } from '../constants';
 
+
+function FlashMessage(state = {
+  message: null,
+  type: 'default'
+}, action) {
+  switch (action.type) {
+    case FLASH_MESSAGE:
+      const {text, type} = action.message;
+      return _.assign({}, state, {message: text, type: type });
+    default:
+      return state;
+  }
+}
 
 
 function Account(state = {
@@ -212,11 +226,6 @@ function Playlist(state = {
     case RECEIVE_PLAYLIST_PERMALINK:
       return _.assign({}, state, {published: true, server_info: action.data, server_errors:[]})
       
-    case RECEIVE_PLAYLIST_ERROR:
-      let server_errors = state.server_errors;
-      server_errors.push(action.data)
-      return _.assign({}, state, {published: false, server_errors: server_errors})
-
     default:
       return state;
   }
@@ -228,7 +237,8 @@ const rootReducer = combineReducers({
   routing: routeReducer,
   Search,
   Playlist,
-  Account
+  Account,
+  FlashMessage
 });
 
 export default rootReducer;
