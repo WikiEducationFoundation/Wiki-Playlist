@@ -91,7 +91,8 @@ var defaultArticle = {
   thumbnail: '',
   url: '',
   open: false,
-  has_article: false
+  has_article: false,
+  pageId: null
 }
 
 let initialArticles = [];
@@ -135,9 +136,10 @@ function Playlist(state = {
 
     case ADD_ARTICLE:
       let {article, index} = action;
-      const {title, fullurl, pageid} = article;
+      const { title, fullurl, pageid } = article;
       const pageId = pageid;
       const url = fullurl;
+      console.log(article)
       const thumbnail = _.deepGet(article, 'thumbnail.source');
       let description = _.deepGet(article, 'terms.description.0'); 
       if(article.extract !== undefined) {
@@ -152,6 +154,7 @@ function Playlist(state = {
     case ADD_ARTICLE_IMAGES:
       let {images} = action;
       var articles = state.articles.slice(0);
+      articles[action.index].image = images[0];
       articles[action.index].images = images;
       return _.assign({}, state, {articles: articles})
 

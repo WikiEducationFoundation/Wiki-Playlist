@@ -1,5 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Playlist, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'Create' do
+    it { expect(build(:playlist)).to have_many(:articles) }
+  end
 end

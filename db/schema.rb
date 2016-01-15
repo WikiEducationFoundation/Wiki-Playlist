@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20160114223710) do
     t.integer  "playlist_id"
     t.integer  "pageId"
     t.string   "title"
+    t.string   "url"
     t.string   "description"
     t.string   "image"
     t.datetime "created_at",  null: false
@@ -30,6 +31,8 @@ ActiveRecord::Schema.define(version: 20160114223710) do
 
   create_table "playlists", force: :cascade do |t|
     t.integer  "user_id"
+    t.string   "title"
+    t.string   "caption"
     t.boolean  "featured",             default: false
     t.boolean  "share_image_rendered", default: false
     t.string   "share_image"

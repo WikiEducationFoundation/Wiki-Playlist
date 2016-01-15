@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+<div class="p2">
+<p>
+  <strong>Title:</strong>
+  <%= @playlist.title %>
+</p>
+
+<p>
+  <%= @playlist.caption %>
+</p>
+
+<% @articles.each do |article| %>
+  <div>
+    <h2><%= article.title %></h2>
+    <p><%= article.description %></p>
+    <img src="<%= article.image %>">
+  </div>
+<% end %>
+</div>
+

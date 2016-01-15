@@ -260,7 +260,8 @@ function getCSRFToken(callback) {
 }
 
 export function createPlaylist(playlist, callback) {
-  getCSRFToken((res)=>{
+  playlist.articles_attributes = playlist.articles;
+  getCSRFToken((res)=> {
     superagent.post('/playlists')
     .set('X-CSRF-Token', res.token)
     .send(playlist)
