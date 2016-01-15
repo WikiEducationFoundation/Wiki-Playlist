@@ -7,5 +7,8 @@
   text-align center
   transition 300ms linear
   
-  &:hover
-    background rgba(#ccc, .2)
+  &:first-of-type
+    border-right-color $color-primary--dark
+  
+  &:last-of-type
+    border-left-color lighten($color-primary, 10%)
