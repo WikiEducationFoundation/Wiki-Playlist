@@ -14,5 +14,6 @@ Rails.application.routes.draw do
 
   root 'page#index'
   resources :playlists
+  get "playlist/preview/:id" => "playlists#preview"
   get "playlist(/*all)", to: redirect('/')
 end
