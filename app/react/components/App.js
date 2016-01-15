@@ -2,9 +2,10 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import childrenWithProps from '../utils/childrenWithProps';
 import DevTools from '../containers/DevTools';
-import { login, logout, addUser, createPlaylist, receivePlaylistPermalink, receivePlaylistError } from '../actions';
+import { login, logout, addUser, createPlaylist, receivePlaylistPermalink, addFlashMessage, flashMessage } from '../actions';
 import {MD} from '../constants';
 import MediaQuery from 'react-responsive';
+import FlashMessage from './FlashMessage';
 
 class App extends React.Component {
 
@@ -24,18 +25,17 @@ class App extends React.Component {
         );
     }
 
-    const { server_errors } = this.props.Playlist;
+    const { server_errors, published } = this.props.Playlist;
     const errors = (server_errors.length ? <p className='error'>{server_errors.pop()}</p> : null);
-    const saveButton = (logged_in ? <button className='btn ml1' onClick={this._savePlaylist.bind(this)}>Save Playlist</button> : null);
+    const saveButton = (logged_in ? <button className='btn ml1' onClick={this._savePlaylist.bind(this)}>{(published ? 'Update' : 'Save')} Playlist</button> : null);
 
     return (
       <div className="px2">
-        
-        
+
         <h1 className="h4">
             <Link to="/">Wikipedia Playlist</Link>
           </h1>
-        {errors}
+        <FlashMessage />
         <nav className="py2 flex">
           
           <div className="px1">
@@ -59,11 +59,13 @@ class App extends React.Component {
   }
 
   _savePlaylist() {
+    const { published } = this.props.Playlist;
     createPlaylist(this.props.Playlist, (data) => {
       if(data.error) {
-        this.dispatch(receivePlaylistError(data.error));
+        flashMessage(this.dispatch,  {text: data.error, type: 'error'});
       } else {
         this.dispatch(receivePlaylistPermalink(data.res.body));
+        flashMessage(this.dispatch, {text: `Playlist ${(published ? 'updated' : 'saved')}!`, type: 'success'});
       }
     })
   }
