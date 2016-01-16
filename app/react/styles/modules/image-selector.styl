@@ -55,3 +55,29 @@
   
   li.slick-active button:after
     background rgba(black, .5)
+
+.slick-next,
+.slick-prev
+  position absolute
+  top 100px
+  left 0
+  color transparent
+  width 30px
+  height 30px
+  display block
+  margin-top -15px
+  background none
+  border none
+  background-image url('/icons/arrow-left.svg')
+  background-repeat no-repeat
+  background-size contain
+  background-color rgba(black, .1)
+  
+  &:focus
+    outline 0
+    background-color rgba(black, .2)
+
+.slick-next
+  left auto
+  right 0
+  background-image url('/icons/arrow-right.svg')

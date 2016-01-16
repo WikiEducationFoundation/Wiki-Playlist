@@ -24,9 +24,12 @@ class ImageSelector extends React.Component {
 
   render() {
 
+    const { editingArticle, articles } = this.props.Playlist;
+    const total_images = articles[editingArticle].images.length;
+
     const settings = {
-      dots: true,
-      arrows: false,
+      dots: (total_images < 12 ? true : false),
+      arrows: true,
       infinite: true,
       speed: 500,
       slidesToShow: 1,
@@ -39,7 +42,7 @@ class ImageSelector extends React.Component {
       <div className='image-selector flex flex-column flex-justify'>
         <div>
           <Slider {...settings}>{this._images()}</Slider>
-          <p className='center'>Swipe to view more thumbnails</p>
+          <p className='center assistive-text'>Swipe to view more thumbnails</p>
         </div>
         <div className='flex actions border-top'>
           <button className='btn border-right' onClick={this._cancel}>Cancel</button>
@@ -83,8 +86,8 @@ class ImageSelector extends React.Component {
     images.map(img => {
       const selected = (img === currentImage ? true : false);
       _images.push(
-        <div style={{display: 'inline-block', verticalAlign: 'top'}}>
-          <ArticleImage key={img} 
+        <div key={img} style={{display: 'inline-block', verticalAlign: 'top'}}>
+          <ArticleImage 
             dispatch={this.props.dispatch} 
             articleIndex={editingArticle} 
             img={img}
@@ -109,7 +112,6 @@ class ArticleImage extends React.Component {
     return (
       <div>
         <div style={style} className={'image-selector__image' + (this.props.selected ? ' bg-aqua' : '')}></div>
-        <p className='image-selector__description p1'>{description}</p>
       </div>
     )
   }

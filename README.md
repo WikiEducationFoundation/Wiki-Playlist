@@ -45,7 +45,13 @@
 
 ## References
 
-*Gems*
+**Wiki API**
+
+- [OpenSearch API](https://www.mediawiki.org/wiki/API:Opensearch)
+- [Query API](https://www.mediawiki.org/wiki/API:Query)
+
+
+**Gems**
 
 - [Rails Admin](https://github.com/sferik/rails_admin)
 - [Devise](https://github.com/plataformatec/devise)
@@ -54,7 +60,7 @@
 - [Heroku, Ruby on Rails and PhantomJS](https://gist.github.com/edelpero/9257311)
 
 
-*Testing*
+**Testing**
 
 - [Rspec Model Testing Template](https://gist.github.com/kyletcarlson/6234923)
 
