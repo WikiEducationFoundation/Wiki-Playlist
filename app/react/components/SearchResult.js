@@ -4,9 +4,10 @@ import {
   addArticle, 
   updateQuery,
   addArticleImages,
-  fetchArticleImages,
   updateCurrentEditingArticle
 } from '../actions';
+
+import { fetchArticleImages } from '../actions/SearchAPI';
 
 class SearchResult extends React.Component {
   render() {

@@ -2,13 +2,11 @@ _.mixin(require("lodash-deep"));
 import { moveArrayItem } from '../utils/Array';
 import { combineReducers } from 'redux';
 import { routeReducer, UPDATE_PATH } from 'redux-simple-router';
-import { search } from '../actions';
 import {
   LOGIN,
   LOGOUT,
   ADD_USER,
   UPDATE_QUERY, 
-  FETCH_QUERY, 
   ADD_SEARCH, 
   SET_EDIT_ARTICLE,
   ADD_ARTICLE_CARD,
@@ -80,10 +78,6 @@ function Search(state = {
       let queries = state.queries.slice(0);
       queries[index] = query;
       return _.assign({}, state, {queries: queries})
-
-    case FETCH_QUERY:
-      search(action.query, action.handler)
-      return state;
 
     case ADD_SEARCH:
       let history = state.history;

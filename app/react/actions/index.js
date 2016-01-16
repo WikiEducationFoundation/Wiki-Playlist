@@ -5,7 +5,6 @@ import {
   LOGOUT,
   ADD_USER,
   UPDATE_QUERY,
-  FETCH_QUERY,
   RECEIVE_RESULTS,
   ADD_SEARCH,
   SET_EDIT_ARTICLE,
@@ -77,14 +76,6 @@ export function addSearch(results, index) {
     type: ADD_SEARCH,
     results,
     index
-  }
-}
-
-export function fetchQuery(query, handler) {
-  return {
-    type: FETCH_QUERY,
-    query: query,
-    handler: handler
   }
 }
 
@@ -193,86 +184,10 @@ export function collapseComplete() {
   }
 }
 
-// — Search
+
 export function updateCurrentEditingArticle(index) {
   return {
     type: SET_EDIT_ARTICLE,
     index
   }
-}
-
-
-/* Wiki Search
---------------------------------------------- */
-
-const superagent = require('superagent');
-let jsonp = require('superagent-jsonp');
-
-const wiki_api = "https://en.wikipedia.org/w/api.php?action=";
-const opensearch = `${wiki_api}opensearch&prop=pageimages|pageterms&format=json&search=`
-const query_titles = `${wiki_api}query&prop=pageimages|pageterms|info|content|extracts&exintro=&explaintext=&inprop=url&format=json&piprop=thumbnail&pilimit=`
-const terms_description_titles = "&wbptterms=description&titles="
-const redirects = "&redirects="
-
-export function search(query, callback) {
-  superagent(opensearch + query)
-  .use(jsonp)
-  .end((err, res) => {
-    if(err) {
-      console.log('error fetching search', err);
-    } else {
-      searchTitles(res.body[1])
-    }
-  })
-
-  function searchTitles(titles) {
-    superagent(query_titles + titles.length + terms_description_titles + titles.join('|') + redirects).use(jsonp)
-    .end((err, res) => {
-      if(err) {
-        console.log('error fetching titles', err);
-      } else {
-        callback(res.body.query);
-      }
-    })
-  }
-}
-
-// Fetch Article images
-const exclude_images = require('../data/exclude_images');
-const query_article_images = `${wiki_api}query&redirects&generator=images&prop=imageinfo&&iiprop=url|extmetadata|metadata|commonmetadata&iiurlwidth=600&format=json&titles=`
-
-export function fetchArticleImages(title, callback) {
-  superagent(query_article_images + title)
-  .use(jsonp)
-  .end((err, res) => {
-    if(err) {
-      console.log('error fetching article images', err);
-    } else {
-      const imageObjects = _.values(res.body.query.pages);
-      let images = [];
-      imageObjects.map(obj => {
-        // console.log('image info', obj);
-        const {thumburl, extmetadata} = obj.imageinfo[0];
-        const url = thumburl;
-        var metadescription = extmetadata.ImageDescription;
-        var description = "";
-        if(metadescription !== undefined) {
-          description = metadescription.value.replace(/(<([^>]+)>)/ig,"").substring(0, 300)
-        }
-        const image = {
-          url,
-          description
-        }
-        var exclude = false
-        exclude_images.map(exl => {
-          if(image.url.indexOf(exl) !== -1) {exclude = true;}
-        });
-        if(!exclude) {
-          images.push(image);
-        }
-        
-      });
-      callback(images);
-    }
-  })
 }

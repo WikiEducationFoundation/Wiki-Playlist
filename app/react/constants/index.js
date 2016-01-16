@@ -3,7 +3,6 @@ export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const ADD_USER = 'ADD_USER';
 export const UPDATE_QUERY = 'UPDATE_QUERY';
-export const FETCH_QUERY = 'FETCH_QUERY';
 export const RECEIVE_RESULTS = 'RECEIVE_RESULTS';
 export const ADD_SEARCH = 'ADD_SEARCH';
 export const SET_EDIT_ARTICLE = 'SET_EDIT_ARTICLE';
