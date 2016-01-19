@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+npm run build
+git add .
+git commit -m 'Frontend Asset Build'
+git push heroku master
