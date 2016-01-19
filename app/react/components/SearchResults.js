@@ -11,7 +11,7 @@ export default class SearchResults extends React.Component {
   }
 
   _results() {
-    const {query} = this.props;
+    const {query, isSearching} = this.props;
     if(query !== undefined) {
       const {pages, redirects} = query;
       let results = [];
@@ -22,7 +22,7 @@ export default class SearchResults extends React.Component {
       }
       return results;
     } else {
-      return <p>Loading results...</p>
+      return <p>{(isSearching ? 'Loading results...' : 'No results found')}</p>
     }
   }
 

@@ -1,4 +1,4 @@
-import { updateQuery, fetchQuery, addSearch } from '../actions';
+import { updateQuery, fetchQuery, addSearch, isSearching } from '../actions';
 import { search } from '../actions/SearchAPI';
 
 export default class SearchForm extends React.Component {
@@ -21,8 +21,9 @@ export default class SearchForm extends React.Component {
     const query = e.target.value;
     dispatch(updateQuery(index, query))
     this.queryTimeout = setTimeout(()=>{
+      dispatch(isSearching(true))
       search(query, this._handleResults.bind(this));
-    }, 300)
+    }, 700)
   }
 
   _handleKeyDown(e) {
@@ -31,5 +32,6 @@ export default class SearchForm extends React.Component {
 
   _handleResults(results) {
     this.props.dispatch(addSearch(results, this.props.index))
+    this.props.dispatch(isSearching(false))
   }
 }

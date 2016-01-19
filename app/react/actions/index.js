@@ -7,6 +7,7 @@ import {
   UPDATE_QUERY,
   RECEIVE_RESULTS,
   ADD_SEARCH,
+  SEARCHING,
   SET_EDIT_ARTICLE,
   UPDATE_PATH,
   ADD_ARTICLE_CARD,
@@ -63,6 +64,14 @@ export function addUser(user) {
 }
 
 // — Search
+
+export function isSearching(bool) {
+  return {
+    type: SEARCHING,
+    bool
+  }
+}
+
 export function updateQuery(index, query) {
   return {
     type: UPDATE_QUERY,

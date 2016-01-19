@@ -8,6 +8,7 @@ import {
   ADD_USER,
   UPDATE_QUERY, 
   ADD_SEARCH, 
+  SEARCHING,
   SET_EDIT_ARTICLE,
   ADD_ARTICLE_CARD,
   ADD_ARTICLE,
@@ -68,10 +69,14 @@ while(i < TOTAL_ARTICLES) {
 
 function Search(state = {
   queries: initialQueries,
-  history: {}
+  history: {},
+  searching: false
 }, action) {
 
   switch (action.type) {
+
+    case SEARCHING:
+      return _.assign({}, state, {searching: action.bool});
   
     case UPDATE_QUERY:
       const {index, query} = action;
