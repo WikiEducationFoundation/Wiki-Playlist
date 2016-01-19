@@ -30,13 +30,13 @@ class ArticleSearch extends React.Component {
   }
 
   _currentQuery() {
-    const {queries, history} = this.props.Search;
+    const {queries, history, searching} = this.props.Search;
     const query = queries[this.props.Playlist.editingArticle];
     if(query !== undefined && query.length) {
       return (
         <div>
           <h2>Search For: "{query}"</h2>
-          <SearchResults dispatch={this.props.dispatch} query={history[query]}/>
+          <SearchResults dispatch={this.props.dispatch} query={history[query]} isSearching={searching}/>
         </div>
       );
       

@@ -5,6 +5,7 @@ export const ADD_USER = 'ADD_USER';
 export const UPDATE_QUERY = 'UPDATE_QUERY';
 export const RECEIVE_RESULTS = 'RECEIVE_RESULTS';
 export const ADD_SEARCH = 'ADD_SEARCH';
+export const SEARCHING = 'SEARCHING';
 export const SET_EDIT_ARTICLE = 'SET_EDIT_ARTICLE';
 export const UPDATE_PATH = 'UPDATE_PATH';
 export const ADD_ARTICLE_CARD = 'ADD_ARTICLE_CARD';
