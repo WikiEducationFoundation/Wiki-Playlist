@@ -1,6 +1,12 @@
 import es6BindAll from "es6bindall"; 
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import { pushPath } from 'redux-simple-router';
+import {
+  logoutUser,
+  openLoginPopup,
+  getUserStatus
+} from '../actions/UserAPI';
 
 import { 
   login,
@@ -44,15 +50,20 @@ class UserControls extends React.Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    $(document).on('authSuccess', ()=>{dispatch(login())});
-    $(document).on('authLogout', ()=>{dispatch(logout())});
-    $(document).on('authUser', (data)=>{
-      const { email, username } = data;
-      dispatch(addUser({ 
-        email,
-        username
-      }))
+    getUserStatus();
+    $(document).on('authSuccess', (data) => {
+      // auth_success partial doesn't get user data so hit /auth/user_status endpoint
+      if(data.username === undefined) { 
+        getUserStatus(); 
+      } else {
+        dispatch(login())
+        dispatch(addUser({username: data.username}));
+        dispatch(pushPath('/playlist'));
+      }
     });
+    $(document).on('authLogout', ()=>{dispatch(logout())});
+    $(document).on('click', '[data-popup]', openLoginPopup);
+    $(document).on('click', '[data-sign-out]', logoutUser);
   }
 
   _login() {

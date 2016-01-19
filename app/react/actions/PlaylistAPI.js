@@ -1,19 +1,9 @@
 const superagent = require('superagent');
 let jsonp = require('superagent-jsonp');
+import { getCSRFToken } from './rails';
 
 /* Playlist Actions
 --------------------------------------------- */
-
-function getCSRFToken(callback) {
-  superagent.get('/csrf-token').end(function(err, res) {
-    if(err || !res.ok) {
-      console.log('Error getting csrf', err);
-    } else {
-      callback(res.body);
-    }
-  })
-}
-
 
 const allowed_article_attributes = ["pageId", "title", "url", "description", "image"];
 function prepPlaylistAttributes(_playlist) {
