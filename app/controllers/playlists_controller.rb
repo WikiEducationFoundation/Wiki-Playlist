@@ -4,11 +4,6 @@ class PlaylistsController < ApplicationController
   def create
     @playlist = Playlist.new(playlist_params)
     @playlist.user_id = current_user.id
-    params['articles'].each do |article| 
-      @playlist.articles.build(article_params(article))
-      # remove me demo for errors:  @playlist.articles.build(article)
-    end
-    
     respond_to do |format|
       if @playlist.save
         @articles = @playlist.articles
@@ -67,15 +62,5 @@ class PlaylistsController < ApplicationController
         :share_image,
         articles_attributes: [:title, :url, :image, :description, :pageId]
       )
-    end
-
-    def article_params(article)
-      { 
-        :title => article[:title], 
-        :url => article[:url],
-        :image => article[:image]['url'],
-        :description => article[:description],
-        :pageId => article[:pageId]
-      }
     end
 end

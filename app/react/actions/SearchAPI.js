@@ -35,7 +35,7 @@ export function search(query, callback) {
 
 // Fetch Article images
 const exclude_images = require('../data/exclude_images');
-const query_article_images = `${wiki_api}query&redirects&generator=images&list=allimages&prop=imageinfo&&iiprop=url|extmetadata|metadata|commonmetadata&iiurlwidth=600&gimlimit=300&format=json&titles=`
+const query_article_images = `${wiki_api}query&redirects&generator=images&list=allimages&prop=imageinfo&&iiprop=url|extmetadata|metadata|commonmetadata&iiurlwidth=600&gimlimit=100&format=json&titles=`
 
 export function fetchArticleImages(title, callback,) {
   superagent(query_article_images + title)
@@ -46,18 +46,12 @@ export function fetchArticleImages(title, callback,) {
     } else {
       const imageObjects = _.values(res.body.query.pages);
       let images = [];
+      console.log(imageObjects);
       imageObjects.map(obj => {
-        // console.log('image info', obj);
         const {thumburl, extmetadata} = obj.imageinfo[0];
         const url = thumburl;
-        var metadescription = extmetadata.ImageDescription;
-        var description = "";
-        if(metadescription !== undefined) {
-          description = metadescription.value.replace(/(<([^>]+)>)/ig,"").substring(0, 300)
-        }
         const image = {
-          url,
-          description
+          url
         }
         var exclude = false
         exclude_images.map(exl => {
