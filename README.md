@@ -35,10 +35,23 @@
 
 *Run `npm run build` before deploying to production if any of the front-end javascript has changed.
 
+**Setup**
+
 1. Initialize a git repo in the current directory and commit all files.
 2. Install the [heroku toolbelt](https://toolbelt.heroku.com/)
 3. `heroku create`
-4. `git push heroku master`
+
+**Deploy**
+
+To deploy run: `git push heroku master` OR use the shortcut bash script `./deploy` which will automate the commands:
+
+```bash
+npm run build
+git add .
+git commit -m 'Frontend Asset Build'
+git push heroku master
+```
+
 
 [See Heroku's guide for more information](https://devcenter.heroku.com/articles/getting-started-with-rails4)
 
