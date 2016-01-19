@@ -14,12 +14,27 @@ function getCSRFToken(callback) {
   })
 }
 
+
+const allowed_article_attributes = ["pageId", "title", "url", "description", "image"];
+function prepPlaylistAttributes(_playlist) {
+  let playlist = _.assign({}, _playlist);
+  let articles = playlist.articles.slice(0);
+  articles.map((article, i) => {
+    articles[i] = _.pick(article, allowed_article_attributes);
+    articles[i].image = article.image.url;
+  });
+  playlist.articles_attributes = articles;
+  delete playlist.articles;
+  return playlist;
+}
+
+
 export function createPlaylist(playlist, callback) {
-  playlist.articles_attributes = playlist.articles;
+  let _playlist = prepPlaylistAttributes(playlist);
   getCSRFToken((res)=> {
     superagent.post('/playlists')
     .set('X-CSRF-Token', res.token)
-    .send(playlist)
+    .send(_playlist)
     .set('Accept', 'application/json')
     .end(function(err, res) {
       if(err || !res.ok) {
@@ -32,11 +47,11 @@ export function createPlaylist(playlist, callback) {
 }
 
 export function updatePlaylist(playlist, callback) {
-  playlist.articles_attributes = playlist.articles;
+  let _playlist = prepPlaylistAttributes(playlist);
   getCSRFToken((res)=> {
     superagent.put(`/playlists/${playlist.server_info.id}`)
     .set('X-CSRF-Token', res.token)
-    .send(playlist)
+    .send(_playlist)
     .set('Accept', 'application/json')
     .end(function(err, res) {
       if(err || !res.ok) {
