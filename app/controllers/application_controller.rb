@@ -19,18 +19,19 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def user_status
+    @user = current_user
+    render :json => {
+      'logged_in' => user_signed_in?,
+      'user' => @user.as_json()
+    }
+  end
+
   def after_sign_in_path_for(resource)
     if resource.admin
       rails_admin_path
     elsif resource
       oauth_success_path
-    end
-  end
-
-  def get_current_user
-    if user_signed_in?
-      @user = current_user
-      render :json => @user.as_json()
     end
   end
 
