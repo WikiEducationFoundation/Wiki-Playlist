@@ -124,6 +124,7 @@ function defaultPlaylist() {
     editingTitle: false,
     caption: '',
     editingCaption: false,
+    total_articles: 0,
     articles: articles,
     editingArticle: null,
     animating: false,
@@ -174,7 +175,7 @@ function Playlist(state = initialPlaylistState, action) {
       _article.has_article = true;
       var articles = state.articles.slice(0);
       articles[index] = _article;
-      return _.assign({}, state, {articles: articles})
+      return _.assign({}, state, {articles: articles, total_articles: state.total_articles + 1})
 
     case ADD_ARTICLE_IMAGES:
       let {images} = action;
@@ -234,7 +235,6 @@ function Playlist(state = initialPlaylistState, action) {
 
     case HANDLE_DELETE:
       var initialPlaylistState = defaultPlaylist();
-      console.log(initialPlaylistState);
       return initialPlaylistState;
       
     default:
