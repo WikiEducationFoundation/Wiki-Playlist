@@ -39,18 +39,39 @@
 
 1. Initialize a git repo in the current directory and commit all files.
 2. Install the [heroku toolbelt](https://toolbelt.heroku.com/)
-3. `heroku create`
+3. Create new Heroku App:
+
+
+```shell
+$ heroku create --stack cedar-14 --buildpack https://github.com/ddollar/heroku-buildpack-multi
+$ echo "https://github.com/ddollar/heroku-buildpack-apt" >> .buildpacks
+$ echo "https://github.com/srbartlett/heroku-buildpack-phantomjs-2.0.git" >> .buildpacks
+$ cat <<EOT >> Aptfile
+libicu52
+libjpeg8
+libfontconfig
+libwebp5
+EOT
+
+$ git push heroku master
+$ heroku ps:scale web=1
+$ heroku ps
+$ heroku open
+```
 
 **Deploy**
 
 To deploy run: `git push heroku master` OR use the shortcut bash script `./deploy` which will automate the commands:
 
-```bash
-npm run build
-git add .
-git commit -m 'Frontend Asset Build'
-git push heroku master
+```shell
+$ npm run build
+$ git add .
+$ git commit -m 'Frontend Asset Build'
+$ git push heroku master
 ```
+
+
+[Heroku Buildpack PhantomJS 2.0](https://github.com/srbartlett/heroku-buildpack-phantomjs-2.0/blob/master/README.md)
 
 ##PhantomJS
 
