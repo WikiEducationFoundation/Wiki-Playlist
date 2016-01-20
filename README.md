@@ -52,6 +52,10 @@ git commit -m 'Frontend Asset Build'
 git push heroku master
 ```
 
+##PhantomJS
+
+TODO
+
 
 [See Heroku's guide for more information](https://devcenter.heroku.com/articles/getting-started-with-rails4)
 
