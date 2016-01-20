@@ -1,8 +1,7 @@
 class PlaylistsController < ApplicationController
-  before_action :set_playlist, only: [:show, :edit, :update, :destroy, :preview]
+  before_action :set_playlist, only: [:show, :edit, :update, :destroy, :preview, :render_share_image]
 
   def create
-    
     @playlist = Playlist.new(playlist_params)
     @playlist.user_id = current_user.id
     respond_to do |format|
@@ -12,7 +11,6 @@ class PlaylistsController < ApplicationController
           id: @playlist.id,
           articles: @playlist.articles
         } }
-
       else
         format.json { render json: @playlist.errors, status: :unprocessable_entity }
       end
@@ -44,6 +42,19 @@ class PlaylistsController < ApplicationController
     respond_to do |format|
       # format.html { redirect_to playlists_url, notice: 'Playlist was successfully destroyed.' }
       format.json { head :no_content, message: 'Playlist was successfully deleted.' }
+    end
+  end
+
+  def preview
+    render :json => { :preview => render_to_string('show', :layout => false) }
+  end
+
+
+  def render_share_image
+    playlist = render_to_string('show', layout: false)
+    render_job = `phantomjs --ignore-ssl-errors=yes --ssl-protocol=TLSv1 --debug=true lib/script/share-image.js '#{playlist}'`
+    respond_to do |format|
+      format.json { render json: { message: render_job } }
     end
   end
 
