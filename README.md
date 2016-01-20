@@ -56,6 +56,7 @@ EOT
 $ git push heroku master
 $ heroku ps:scale web=1
 $ heroku ps
+$ heroku run rake db:migrate
 $ heroku open
 ```
 
