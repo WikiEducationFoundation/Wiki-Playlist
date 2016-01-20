@@ -5,19 +5,35 @@ import { getCSRFToken } from './rails';
 /* Playlist Actions
 --------------------------------------------- */
 
+const allowed_playlist_attributes = ["title", "caption", "articles_attributes"];
 const allowed_article_attributes = ["pageId", "title", "url", "description", "image"];
-function prepPlaylistAttributes(_playlist) {
-  let playlist = _.assign({}, _playlist);
+
+function filterArticleKeys(playlist) {
   let articles = playlist.articles.slice(0);
   articles.map((article, i) => {
     articles[i] = _.pick(article, allowed_article_attributes);
-    articles[i].image = article.image.url;
+    if(article.image !== undefined) {
+      articles[i].image = article.image.url;
+    }
   });
-  playlist.articles_attributes = articles;
-  delete playlist.articles;
-  return playlist;
+
+  if(playlist.server_info.articles !== undefined) {
+    const ids = playlist.server_info.articles;
+    articles.map((article, i) => articles[i].id = ids[i] );
+  }
+
+  return articles;
 }
 
+function filterPlaylistKeys(playlist) {
+  return _.pick(playlist, allowed_playlist_attributes);
+}
+
+function prepPlaylistAttributes(_playlist) {
+  let playlist = _.assign({}, _playlist);
+  playlist.articles_attributes = filterArticleKeys(playlist);
+  return {playlist: filterPlaylistKeys(playlist)};
+}
 
 export function createPlaylist(playlist, callback) {
   let _playlist = prepPlaylistAttributes(playlist);

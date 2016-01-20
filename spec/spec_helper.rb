@@ -17,9 +17,16 @@
 #
 
 require 'factory_girl_rails'
+require 'omniauth'
+require 'devise'
+require_relative 'helpers/omniauth_test_helper'
+
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+
+  config.include Devise::TestHelpers, :type => :controller
+  config.include OmniAuthTestHelpers
 
   config.include FactoryGirl::Syntax::Methods
   # rspec-expectations config goes here. You can use an alternate
