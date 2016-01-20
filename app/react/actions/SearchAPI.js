@@ -46,13 +46,13 @@ export function fetchArticleImages(title, callback,) {
     } else {
       const imageObjects = _.values(res.body.query.pages);
       let images = [];
-      console.log(imageObjects);
       imageObjects.map(obj => {
-        const {thumburl, extmetadata} = obj.imageinfo[0];
-        const url = thumburl;
-        const image = {
-          url
+        let image = { url: ''}
+        if(obj.imageinfo !== undefined && obj.imageinfo.length) {
+          const {thumburl} = obj.imageinfo[0];
+          image.url = thumburl
         }
+        
         var exclude = false
         exclude_images.map(exl => {
           if(image.url.indexOf(exl) !== -1) {exclude = true;}

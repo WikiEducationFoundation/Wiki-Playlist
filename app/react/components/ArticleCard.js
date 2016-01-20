@@ -141,13 +141,18 @@ class ArticleCard extends React.Component {
       style.backgroundImage = `url(${images[0].url})`;
     }
 
-    let cancel = null;
-    if(editing_options) {
-      link = link_to_image_selector;
-      imageClass += 'editing ';
-      cancel = (
+    const cancel_button = (
         <button className='article-card__cancel-button'
                 onClick={()=>{this.setState({editing_options: false})}}>&#215;</button>)
+
+    let cancel = null;
+    if(editing_options) {
+      cancel = cancel_button;
+    }
+
+    if(editing_options && images.length > 1) {
+      link = link_to_image_selector;
+      imageClass += 'editing ';
     }
 
     if(this.props.Playlist.animating && open) {

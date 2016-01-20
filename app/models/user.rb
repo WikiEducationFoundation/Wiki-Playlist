@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
 
   def self.from_omniauth(auth)
     where( provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      email = nil
       email = auth.info.email
       email = auth.extra.raw_info.email if email.nil?
       user.username = auth.info.nickname if auth.info.nickname?

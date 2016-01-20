@@ -94,20 +94,34 @@ class UserControls extends React.Component {
   _savePlaylist() {
     const { published, total_articles } = this.props.Playlist;
     // Flash Message if not enough articles
-    if(total_articles < 3) {
-      flashMessage(this.dispatch,  {text: "Please find at least 3 articles.", type: 'action'});
-    } else {
-      //Otherwise save the playlist
-      const saveMethod = (published ? updatePlaylist : createPlaylist)
-      saveMethod(this.props.Playlist, (data) => {
-        if(data.error) {
-          flashMessage(this.dispatch,  {text: data.error, type: 'error'});
-        } else {
-          this.dispatch(receivePlaylistPermalink(data.res.body));
-          flashMessage(this.dispatch, {text: `Playlist ${(published ? 'updated' : 'saved')}!`, type: 'success'});
-        }
-      })
-    }
+    // if(total_articles < 3) {
+    //   flashMessage(this.dispatch,  {text: "Please find at least 3 articles.", type: 'action'});
+    // } else {
+    //   //Otherwise save the playlist
+    //   const saveMethod = (published ? updatePlaylist : createPlaylist)
+    //   saveMethod(this.props.Playlist, (data) => {
+    //     if(data.error) {
+    //       flashMessage(this.dispatch,  {text: data.error, type: 'error'});
+    //     } else {
+    //       this.dispatch(receivePlaylistPermalink(data.res.body));
+    //       flashMessage(this.dispatch, {text: `Playlist ${(published ? 'updated' : 'saved')}!`, type: 'success'});
+    //     }
+    //   })
+    // }
+
+    const saveMethod = (published ? updatePlaylist : createPlaylist)
+    saveMethod(this.props.Playlist, (data) => {
+      if(data.error) {
+        flashMessage(this.dispatch,  {text: data.error, type: 'error'});
+      } else {
+        const { id, articles } = data.res.body;
+        var article_ids = [];
+        articles.map(article => article_ids.push(article.id));
+        var playlist_data = {id: id, articles: article_ids};
+        this.dispatch(receivePlaylistPermalink(playlist_data));
+        flashMessage(this.dispatch, {text: `Playlist ${(published ? 'updated' : 'saved')}!`, type: 'success'});
+      }
+    })
     
   }
 

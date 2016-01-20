@@ -2,12 +2,17 @@ class PlaylistsController < ApplicationController
   before_action :set_playlist, only: [:show, :edit, :update, :destroy, :preview]
 
   def create
+    
     @playlist = Playlist.new(playlist_params)
     @playlist.user_id = current_user.id
     respond_to do |format|
       if @playlist.save
-        @articles = @playlist.articles
-        format.json { render :show, status: :created, location: @playlist }
+        # format.json { render :show, status: :created, location: @playlist }
+        format.json { render json: {
+          id: @playlist.id,
+          articles: @playlist.articles
+        } }
+
       else
         format.json { render json: @playlist.errors, status: :unprocessable_entity }
       end
@@ -17,10 +22,6 @@ class PlaylistsController < ApplicationController
   # GET /playlists/1
   # GET /playlists/1.json
   def show
-  end
-
-  def preview
-    render :json => { :preview => render_to_string('show', :layout => false) }
   end
 
   # PATCH/PUT /playlists/1
@@ -56,11 +57,8 @@ class PlaylistsController < ApplicationController
     def playlist_params
       params.require(:playlist).permit(
         :title, 
-        :caption, 
-        :featured, 
-        :share_image_rendered, 
-        :share_image,
-        articles_attributes: [:title, :url, :image, :description, :pageId]
+        :caption,
+        :articles_attributes => [:id, :title, :url, :image, :description, :pageId, :_destroy]
       )
     end
 end
