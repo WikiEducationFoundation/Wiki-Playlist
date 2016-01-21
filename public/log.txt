@@ -1,0 +1,47 @@
+html received: <div class="p2">
+<p>
+  <strong>Title:</strong>
+  Jazz Greats
+</p>
+
+<p>
+  Lorem ipsum Duis in amet in do pariatur officia mollit Ut Ut amet commodo fugiat ut qui aliqua ea dolore ut sed nulla esse culpa irure dolor adipisicing.
+</p>
+
+  <div>
+    <h2>Charlie Parker</h2>
+    <p>Charles &quot;Charlie&quot; Parker, Jr. (August 29, 1920 – March 12, 1955), also known as &quot;Yardbird&quot; and &quot;Bird&quot;, was an American jazz saxophonist and composer.
+Parker was a highly influential jazz soloist and a leading figure in the development of bebop, a form of jazz characterized by fast tempos, virtuosic technique and improvisation. Parker introduced revolutionary harmonic ideas including rapid passing chords, new variants of altered chords, and chord substitutions. His tone ranged from clean and penetrating to sweet and somber. Parker acquired the nickname &quot;Yardbird&quot; early in his career. This and its shortened form, &quot;Bird&quot; continued to be used for the rest of his life, inspiring the titles of a number of Parker compositions, such as &quot;Yardbird Suite&quot;, &quot;Ornithology&quot;, &quot;Bird Gets the Worm&quot;, and &quot;Bird of Paradise.&quot; Parker was an icon for the hipster subculture and later the Beat Generation, personifying the jazz musician as an uncompromising artist and intellectual rather than just an entertainer.</p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Charlie_Parker%2C_Tommy_Potter%2C_Miles_Davis%2C_Max_Roach_%28Gottlieb_06941%29.jpg/600px-Charlie_Parker%2C_Tommy_Potter%2C_Miles_Davis%2C_Max_Roach_%28Gottlieb_06941%29.jpg">
+  </div>
+  <div>
+    <h2>Billie Holiday</h2>
+    <p>Eleanora Fagan (April 7, 1915 – July 17, 1959), professionally known as Billie Holiday, was an American jazz musician and singer-songwriter with a career spanning nearly thirty years. Nicknamed &quot;Lady Day&quot; by her friend and music partner Lester Young, Holiday had a seminal influence on jazz music and pop singing. Her vocal style, strongly inspired by jazz instrumentalists, pioneered a new way of manipulating phrasing and tempo. Holiday was known for her vocal delivery and improvisation skills, which made up for her limited range and lack of formal music education.
+After a turbulent childhood, Holiday began singing in nightclubs around Harlem. After being heard by producer John Hammond, who commended her voice, Holiday was signed to Brunswick Records in 1935. Collaborations with Teddy Wilson yielded the hit &quot;What a Little Moonlight Can Do&quot;, which would later become a jazz standard. Throughout the 1930s and 1940s, Holiday booked mainstream success with labels such as Columbia Records and Decca Records. By the late 1940s, however, Holiday was beset with legal troubles and drug abuse. After a short prison sentence, Holiday performed a sold-out concert at Carnegie Hall. However, due to her drug and alcohol problems, her reputation deteriorated.
+Though she was a successful concert performer throughout the 1950s with two further sold-out shows at Carnegie Hall, Holiday&#39;s bad health, coupled with a string of abusive relationships and ongoing drug and alcohol abuse, caused her voice to wither. Her final recordings were met with mixed reaction to her damaged voice, but were mild commercial successes. Her final album, Lady in Satin, was released in 1958. Holiday died of cirrhosis of the liver in 1959. A posthumous album, Last Recordings, was released following her death.
+Much of Holiday&#39;s material has been rereleased since her death, and she is considered a legendary performer with an ongoing influence on American music. Holiday is the recipient of four Grammy awards, all of them posthumous awards for Best Historical Album. Furthermore, Holiday herself was inducted into the Grammy Hall of Fame in 1973. Lady Sings the Blues, a film centered on Holiday&#39;s life, starring Diana Ross, was released in 1972.
+
+</p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Billie_Holiday%2C_Downbeat%2C_New_York%2C_N.Y.%2C_ca._Feb._1947_%28William_P._Gottlieb_04251%29.jpg/600px-Billie_Holiday%2C_Downbeat%2C_New_York%2C_N.Y.%2C_ca._Feb._1947_%28William_P._Gottlieb_04251%29.jpg">
+  </div>
+  <div>
+    <h2>Thelonious Monk</h2>
+    <p>American jazz pianist and composer</p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Thelonious_Monk%2C_Minton%27s_Playhouse%2C_New_York%2C_N.Y.%2C_ca._Sept._1947_%28William_P._Gottlieb_06191%29.jpg/600px-Thelonious_Monk%2C_Minton%27s_Playhouse%2C_New_York%2C_N.Y.%2C_ca._Sept._1947_%28William_P._Gottlieb_06191%29.jpg">
+  </div>
+  <div>
+    <h2>Ella Fitzgerald</h2>
+    <p>Ella Jane Fitzgerald (April 25, 1917 – June 15, 1996) was an American jazz singer often referred to as the First Lady of Song, Queen of Jazz and Lady Ella. She was noted for her purity of tone, impeccable diction, phrasing and intonation, and a &quot;horn-like&quot; improvisational ability, particularly in her scat singing.
+After tumultuous teenage years, Fitzgerald found stability in musical success with the Chick Webb Orchestra, performing across the country, but most often associated with the Savoy Ballroom in Harlem. Fitzgerald&#39;s rendition of the nursery rhyme &quot;A-Tisket, A-Tasket&quot; helped boost both her and Webb to national fame. Taking over the band after Webb died, Fitzgerald left it behind in 1942 to start a solo career that would last essentially the rest of her life.
+Signed with manager and Savoy co-founder Moe Gale from early in her career, she eventually gave managerial control for her performance and recording career to Norman Granz, who built up the label Verve Records based in part on Fitzgerald&#39;s vocal abilities. With Verve she recorded some of her more widely noted works, particularly her interpretation of the Great American Songbook.
+While Fitzgerald appeared in movies and as a guest on popular television shows in the second half of the twentieth century, her musical collaborations with Louis Armstrong, Duke Ellington, and The Ink Spots were some of her most notable acts outside of her solo career. These partnerships produced recognizable songs like &quot;Dream a Little Dream of Me&quot;, &quot;Cheek to Cheek&quot;, &quot;Into Each Life Some Rain Must Fall&quot;, and &quot;It Don&#39;t Mean a Thing (If It Ain&#39;t Got That Swing)&quot;. In 1993, Fitzgerald capped off her sixty-year career with her last public performance. Three years later, she died at the age of 79, following years of decline in her health. After her passing, Fitzgerald&#39;s influence lived on through her fourteen Grammy Awards, National Medal of Arts, Presidential Medal of Freedom, and tributes in the form of stamps, music festivals, and theater namesakes.</p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Ella_Fitzgerald_%28Gottlieb_02871%29.jpg/600px-Ella_Fitzgerald_%28Gottlieb_02871%29.jpg">
+  </div>
+  <div>
+    <h2>Chet Baker</h2>
+    <p>Chesney Henry &quot;Chet&quot; Baker, Jr. (December 23, 1929 – May 13, 1988) was an American jazz trumpeter, flugelhornist and vocalist.
+Baker earned much attention and critical praise through the 1950s, particularly for albums featuring his vocals (Chet Baker Sings, It Could Happen to You). Jazz historian David Gelly described the promise of Baker&#39;s early career as &quot;James Dean, Sinatra, and Bix, rolled into one.&quot; His well-publicized drug habit also drove his notoriety and fame; Baker was in and out of jail frequently before enjoying a career resurgence in the late 1970s and &#39;80s.</p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Chet675.jpg/600px-Chet675.jpg">
+  </div>
+</div>
+

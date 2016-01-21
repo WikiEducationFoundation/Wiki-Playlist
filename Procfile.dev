@@ -1,2 +1,4 @@
+zeus: echo "Starting Zeus..." && zeus start &> /dev/null
+web: sleep 2 && zeus s
 client: npm run start-hot-dev
-server: rails s
+worker: que ./config/environment.rb

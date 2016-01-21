@@ -1,12 +1,12 @@
 class PlaylistsController < ApplicationController
-  before_action :set_playlist, only: [:show, :edit, :update, :destroy, :preview, :render_share_image]
+  before_action :set_playlist, only: [:show, :edit, :update, :destroy, :preview, :render_share_image, :render_status]
 
   def create
     @playlist = Playlist.new(playlist_params)
     @playlist.user_id = current_user.id
     respond_to do |format|
       if @playlist.save
-        # format.json { render :show, status: :created, location: @playlist }
+        GenerateShareImage.enqueue(@playlist.id, :title => @playlist.title)
         format.json { render json: {
           id: @playlist.id,
           articles: @playlist.articles
@@ -25,9 +25,14 @@ class PlaylistsController < ApplicationController
   # PATCH/PUT /playlists/1
   # PATCH/PUT /playlists/1.json
   def update
+    @playlist.share_image_rendered = false;
     respond_to do |format|
       if @playlist.update(playlist_params)
-        format.json { render :show, status: :ok, location: @playlist }
+        GenerateShareImage.enqueue(@playlist.id, :title => @playlist.title)
+        format.json { render json: {
+          id: @playlist.id,
+          articles: @playlist.articles
+        } }
       else
         # format.html { render :edit }
         format.json { render json: @playlist.errors, status: :unprocessable_entity }
@@ -52,12 +57,25 @@ class PlaylistsController < ApplicationController
 
   def render_share_image
     playlist = render_to_string('show', layout: false)
-    render_job = `phantomjs --ignore-ssl-errors=yes --ssl-protocol=TLSv1 --debug=true lib/script/share-image.js '#{playlist}'`
+    binding.pry
+    title = @playlist.title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
+    render_job = `phantomjs --ignore-ssl-errors=yes --ssl-protocol=TLSv1 --debug=true lib/script/share-image.js "#{playlist}" '#{title}'`
     respond_to do |format|
-      format.json { render json: { message: render_job } }
+      format.json { render json: { message: JSON.parse(render_job) } }
     end
   end
 
+  def render_status
+    status = { rendered: false }
+    if @playlist.share_image_rendered
+      status = {
+        rendered: true,
+        url: @playlist.share_image.url
+      }
+    end
+    render json: status
+  end
+  
   private
 
     def set_playlist

@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, 
          :omniauthable, omniauth_providers: [:mediawiki, :mediawiki_signup, :twitter, :facebook],
          :authentication_keys => [:login]
-  
+
   # Virtual attribute for authenticating by either username or email
   # This is in addition to a real persisted field like 'username'
   attr_accessor :login
@@ -38,6 +38,7 @@ class User < ActiveRecord::Base
   end
 
   def self.find_first_by_auth_conditions(warden_conditions)
+    binding.pry
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
       where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
@@ -62,6 +63,7 @@ class User < ActiveRecord::Base
   
   def create_login
     if self.username.blank? && self.email
+      binding.pry
       email = self.email.split(/@/)
       login_taken = User.where(:username => email[0]).first
       unless login_taken
@@ -70,6 +72,10 @@ class User < ActiveRecord::Base
         self.username = self.email
       end
     end
+  end
+
+  def email_required?
+    false
   end
 
 end

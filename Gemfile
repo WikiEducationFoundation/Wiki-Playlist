@@ -21,14 +21,28 @@ gem 'omniauth'
 gem 'omniauth-mediawiki', git: 'https://github.com/ragesoss/omniauth-mediawiki.git'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
-gem "cancancan"
+gem 'cancancan'
+gem 'que'
+gem "paperclip", "~> 4.3"
+gem 'aws-sdk-v1'
+gem 'zeus'
 
 group :development, :test do
   gem 'byebug'
-  gem 'rspec-rails', '~> 3.0'
+  gem 'guard'
+  gem 'guard-bundler'
+  gem 'guard-rspec'
+  gem 'guard-zeus'
+  gem 'pry-byebug'
+end
+
+group :test do
+  gem "capybara"
+  gem "capybara-webkit"
+  gem "rspec-rails", '~> 3.0'
+  gem "cucumber-rails"
   gem 'factory_girl_rails'
   gem 'faker'
-  gem 'pry-byebug'
   gem 'shoulda'
 end
 

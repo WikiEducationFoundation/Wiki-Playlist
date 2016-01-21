@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   root 'page#index'
   resources :playlists
+  get "playlist/render_status/:id" => "playlists#render_status"
   get "playlist/render_share_image/:id" => "playlists#render_share_image"
   get "playlist(/*all)", to: redirect('/')
 end
