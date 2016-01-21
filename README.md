@@ -43,9 +43,10 @@
 
 
 ```shell
-$ heroku create --stack cedar-14 --buildpack https://github.com/ddollar/heroku-buildpack-multi
-$ echo "https://github.com/ddollar/heroku-buildpack-apt" >> .buildpacks
-$ echo "https://github.com/srbartlett/heroku-buildpack-phantomjs-2.0.git" >> .buildpacks
+$ heroku create --stack cedar-14
+$ heroku buildpacks:add https://github.com/ddollar/heroku-buildpack-apt
+$ heroku buildpacks:add https://github.com/srbartlett/heroku-buildpack-phantomjs-2.0.git
+$ heroku buildpacks:add heroku/ruby
 $ cat <<EOT >> Aptfile
 libicu52
 libjpeg8
