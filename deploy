@@ -1,6 +1,15 @@
 #!/usr/bin/env bash
+
+
+if [[ "$1" != "" ]]; then
+  MESSAGE="$1"
+else
+  MESSAGE="Build and Deploy"
+fi
+
 npm run build
 git add .
-git commit -m 'Frontend Asset Build'
-git push
+git commit -m $MESSAGE
+git push origin master
+git push wintr master
 git push heroku master

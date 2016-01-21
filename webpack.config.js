@@ -33,7 +33,8 @@ module.exports = {
       ReactDOM: 'react-dom',
       _: 'lodash',
       Slider: 'react-slick',
-      es6BindAll: 'es6bindall'
+      es6BindAll: 'es6bindall',
+      slugify: 'slugify'
     })
   ]
 };

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160114223710) do
+ActiveRecord::Schema.define(version: 20160121212140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,14 +33,29 @@ ActiveRecord::Schema.define(version: 20160114223710) do
     t.integer  "user_id"
     t.string   "title"
     t.string   "caption"
-    t.boolean  "featured",             default: false
-    t.boolean  "share_image_rendered", default: false
+    t.boolean  "featured",                 default: false
+    t.boolean  "share_image_rendered",     default: false
     t.string   "share_image"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.string   "share_image_file_name"
+    t.string   "share_image_content_type"
+    t.integer  "share_image_file_size"
+    t.datetime "share_image_updated_at"
   end
 
   add_index "playlists", ["user_id"], name: "index_playlists_on_user_id", using: :btree
+
+  create_table "que_jobs", id: false, force: :cascade do |t|
+    t.integer  "priority",    limit: 2, default: 100,                                        null: false
+    t.datetime "run_at",                default: "now()",                                    null: false
+    t.integer  "job_id",      limit: 8, default: "nextval('que_jobs_job_id_seq'::regclass)", null: false
+    t.text     "job_class",                                                                  null: false
+    t.json     "args",                  default: [],                                         null: false
+    t.integer  "error_count",           default: 0,                                          null: false
+    t.text     "last_error"
+    t.text     "queue",                 default: "",                                         null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: ""

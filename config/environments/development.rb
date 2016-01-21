@@ -6,6 +6,8 @@ Rails.application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
+  $stdout.sync = true
+
   # Do not eager load code on boot.
   config.eager_load = false
 
@@ -42,5 +44,11 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   config.action_controller.action_on_unpermitted_parameters = :raise
+
+  config.paperclip_defaults = {
+    :storage => :s3,
+    # :s3_host_name => 'REMOVE_THIS_LINE_IF_UNNECESSARY',
+    :bucket => 'wiki-playlist'
+  }
 
 end
