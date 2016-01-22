@@ -3,7 +3,11 @@
   z-index 50
 
 .playlist__caption
-  flex-basis 100%
+  // flex-basis 100%
+  min-height 150px
+  
+  +above(md)
+    max-width 300px
   
   .field
     width 100%

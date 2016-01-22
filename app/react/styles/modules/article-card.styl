@@ -1,24 +1,18 @@
 .article-card
-  height 400px
   width 100%
   max-width 300px
   margin-bottom 1em
   transition 300ms linear
   +above(md)
-    display inline-block
+    display block
     vertical-align top
-    margin-right 1rem
-  
-.article-card--title 
-  white-space normal
-  .article-card__summary
-    text-align left
-    justify-content flex-start
-    white-space normal
+    width 100%
+    max-width none
+    height 300px
+    margin-left auto
+    margin-right auto
 
-.article-card--add .article-card__container
-  background $gray
-
+.card,
 .article-card__container
   border-radius 10px
   top 0
@@ -30,34 +24,79 @@
   overflow-x hidden
   box-shadow 0px 2px 4px 0px rgba(0,0,0,0.22)
 
+.article-card__container
+  flex-direction column
+  +above(md)
+    flex-direction row
+
+.article-card__content
+  display flex
+  align-items stretch
+  flex-direction column
+  height 100%
+  width 100%
+  
+  +above(md)
+    flex-direction row
+
+.article-card--title 
+  white-space normal
+  .article-card__summary
+    text-align left
+    justify-content flex-start
+    white-space normal
+
+.article-card--add .article-card__container
+  background $gray
+
 .article-card__edit-button
   font-size 12px
   padding .25rem 1rem
 
 .article-card__summary
-  flex 1 0 auto
-  justify-content center
-  text-align center
+  display flex
   white-space normal
+  flex-direction column
+  justify-content center
+  padding 1rem
+  align-items space-between
+  +above(md)
+    display flex
+    height 100%
+    justify-content space-between
+    padding 2rem
+    max-width 70%
 
-.article-card__excerpt
-  line-height 1.2
+.article-card__title
+  border-bottom 1px solid $black
+  padding-bottom .25rem
+  margin-bottom .5rem
 
-.article-card__header,
-.article-card__image
-  border-top-left-radius 9px
-  border-top-right-radius 9px
+// .article-card__header,
+// .article-card__image
+//   border-top-left-radius 9px
+//   border-top-right-radius 9px
 
 .article-card__image
   position relative
   background-color $gray
   background-position top center
+  background-repeat no-repeat
   background-size cover
   display flex
   flex-direction column
   justify-content center
   align-items center
   transition 300ms linear
+  height 200px
+  
+  +above(md)
+    height 100%
+    width 400px
+    max-width 30%
+    flex-basis 35%
+    background-position center
+    background-color white
   
   &.hidden
     opacity 0
@@ -74,8 +113,7 @@
     background rgba(black, .5)
 
 .article-card__header
-  height 200px
-  background-color $color-primary
+  // 
 
 .article-card__image__edit-button
   position relative

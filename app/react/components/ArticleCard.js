@@ -4,8 +4,9 @@ import { Link } from 'react-router';
 import { pushPath } from 'redux-simple-router';
 import { connect } from 'react-redux';
 import es6BindAll from "es6bindall"; 
+import Icon from './Icon';
 
-class ArticleCard extends React.Component {
+export class ArticleCard extends React.Component {
 
   constructor(props) {
     super();
@@ -24,9 +25,10 @@ class ArticleCard extends React.Component {
   }
 
   render() {
+    const { has_article } = this.props;
     return (
-      <div className="article-card flex-column flex-stretch">
-        <div className="article-card__container flex flex-column flex-stretch" ref={card => {this.cardElement = card}}>
+      <div className={'flex-column flex-stretch ' + (has_article ? 'article-card' : 'editable-container p2 mb2')}>
+        <div className={' ' + (has_article ? 'article-card__container' : '')} ref={card => {this.cardElement = card}}>
           {this._articleContent()}
           {this.props.children}
         </div>
@@ -47,8 +49,10 @@ class ArticleCard extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if(nextProps.routing === undefined) { return; }
     const {path} = nextProps.routing;
     const {index, Playlist, open} = this.props;
+
 
     if(nextProps.open && !open && !this.animating) {
       this.expandController = this.addAnimation(this._expand);
@@ -72,14 +76,14 @@ class ArticleCard extends React.Component {
   _articleContent() {
     const { editing_options } = this.state;
     const { title, description, index, editing, open, has_article, caption, url } = this.props;
-    const truncated_description = (description !== undefined && description.length > 150 ? `${description.substr(0,150)}...` : description)
+    const truncated_description = (description !== undefined && description.length > 250 ? `${description.substr(0,250)}...` : description)
     const article_link = (!_.isEmpty(url) ? <a className='px1' href={url}>Read Article</a> : null)
     let content = null;
     if(has_article) {
       content = (
         <div>
-          <h2 className="m0">{title}</h2>
-          <div className="px1 mb2 article-card__excerpt"><small>{truncated_description}{article_link}</small></div>
+          <h2 className="article-card__title">{title}</h2>
+          <div className="mb2 article-card__excerpt summary"><small>{truncated_description}{article_link}</small></div>
         </div>
       );
     }
@@ -87,16 +91,18 @@ class ArticleCard extends React.Component {
     const search_button = (<button className='btn btn-outline flex-end bg-silver'
               onClick={() => {this.dispatch(expandArticle(index))}}>Add Article</button>);
     
-    const edit_button = (<button className='article-card__edit-button btn btn-outline' 
-              onClick={() => { this.setState({editing_options: true})}}>Edit</button>)
+    const edit_button = (<button className='action' 
+              onClick={() => { this.setState({editing_options: true})}}>Edit <Icon size="16px" icon="edit" fill={'silver'} /></button>)
 
     let button = search_button;
-    if(has_article) { button = edit_button; }
+    if(has_article) { button = (
+      <span>{edit_button}
+        <a className='action action--external-serif' href={url}>View Article <Icon size="12px" icon="external-link" fill={'teal'} /></a></span>); }
     
     if(editing_options) { 
       button = null; 
       content = (
-        <button className='btn btn-outline'
+        <button className='btn btn--edit'
                 onClick={() => {this.dispatch(expandArticle(index))}}>Change Article</button>
       )
 
@@ -105,11 +111,13 @@ class ArticleCard extends React.Component {
 
     if(editing !== index) {
       return (
-        <div className="article-card__content flex flex-grow flex-column flex-stretch" ref={c => {this.cardContent = c}}>
+        <div className={(has_article ? 'article-card__content' : 'center')} ref={c => {this.cardContent = c}}>
           {this._articleImage()}
-          <div className='flex flex-column flex-center article-card__summary'>
+          <div className={(has_article ? 'article-card__summary' : '')}>
             {content}
-            {button}
+            <div className=''>
+              {button}
+            </div>
           </div>
         </div>)
     } else {
@@ -119,10 +127,13 @@ class ArticleCard extends React.Component {
 
   _articleImage() {
     const { editing_options } = this.state;
-    const {image, images, open} = this.props;
+    const {image, images, open, has_article} = this.props;
+
+    if(!has_article) {
+      return null;
+    }
 
     let style = {
-      height: '200px'
     }
 
     let imageClass = '';
@@ -250,5 +261,6 @@ class ArticleCard extends React.Component {
   }
 
 }
+
 
 export default connect( state => {return state})(GSAP()(ArticleCard))

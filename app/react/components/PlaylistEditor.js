@@ -73,7 +73,7 @@ class PlaylistEditor extends React.Component {
     const titleCount = (this.state.titleTyping ? <span 
                 className='character-limit'
                 style={{
-                  color: (titleCharRemaining < 1 ? 'red' : 'white')
+                  color: (titleCharRemaining < 1 ? 'red' : 'black')
                 }}>{(titleCharRemaining)}</span> : null)
     const captionCount = (this.state.captionTyping ? <span 
                 className='character-limit'
@@ -82,17 +82,17 @@ class PlaylistEditor extends React.Component {
                 }}>{(captionCharRemaining)}</span> : null);
 
     return (
-      <div className="article-card article-card--title flex-column flex-stretch">
-        <div className="article-card__container border flex flex-column flex-stretch flex-center" ref={card => {this.cardElement = card}}>
-          <div className="article-card__content flex flex-grow flex-column flex-stretch" ref={c => {this.cardContent = c}}>
-            <div className={'article-card__header bg-navy px2 relative'}>
+      <div>
+        <div className="" >
+          <div className="md-flex flex-justify py4" ref={c => {this.cardContent = c}}>
+            <div className={'article-card__header px2 relative'}>
               
               {titleCount}
               <Editor
                 onFocus={()=>{ this.setState({titleTyping: true}) }}
                 onBlur={()=> { this.setState({titleTyping: false}) }}
                 tag="h1"
-                className="white m0 mt1 mb1"
+                className="m0 mt1 mb1"
                 text={title}
                 onKeyDown={(e)=>{
                   if(e.which === 13) {
@@ -119,7 +119,7 @@ class PlaylistEditor extends React.Component {
                   toolbar: {buttons: []}}}/>
               {account}
             </div>
-            <div className='flex left flex-column article-card__summary relative'>
+            <div className='card playlist__caption'>
               {captionCount}
               <Editor
                 onFocus={()=>{ this.setState({captionTyping: true}) }}
@@ -160,13 +160,9 @@ class PlaylistEditor extends React.Component {
     const {articles} = this.props.Playlist;
     if(articles.length < 5) {
       return (
-      <div className="article-card article-card--add flex-column flex-stretch">
-        <div className="article-card__container border flex flex-column flex-stretch flex-center" ref={card => {this.cardElement = card}}>
-          <div className="full-height flex flex-center center flex-justify-center">
-            <button className='btn btn-outline bg-white'
-                    onClick={()=>{this.props.dispatch(addArticleCard())}}>+</button>
-          </div>
-        </div>
+      <div className="editable-container center p2">
+          <button className='action teal'
+                    onClick={()=>{this.props.dispatch(addArticleCard())}}>Add Article +</button>
       </div>)
     } else {
       return null;
