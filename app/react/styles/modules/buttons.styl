@@ -7,15 +7,38 @@
   
 .btn
   cursor pointer
-  border 1px solid $color-primary
-  border-bottom 3px solid $color-primary--dark
-  font-weight 400
+  font-weight 200
+  letter-spacing .5px
+  border-radius 3px
+  padding 9px 15px
   color #fff
-  background-color $color-primary
+  background-color $teal
   transition 100ms easeOutExpo
+  box-shadow 0 3px 5px -2px rgba($black, .2)
   
 .btn:hover
-  border-bottom-color $color-primary
+  // 
+
+.btn-outline
+  border-color $teal
+  background white
+  color $teal
+  font-weight 400
+
+.btn-outline--alt
+  border-color $mine-shaft
+  color $mine-shaft
+  background none
+  font-weight 400
+
+.btn--search-result
+  background none
+  color $teal
+  border-color $teal
+  padding 6px 15px
+  height 31px
+  font-weight 400
+  font-size 14px
 
 .btn--oauth
   width 300px
@@ -25,14 +48,11 @@
   &.twitter
     background $twitter
     border-color $twitter
-    border-bottom 3px solid darken($twitter, 20%)
 
   &.facebook
     background $facebook
     border-color $facebook
-    border-bottom 3px solid darken($facebook, 20%)
 
   &.wiki
     background $wiki
     border-color $wiki
-    border-bottom 3px solid darken($wiki, 25%)

@@ -32,4 +32,9 @@ config.entry.main.push(
   'webpack-dev-server/client?http://localhost:8080'
 )
 
+config.entry.styleguide.push(
+  'webpack/hot/only-dev-server',
+  'webpack-dev-server/client?http://localhost:8080'
+)
+
 module.exports = config;

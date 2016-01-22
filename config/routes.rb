@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   root 'page#index'
+  get '/styleguide' => 'page#styleguide'
   resources :playlists
   get "playlist/render_status/:id" => "playlists#render_status"
   get "playlist/render_share_image/:id" => "playlists#render_share_image"
