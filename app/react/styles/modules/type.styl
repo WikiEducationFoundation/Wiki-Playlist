@@ -1,16 +1,44 @@
-@import url(https://fonts.googleapis.com/css?family=Lato:400/,700/,300);
-
-$sans-serif = 'Lato', sans-serif
+html
+  font-size 16px
 
 body
   font-family $sans-serif
+  line-height 21px
+  
+h1, h2, h3, h4, h5, h6, p, blockquote
+  margin-top 0
+  margin-bottom 0
+  padding 0
+
+.prose
+  h1, h2, h3, h4, h5, h6, p, blockquote
+    margin-bottom 16px
+    &:last-child
+      margin-bottom 0
 
 h1,
-h2,
-h3,
-h4,
-h5
+h3
   font-family $sans-serif
+
+h1
+  font-size 41px
+  line-height 52px
+  font-weight 600
+
+h2
+  font-family $serif
+  font-size 36px
+  line-height 41px
+  font-weight 100
+
+.caption
+  color $mine-shaft
+
+.summary
+  color $mine-shaft
+  font-family $serif
+  font-size 18px
+  line-height 26px
 
 .assistive-text
   font-size 11px

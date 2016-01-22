@@ -3,11 +3,12 @@ var webpack = require('webpack');
 
 module.exports = {
   entry: {
-    main: ['./app/react/index.js']
+    main: ['./app/react/index.js'],
+    styleguide: ['./app/react/styleguide.js']
   },
   output: {
     path: __dirname + '/app/assets/javascripts',
-    filename: 'react_bundle.js'
+    filename: '[name].js'
   },
   module: {
     loaders: [
