@@ -9,5 +9,6 @@ module.exports = [
   '.tif',
   'Commons-logo',
   'assets/file-type-icons',
-  '_Icon.svg'
+  '_Icon.svg',
+  'Question_book-new.svg',
 ]

@@ -1,5 +1,5 @@
 class PlaylistsController < ApplicationController
-  before_action :set_playlist, only: [:show, :edit, :update, :destroy, :preview, :render_share_image, :render_status]
+  before_action :set_playlist, only: [:show, :edit, :update, :destroy, :preview, :render_share_image, :render_status, :render_success]
 
   def create
     @playlist = Playlist.new(playlist_params)
@@ -66,14 +66,18 @@ class PlaylistsController < ApplicationController
   end
 
   def render_status
-    status = { rendered: false }
+    status = { ready: false }
     if @playlist.share_image_rendered
       status = {
-        rendered: true,
+        ready: true,
         url: @playlist.share_image.url
       }
     end
     render json: status
+  end
+
+  def render_success
+    render :js => "$(document).trigger($.Event('ShareImageRenderComplete', #{@playlist.id}));"
   end
   
   private

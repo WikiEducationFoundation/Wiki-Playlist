@@ -23,6 +23,12 @@ export const SET_PLAYLIST_TITLE = 'SET_PLAYLIST_TITLE';
 export const RECEIVE_PLAYLIST_PERMALINK = 'RECEIVE_PLAYLIST_PERMALINK';
 export const FLASH_MESSAGE = 'FLASH_MESSAGE';
 export const HANDLE_DELETE = 'HANDLE_DELETE';
+export const RECEIVE_SHARE_INFO = 'RECEIVE_SHARE_INFO';
+export const SHARE_IMAGE_RENDERING = 'SHARE_IMAGE_RENDERING';
 
 // Breakpoints
 export const MD = '756px';
+
+// MISC
+// export const MINIMUM_ARTICLES = 3;
+export const MINIMUM_ARTICLES = 1;

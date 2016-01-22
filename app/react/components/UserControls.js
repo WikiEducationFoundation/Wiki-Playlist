@@ -2,6 +2,7 @@ import es6BindAll from "es6bindall";
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { pushPath } from 'redux-simple-router';
+import { MINIMUM_ARTICLES } from '../constants';
 import {
   logoutUser,
   openLoginPopup,
@@ -15,13 +16,16 @@ import {
   handleDelete,
   receivePlaylistPermalink,
   addFlashMessage,
-  flashMessage 
+  flashMessage,
+  receiveShareInfo,
+  setShareImageRendering
 } from '../actions';
 
 import {
   createPlaylist,
   updatePlaylist,
-  deletePlaylist
+  deletePlaylist,
+  pollPlaylistRenderStatus
 } from '../actions/PlaylistAPI';
 
 class UserControls extends React.Component {
@@ -33,7 +37,8 @@ class UserControls extends React.Component {
       '_saveButton',
       '_savePlaylist',
       '_deleteButton',
-      '_deletePlaylist'
+      '_deletePlaylist',
+      '_handleSaveSuccess'
     ]);
   }
 
@@ -94,35 +99,35 @@ class UserControls extends React.Component {
   _savePlaylist() {
     const { published, total_articles } = this.props.Playlist;
     // Flash Message if not enough articles
-    // if(total_articles < 3) {
-    //   flashMessage(this.dispatch,  {text: "Please find at least 3 articles.", type: 'action'});
-    // } else {
-    //   //Otherwise save the playlist
-    //   const saveMethod = (published ? updatePlaylist : createPlaylist)
-    //   saveMethod(this.props.Playlist, (data) => {
-    //     if(data.error) {
-    //       flashMessage(this.dispatch,  {text: data.error, type: 'error'});
-    //     } else {
-    //       this.dispatch(receivePlaylistPermalink(data.res.body));
-    //       flashMessage(this.dispatch, {text: `Playlist ${(published ? 'updated' : 'saved')}!`, type: 'success'});
-    //     }
-    //   })
-    // }
+    if(total_articles < MINIMUM_ARTICLES) {
+      flashMessage(this.dispatch,  {text: "Please find at least 3 articles.", type: 'action'});
+    } else {
+      //Otherwise save the playlist
+      const saveMethod = (published ? updatePlaylist : createPlaylist)
+      saveMethod(this.props.Playlist, (data) => {
+        if(data.error) {
+          flashMessage(this.dispatch,  {text: data.error, type: 'error'});
+        } else {
+          this._handleSaveSuccess(data.res.body);
+        }
+      })
+    }
+  }
 
-    const saveMethod = (published ? updatePlaylist : createPlaylist)
-    saveMethod(this.props.Playlist, (data) => {
-      if(data.error) {
-        flashMessage(this.dispatch,  {text: data.error, type: 'error'});
-      } else {
-        const { id, articles } = data.res.body;
-        var article_ids = [];
-        articles.map(article => article_ids.push(article.id));
-        var playlist_data = {id: id, articles: article_ids};
-        this.dispatch(receivePlaylistPermalink(playlist_data));
-        flashMessage(this.dispatch, {text: `Playlist ${(published ? 'updated' : 'saved')}!`, type: 'success'});
-      }
+  _handleSaveSuccess(data, published) {
+    const { id, articles } = data;
+    var article_ids = [];
+    articles.map(article => article_ids.push(article.id));
+    var playlist_data = {id: id, articles: article_ids};
+    this.dispatch(receivePlaylistPermalink(playlist_data));
+    this.dispatch(setShareImageRendering(true));
+    flashMessage(this.dispatch, {text: `Playlist ${(published ? 'updated' : 'saved')}!`, type: 'success'});
+    pollPlaylistRenderStatus(id, (data)=>{
+      console.log(data);
+      this.dispatch(receiveShareInfo(data));
+      flashMessage(this.dispatch, {text: 'Playlist ready to share', type: 'success'});
+      this.dispatch(setShareImageRendering(false));
     })
-    
   }
 
   _deleteButton() {
