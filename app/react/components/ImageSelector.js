@@ -24,6 +24,7 @@ class ImageSelector extends React.Component {
 
   render() {
 
+    const { currentIndex } = this.state;
     const { editingArticle, articles } = this.props.Playlist;
     const total_images = articles[editingArticle].images.length;
 
@@ -42,11 +43,11 @@ class ImageSelector extends React.Component {
       <div className='image-selector flex flex-column flex-justify'>
         <div>
           <Slider {...settings}>{this._images()}</Slider>
-          <p className='center assistive-text'>Swipe to view more thumbnails</p>
         </div>
-        <div className='flex actions border-top'>
-          <button className='btn border-right' onClick={this._cancel}>Cancel</button>
-          <button className='btn' onClick={this._selectImage}>Select</button>
+        <div className='image-selector__controls flex flex-justify px2 py1 actions'>
+          <button className='action' onClick={this._cancel}>Cancel</button>
+          {(total_images < 12 ? null : <span className='white'>{currentIndex + 1}/{total_images}</span>)}
+          <button className='action' onClick={this._selectImage}>Select</button>
         </div>
       </div>
     )

@@ -30,5 +30,5 @@ export const SHARE_IMAGE_RENDERING = 'SHARE_IMAGE_RENDERING';
 export const MD = '756px';
 
 // MISC
-// export const MINIMUM_ARTICLES = 3;
-export const MINIMUM_ARTICLES = 1;
+export const MINIMUM_ARTICLES = 3;
+// export const MINIMUM_ARTICLES = 1;
