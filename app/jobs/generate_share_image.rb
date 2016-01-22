@@ -9,6 +9,7 @@ class GenerateShareImage < Que::Job
   def run(playlist_id, options)
     @playlist = Playlist.find(playlist_id)
 
+    # todo: User slim or haml directly to render an html string rather than hitting the server
     playlist_html = ApplicationController.new.render_to_string(
       :template => '/playlists/show',
       :layout => false,
