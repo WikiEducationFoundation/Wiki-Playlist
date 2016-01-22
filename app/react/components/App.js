@@ -13,21 +13,22 @@ class App extends React.Component {
   render() {
     
     return (
-      <div className="px2">
-
-        <h1 className="h4">
-            <Link to="/">Wikipedia Playlist</Link>
-        </h1>
+      <div className="">
+        <nav className="py2 site__navigation">
+          <div className='container flex flex-center flex-justify'>
+            <Link to="/">
+              <img src='//upload.wikimedia.org/wikipedia/en/8/80/Wikipedia-logo-v2.svg' height='30'/>
+              <span className='px2'>Wikipedia Playlist</span>
+            </Link>
+            <UserControls/>
+          </div>
+        </nav>
 
         <FlashMessage />
 
         {this._loading()}
 
-        <nav className="py2 flex">
-          <UserControls/>
-        </nav>
-
-        {this.props.children}
+        <div className='site__content container'>{this.props.children}</div>
         {this._devTools()}
       </div>
     )

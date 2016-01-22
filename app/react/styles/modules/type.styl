@@ -4,11 +4,13 @@ html
 body
   font-family $sans-serif
   line-height 21px
+  color $black
   
 h1, h2, h3, h4, h5, h6, p, blockquote
   margin-top 0
   margin-bottom 0
   padding 0
+  color $black
 
 .prose
   h1, h2, h3, h4, h5, h6, p, blockquote
@@ -27,9 +29,12 @@ h1
 
 h2
   font-family $serif
-  font-size 36px
-  line-height 41px
   font-weight 100
+  font-size 28px
+  line-height 34px
+  +above(md)
+    font-size 36px
+    line-height 41px
 
 .caption
   color $mine-shaft
@@ -37,8 +42,9 @@ h2
 .summary
   color $mine-shaft
   font-family $serif
-  font-size 18px
-  line-height 26px
+  +above(md)
+    font-size 18px
+    line-height 26px
 
 .assistive-text
   font-size 11px
