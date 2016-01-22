@@ -6,10 +6,12 @@ import {MD} from '../constants';
 import MediaQuery from 'react-responsive';
 import FlashMessage from './FlashMessage';
 import UserControls from './UserControls';
+import LoadingAnimation from './LoadingAnimation';
 
-export default class App extends React.Component {
+class App extends React.Component {
 
   render() {
+    
     return (
       <div className="px2">
 
@@ -19,6 +21,8 @@ export default class App extends React.Component {
 
         <FlashMessage />
 
+        {this._loading()}
+
         <nav className="py2 flex">
           <UserControls/>
         </nav>
@@ -27,6 +31,14 @@ export default class App extends React.Component {
         {this._devTools()}
       </div>
     )
+  }
+
+  _loading() {
+    if(this.props.share_rendering){
+      return(<LoadingAnimation />)
+    } else {
+      return null;
+    }
   }
 
   _devTools() {
@@ -39,3 +51,4 @@ export default class App extends React.Component {
   }
 }
 
+export default connect( state => {return state.Playlist})(App)

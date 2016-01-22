@@ -24,7 +24,9 @@ import {
   COLLAPSE_COMPLETE,
   RECEIVE_PLAYLIST_PERMALINK,
   FLASH_MESSAGE,
-  HANDLE_DELETE
+  HANDLE_DELETE,
+  RECEIVE_SHARE_INFO,
+  SHARE_IMAGE_RENDERING
 } from '../constants';
 
 
@@ -134,6 +136,20 @@ export function receivePlaylistPermalink(data) {
 
 export function handleDelete() {
   return { type: HANDLE_DELETE }
+}
+
+export function receiveShareInfo(data) {
+  return {
+    type: RECEIVE_SHARE_INFO,
+    data
+  }
+}
+
+export function setShareImageRendering(bool) {
+  return {
+    type: SHARE_IMAGE_RENDERING,
+    bool
+  }
 }
 
 // — Article

@@ -25,7 +25,9 @@ import {
   RECEIVE_PLAYLIST_PERMALINK,
   RECEIVE_PLAYLIST_ERROR,
   FLASH_MESSAGE,
-  HANDLE_DELETE
+  HANDLE_DELETE,
+  RECEIVE_SHARE_INFO,
+  SHARE_IMAGE_RENDERING
 } from '../constants';
 
 
@@ -135,7 +137,13 @@ function defaultPlaylist() {
     animating: false,
     published: false,
     server_info: {},
-    server_errors: []
+    server_errors: [],
+    share_rendering: false,
+    share: {
+      ready: false,
+      url: null,
+      image: null
+    }
   }
 }
 
@@ -147,7 +155,6 @@ function Playlist(state = initialPlaylistState, action) {
 
     case ADD_ARTICLE_CARD:
       var articles = state.articles.slice(0);
-      console.log('ADD_ARTICLE_CARD')
       articles.push(_.clone(defaultArticle));
       return _.assign({}, state, {articles: articles})
 
@@ -170,7 +177,6 @@ function Playlist(state = initialPlaylistState, action) {
       const { title, fullurl, pageid } = article;
       const pageId = pageid;
       const url = fullurl;
-      console.log(article)
       const thumbnail = _.deepGet(article, 'thumbnail.source');
       let description = _.deepGet(article, 'terms.description.0'); 
       if(article.extract !== undefined) {
@@ -212,12 +218,10 @@ function Playlist(state = initialPlaylistState, action) {
       articles[action.index].open = false;
       return _.assign({}, state, {articles: articles})
 
-
     case COLLAPSE_COMPLETE:
       var articles = state.articles.slice(0);
       articles.map(article => {article.open = false});
       return _.assign({}, state, {articles: articles, animating: false})
-
 
     case UPDATE_PATH:
       if(action.payload.path === '/playlist') {
@@ -241,6 +245,12 @@ function Playlist(state = initialPlaylistState, action) {
     case HANDLE_DELETE:
       var initialPlaylistState = defaultPlaylist();
       return initialPlaylistState;
+
+    case RECEIVE_SHARE_INFO:
+      return _.assign({}, state, {share: action.data});
+
+    case SHARE_IMAGE_RENDERING:
+      return _.assign({}, state, {share_rendering: action.bool});
       
     default:
       return state;

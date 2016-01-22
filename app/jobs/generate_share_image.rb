@@ -1,11 +1,14 @@
 class GenerateShareImage < Que::Job
   # Default settings for this job. These are optional - without them, jobs
   # will default to priority 100 and run immediately.
+  include Rails.application.routes.url_helpers
+
   @priority = 10
   @run_at = proc { 1.second.from_now }
 
   def run(playlist_id, options)
     @playlist = Playlist.find(playlist_id)
+
     playlist_html = ApplicationController.new.render_to_string(
       :template => '/playlists/show',
       :layout => false,
