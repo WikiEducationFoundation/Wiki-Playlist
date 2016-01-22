@@ -25,13 +25,12 @@ export class ArticleCard extends React.Component {
   }
 
   render() {
-    const { has_article } = this.props;
+    const { has_article, index } = this.props;
     return (
       <div className={'flex-column flex-stretch ' + (has_article ? 'article-card' : 'editable-container p2 mb2')}>
         <div className={' ' + (has_article ? 'article-card__container' : '')} ref={card => {this.cardElement = card}}>
           {this._articleContent()}
           {this.props.children}
-        </div>
       </div>
     )
   }
@@ -58,7 +57,7 @@ export class ArticleCard extends React.Component {
       this.expandController = this.addAnimation(this._expand);
     } else if(!nextProps.open && open && !this.animating) {
       this.collapseController = this.addAnimation(this._collapse);
-    } else if (!nextProps.open && !open) {
+    } else if (!nextProps.open && !open && this.cardElement !== undefined) {
       this.cardElement.removeAttribute('style')
     }
 
@@ -77,24 +76,20 @@ export class ArticleCard extends React.Component {
     const { editing_options } = this.state;
     const { title, description, index, editing, open, has_article, caption, url } = this.props;
     const truncated_description = (description !== undefined && description.length > 250 ? `${description.substr(0,250)}...` : description)
-    const article_link = (!_.isEmpty(url) ? <a className='px1' href={url}>Read Article</a> : null)
     let content = null;
     if(has_article) {
       content = (
         <div>
           <h2 className="article-card__title">{title}</h2>
-          <div className="mb2 article-card__excerpt summary"><small>{truncated_description}{article_link}</small></div>
+          <div className="mb2 article-card__excerpt summary">{truncated_description}</div>
         </div>
       );
     }
-
-    const search_button = (<button className='btn btn-outline flex-end bg-silver'
-              onClick={() => {this.dispatch(expandArticle(index))}}>Add Article</button>);
     
     const edit_button = (<button className='action' 
               onClick={() => { this.setState({editing_options: true})}}>Edit <Icon size="16px" icon="edit" fill={'silver'} /></button>)
 
-    let button = search_button;
+    let button = null;
     if(has_article) { button = (
       <span>{edit_button}
         <a className='action action--external-serif' href={url}>View Article <Icon size="12px" icon="external-link" fill={'teal'} /></a></span>); }
@@ -174,6 +169,7 @@ export class ArticleCard extends React.Component {
   }
 
   _hideContent(callback = null) {
+    if(this.cardContent === undefined ) {return;}
     this.addAnimation(() =>{
       return TweenMax.to(this.cardContent, 1,  
         {opacity: 0, ease: Power3.easeOut, onComplete: callback})
@@ -189,6 +185,7 @@ export class ArticleCard extends React.Component {
     this.startX = left;
     this.startWidth = width;
     this.startHeight = height;
+
 
     return TweenMax.fromTo(target, 1,
       {

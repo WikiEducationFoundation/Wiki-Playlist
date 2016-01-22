@@ -11,4 +11,6 @@ module.exports = [
   'assets/file-type-icons',
   '_Icon.svg',
   'Question_book-new.svg',
+  'P_vip.svg',
+  'Cscr-featured.svg'
 ]
