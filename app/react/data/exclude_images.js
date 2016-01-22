@@ -12,5 +12,6 @@ module.exports = [
   '_Icon.svg',
   'Question_book-new.svg',
   'P_vip.svg',
-  'Cscr-featured.svg'
+  'Cscr-featured.svg',
+  'Portal-puzzle.svg'
 ]
