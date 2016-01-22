@@ -99,6 +99,8 @@ class UserControls extends React.Component {
   _savePlaylist() {
     const { published, total_articles } = this.props.Playlist;
     // Flash Message if not enough articles
+
+    // todo:  if 'can publish' instead of comparison here
     if(total_articles < MINIMUM_ARTICLES) {
       flashMessage(this.dispatch,  {text: "Please find at least 3 articles.", type: 'action'});
     } else {
