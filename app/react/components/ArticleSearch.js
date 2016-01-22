@@ -11,12 +11,15 @@ class ArticleSearch extends React.Component {
   }
 
   render() {
+    const { editingArticle, articles } = this.props.Playlist;
     return (
       <div className='search__container intially-hidden p2 vertical-overflow'>
-        <h3>Add Article</h3>
+        <div className='search__container__card'>
+        <div className='mb1'><strong>Add Article ({editingArticle + 1}/{articles.length})</strong></div>
         <SearchForm index={this.props.Playlist.editingArticle} {...this.props}/>
         {this._currentQuery()}
         <Link className='close-button' to='/playlist'>&#215;</Link>
+        </div>
       </div>
     )
   }
@@ -35,7 +38,7 @@ class ArticleSearch extends React.Component {
     if(query !== undefined && query.length) {
       return (
         <div>
-          <h2>Search For: "{query}"</h2>
+          <div className='py1'><strong>Search For: "{query}"</strong></div>
           <SearchResults dispatch={this.props.dispatch} query={history[query]} isSearching={searching}/>
         </div>
       );

@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { pushPath } from 'redux-simple-router';
+import Icon from './Icon';
 import {
   addArticle, 
   updateQuery,
@@ -15,7 +16,7 @@ class SearchResult extends React.Component {
     const thumb = (thumbnail !== undefined ? <div><img src={thumbnail.source}/></div> : null)
     const description = (terms !== undefined && terms.description !== undefined ? <p className='search-result__description'>{terms.description}</p> : null)
     return (
-      <div className='search-result border mb2'>
+      <div className='search-result border mb2 bg-white'>
         <div className='flex border-bottom p1 pt2'>
           {thumb}
           <div className={(thumb ? 'px2' : '')}>
@@ -23,9 +24,9 @@ class SearchResult extends React.Component {
             {description}
           </div>
         </div>
-        <div className='flex search-result__actions'>
-          <a className='btn border-right' href={fullurl} target='_blank'>Read Article</a>
-          <button className='btn' onClick={this.handleAddArticle.bind(this)}>Add to Playlist</button>
+        <div className='flex flex-justify search-result__actions p1'>
+          <a className='action blue' href={fullurl} target='_blank'>Read Article <Icon size="14px" icon="external-link" fill={'blue'} /></a>
+          <button className='btn btn--search-result' onClick={this.handleAddArticle.bind(this)}>Add to Playlist</button>
         </div>
       </div>)
   }
