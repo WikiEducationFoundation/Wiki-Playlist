@@ -118,9 +118,7 @@ class UserControls extends React.Component {
 
   _handleSaveSuccess(data, published) {
     const { id, articles } = data;
-    var article_ids = [];
-    articles.map(article => article_ids.push(article.id));
-    var playlist_data = {id: id, articles: article_ids};
+    var playlist_data = {id: id, articles: articles};
     this.dispatch(receivePlaylistPermalink(playlist_data));
     this.dispatch(setShareImageRendering(true));
     flashMessage(this.dispatch, {text: `Playlist ${(published ? 'updated' : 'saved')}!`, type: 'success'});

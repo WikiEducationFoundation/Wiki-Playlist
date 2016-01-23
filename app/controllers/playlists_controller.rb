@@ -6,7 +6,7 @@ class PlaylistsController < ApplicationController
     @playlist.user_id = current_user.id
     respond_to do |format|
       if @playlist.save
-        GenerateShareImage.enqueue(@playlist.id, :title => @playlist.title)
+        GenerateShareImage.enqueue(@playlist.id, :html => get_playlist_html(@playlist))
         format.json { render json: {
           id: @playlist.id,
           articles: @playlist.articles
@@ -28,7 +28,7 @@ class PlaylistsController < ApplicationController
     @playlist.share_image_rendered = false;
     respond_to do |format|
       if @playlist.update(playlist_params)
-        GenerateShareImage.enqueue(@playlist.id, :title => @playlist.title)
+        GenerateShareImage.enqueue(@playlist.id, :html => get_playlist_html(@playlist))
         format.json { render json: {
           id: @playlist.id,
           articles: @playlist.articles
@@ -78,6 +78,18 @@ class PlaylistsController < ApplicationController
 
   def render_success
     render :js => "$(document).trigger($.Event('ShareImageRenderComplete', #{@playlist.id}));"
+  end
+
+  def get_playlist_html(playlist)
+    render_to_string(
+      :template => '/playlists/show',
+      :formats => [:html],
+      :layout => false,
+      :locals => {
+        :@playlist => playlist,
+        :@articles => playlist.articles
+      }
+    )
   end
   
   private
