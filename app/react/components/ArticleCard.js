@@ -27,10 +27,26 @@ export class ArticleCard extends React.Component {
   render() {
     const { has_article, index } = this.props;
     return (
-      <div className={'flex-column flex-stretch ' + (has_article ? 'article-card' : 'editable-container p2 mb2')}>
-        <div className={' ' + (has_article ? 'article-card__container' : '')} ref={card => {this.cardElement = card}}>
-          {this._articleContent()}
-          {this.props.children}
+      <div className={'flex-column flex-stretch ' + (has_article ? 'article-card' : 'article-card--empty editable-container p2 mb2')}>
+       
+          {(has_article ? 
+
+              <div className='article-card__container' ref={card => {this.cardElement = card}}>
+                {this._articleContent()}
+              </div> 
+
+              : 
+              
+              <button className='btn btn-primary flex-end bg-silver' 
+                      ref={card => {this.cardElement = card}}
+                      onClick={() => {
+                        this.dispatch(updateCurrentEditingArticle(index))
+                        this.dispatch(pushPath('/playlist/article/search'))
+                      }}>
+                      Add Wikipedia Article</button>
+          )}
+        
+          {(has_article ? null : this.props.children)}
       </div>
     )
   }
@@ -91,20 +107,30 @@ export class ArticleCard extends React.Component {
 
     let button = null;
     if(has_article) { button = (
-      <span>{edit_button}
-        <a className='action action--external-serif' href={url}>View Article <Icon size="12px" icon="external-link" fill={'teal'} /></a></span>); }
+      <div className='flex flex-justify'>{edit_button}
+        <a className='action action--external-serif' href={url} target='_blank'>View Article <Icon size="12px" icon="external-link" fill={'teal'} /></a></div>); }
     
     if(editing_options) { 
-      button = null; 
-      content = (
-        <button className='btn btn--edit'
-                onClick={() => {this.dispatch(expandArticle(index))}}>Change Article</button>
-      )
+      // button = null; 
+
+      // expanding version
+      // button = (
+      //   <button className='btn btn--edit'
+      //           onClick={() => {this.dispatch(expandArticle(index))}}>Change Article</button>
+      // )
+
+      //static version
+     button = (<button className='action' 
+                      ref={card => {this.cardElement = card}}
+                      onClick={() => {
+                        this.dispatch(updateCurrentEditingArticle(index))
+                        this.dispatch(pushPath('/playlist/article/search'))
+                      }}>Change Article</button>);
 
     }
 
 
-    if(editing !== index) {
+    // if(editing !== index) {
       return (
         <div className={(has_article ? 'article-card__content' : 'center')} ref={c => {this.cardContent = c}}>
           {this._articleImage()}
@@ -115,14 +141,18 @@ export class ArticleCard extends React.Component {
             </div>
           </div>
         </div>)
-    } else {
-      return null;
-    }
+    // } else {
+    //   return null;
+    // }
   }
 
   _articleImage() {
     const { editing_options } = this.state;
     const {image, images, open, has_article} = this.props;
+
+    if(this.props.children) {
+      return this.props.children;
+    }
 
     if(!has_article) {
       return null;
@@ -253,6 +283,7 @@ export class ArticleCard extends React.Component {
   }
 
   _openImageSelector() {
+    this.setState({editing_options: false})
     this.dispatch(pushPath('/playlist/article/images'));
     this.dispatch(updateCurrentEditingArticle(this.props.index));
   }
