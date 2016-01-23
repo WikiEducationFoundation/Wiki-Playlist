@@ -5,8 +5,8 @@ import { getCSRFToken } from './rails';
 /* Playlist Actions
 --------------------------------------------- */
 
-const allowed_playlist_attributes = ["title", "caption", "articles_attributes"];
-const allowed_article_attributes = ["pageId", "title", "url", "description", "image"];
+const allowed_playlist_attributes = ["title", "caption", "articles_attributes", "id"];
+const allowed_article_attributes = ["pageId", "title", "url", "description", "image", "id"];
 
 function filterArticleKeys(playlist) {
   let articles = playlist.articles.slice(0);
@@ -16,12 +16,6 @@ function filterArticleKeys(playlist) {
       articles[i].image = article.image.url;
     }
   });
-
-  if(playlist.server_info.articles !== undefined) {
-    const ids = playlist.server_info.articles;
-    articles.map((article, i) => articles[i].id = ids[i] );
-  }
-
   return articles;
 }
 

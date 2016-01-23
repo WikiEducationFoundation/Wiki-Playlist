@@ -1,6 +1,5 @@
 module.exports = [
   'https://upload.wikimedia.org/wikipedia/en/e/e7/Cscr-featured.svg',
-  '.ogv',
   '.webm',
   'https://upload.wikimedia.org/wikipedia/en/4/4a/Commons-logo.svg',
   'https://upload.wikimedia.org/wikipedia/en/f/fd/Portal-puzzle.svg',
@@ -13,5 +12,6 @@ module.exports = [
   'Question_book-new.svg',
   'P_vip.svg',
   'Cscr-featured.svg',
-  'Portal-puzzle.svg'
+  'Portal-puzzle.svg',
+  'Office-book.svg'
 ]

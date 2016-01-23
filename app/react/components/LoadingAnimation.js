@@ -1,5 +1,5 @@
 export default class LoadingAnimation extends React.Component {
   render() {
-    return (<p>Rendering your share image...</p>);
+    return (<div className='container'><p>Rendering your share image...</p></div>);
   }
 }

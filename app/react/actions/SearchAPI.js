@@ -57,7 +57,8 @@ export function fetchArticleImages(title, callback,) {
         exclude_images.map(exl => {
           if(image.url.indexOf(exl) !== -1) {exclude = true;}
         });
-        if(!exclude) {
+
+        if(!exclude && image.url !== '') {
           images.push(image);
         }
         

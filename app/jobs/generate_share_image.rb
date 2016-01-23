@@ -8,18 +8,10 @@ class GenerateShareImage < Que::Job
 
   def run(playlist_id, options)
     @playlist = Playlist.find(playlist_id)
-
-    # todo: User slim or haml directly to render an html string rather than hitting the server
-    playlist_html = ApplicationController.new.render_to_string(
-      :template => '/playlists/show',
-      :layout => false,
-      :locals => {
-        :@playlist => @playlist,
-        :@articles => @playlist.articles
-      }
-    )
+    
+    playlist_html = options[:html]
     title = @playlist.title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
-    render_job = `phantomjs --ignore-ssl-errors=yes --ssl-protocol=TLSv1 --debug=true lib/script/share-image.js "#{playlist_html}" '#{title}'`
+    render_job = `phantomjs --ignore-ssl-errors=yes --ssl-protocol=TLSv1 --debug=true lib/script/share-image.js '#{playlist_html}' '#{title}'`
     image_info = JSON.parse(render_job)
     rendered = image_info['rendered']
     path = image_info['path']

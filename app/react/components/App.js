@@ -16,9 +16,9 @@ class App extends React.Component {
       <div className="">
         <nav className="py2 site__navigation">
           <div className='container flex flex-center flex-justify'>
-            <Link to="/">
+            <Link to="/" className='black'>
               <img src='//upload.wikimedia.org/wikipedia/en/8/80/Wikipedia-logo-v2.svg' height='30'/>
-              <span className='px2'>Wikipedia Playlist</span>
+              <span className='px2'>Wikipedia Collections</span>
             </Link>
             <UserControls/>
           </div>

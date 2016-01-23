@@ -98,8 +98,6 @@ function Search(state = {
 }
 
 
-
-
 var defaultArticle = {
   title: 'Article',
   description: '',
@@ -117,7 +115,7 @@ function createInitialArticles() {
   let j = 0;
   let initialArticles = [];
   while(j < TOTAL_ARTICLES) {
-    initialArticles.push(_.clone(defaultArticle));
+    initialArticles.push(_.extend({}, _.clone(defaultArticle), {title: `Article ${j + 1}`}));
     j++;
   }
   return initialArticles;
@@ -240,6 +238,11 @@ function Playlist(state = initialPlaylistState, action) {
       }
       
     case RECEIVE_PLAYLIST_PERMALINK:
+      var articles = state.articles.slice(0);
+      action.data.articles.map((article, i)=> {
+        var index = _.indexOf(articles, _.find(articles, {title: article.title}));
+        articles[index].id = article.id;
+      });
       return _.assign({}, state, {published: true, server_info: action.data, server_errors:[]})
 
     case HANDLE_DELETE:

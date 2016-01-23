@@ -1,0 +1,17 @@
+nav.py2.site__navigation data-reactid=".0.0" 
+  .container.flex.flex-center.flex-justify
+    a href="/" 
+      img height="30" src="//upload.wikimedia.org/wikipedia/en/8/80/Wikipedia-logo-v2.svg" /
+      span.px2 Wikipedia Playlist
+    = link_to 'Create your own playlist', root_path, :class => 'btn btn-primary'
+
+.p2.container.permalink
+  - @articles.each do |article|
+    .flex-column.flex-stretch.article-card
+      .article-card__container
+        .article-card__content
+          .article-card__image style="background-image:url(#{article.image})"
+          .article-card__summary
+            div
+              h2.article-card__title= article.title
+              .mb2.article-card__excerpt= truncate_summary(article.description)
