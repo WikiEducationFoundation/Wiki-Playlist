@@ -13,5 +13,6 @@ module.exports = [
   'P_vip.svg',
   'Cscr-featured.svg',
   'Portal-puzzle.svg',
-  'Office-book.svg'
+  'Office-book.svg',
+  'commons/thumb/b/b4/Ambox_important.svg/600px-Ambox_important'
 ]
