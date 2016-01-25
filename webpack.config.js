@@ -3,8 +3,7 @@ var webpack = require('webpack');
 
 module.exports = {
   entry: {
-    main: ['./app/react/index.js'],
-    styleguide: ['./app/react/styleguide.js']
+    main: ['./app/react/index.js']
   },
   output: {
     path: __dirname + '/app/assets/javascripts',

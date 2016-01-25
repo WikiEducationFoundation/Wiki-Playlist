@@ -74,7 +74,9 @@ class UserControls extends React.Component {
   _login() {
     const { logged_in, current_user } = this.props.Account;
     const { total_articles } = this.props.Playlist;
-    let account = <Link className='btn btn-primary' to="/playlist/login">Login to save</Link>;
+    const { routing } = this.props;
+    let account_button_text = (routing.path.indexOf('playlist') !== -1 ? 'to save' : '');
+    let account = <Link className='btn btn-primary' to="/playlist/login">Login {account_button_text}</Link>;
     if(logged_in && current_user) {
       account = (<span>You are logged in. <a href="#" data-sign-out>Logout</a></span>);
     }

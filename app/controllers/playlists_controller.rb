@@ -17,6 +17,7 @@ class PlaylistsController < ApplicationController
     end
   end
 
+
   # GET /playlists/1
   # GET /playlists/1.json
   def show
@@ -95,8 +96,13 @@ class PlaylistsController < ApplicationController
   private
 
     def set_playlist
-      @playlist = Playlist.find(params[:id])
-      @articles = @playlist.articles
+      if Playlist.where(id: params[:id]).blank?
+        redirect_to '/404'
+      else
+        @playlist = Playlist.find(params[:id])
+        @articles = @playlist.articles
+      end
+      
     end
 
     def playlist_params
