@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { setPlaylistTitle, editingPlaylistTitle } from '../actions';
 import { pushPath } from 'redux-simple-router';
 import { Link } from 'react-router';
-import es6BindAll from "es6bindall"; 
 import TextArea from './TextArea';
 import ContentEditable from 'react-contenteditable';
+import es6BindAll from "es6bindall";
 
 class PlaylistTitle extends React.Component {
   constructor(props) {

@@ -1,4 +1,4 @@
-import es6BindAll from "es6bindall"; 
+import es6BindAll from "es6bindall";
 
 export default class TextArea extends React.Component {
   constructor(props) {

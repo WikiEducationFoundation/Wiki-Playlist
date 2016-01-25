@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import { pushPath } from 'redux-simple-router';
 import Icon from './Icon';
+import es6BindAll from "es6bindall";
+
 import {
   addArticle, 
   updateQuery,
@@ -8,9 +10,14 @@ import {
   updateCurrentEditingArticle
 } from '../actions';
 
-import { fetchArticleImages } from '../actions/SearchAPI';
+import { fetchArticleImages, fetchArticleSummary } from '../actions/SearchAPI';
 
 class SearchResult extends React.Component {
+  constructor() {
+    super();
+    // es6BindAll(this, []);
+  }
+
   render() {
     const {title, thumbnail, terms, fullurl} = this.props.article;
     const thumb = (thumbnail !== undefined ? <div><img src={thumbnail.source}/></div> : null)
@@ -34,8 +41,26 @@ class SearchResult extends React.Component {
   handleAddArticle() {
     const {dispatch, article, Playlist} = this.props;
     const index = Playlist.editingArticle;
-    dispatch(addArticle(index, article))
-    fetchArticleImages(article.title, this.addArticleImages.bind(this));
+    
+    let articleData = new Promise((resolve, reject)=>{
+      if(article.terms.extract === undefined) {
+        fetchArticleSummary(article.title).done((data)=> {
+          var pages = data.query.pages;
+          const extract =  pages[_.keys(pages)[0]].extract;
+          if(extract !== undefined) {
+            article.extract = extract;
+            resolve();
+          } else {
+            resolve();
+          }
+        })
+      } else { resolve(); }
+    });
+
+    articleData.then(()=>{
+      dispatch(addArticle(index, article));
+      fetchArticleImages(article.title, this.addArticleImages.bind(this));
+    }).catch((reason)=> {console.log('Reject promise', reason)});    
   }
 
   addArticleImages(images) {

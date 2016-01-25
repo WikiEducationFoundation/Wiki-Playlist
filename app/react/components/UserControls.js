@@ -1,8 +1,9 @@
-import es6BindAll from "es6bindall"; 
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { pushPath } from 'redux-simple-router';
 import { MINIMUM_ARTICLES } from '../constants';
+import es6BindAll from "es6bindall";
+
 import {
   logoutUser,
   openLoginPopup,
