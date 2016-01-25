@@ -12,4 +12,5 @@
 //
 //= require jquery
 //= require react_integration
-//= require main
+//= require react_bundle
+//= require_tree .

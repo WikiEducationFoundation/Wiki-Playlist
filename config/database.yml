@@ -78,11 +78,6 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-
-local_production:
-  <<: *default
-  database: wiki_playlist_production
-
 production:
   <<: *default
   database: wiki-playlist_production
