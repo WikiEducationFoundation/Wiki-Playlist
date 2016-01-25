@@ -12,7 +12,6 @@ window.React = React;
 window.ReactDOM = ReactDOM;
 
 import { Provider } from 'react-redux';
-import DevTools from './containers/DevTools';
 import {Router, Route, Link, browserHistory, IndexRoute} from 'react-router';
 import { syncReduxAndRouter } from 'redux-simple-router'
 
