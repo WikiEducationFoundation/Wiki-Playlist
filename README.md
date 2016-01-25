@@ -74,13 +74,13 @@ $ git push heroku master
 
 
 [Heroku Buildpack PhantomJS 2.0](https://github.com/srbartlett/heroku-buildpack-phantomjs-2.0/blob/master/README.md)
-[See Heroku's guide for more information](https://devcenter.heroku.com/articles/getting-started-with-rails4)
 
 ##PhantomJS
 
 TODO
 
 
+[See Heroku's guide for more information](https://devcenter.heroku.com/articles/getting-started-with-rails4)
 
 
 ## References
