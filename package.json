@@ -68,6 +68,7 @@
     "start": "foreman start -f Procfile.dev",
     "hot": "npm run start-hot-dev",
     "start-hot-dev": "webpack-dev-server --hot --inline --config config/webpack/hot-dev.config.js",
+    "dev-build": "webpack --config config/webpack/production.config.js",
     "build": "webpack -p --config config/webpack/production.config.js"
   },
   "license": "",
