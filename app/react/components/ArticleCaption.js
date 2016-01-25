@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { pushPath } from 'redux-simple-router';
-import es6BindAll from "es6bindall"; 
 import TextArea from './TextArea';
 import { setArticleCaption } from '../actions'
+import es6BindAll from "es6bindall";
 
 class ArticleCaption extends React.Component {
   

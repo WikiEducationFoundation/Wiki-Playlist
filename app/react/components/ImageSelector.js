@@ -1,8 +1,8 @@
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { setArticleImage, updateCurrentEditingArticle } from '../actions';
-import es6BindAll from "es6bindall"; 
 import { pushPath } from 'redux-simple-router';
+import es6BindAll from "es6bindall";
 
 class ImageSelector extends React.Component {
 

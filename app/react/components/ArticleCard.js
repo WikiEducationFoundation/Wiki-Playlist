@@ -3,8 +3,9 @@ import { updateCurrentEditingArticle, expandArticle, collapseArticle, collapseCo
 import { Link } from 'react-router';
 import { pushPath } from 'redux-simple-router';
 import { connect } from 'react-redux';
-import es6BindAll from "es6bindall"; 
 import Icon from './Icon';
+import es6BindAll from "es6bindall";
+
 
 export class ArticleCard extends React.Component {
 
@@ -12,7 +13,7 @@ export class ArticleCard extends React.Component {
     super();
     this.dispatch = props.dispatch;
 
-    es6BindAll(this, [
+   es6BindAll(this, [
         '_expand', 
         '_collapse',
         '_openImageSelector', 
