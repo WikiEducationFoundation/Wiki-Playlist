@@ -27,8 +27,6 @@ ActiveRecord::Schema.define(version: 20160121212140) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "articles", ["playlist_id"], name: "index_articles_on_playlist_id", using: :btree
-
   create_table "playlists", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "title"
