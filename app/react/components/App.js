@@ -1,7 +1,6 @@
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import childrenWithProps from '../utils/childrenWithProps';
-import DevTools from '../containers/DevTools';
 import {MD} from '../constants';
 import MediaQuery from 'react-responsive';
 import FlashMessage from './FlashMessage';
@@ -45,6 +44,7 @@ class App extends React.Component {
   _devTools() {
     // return null;
     if(process.env.NODE_ENV === 'development') {
+      var  DevTools = require('../containers/DevTools');
       return <MediaQuery query={`(min-device-width: ${MD})`}><DevTools/></MediaQuery>
     } else {
       return null;
