@@ -24,6 +24,7 @@ import ArticlePreview from './components/ArticlePreview';
 import ArticleCaption from './components/ArticleCaption';
 import ImageSelector from './components/ImageSelector';
 import Login from './components/Login';
+import StyleGuide from './components/StyleGuide';
 
 import { createHistory } from 'history';
 import configureStore from './store/configureStore';
@@ -47,7 +48,7 @@ class PlaylistApp extends React.Component{
             </Route>
             <Route path="/playlist/login" component={Login}/>
           </Route>
-
+          <Route path="/styleguide" component={StyleGuide}/>
         </Router>
       </Provider>
       
