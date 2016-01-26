@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { pushPath } from 'redux-simple-router';
 import es6BindAll from "es6bindall";
+import ShareButton from './ShareButton';
 
 import {
   logoutUser,
@@ -48,6 +49,7 @@ class UserControls extends React.Component {
     return (
       <div>
         {this._login()}
+        <ShareButton/>
         <SaveButton/>
         {this._deleteButton()}
       </div>
@@ -84,7 +86,7 @@ class UserControls extends React.Component {
     const { routing } = this.props;
     let account_button_text = (routing.path.indexOf('playlist') !== -1 ? 'to save' : '');
     let account = (
-      <button className='btn btn-primary' 
+      <button className='btn btn-primary mr1' 
               onClick={()=>{
                 this.dispatch(showLogin(true));
               }}>Login {account_button_text}</button>
@@ -101,9 +103,10 @@ class UserControls extends React.Component {
     const { logged_in, current_user } = this.props.Account;
     if(logged_in && published) {
       return (
-        <a href='#' 
+        <a href='#'
+           className='red' 
            onClick={this._deletePlaylist.bind(this)}>
-           Delete Playlist</a>)
+           delete</a>)
     } else {
       return null;
     }

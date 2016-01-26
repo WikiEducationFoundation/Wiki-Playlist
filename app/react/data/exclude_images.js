@@ -13,5 +13,6 @@ module.exports = [
   'P_vip.svg',
   'Cscr-featured.svg',
   'Portal-puzzle.svg',
-  'Office-book.svg'
+  'Office-book.svg',
+  'Edit-clear.svg'
 ]

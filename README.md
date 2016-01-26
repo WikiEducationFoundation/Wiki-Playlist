@@ -99,6 +99,9 @@ TODO
 - [Media Wiki API Gem](https://github.com/wikimedia/mediawiki-ruby-api)
 - [Heroku, Ruby on Rails and PhantomJS](https://gist.github.com/edelpero/9257311)
 
+**Frontend**
+
+ - [React Icons](http://dmfrancisco.github.io/react-icons/)
 
 **Testing**
 

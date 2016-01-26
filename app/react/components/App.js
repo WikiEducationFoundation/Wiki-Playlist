@@ -8,11 +8,13 @@ import UserControls from './UserControls';
 import LoadingAnimation from './LoadingAnimation';
 import Login from './Login';
 import SaveButton from  './SaveButton';
+import Share from './Share';
 
 class App extends React.Component {
 
   render() {
     const { logged_in, current_user, show_login } = this.props.Account;
+    const { show_share } = this.props.Share;
     return (
       <div className="">
         <nav className="md-py2 site__navigation">
@@ -44,13 +46,14 @@ class App extends React.Component {
           {(logged_in && current_user ? <span>&nbsp;|&nbsp;You are logged in. <a href="#" className='' data-sign-out>Logout</a></span> : null)}
         </footer>
 
+        {(show_share? <Share/> : null )}
         {(show_login ? <Login/> : null )}
       </div>
     )
   }
 
   _loading() {
-    if(this.props.share_rendering){
+    if(this.props.Share.share_rendering){
       return(<LoadingAnimation />)
     } else {
       return null;

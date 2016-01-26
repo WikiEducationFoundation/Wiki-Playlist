@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   root 'page#index'
-  # resources :playlists
+  resources :playlists
   get "playlist/render_status/:id" => "playlists#render_status"
   get "playlist", to: "page#playlist"
   get "playlist/article/search", to: "page#playlist"

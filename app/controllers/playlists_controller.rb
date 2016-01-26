@@ -71,7 +71,7 @@ class PlaylistsController < ApplicationController
     if @playlist.share_image_rendered
       status = {
         ready: true,
-        url: @playlist.share_image.url
+        share_image_url: @playlist.share_image.url
       }
     end
     render json: status

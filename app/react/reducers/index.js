@@ -31,7 +31,9 @@ import {
   RECEIVE_SHARE_INFO,
   SHARE_IMAGE_RENDERING,
   SET_USER_ONBOARDING,
-  SET_ONBOARDING_STEP
+  SET_ONBOARDING_STEP,
+  SHOW_SHARE,
+  CLOSE_SHARE 
 } from '../constants';
 
 
@@ -57,6 +59,32 @@ function Onboarding(state= {
       return _.assign({}, state, { onboarded: action.bool })
     case SET_ONBOARDING_STEP:
       return _.assign({}, state, { step: action.step })
+    default:
+      return state;
+  }
+}
+
+function Share(state= {
+  show_share: false,
+  close_share: false,
+  ready: false,
+  share_image_url: null,
+  image: null,
+  share_rendering: false
+}, action) {
+  switch (action.type) {
+    case SHOW_SHARE:
+      return _.assign({}, state, {show_share: action.bool})
+    
+    case CLOSE_SHARE: 
+      return _.assign({}, state, {close_share: action.bool})
+
+    case RECEIVE_SHARE_INFO:
+      return _.assign({}, state, action.data);
+
+    case SHARE_IMAGE_RENDERING:
+      return _.assign({}, state, {share_rendering: action.bool});
+
     default:
       return state;
   }
@@ -159,13 +187,7 @@ function defaultPlaylist() {
     animating: false,
     published: false,
     server_info: {},
-    server_errors: [],
-    share_rendering: false,
-    share: {
-      ready: false,
-      url: null,
-      image: null
-    }
+    server_errors: []
   }
 }
 
@@ -272,17 +294,14 @@ function Playlist(state = initialPlaylistState, action) {
     case HANDLE_DELETE:
       var initialPlaylistState = defaultPlaylist();
       return initialPlaylistState;
-
-    case RECEIVE_SHARE_INFO:
-      return _.assign({}, state, {share: action.data});
-
-    case SHARE_IMAGE_RENDERING:
-      return _.assign({}, state, {share_rendering: action.bool});
       
     default:
       return state;
   }
 }
+
+
+
 
 /* Root Reducer
 --------------------------------------------- */
@@ -292,7 +311,8 @@ const rootReducer = combineReducers({
   Playlist,
   Account,
   FlashMessage,
-  Onboarding
+  Onboarding,
+  Share
 });
 
 export default rootReducer;

@@ -29,6 +29,8 @@ export const SET_USER_ONBOARDING = 'SET_USER_ONBOARDING';
 export const SET_ONBOARDING_STEP = 'SET_ONBOARDING_STEP';
 export const SHOW_LOGIN = 'SHOW_LOGIN';
 export const CLOSE_LOGIN = 'CLOSE_LOGIN';
+export const SHOW_SHARE = 'SHOW_SHARE';
+export const CLOSE_SHARE = 'CLOSE_SHARE';
 
 // Breakpoints
 export const MD = '756px';
@@ -40,3 +42,7 @@ export const MINIMUM_ARTICLES = 1;
 // LIMITS
 export const TITLE_LIMIT = 40;
 export const CAPTION_LIMIT = 200;
+
+// Sharing
+// export const FACEBOOK_APP_ID = 1645762445689430
+export const FACEBOOK_APP_ID = 1022346264473268
