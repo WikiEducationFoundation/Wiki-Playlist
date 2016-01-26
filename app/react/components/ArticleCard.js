@@ -1,5 +1,5 @@
 import GSAP from 'react-gsap-enhancer'
-import { updateCurrentEditingArticle, expandArticle, collapseArticle, collapseComplete, setUserOnboarding} from '../actions';
+import { updateCurrentEditingArticle, expandArticle, collapseArticle, collapseComplete, setOnboardingStep, setUserOnboarding} from '../actions';
 import { Link } from 'react-router';
 import { pushPath } from 'redux-simple-router';
 import { connect } from 'react-redux';
@@ -30,6 +30,11 @@ export class ArticleCard extends React.Component {
     const { onboarded, step } = this.props.Onboarding;
     const isOnboarding = !onboarded && step === 2 && index === 0;
     const onboarding_class = ( isOnboarding ? 'onboarding ' : '')
+    const onboarding_back_button = (
+          <div><button className='action'
+                       onClick={()=>{
+                       this.dispatch(setOnboardingStep(1));
+                    }}>back</button></div>);
     return (
       <div className={'flex-column flex-stretch ' + onboarding_class + (has_article ? 'article-card' : 'article-card--empty editable-container p2 mb2')}>
        
@@ -45,10 +50,9 @@ export class ArticleCard extends React.Component {
               {(isOnboarding ? 
                   <div><h3 className='mb1'>Adding Wikipedia Articles</h3>
                   <p className='mb2'>Copy explaining how the tool works, 3 pages at a minimum, and 5 at the max.</p></div> : null)}
-              <button className='btn btn-primary flex-end bg-silver' 
+                  <button className='btn btn-primary flex-end bg-silver' 
                       ref={card => {this.cardElement = card}}
                       onClick={() => {
-                        // this.dispatch(setUserOnboarding(true))
                         this.dispatch(updateCurrentEditingArticle(index))
                         this.dispatch(pushPath('/playlist/article/search'))
                       }}>
@@ -135,7 +139,8 @@ export class ArticleCard extends React.Component {
           <a className='btn btn-primary ml1'
              onClick={()=>{
               this.dispatch(setUserOnboarding(true));
-             }}>Save</a></div>
+             }}>Save</a>
+          </div>
         </div>
       )
     }

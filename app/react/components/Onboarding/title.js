@@ -1,13 +1,21 @@
 import GSAP from 'react-gsap-enhancer';
 import { connect } from 'react-redux';
 import {
-  setOnboardingStep
+  TITLE_LIMIT
+} from '../../constants';
+
+import {
+  setOnboardingStep,
+  setPlaylistTitle
 } from '../../actions';
 
 class OnboardingTitle extends React.Component {
   constructor(props) {
     super();
     this.dispatch = props.dispatch;
+    this.state = {
+      title: ''
+    }
   }
   render() {
     const { step } = this.props.Onboarding;
@@ -47,14 +55,24 @@ class OnboardingTitle extends React.Component {
         <div className='p3 flex flex-column onboarding__column'>
           <h3 className='h3 mb1'>Name of your Collection</h3>
           <p className='mb2'>Note! This can be changed at anytime</p>
-          <input className='field' placeholder='Collection Name'></input>
+          <small>{TITLE_LIMIT - this.state.title.length} characters left</small>
+          <input className='field p1' 
+                 placeholder='Collection Name'
+                 value={this.state.title}
+                 onChange={({target})=>{
+                  let text = target.value.substr(0, TITLE_LIMIT);
+                  this.setState({title: text});
+                 }}></input>
           <div>
+
             <button className='action mr2'
               onClick={()=>{
                 this.dispatch(setOnboardingStep(0));
               }}>Back</button>
+
             <button className='btn btn-primary' 
               onClick={()=>{
+                this.dispatch(setPlaylistTitle(this.state.title));
                 this.dispatch(setOnboardingStep(2));
               }}>Next</button></div>
         </div>

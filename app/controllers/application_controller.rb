@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :null_session
   before_action :configure_permitted_parameters, if: :devise_controller?
+  
   require Rails.root.join("lib/custom_public_exceptions")
   config.exceptions_app = CustomPublicExceptions.new(Rails.public_path)
 
