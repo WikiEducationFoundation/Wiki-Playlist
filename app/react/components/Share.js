@@ -64,7 +64,9 @@ class Share extends React.Component {
             </button>
           </div>
           <div className='flex flex-column py1'>
-            <button className='btn btn-outline mb1'>Email</button>
+            <a href={`mailto:?subject=My Wikipedia Playlist:%20${encodeURIComponent(title)}&body=${encodeURIComponent(title)}%0A${encodeURIComponent(permalink)}%0A${encodeURIComponent(caption)}`} 
+               className='btn btn-outline mb1 center'>
+               Email</a>
             <button className='btn btn-primary copy-clipboard' data-clipboard-text={permalink}>
               {(copied ? 'Copied to your clipboard!' : 'Copy Permalink')}
             </button>
@@ -138,7 +140,7 @@ class Share extends React.Component {
   }
 
   componentWillUnmount() {
-    clearTimeout(this.copyTimeout);
+    
   }
 }
 
