@@ -13,13 +13,8 @@ export default class SearchResults extends React.Component {
   _results() {
     const {query, isSearching} = this.props;
     if(query !== undefined) {
-      const {pages, redirects} = query;
       let results = [];
-      this.page_ids = Object.keys(pages);
-      for(var i = 0; i < this.page_ids.length; ++i) {
-        const key = this.page_ids[i];
-        results.push(<SearchResult key={`result_${key}`} article={pages[key]} />);
-      }
+      query.map((article, i) => results.push(<SearchResult key={`result_${i}`} article={article} />))
       return results;
     } else {
       return <p>{(isSearching ? 'Loading results...' : 'No results found')}</p>
