@@ -14,5 +14,6 @@ module.exports = [
   'Cscr-featured.svg',
   'Portal-puzzle.svg',
   'Office-book.svg',
-  'Edit-clear.svg'
+  'Edit-clear.svg',
+  'PD-icon.svg'
 ]

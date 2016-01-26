@@ -36,13 +36,13 @@ export const CLOSE_SHARE = 'CLOSE_SHARE';
 export const MD = '756px';
 
 // MISC
-// export const MINIMUM_ARTICLES = 3;
-export const MINIMUM_ARTICLES = 1;
+export const MINIMUM_ARTICLES = (process.env.NODE_ENV === 'development' ? 1 : 3);
 
 // LIMITS
 export const TITLE_LIMIT = 40;
 export const CAPTION_LIMIT = 200;
 
 // Sharing
-// export const FACEBOOK_APP_ID = 1645762445689430
-export const FACEBOOK_APP_ID = 1022346264473268
+const LOCAL_FACEBOOK_APP_ID = 1022346264473268;
+const HEROKU_FACEBOOK_APP_ID = 1645762445689430;
+export const FACEBOOK_APP_ID = (process.env.NODE_ENV === 'development' ? LOCAL_FACEBOOK_APP_ID : HEROKU_FACEBOOK_APP_ID);
