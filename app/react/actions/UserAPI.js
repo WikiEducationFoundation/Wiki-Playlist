@@ -1,10 +1,11 @@
 import { getCSRFToken } from './rails';
 import PopupCenter from '../utils/Popup';
+import Cookies from 'js-cookie';
 
 export function openLoginPopup(e) {
   e.preventDefault();
   var title = $(e.target).data('popup');
-  PopupCenter(e.target.href, title, '500', '500');
+  PopupCenter(e.target.href, title, '1000', '500');
 }
 
 export function getUserStatus() {
@@ -13,6 +14,13 @@ export function getUserStatus() {
       $(document).trigger($.Event("authSuccess", data.user));
     }
   });
+
+  const onboarded = Cookies.get('onboarded');
+  if( onboarded !== undefined) {
+    $(document).trigger($.Event("userOnboarded", true));
+  } else {
+    $(document).trigger($.Event("userOnboarded", false));
+  }
 }
 
 export function logoutUser(e){

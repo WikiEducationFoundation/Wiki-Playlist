@@ -51,7 +51,6 @@ class PlaylistApp extends React.Component{
           <Route path="/styleguide" component={StyleGuide}/>
         </Router>
       </Provider>
-      
     )
   }
 }

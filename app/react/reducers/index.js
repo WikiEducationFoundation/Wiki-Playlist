@@ -27,7 +27,9 @@ import {
   FLASH_MESSAGE,
   HANDLE_DELETE,
   RECEIVE_SHARE_INFO,
-  SHARE_IMAGE_RENDERING
+  SHARE_IMAGE_RENDERING,
+  SET_USER_ONBOARDING,
+  SET_ONBOARDING_STEP
 } from '../constants';
 
 
@@ -39,6 +41,20 @@ function FlashMessage(state = {
     case FLASH_MESSAGE:
       const {text, type} = action.message;
       return _.assign({}, state, {message: text, type: type });
+    default:
+      return state;
+  }
+}
+
+function Onboarding(state= {
+  onboarded: false,
+  step: 0
+}, action) {
+  switch (action.type) {
+    case SET_USER_ONBOARDING:
+      return _.assign({}, state, { onboarded: action.bool })
+    case SET_ONBOARDING_STEP:
+      return _.assign({}, state, { step: action.step })
     default:
       return state;
   }
@@ -267,7 +283,8 @@ const rootReducer = combineReducers({
   Search,
   Playlist,
   Account,
-  FlashMessage
+  FlashMessage,
+  Onboarding
 });
 
 export default rootReducer;

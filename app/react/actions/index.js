@@ -26,7 +26,9 @@ import {
   FLASH_MESSAGE,
   HANDLE_DELETE,
   RECEIVE_SHARE_INFO,
-  SHARE_IMAGE_RENDERING
+  SHARE_IMAGE_RENDERING,
+  SET_USER_ONBOARDING,
+  SET_ONBOARDING_STEP
 } from '../constants';
 
 
@@ -63,6 +65,17 @@ export function logout() {
 
 export function addUser(user) {
   return { type: ADD_USER, user }
+}
+
+
+// — Onboarding
+
+export function setUserOnboarding(bool) {
+  return { type: SET_USER_ONBOARDING, bool}
+}
+
+export function setOnboardingStep(step) {
+  return { type: SET_ONBOARDING_STEP, step}
 }
 
 // — Search

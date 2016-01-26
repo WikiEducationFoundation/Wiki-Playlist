@@ -43,18 +43,17 @@ class SearchResult extends React.Component {
     const index = Playlist.editingArticle;
     
     let articleData = new Promise((resolve, reject)=>{
-      if(article.terms.extract === undefined) {
-        fetchArticleSummary(article.title).done((data)=> {
-          var pages = data.query.pages;
-          const extract =  pages[_.keys(pages)[0]].extract;
-          if(extract !== undefined) {
-            article.extract = extract;
-            resolve();
-          } else {
-            resolve();
-          }
-        })
-      } else { resolve(); }
+      fetchArticleSummary(article.title).done((data)=> {
+
+        var pages = data.query.pages;
+        const extract =  pages[_.keys(pages)[0]].extract;
+        if(extract !== undefined) {
+          article.extract = extract;
+          resolve();
+        } else {
+          resolve();
+        }
+      })
     });
 
     articleData.then(()=>{

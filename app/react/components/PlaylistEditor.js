@@ -1,6 +1,7 @@
 import ArticleCard from './ArticleCard';
 import { connect } from 'react-redux';
 import { truncateHTML, stripTags } from '../utils/Text';
+import OnboardingTitle from './Onboarding/title';
 import { 
   updateCurrentEditingArticle,
   updateQuery,
@@ -15,12 +16,17 @@ const CAPTION_LIMIT = 200;
 import Editor from 'react-medium-editor';
 import { pushPath } from 'redux-simple-router';
 import { Link } from 'react-router';
+import es6BindAll from "es6bindall";
 
 class PlaylistEditor extends React.Component {
 
   constructor(props) {
     super();
     this.dispatch = props.dispatch;
+    es6BindAll(this, [
+      '_onboardingTitle'
+    ]);
+
     this.state = {
       titleLimitHit: false,
       captionLimitHit: false,
@@ -30,17 +36,20 @@ class PlaylistEditor extends React.Component {
   }
 
   render() {
+    const { onboarded, step } = this.props.Onboarding;
+    const { path } = this.props.routing;
     return (
       <div className='playlist'>
-        {this._titleCard()}
+        {(!onboarded && step === 0 || step === 1 ? this._onboardingTitle()  : this._titleCard())}
         {this._articles()}
         {this._addArticle()}
-        <div>{this._captions()}</div>
+        { onboarded ? null : <div className='onboarding__screen'></div>}
       </div>
     )
   }
 
   _articles() {
+
     const {articles, editingArticle} = this.props.Playlist;
     let _articles = [];
     articles.map((article, i) =>{
@@ -83,7 +92,7 @@ class PlaylistEditor extends React.Component {
 
     return (
       <div>
-        <div className="" >
+        <div className="">
           <div className="md-flex flex-justify py4" ref={c => {this.cardContent = c}}>
             <div className={'article-card__header px2 relative'}>
               
@@ -154,6 +163,10 @@ class PlaylistEditor extends React.Component {
           </div>
         </div>
       </div>)
+  }
+
+  _onboardingTitle() {
+    return <OnboardingTitle />
   }
 
   _addArticle() {

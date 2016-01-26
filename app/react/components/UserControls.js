@@ -19,7 +19,9 @@ import {
   addFlashMessage,
   flashMessage,
   receiveShareInfo,
-  setShareImageRendering
+  setShareImageRendering,
+  setUserOnboarding,
+  setOnboardingStep
 } from '../actions';
 
 import {
@@ -56,6 +58,7 @@ class UserControls extends React.Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
+    const { path } = this.props.routing;
     getUserStatus();
     $(document).on('authSuccess', (data) => {
       // auth_success partial doesn't get user data so hit /auth/user_status endpoint
@@ -64,12 +67,15 @@ class UserControls extends React.Component {
       } else {
         dispatch(login())
         dispatch(addUser({username: data.username}));
-        dispatch(pushPath('/playlist'));
+        // dispatch(pushPath('/playlist'));
       }
     });
     $(document).on('authLogout', ()=>{dispatch(logout())});
     $(document).on('click', '[data-popup]', openLoginPopup);
     $(document).on('click', '[data-sign-out]', logoutUser);
+    $(document).on('userOnboarded', (bool)=>{
+      this.dispatch(setUserOnboarding(bool))
+    });
   }
 
   _login() {
