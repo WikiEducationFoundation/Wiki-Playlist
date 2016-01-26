@@ -4,9 +4,20 @@ body
 .site__navigation
   background white
   box-shadow 0px 2px 4px 0px rgba(0,0,0,0.15)
+  padding-left .5rem
+  +above(md)
+    padding 1rem 0
+    
   img
     display inline-block
     vertical-align middle
+  
+  .btn-primary
+    border-radius 0
+    +above(md)
+      border-radius 3px
 
 .site__content
-  // 
+  padding 0 1rem
+  +above(md)
+    padding 0

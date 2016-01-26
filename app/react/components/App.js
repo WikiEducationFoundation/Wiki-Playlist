@@ -7,13 +7,15 @@ import FlashMessage from './FlashMessage';
 import UserControls from './UserControls';
 import LoadingAnimation from './LoadingAnimation';
 import Login from './Login';
+import SaveButton from  './SaveButton';
 
 class App extends React.Component {
 
   render() {
+    const { logged_in, current_user, show_login } = this.props.Account;
     return (
       <div className="">
-        <nav className="py2 site__navigation">
+        <nav className="md-py2 site__navigation">
           <div className='container flex flex-center flex-justify'>
             <Link to="/" className='black'>
               <img src='//upload.wikimedia.org/wikipedia/en/8/80/Wikipedia-logo-v2.svg' height='30'/>
@@ -27,11 +29,22 @@ class App extends React.Component {
 
         {this._loading()}
 
-        <div className='site__content container'>{this.props.children}</div>
+        <div className='site__content container'>
+          {this.props.children}
+
+          <div className='py2 playlist-actions flex flex-justify'>
+            <button className='btn btn-outline'>Preview</button>
+            <SaveButton />
+          </div>
+        </div>
         {this._devTools()}
 
-        <footer className='container'><Link to='/styleguide'>Styleguide</Link></footer>
-        {(this.props.Account.show_login ? <Login/> : null )}
+        <footer className='container p2 flex flex-center'>
+          <Link to='/styleguide'>Styleguide</Link>
+          {(logged_in && current_user ? <span>&nbsp;|&nbsp;You are logged in. <a href="#" className='' data-sign-out>Logout</a></span> : null)}
+        </footer>
+
+        {(show_login ? <Login/> : null )}
       </div>
     )
   }
