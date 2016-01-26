@@ -30,7 +30,9 @@ import {
   SET_USER_ONBOARDING,
   SET_ONBOARDING_STEP,
   SHOW_LOGIN,
-  CLOSE_LOGIN
+  CLOSE_LOGIN,
+  SHOW_SHARE,
+  CLOSE_SHARE 
 } from '../constants';
 
 
@@ -87,6 +89,18 @@ export function setUserOnboarding(bool) {
 export function setOnboardingStep(step) {
   return { type: SET_ONBOARDING_STEP, step}
 }
+
+
+// — Share
+
+export function showShare(bool) {
+  return { type: SHOW_SHARE, bool}
+}
+
+export function closeShare(bool) {
+  return { type: CLOSE_SHARE, bool}
+}
+
 
 // — Search
 
