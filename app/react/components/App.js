@@ -29,6 +29,7 @@ class App extends React.Component {
 
         <div className='site__content container'>{this.props.children}</div>
         {this._devTools()}
+
         <footer className='container'><Link to='/styleguide'>Styleguide</Link></footer>
       </div>
     )
@@ -53,4 +54,4 @@ class App extends React.Component {
   }
 }
 
-export default connect( state => {return state.Playlist})(App)
+export default connect( state => {return state})(App)

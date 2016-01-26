@@ -21,6 +21,7 @@ export default class StyleGuide extends React.Component {
 
         <h1 className='mb1'>My Favorite Wikipedia Articles</h1>
         <p className='caption mb2'>Add Playlist Caption</p>
+        <h3 className='h3 mb2'>Wikipedia Collection Creator</h3>
         <div className='py2 border-top border-bottom col-6'>
           <h2 className='mb1'>Article Title</h2>
           <p className='summary'>

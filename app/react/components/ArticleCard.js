@@ -1,5 +1,5 @@
 import GSAP from 'react-gsap-enhancer'
-import { updateCurrentEditingArticle, expandArticle, collapseArticle, collapseComplete } from '../actions';
+import { updateCurrentEditingArticle, expandArticle, collapseArticle, collapseComplete, setUserOnboarding} from '../actions';
 import { Link } from 'react-router';
 import { pushPath } from 'redux-simple-router';
 import { connect } from 'react-redux';
@@ -27,8 +27,11 @@ export class ArticleCard extends React.Component {
 
   render() {
     const { has_article, index } = this.props;
+    const { onboarded, step } = this.props.Onboarding;
+    const isOnboarding = !onboarded && step === 2 && index === 0;
+    const onboarding_class = ( isOnboarding ? 'onboarding ' : '')
     return (
-      <div className={'flex-column flex-stretch ' + (has_article ? 'article-card' : 'article-card--empty editable-container p2 mb2')}>
+      <div className={'flex-column flex-stretch ' + onboarding_class + (has_article ? 'article-card' : 'article-card--empty editable-container p2 mb2')}>
        
           {(has_article ? 
 
@@ -38,13 +41,19 @@ export class ArticleCard extends React.Component {
 
               : 
               
+              <div className='center'>
+              {(isOnboarding ? 
+                  <div><h3 className='mb1'>Adding Wikipedia Articles</h3>
+                  <p className='mb2'>Copy explaining how the tool works, 3 pages at a minimum, and 5 at the max.</p></div> : null)}
               <button className='btn btn-primary flex-end bg-silver' 
                       ref={card => {this.cardElement = card}}
                       onClick={() => {
+                        // this.dispatch(setUserOnboarding(true))
                         this.dispatch(updateCurrentEditingArticle(index))
                         this.dispatch(pushPath('/playlist/article/search'))
                       }}>
                       Add Wikipedia Article</button>
+              </div>
           )}
         
           {(has_article ? null : this.props.children)}
@@ -70,13 +79,13 @@ export class ArticleCard extends React.Component {
     const {index, Playlist, open} = this.props;
 
 
-    if(nextProps.open && !open && !this.animating) {
-      this.expandController = this.addAnimation(this._expand);
-    } else if(!nextProps.open && open && !this.animating) {
-      this.collapseController = this.addAnimation(this._collapse);
-    } else if (!nextProps.open && !open && this.cardElement !== undefined) {
-      this.cardElement.removeAttribute('style')
-    }
+    // if(nextProps.open && !open && !this.animating) {
+    //   this.expandController = this.addAnimation(this._expand);
+    // } else if(!nextProps.open && open && !this.animating) {
+    //   this.collapseController = this.addAnimation(this._collapse);
+    // } else if (!nextProps.open && !open && this.cardElement !== undefined) {
+    //   this.cardElement.removeAttribute('style')
+    // }
 
     if(nextProps.Playlist.all_collapsed && this.controller !== undefined) {
       
@@ -92,6 +101,8 @@ export class ArticleCard extends React.Component {
   _articleContent() {
     const { editing_options } = this.state;
     const { title, description, index, editing, open, has_article, caption, url } = this.props;
+    const { onboarded, step } = this.props.Onboarding;
+    const isOnboarding = !onboarded && step === 2 && index === 0;
     const truncated_description = (description !== undefined && description.length > 250 ? `${description.substr(0,250)}...` : description)
     let content = null;
     if(has_article) {
@@ -103,25 +114,35 @@ export class ArticleCard extends React.Component {
       );
     }
     
-    const edit_button = (<button className='action' 
-              onClick={() => { this.setState({editing_options: true})}}>Edit <Icon size="16px" icon="edit" fill={'silver'} /></button>)
+    const edit_button = (
+        <button className='btn btn-outline' 
+                onClick={() => { this.setState({editing_options: true})}}>
+                Edit <Icon size="14px" icon="edit" fill={'teal'} /></button>)
 
     let button = null;
     if(has_article) { button = (
-      <div className='flex flex-justify'>{edit_button}
-        <a className='action action--external-serif' href={url} target='_blank'>View Article <Icon size="12px" icon="external-link" fill={'teal'} /></a></div>); }
+      <div className='flex flex-justify flex-center'>{edit_button}
+        <a className='action action--external-serif' 
+           href={url} target='_blank'>
+           View Article &nbsp;
+           <Icon size="12px" icon="external-link" fill={'teal'} /></a>
+        </div>); }
     
+    if(isOnboarding) {
+      button = (
+        <div className='flex flex-end'>
+          <div className='onboarding__finish'>{edit_button}
+          <a className='btn btn-primary ml1'
+             onClick={()=>{
+              this.dispatch(setUserOnboarding(true));
+             }}>Save</a></div>
+        </div>
+      )
+    }
+
     if(editing_options) { 
-      // button = null; 
 
-      // expanding version
-      // button = (
-      //   <button className='btn btn--edit'
-      //           onClick={() => {this.dispatch(expandArticle(index))}}>Change Article</button>
-      // )
-
-      //static version
-     button = (<button className='action' 
+      button = (<button className='action' 
                       ref={card => {this.cardElement = card}}
                       onClick={() => {
                         this.dispatch(updateCurrentEditingArticle(index))
