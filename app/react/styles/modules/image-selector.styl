@@ -19,6 +19,7 @@
   +above(md)
     width 100%
     height 300px
+    
   img
     max-height 100%
 
@@ -66,6 +67,8 @@
     background rgba(black, .5)
 
 .image-selector__controls
+  padding 0 1rem
+  
   +above(md)
     position absolute
     background-color rgba(black, .1)
@@ -73,9 +76,21 @@
     left 0
     right 0
     z-index 10
+    border-bottom-left-radius 10px
+    align-items center
+    padding 0
     
     .action
       color white
+      padding .5rem 1rem
+      &:hover
+        background rgba(black, .3)
+
+.slick-slide
+  +above(md)
+    border-top-left-radius 10px
+    border-bottom-left-radius 10px
+    overflow hidden
 
 .slick-next,
 .slick-prev
@@ -95,7 +110,7 @@
   background-color rgba(black, .1)
   
   +above(md)
-    top 160px
+    top 150px
   
   &:focus
     outline 0

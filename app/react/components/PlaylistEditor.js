@@ -68,7 +68,7 @@ class PlaylistEditor extends React.Component {
     const { dispatch } = this.props;
     const { logged_in, current_user } = this.props.Account;
 
-    let account = <Link to="/playlist/login">Login</Link>;
+    let account = null;
     if(logged_in && current_user) {
       account = <span>By {current_user.username}</span>;
     }
@@ -93,7 +93,7 @@ class PlaylistEditor extends React.Component {
     return (
       <div>
         <div className="">
-          <div className="md-flex flex-justify py4" ref={c => {this.cardContent = c}}>
+          <div className="md-flex flex-justify py2 mb1 md-py4" ref={c => {this.cardContent = c}}>
             <div className={'article-card__header px2 relative'}>
               
               {titleCount}

@@ -44,7 +44,7 @@ class ImageSelector extends React.Component {
         <div>
           <Slider {...settings}>{this._images()}</Slider>
         </div>
-        <div className='image-selector__controls flex flex-justify px2 py1 actions'>
+        <div className='image-selector__controls flex flex-justify flex-center actions'>
           <button className='action' onClick={this._cancel}>Cancel</button>
           {(total_images < 12 ? null : <span className='white'>{currentIndex + 1}/{total_images}</span>)}
           <button className='action' onClick={this._selectImage}>Select</button>

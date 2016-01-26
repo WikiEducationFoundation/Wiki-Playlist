@@ -47,7 +47,6 @@ class Login extends React.Component {
         ease: Power2.easeOut,
         onStart: () => {
           var container = this.container;
-          console.log('start', container)
           TweenMax.from(container, .5, {
             yPercent: 125,
             ease: Power2.easeOut,
@@ -62,7 +61,6 @@ class Login extends React.Component {
 
   componentWillReceiveProps(props) {
     if(props.Account.close_login) {
-      console.log('close')
       this.addAnimation(({target})=> {
         return TweenMax.to(target, 0.5, {
             opacity: 0, 

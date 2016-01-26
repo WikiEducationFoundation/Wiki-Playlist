@@ -15,6 +15,7 @@ import { pushPath } from 'redux-simple-router';
 import { connect } from 'react-redux';
 import Icon from './Icon';
 import es6BindAll from "es6bindall";
+import ImageSelector from './ImageSelector';
 
 
 export class ArticleCard extends React.Component {
@@ -130,7 +131,10 @@ export class ArticleCard extends React.Component {
     
     const edit_button = (
         <button className='btn btn-outline' 
-                onClick={() => { this.setState({editing_options: true})}}>
+                onClick={() => { 
+                  this.dispatch(updateCurrentEditingArticle(index))
+                  this.setState({editing_options: true})
+                }}>
                 Edit <Icon size="14px" icon="edit" fill={'teal'} /></button>)
 
     let button = null;
@@ -171,7 +175,7 @@ export class ArticleCard extends React.Component {
     // if(editing !== index) {
       return (
         <div className={(has_article ? 'article-card__content' : 'center')} ref={c => {this.cardContent = c}}>
-          {this._articleImage()}
+          {(editing_options ? <ImageSelector/> : this._articleImage())}
           <div className={(has_article ? 'article-card__summary' : '')}>
             {content}
             <div className=''>
