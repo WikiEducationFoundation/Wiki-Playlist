@@ -4,6 +4,8 @@ import { combineReducers } from 'redux';
 import { routeReducer, UPDATE_PATH } from 'redux-simple-router';
 import {
   LOGIN,
+  SHOW_LOGIN,
+  CLOSE_LOGIN,
   LOGOUT,
   ADD_USER,
   UPDATE_QUERY, 
@@ -63,13 +65,19 @@ function Onboarding(state= {
 
 function Account(state = {
   logged_in: false,
-  current_user: null
+  current_user: null,
+  show_login: false,
+  close_login: false
 }, action) {
   switch (action.type) {
     case LOGIN:
       return _.assign({}, state, {logged_in: true});
     case LOGOUT:
       return _.assign({}, state, {logged_in: false});
+    case SHOW_LOGIN:
+      return _.assign({}, state, {show_login: action.bool})
+    case CLOSE_LOGIN:
+      return _.assign({}, state, {close_login: action.bool})
     case ADD_USER:
       return _.assign({}, state, {current_user: action.user});
     default:

@@ -1,5 +1,15 @@
 import GSAP from 'react-gsap-enhancer'
-import { updateCurrentEditingArticle, expandArticle, collapseArticle, collapseComplete, setOnboardingStep, setUserOnboarding} from '../actions';
+import { 
+  updateCurrentEditingArticle,
+  expandArticle,
+  collapseArticle,
+  collapseComplete,
+  setOnboardingStep,
+  setUserOnboarding,
+} from '../actions';
+
+import { setOnboardingCookie } from '../actions/UserAPI';
+
 import { Link } from 'react-router';
 import { pushPath } from 'redux-simple-router';
 import { connect } from 'react-redux';
@@ -139,6 +149,7 @@ export class ArticleCard extends React.Component {
           <a className='btn btn-primary ml1'
              onClick={()=>{
               this.dispatch(setUserOnboarding(true));
+              setOnboardingCookie();
              }}>Save</a>
           </div>
         </div>

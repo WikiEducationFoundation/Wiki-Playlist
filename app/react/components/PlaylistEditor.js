@@ -208,6 +208,8 @@ class PlaylistEditor extends React.Component {
       )
     })
   }
+
+  
 }
 
 export default connect( state => {return state})(PlaylistEditor);

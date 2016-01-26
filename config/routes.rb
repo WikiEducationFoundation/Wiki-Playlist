@@ -9,8 +9,13 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   root 'page#index'
-  resources :playlists
-  get "/:id" => 'playlists#show'
+  # resources :playlists
   get "playlist/render_status/:id" => "playlists#render_status"
-  get "playlist(/*all)", to: redirect('/')
+  get "playlist", to: "page#playlist"
+  get "playlist/article/search", to: "page#playlist"
+  get "playlist/article/images", to: "page#playlist"
+  get "/playlist/article/caption", to: "page#playlist"
+  get "/playlist/login", to: "page#playlist"
+  get "/:id" => 'playlists#show'
+  # get "playlist(/*all)", to: redirect('/')
 end

@@ -27,6 +27,8 @@ export const RECEIVE_SHARE_INFO = 'RECEIVE_SHARE_INFO';
 export const SHARE_IMAGE_RENDERING = 'SHARE_IMAGE_RENDERING';
 export const SET_USER_ONBOARDING = 'SET_USER_ONBOARDING';
 export const SET_ONBOARDING_STEP = 'SET_ONBOARDING_STEP';
+export const SHOW_LOGIN = 'SHOW_LOGIN';
+export const CLOSE_LOGIN = 'CLOSE_LOGIN';
 
 // Breakpoints
 export const MD = '756px';

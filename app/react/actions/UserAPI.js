@@ -17,10 +17,14 @@ export function getUserStatus() {
 
   const onboarded = Cookies.get('onboarded');
   if( onboarded !== undefined) {
-    $(document).trigger($.Event("userOnboarded", true));
+    $(document).trigger($.Event("userOnboarded", {onboarded: true}));
   } else {
-    $(document).trigger($.Event("userOnboarded", false));
+    $(document).trigger($.Event("userOnboarded", {onboarded: false}));
   }
+}
+
+export function setOnboardingCookie() {
+  Cookies.set('onboarded', true);
 }
 
 export function logoutUser(e){

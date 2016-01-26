@@ -28,7 +28,9 @@ import {
   RECEIVE_SHARE_INFO,
   SHARE_IMAGE_RENDERING,
   SET_USER_ONBOARDING,
-  SET_ONBOARDING_STEP
+  SET_ONBOARDING_STEP,
+  SHOW_LOGIN,
+  CLOSE_LOGIN
 } from '../constants';
 
 
@@ -54,6 +56,14 @@ export function flashMessage(dispatch, message) {
 
 
 // — Account
+
+export function showLogin(bool) {
+  return { type: SHOW_LOGIN, bool}
+}
+
+export function closeLogin(bool) {
+  return { type: CLOSE_LOGIN, bool}
+}
 
 export function login() {
   return { type: LOGIN }
