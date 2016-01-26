@@ -46,7 +46,6 @@ class PlaylistApp extends React.Component{
               <Route path="/playlist/article/images" component={ImageSelector} />
               <Route path="/playlist/article/caption" component={ArticleCaption} />
             </Route>
-            <Route path="/playlist/login" component={Login}/>
           </Route>
           <Route path="/styleguide" component={StyleGuide}/>
         </Router>

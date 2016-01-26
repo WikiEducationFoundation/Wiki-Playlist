@@ -13,6 +13,8 @@ import {
 import { 
   login,
   logout,
+  showLogin,
+  closeLogin,
   addUser,
   handleDelete,
   receivePlaylistPermalink,
@@ -59,7 +61,7 @@ class UserControls extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
     const { path } = this.props.routing;
-    getUserStatus();
+    
     $(document).on('authSuccess', (data) => {
       // auth_success partial doesn't get user data so hit /auth/user_status endpoint
       if(data.username === undefined) { 
@@ -73,9 +75,11 @@ class UserControls extends React.Component {
     $(document).on('authLogout', ()=>{dispatch(logout())});
     $(document).on('click', '[data-popup]', openLoginPopup);
     $(document).on('click', '[data-sign-out]', logoutUser);
-    $(document).on('userOnboarded', (bool)=>{
-      this.dispatch(setUserOnboarding(bool))
+    $(document).on('userOnboarded', (data)=>{
+      this.dispatch(setUserOnboarding(data.onboarded))
     });
+
+    getUserStatus();
   }
 
   _login() {
@@ -83,7 +87,12 @@ class UserControls extends React.Component {
     const { total_articles } = this.props.Playlist;
     const { routing } = this.props;
     let account_button_text = (routing.path.indexOf('playlist') !== -1 ? 'to save' : '');
-    let account = <Link className='btn btn-primary' to="/playlist/login">Login {account_button_text}</Link>;
+    let account = (
+      <button className='btn btn-primary' 
+              onClick={()=>{
+                this.dispatch(showLogin(true));
+              }}>Login {account_button_text}</button>
+      );
     if(logged_in && current_user) {
       account = (<span>You are logged in. <a href="#" data-sign-out>Logout</a></span>);
     }

@@ -6,11 +6,11 @@ import MediaQuery from 'react-responsive';
 import FlashMessage from './FlashMessage';
 import UserControls from './UserControls';
 import LoadingAnimation from './LoadingAnimation';
+import Login from './Login';
 
 class App extends React.Component {
 
   render() {
-    
     return (
       <div className="">
         <nav className="py2 site__navigation">
@@ -31,6 +31,7 @@ class App extends React.Component {
         {this._devTools()}
 
         <footer className='container'><Link to='/styleguide'>Styleguide</Link></footer>
+        {(this.props.Account.show_login ? <Login/> : null )}
       </div>
     )
   }
