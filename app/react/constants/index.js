@@ -34,3 +34,7 @@ export const MD = '756px';
 // MISC
 // export const MINIMUM_ARTICLES = 3;
 export const MINIMUM_ARTICLES = 1;
+
+// LIMITS
+export const TITLE_LIMIT = 40;
+export const CAPTION_LIMIT = 200;
