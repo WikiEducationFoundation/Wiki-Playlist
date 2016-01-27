@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { pushPath } from 'redux-simple-router';
 import es6BindAll from "es6bindall";
 import ShareButton from './ShareButton';
+import Icon from './Icon';
 
 import {
   logoutUser,
@@ -32,7 +33,6 @@ import {
 } from '../actions/PlaylistAPI';
 
 import SaveButton from './SaveButton';
-
 class UserControls extends React.Component {
   constructor(props) {
     super();
@@ -45,12 +45,19 @@ class UserControls extends React.Component {
   }
 
   render() {
-    const { Playlist, Account } = this.props;
+    const { Playlist, Account, routing } = this.props;
+    const { path } = routing;
+    const isPlaylistPage = path.indexOf('playlist') > -1;
+    const create_button = (
+      <Link className='btn btn-primary' to="/playlist">
+          Create a Playlist 
+          <Icon size="18px" icon="play-circle" fill={'white'} />
+      </Link>);
     return (
       <div>
         {this._login()}
-        <ShareButton/>
-        <SaveButton/>
+        {(isPlaylistPage? <ShareButton/> : null)}
+        {(isPlaylistPage?  <SaveButton/> : create_button)}
         {this._deleteButton()}
       </div>
     )

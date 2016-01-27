@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   }
 
   def as_json(options={})
-    super(:only => [:email, :username])
+    super(:only => [:email, :username, :admin])
   end
 
   def self.from_omniauth(auth)
@@ -38,7 +38,6 @@ class User < ActiveRecord::Base
   end
 
   def self.find_first_by_auth_conditions(warden_conditions)
-    binding.pry
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
       where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
@@ -56,7 +55,7 @@ class User < ActiveRecord::Base
       errors.add(:username, 'is already taken')
     end
   end
-
+  
   before_validation :create_login
 
   protected

@@ -69,6 +69,8 @@ class App extends React.Component {
       return null;
     }
   }
+
+  
 }
 
 export default connect( state => {return state})(App)
