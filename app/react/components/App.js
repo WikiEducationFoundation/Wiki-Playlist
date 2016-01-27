@@ -15,6 +15,7 @@ class App extends React.Component {
   render() {
     const { logged_in, current_user, show_login } = this.props.Account;
     const { show_share } = this.props.Share;
+    const preview_button = <button className='btn btn-outline'>Preview</button>;
     return (
       <div className="">
         <nav className="md-py2 site__navigation">
@@ -34,8 +35,7 @@ class App extends React.Component {
         <div className='site__content container'>
           {this.props.children}
 
-          <div className='py2 playlist-actions flex flex-justify'>
-            <button className='btn btn-outline'>Preview</button>
+          <div className='py2 playlist-actions center'>
             <SaveButton />
           </div>
         </div>

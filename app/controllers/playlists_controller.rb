@@ -85,7 +85,8 @@ class PlaylistsController < ApplicationController
       :layout => false,
       :locals => {
         :@playlist => playlist,
-        :@articles => playlist.articles
+        :@articles => playlist.articles.order(:position),
+        :@user => User.find(playlist.user_id)
       }
     )
   end
@@ -97,7 +98,7 @@ class PlaylistsController < ApplicationController
         redirect_to '/404'
       else
         @playlist = Playlist.find(params[:id])
-        @articles = @playlist.articles
+        @articles = @playlist.articles.order(:position)
         @user = User.find(@playlist.user_id)
       end
       
@@ -107,7 +108,7 @@ class PlaylistsController < ApplicationController
       params.require(:playlist).permit(
         :title, 
         :caption,
-        :articles_attributes => [:id, :title, :url, :image, :description, :pageId, :_destroy]
+        :articles_attributes => [:id, :title, :url, :image, :description, :pageId, :_destroy, :position]
       )
     end
 end

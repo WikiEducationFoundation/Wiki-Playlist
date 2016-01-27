@@ -6,12 +6,13 @@ import { getCSRFToken } from './rails';
 --------------------------------------------- */
 
 const allowed_playlist_attributes = ["title", "caption", "articles_attributes", "id"];
-const allowed_article_attributes = ["pageId", "title", "url", "description", "image", "id"];
+const allowed_article_attributes = ["pageId", "title", "url", "description", "image", "id", "position"];
 
 function filterArticleKeys(playlist) {
   let articles = playlist.articles.slice(0);
   articles.map((article, i) => {
     articles[i] = _.pick(article, allowed_article_attributes);
+    articles[i].position = i;
     if(article.image !== undefined) {
       articles[i].image = article.image.url;
     }
