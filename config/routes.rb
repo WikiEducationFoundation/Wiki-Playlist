@@ -13,9 +13,6 @@ Rails.application.routes.draw do
   get "playlist/render_status/:id" => "playlists#render_status"
   get "playlist", to: "page#playlist"
   get "playlist/article/search", to: "page#playlist"
-  get "playlist/article/images", to: "page#playlist"
-  get "/playlist/article/caption", to: "page#playlist"
   get "/playlist/login", to: "page#playlist"
   get "/:id" => 'playlists#show'
-  # get "playlist(/*all)", to: redirect('/')
 end

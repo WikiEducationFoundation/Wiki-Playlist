@@ -17,9 +17,6 @@ class PlaylistsController < ApplicationController
     end
   end
 
-
-  # GET /playlists/1
-  # GET /playlists/1.json
   def show
   end
 
@@ -101,6 +98,7 @@ class PlaylistsController < ApplicationController
       else
         @playlist = Playlist.find(params[:id])
         @articles = @playlist.articles
+        @user = User.find(@playlist.user_id)
       end
       
     end

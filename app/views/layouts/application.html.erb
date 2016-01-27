@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>WikiPlaylist</title>
+  <title>WikiPlaylist <% if content_for?(:title) %> | <%= yield :title %><% end %></title>
   <meta name="viewport" content="initial-scale=1,user-scalable=yes">
+  <% if content_for?(:meta) %>
+    <%= yield :meta %>
+  <% else %>
+    <%= render 'layouts/meta' %>
+  <% end %>
   <link rel="apple-touch-icon" href="//www.wikipedia.org/static/apple-touch/wikipedia.png">
   <link rel="shortcut icon" href="//www.wikipedia.org/static/favicon/wikipedia.ico">
   <link href="//d2v52k3cl9vedd.cloudfront.net/basscss/7.0.4/basscss.min.css" rel="stylesheet">

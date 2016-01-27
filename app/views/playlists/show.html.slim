@@ -1,4 +1,20 @@
-nav.py2.site__navigation data-reactid=".0.0" 
+- content_for :title do
+  = @playlist.title
+- content_for :meta do
+  meta content="summary_large_image" name="twitter:card" /
+  meta content="@wikipedia" name="twitter:site" /
+  meta content="@wikipedia" name="twitter:creator" /
+  meta content=("Wikipedia Playlist | #{@playlist.title}") name="twitter:title" /
+  meta content=("#{@playlist.caption}")
+  meta content="#{@playlist.share_image.url}" name="twitter:image"
+  meta content="#{request.original_url}" property="og:url" /
+  meta content="article" property="og:type" /
+  meta content=("Wikipedia Playlist | #{@playlist.title}") property="og:title" /
+  meta content=("#{@playlist.caption}") property="og:description" /
+  meta content="#{@playlist.share_image.url}" property="og:image" /
+
+
+nav.py2.site__navigation data-reactid=".0.0"
   .container.flex.flex-center.flex-justify
     a href="/" 
       img height="30" src="//upload.wikimedia.org/wikipedia/en/8/80/Wikipedia-logo-v2.svg" /
@@ -6,6 +22,10 @@ nav.py2.site__navigation data-reactid=".0.0"
     = link_to 'Create your own playlist', root_path, :class => 'btn btn-primary'
 
 .p2.container.permalink
+  div.py2
+    h1= @playlist.title
+    p= @playlist.caption
+    p By #{@user.username}
   - @articles.each do |article|
     .flex-column.flex-stretch.article-card
       .article-card__container
