@@ -25,7 +25,8 @@ nav.py2.site__navigation data-reactid=".0.0"
   div.py2
     h1= @playlist.title
     p= @playlist.caption
-    p By #{@user.username}
+    - if @user && @user.username
+      p By #{@user.username}
   - @articles.each do |article|
     .flex-column.flex-stretch.article-card
       .article-card__container
