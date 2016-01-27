@@ -20,6 +20,20 @@ class PlaylistsController < ApplicationController
   def show
   end
 
+  def index
+    if User.find(current_user.id).admin
+      @playlists = Playlist.all
+    else
+      @playlists = Playlist.featured
+    end
+
+    respond_to do |format|
+      format.json do
+        format.json { render json: { playlists: @playlists } }
+      end
+    end
+  end
+
   # PATCH/PUT /playlists/1
   # PATCH/PUT /playlists/1.json
   def update
