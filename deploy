@@ -9,10 +9,8 @@ fi
 
 npm run build
 wait
-echo "done with build!"
 git add -A
 eval git "commit -m $MESSAGE"
-echo "done with commit!"
 git push origin master
 git push wintr master
 git push heroku master
