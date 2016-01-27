@@ -23,5 +23,9 @@
 <body>
 <%= yield %>
 <%= render 'layouts/react_hot_assets' %>
+
+<% if Rails.env.production? %>
+  <%= render 'layouts/piwik' %>
+<% end %>
 </body>
 </html>
