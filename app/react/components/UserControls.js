@@ -67,6 +67,8 @@ class UserControls extends React.Component {
       } else {
         dispatch(login())
         dispatch(addUser({username: data.username}));
+        dispatch(closeLogin(true));
+
         // dispatch(pushPath('/playlist'));
       }
     });
