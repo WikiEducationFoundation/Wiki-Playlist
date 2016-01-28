@@ -54,14 +54,15 @@ class ImageSelector extends React.Component {
   }
 
   _cancel() {
-    this.dispatch(pushPath('/playlist'))
+    this.dispatch(pushPath('/playlists'))
   }
 
   _selectImage() {
     const { images, articleIndex, article } = this._getImages();
     this.dispatch(setArticleImage(articleIndex, images[this.state.currentIndex]));
-    this.dispatch(updateCurrentEditingArticle(null));
-    this.dispatch(pushPath('/playlist/'));
+    // this.dispatch(updateCurrentEditingArticle(null));
+    this.props.finishEditing()
+    this.dispatch(pushPath('/playlists'));
     
   }
 

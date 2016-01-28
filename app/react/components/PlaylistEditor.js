@@ -137,7 +137,7 @@ class PlaylistEditor extends React.Component {
   _captions() {
     // Don't display captions if currently editing one
     const { path } = this.props.routing;
-    if(path === '/playlist/article/caption') {
+    if(path === '/playlists/article/caption') {
       return null
     }
 
@@ -150,7 +150,7 @@ class PlaylistEditor extends React.Component {
         caption = article.caption;
         edit_button = (<a href='#' className='gray' onClick={()=> {
           dispatch(updateCurrentEditingArticle(i));
-          dispatch(pushPath('/playlist/article/caption'));
+          dispatch(pushPath('/playlists/article/caption'));
         }}>Edit Caption</a>)
       }
       return (

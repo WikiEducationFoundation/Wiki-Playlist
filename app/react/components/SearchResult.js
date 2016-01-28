@@ -67,7 +67,7 @@ class SearchResult extends React.Component {
     const index = Playlist.editingArticle;
     dispatch(addArticleImages(index, images))
     dispatch(pushPath('/playlists'))
-    dispatch(updateCurrentEditingArticle(null));
+    // dispatch(updateCurrentEditingArticle(null));
     dispatch(updateQuery(index, ''));
   }
 }
