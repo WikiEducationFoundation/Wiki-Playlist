@@ -7,10 +7,10 @@ else
   MESSAGE="Build and Deploy"
 fi
 
-# npm run build
-# wait
+npm run build
+wait
 git add .
 eval "git commit -m '$MESSAGE'"
-# git push origin master
-# git push wintr master
-# git push heroku master
+git push origin master
+git push wintr master
+git push heroku master
