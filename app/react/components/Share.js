@@ -23,15 +23,41 @@ class Share extends React.Component {
     const { title, caption } = this.props.Playlist;
     const { id } = this.props.Playlist.server_info;
     const { copied } = this.state;
-    const { share_image_url } = this.props.Share;
+    const { share_image_url, share_rendering } = this.props.Share;
     const { protocol, host } = window.location;
     const permalink = protocol + '//' + host + '/' + id;
+
 
     return (
       <div className='sharing__overlay' onClick={this.closeShare.bind(this)}>
         <div className='sharing__container p2 bg-white card mt2 relative'
              ref={(container) => {this.container = container}}>
+             {(share_rendering ? this._shareRendering() : this._sharingButtons())}
+        </div>
+      </div>
+    )
+    
+  }
+
+  _shareRendering() {
+    return (
+      <div className='center p2'>
+        <p>Preparing your playlist...</p>
+      </div>
+    )
+  }
+
+  _sharingButtons() {
+    const { title, caption } = this.props.Playlist;
+    const { id } = this.props.Playlist.server_info;
+    const { copied } = this.state;
+    const { share_image_url, share_rendering } = this.props.Share;
+    const { protocol, host } = window.location;
+    const permalink = protocol + '//' + host + '/' + id;
+    return (
+        <div>
           <p className='caption mb2'>Share Playlist</p>
+          <div className='mb1 border'><img src={share_image_url}/></div>
           <div className='flex flex-justify mb1'>
             <button className='share-button action'
                     data-share-twitter
@@ -73,12 +99,12 @@ class Share extends React.Component {
           </div>
           <button className='action close-button' onClick={this.closeShare.bind(this)}>&#215;</button>
         </div>
-      </div>
     );
   }
 
   closeShare({target}) {
-    const canClose = $(target).hasClass('sharing__overlay') || $(target).hasClass('close-button')
+    const { share_rendering } = this.props.Share;
+    const canClose = !share_rendering && $(target).hasClass('sharing__overlay') || $(target).hasClass('close-button')
     if(canClose){
       this.props.dispatch(closeShare(true));
     }
@@ -137,10 +163,6 @@ class Share extends React.Component {
         })
       })
     }
-  }
-
-  componentWillUnmount() {
-    
   }
 }
 

@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { 
-  showShare
+  showShare,
+  updateCurrentEditingArticle
 } from '../actions';
 
 class ShareButton extends React.Component {
@@ -9,6 +10,7 @@ class ShareButton extends React.Component {
     const button = (
       <button className='btn btn-outline'
               onClick={()=>{
+                dispatch(updateCurrentEditingArticle(null));
                 dispatch(showShare(true));
               }}>Share</button>);
 

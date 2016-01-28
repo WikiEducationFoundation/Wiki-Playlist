@@ -17,6 +17,7 @@ import { Link } from 'react-router';
 import es6BindAll from "es6bindall";
 import EditableText from './EditableText';
 import SaveButton from './SaveButton';
+import DeleteButton from './DeleteButton';
 
 class PlaylistEditor extends React.Component {
 
@@ -40,6 +41,7 @@ class PlaylistEditor extends React.Component {
     const { path } = this.props.routing;
     return (
       <div className='playlist'>
+        <DeleteButton />
         {(!onboarded && step === 0 || step === 1 ? this._onboardingTitle()  : this._titleCard())}
         {this._articles()}
         {this._addArticle()}

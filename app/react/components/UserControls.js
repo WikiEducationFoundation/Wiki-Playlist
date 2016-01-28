@@ -17,7 +17,6 @@ import {
   showLogin,
   closeLogin,
   addUser,
-  handleDelete,
   receivePlaylistPermalink,
   addFlashMessage,
   flashMessage,
@@ -28,7 +27,6 @@ import {
 } from '../actions';
 
 import {
-  deletePlaylist,
   pollPlaylistRenderStatus
 } from '../actions/PlaylistAPI';
 
@@ -38,9 +36,7 @@ class UserControls extends React.Component {
     super();
     this.dispatch = props.dispatch;
     es6BindAll(this, [
-      '_login',
-      '_deleteButton',
-      '_deletePlaylist'
+      '_login'
     ]);
   }
 
@@ -57,7 +53,6 @@ class UserControls extends React.Component {
         {this._login()}
         {(isPlaylistPage? <ShareButton/> : null)}
         {(isPlaylistPage?  <SaveButton/> : create_button)}
-        {this._deleteButton()}
       </div>
     )
   }
@@ -74,8 +69,6 @@ class UserControls extends React.Component {
         dispatch(login())
         dispatch(addUser({username: data.username}));
         dispatch(closeLogin(true));
-
-        // dispatch(pushPath('/playlist'));
       }
     });
     $(document).on('authLogout', ()=>{dispatch(logout())});
@@ -104,33 +97,7 @@ class UserControls extends React.Component {
       account = null;
     }
     return account;
-  }
-
-  _deleteButton() {
-    const { published } = this.props.Playlist;
-    const { logged_in, current_user } = this.props.Account;
-    if(logged_in && published) {
-      return (
-        <a href='#'
-           className='red' 
-           onClick={this._deletePlaylist.bind(this)}>
-           delete</a>)
-    } else {
-      return null;
-    }
-  }
-
-  _deletePlaylist() {
-    const { id } = this.props.Playlist.server_info;
-    deletePlaylist(id, (data) => {
-      if(data.error) {
-        flashMessage(this.dispatch,  {text: data.error, type: 'error'});
-      } else {
-        this.dispatch(handleDelete());
-        flashMessage(this.dispatch, {text: 'Playlist deleted', type: 'success'});
-      }
-    })
-  }
+  } 
 }
 
 export default connect( state => {return state})(UserControls)

@@ -43,7 +43,7 @@ class PlaylistsController < ApplicationController
     @playlist.share_image_rendered = false;
     respond_to do |format|
       if @playlist.update(playlist_params)
-        GenerateShareImage.enqueue(@playlist.id, :html => get_playlist_html(@playlist))
+        GenerateShareImage.enqueue(@playlist.id, :html => get_share_image_html(@playlist))
         format.json { render json: {
           id: @playlist.id,
           articles: @playlist.articles
