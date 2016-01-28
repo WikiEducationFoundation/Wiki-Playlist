@@ -97,7 +97,7 @@ export default class Icon extends React.Component {
     });
 
     return (
-      <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fit
+      <svg viewBox="0 0 24 24" className={this.props.className} preserveAspectRatio="xMidYMid meet" fit
         style={styles}>
           {this.renderGraphic()}
       </svg>

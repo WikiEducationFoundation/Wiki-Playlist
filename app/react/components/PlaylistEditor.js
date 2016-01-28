@@ -8,18 +8,13 @@ import {
   addArticleCard,
   setPlaylistCaption,
   setPlaylistTitle,
-  updatePlaylistUsername
+  updatePlaylistUsername,
+  updatePlaylistCaption
 } from '../actions';
-
-const TITLE_LIMIT = 40;
-const CAPTION_LIMIT = 200;
-
-import Editor from 'react-medium-editor';
+import { TITLE_LIMIT, CAPTION_LIMIT } from '../constants';
 import { pushPath } from 'redux-simple-router';
 import { Link } from 'react-router';
 import es6BindAll from "es6bindall";
-import PlaylistTitle from './PlaylistTitle';
-import PlaylistCaption from './PlaylistCaption';
 import EditableText from './EditableText';
 import SaveButton from './SaveButton';
 
@@ -83,18 +78,38 @@ class PlaylistEditor extends React.Component {
           <div className="py2 mb1 md-py4" ref={c => {this.cardContent = c}}>
             <div className={'article-card__header px2 relative md-flex flex-justify'}>
               <div>
-                {(signed_in ? <EditableText
-                  value={username}
-                  placeholder={'Username'}
-                  limit={50}
-                  inputType='text'
-                  className='text'
-                  save={(username)=>{this.dispatch(updatePlaylistUsername(username))}}/> :  null)}
-                <PlaylistTitle 
-                  title={title}/>
+                {(signed_in ? 
+                  <EditableText
+                    value={username}
+                    placeholder={'Username'}
+                    limit={50}
+                    inputType='text'
+                    className='text'
+                    save={(username)=>{this.dispatch(updatePlaylistUsername(username))}}>
+                    <p>{username}</p>
+                    </EditableText> 
+                  :  null)}
+                
+                <EditableText
+                    value={title}
+                    placeholder={'Your Playlist Title'}
+                    limit={TITLE_LIMIT}
+                    className='h1 '
+                    save={(title)=>{this.dispatch(setPlaylistTitle(title))}}>
+                    <h1>{title}</h1>
+                    </EditableText> 
               </div>
 
-              <div className='card p2 playlist__caption'><PlaylistCaption caption={caption}/></div>
+              <div className='card p2 playlist__caption'>
+                <EditableText
+                    value={caption}
+                    placeholder={'Add a caption to your playlist'}
+                    limit={CAPTION_LIMIT}
+                    className=' '
+                    save={(caption)=>{this.dispatch(setPlaylistCaption(caption))}}>
+                    <p>{caption}</p>
+                    </EditableText> 
+                </div>
             </div>
             
           </div>

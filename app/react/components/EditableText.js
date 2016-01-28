@@ -54,9 +54,9 @@ class EditableText extends React.Component {
        this.setState({value: this.truncateValue(target.value)})
       },
       onBlur: (e) => {
-       this._handleChange(e);
-       this.setState({editing: false});
-       this._save()
+       // this._handleChange(e);
+       // this.setState({editing: false});
+       // this._save()
       },
       onKeyPress: ({which}) =>{
         if(which === 13) {
@@ -65,29 +65,34 @@ class EditableText extends React.Component {
       }
     }
 
+    const textInput = inputType !== undefined && inputType === 'text';
+
     return (
-      <div>
+      <div className='editable-text'>
         {( 
           editing || empty ? 
-            <div className='flex flex-center'>
-              <span className='relative inline-block'>
-                {(inputType !== undefined && inputType === 'text' ? 
+            <div className={(textInput ? 'flex flex-center' : '')}>
+              <div className='relative'>
+                {(textInput ? 
                     <input {...inputProps} /> 
                   :  
                     <textarea {...inputProps} />)}
                 <span className='character-limit'>{count}</span>
-              </span>
-              <button className='action cancel-button inline-block mr1 ml1' onClick={this._cancel}>&#215;</button>
-              <button className='action mr1' onClick={this._save}><Icon size="25px" icon="check" fill={'teal'} /></button>
+              </div>
+              <div className='flex flex-center'>
+                <button className='action cancel-button inline-block mr1 ml1' onClick={this._cancel}>&#215;</button>
+                <button className='action mr1' onClick={this._save}><Icon size="25px" icon="check" fill={'teal'} /></button>
+              </div>
             </div>
           : 
-            <span className='inline-block' onClick={()=>{
+            <div className='relative inline-block' onClick={()=>{
               this.setState({editing: true}, ()=>{
                 this.refs.input.focus();
                 const len = this.state.value.length * 2;
                 this.refs.input.setSelectionRange(len, len);
-              })
-            }}>{value} <Icon size="20px" icon="edit" fill={'silver'} /></span>
+              })}}>
+              {this.props.children}<Icon className='edit-icon' size="20px" icon="edit" fill={'silver'} />
+            </div>
         )}
         
       </div>
