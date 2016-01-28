@@ -22,5 +22,5 @@ Rails.application.routes.draw do
   get "playlist", to: redirect('/playlists')
   get "playlists/article/search", to: "page#playlist"
   get "/playlists/login", to: "page#playlist"
-  get "/playlist/:id" => 'playlists#show'
+  get "/playlist/:slug" => 'playlists#show'
 end
