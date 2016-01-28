@@ -66,6 +66,7 @@ export class ArticleCard extends React.Component {
                   <button className='btn btn-primary flex-end bg-silver' 
                       ref={card => {this.cardElement = card}}
                       onClick={() => {
+                        console.log(index);
                         this.dispatch(updateCurrentEditingArticle(index))
                         this.dispatch(pushPath('/playlists/article/search'))
                       }}>

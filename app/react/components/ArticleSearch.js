@@ -3,11 +3,18 @@ import SearchForm from './SearchForm';
 import SearchResults from './SearchResults';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import { pushPath } from 'redux-simple-router';
+import { PLAYLISTS_PATH } from '../constants';
 
 class ArticleSearch extends React.Component {
   
   componentDidMount() {
     this.addAnimation(fadeIn);
+    const { editingArticle } = this.props.Playlist;
+    // Redirect to playlist path if current editing article index is null
+    if(!Number.isInteger(editingArticle)) {
+      this.props.dispatch(pushPath(PLAYLISTS_PATH))
+    }
   }
 
   render() {

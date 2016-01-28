@@ -1,3 +1,6 @@
+// Paths
+export const PLAYLISTS_PATH = '/playlists';
+
 // Actions
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
