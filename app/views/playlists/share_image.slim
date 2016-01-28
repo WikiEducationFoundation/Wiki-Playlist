@@ -1,0 +1,14 @@
+.share-image
+  div.share-image__title.center
+    - if @user && @user.username
+      div.share-image__user #{@user.username}&#39;s
+    h1 Wikipedia Playlist
+  .share-image__articles.relative
+    - @articles.each do |article, index|
+      div class="flex-column flex-stretch article-card article-card--share card-#{article.position}"
+        .article-card__container
+          .article-card__content
+            .sharing-card__image style="background-image:url(#{article.image})"
+            .article-card__summary
+              div
+                h2.article-card__title= article.title
