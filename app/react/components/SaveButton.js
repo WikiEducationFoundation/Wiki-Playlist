@@ -23,7 +23,9 @@ import {
   receiveShareInfo,
   setShareImageRendering,
   setUserOnboarding,
-  setOnboardingStep
+  setOnboardingStep,
+  updateCurrentEditingArticle,
+  showShare
 } from '../actions';
 
 import {
@@ -67,6 +69,7 @@ class SaveButton extends React.Component {
 
   _savePlaylist() {
     const { published, total_articles } = this.props.Playlist;
+    this.dispatch(updateCurrentEditingArticle(null));
     // todo:  if 'can publish' instead of comparison here
     if(total_articles < MINIMUM_ARTICLES) {
       flashMessage(this.dispatch,  {text: "Please find at least 3 articles.", type: 'action'});
@@ -87,10 +90,11 @@ class SaveButton extends React.Component {
     var playlist_data = {id: id, articles: articles};
     this.dispatch(receivePlaylistPermalink(playlist_data));
     this.dispatch(setShareImageRendering(true));
+    this.dispatch(showShare(true));
     flashMessage(this.dispatch, {text: `Playlist ${(published ? 'updated' : 'saved')}!`, type: 'success'});
     pollPlaylistRenderStatus(id, (data)=>{
       this.dispatch(receiveShareInfo(data));
-      flashMessage(this.dispatch, {text: 'Playlist ready to share', type: 'success'});
+      // flashMessage(this.dispatch, {text: 'Playlist ready to share', type: 'success'});
       this.dispatch(setShareImageRendering(false));
     })
   }

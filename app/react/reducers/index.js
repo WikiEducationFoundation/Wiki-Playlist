@@ -76,6 +76,7 @@ function Share(state= {
   switch (action.type) {
     case SHOW_SHARE:
       return _.assign({}, state, {show_share: action.bool})
+      break;
     
     case CLOSE_SHARE: 
       return _.assign({}, state, {close_share: action.bool})
@@ -84,7 +85,7 @@ function Share(state= {
       return _.assign({}, state, action.data);
 
     case SHARE_IMAGE_RENDERING:
-      return _.assign({}, state, {share_rendering: action.bool});
+      return _.assign({}, state, {share_rendering: action.bool, close_share: false});
 
     default:
       return state;
@@ -302,7 +303,7 @@ function Playlist(state = initialPlaylistState, action) {
 
     case HANDLE_DELETE:
       var initialPlaylistState = defaultPlaylist();
-      return initialPlaylistState;
+      return _.assign({}, initialPlaylistState, {username: state.username});
       
     default:
       return state;

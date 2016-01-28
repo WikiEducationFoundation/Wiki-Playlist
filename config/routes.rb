@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   
   root 'page#index'
-  resources :playlists, only: [:show, :create, :edit, :update, :destroy]
+  resources :playlists, only: [:show, :create, :edit, :update, :destroy, :delete]
   get "all" => "playlists#index"
   get "playlists/render_status/:id" => "playlists#render_status"
   get "playlists/share-image/:id" => "playlists#share_image"

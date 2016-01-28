@@ -15,5 +15,6 @@ module.exports = [
   'Portal-puzzle.svg',
   'Office-book.svg',
   'Edit-clear.svg',
-  'PD-icon.svg'
+  'PD-icon.svg',
+  'Ambox_important.svg'
 ]
