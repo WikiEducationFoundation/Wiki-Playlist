@@ -14,7 +14,6 @@
     margin-left auto
     margin-right auto
     
-
 .article-card,
 .article-card--empty
   &.onboarding
@@ -163,3 +162,67 @@
   vertical-align top
   margin-right 1em
   white-space normal
+
+
+// Sharing
+
+.article-card.article-card--share
+  width 250px
+  position absolute
+  top 10%
+  left 50%
+  height auto
+  border-radius 20px
+  box-shadow -5px 5px 10px rgba($black, .2)
+  transition none
+  *
+    transition none
+  
+  .article-card__container,
+  .article-card__content
+    flex-direction column
+    height auto
+    overflow hidden
+    // backface-visibility hidden
+    border-top-left-radius 20px
+    border-top-right-radius 20px
+  
+  .sharing-card__image
+    position relative
+    max-width none
+    height 170px
+    width 100%
+    border-top-left-radius 20px
+    border-top-right-radius 20px
+    overflow hidden
+    background-size cover
+    background-position 50%
+    
+    img
+      position absolute
+      top 0
+      left 0
+      min-height 100%
+  
+  .article-card__summary
+    height auto
+    width 100%
+    max-width none
+    padding .5rem
+    height 350px
+    text-align center
+    
+    h2
+      font-size 20px
+      line-height 30px
+
+.article-card--share.card-0
+  left 30%
+  transform translate(-60%, 3%) rotate(-10deg)
+
+.article-card--share.card-1
+  transform translateX(-50%)
+
+.article-card--share.card-2
+  left 68%
+  transform translate(-32%, 3%) rotate(10deg)

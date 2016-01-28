@@ -1,12 +1,12 @@
 class PlaylistsController < ApplicationController
-  before_action :set_playlist, only: [:show, :edit, :update, :destroy, :preview, :render_share_image, :render_status, :render_success]
+  before_action :set_playlist, only: [:show, :edit, :update, :destroy, :share_image, :get_share_html, :render_share_image, :render_status, :render_success]
 
   def create
     @playlist = Playlist.new(playlist_params)
     @playlist.user_id = current_user.id
     respond_to do |format|
       if @playlist.save
-        GenerateShareImage.enqueue(@playlist.id, :html => get_playlist_html(@playlist))
+        GenerateShareImage.enqueue(@playlist.id, :html => get_share_image_html(@playlist))
         format.json { render json: {
           id: @playlist.id,
           articles: @playlist.articles
@@ -32,6 +32,9 @@ class PlaylistsController < ApplicationController
         format.json { render json: { playlists: @playlists } }
       end
     end
+  end
+
+  def share_image
   end
 
   # PATCH/PUT /playlists/1
@@ -92,9 +95,13 @@ class PlaylistsController < ApplicationController
     render :js => "$(document).trigger($.Event('ShareImageRenderComplete', #{@playlist.id}));"
   end
 
-  def get_playlist_html(playlist)
+  def get_share_html
+    render :json => { :preview => get_share_image_html(@playlist) }
+  end
+
+  def get_share_image_html(playlist)
     render_to_string(
-      :template => '/playlists/show',
+      :template => '/playlists/share_image',
       :formats => [:html],
       :layout => false,
       :locals => {

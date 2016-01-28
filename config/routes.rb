@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   root 'page#index'
   resources :playlists
   get "playlist/render_status/:id" => "playlists#render_status"
+  get "playlist/share-image/:id" => "playlists#share_image"
+  get "playlist/share-html/:id" => "playlists#get_share_html"
   get "playlist", to: "page#playlist"
   get "playlist/article/search", to: "page#playlist"
   get "/playlist/login", to: "page#playlist"
