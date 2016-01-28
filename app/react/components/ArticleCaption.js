@@ -45,13 +45,13 @@ class ArticleCaption extends React.Component {
   }
 
   _goToImageSelector() {
-    this.dispatch(pushPath('/playlist/article/images'));
+    this.dispatch(pushPath('/playlists/article/images'));
   }
 
   _saveCaption() {
     const articleIndex = this.props.Playlist.editingArticle;
     this.dispatch(setArticleCaption(articleIndex, this.state.caption))
-    this.dispatch(pushPath('/playlist'));
+    this.dispatch(pushPath('/playlists'));
   }
 
   _storeCaption(caption) {

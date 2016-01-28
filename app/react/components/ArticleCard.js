@@ -60,7 +60,9 @@ export class ArticleCard extends React.Component {
               <div className='center'>
               {(isOnboarding ? 
                   <div><h3 className='mb1'>Adding Wikipedia Articles</h3>
-                  <p className='mb2'>Copy explaining how the tool works, 3 pages at a minimum, and 5 at the max.</p></div> : null)}
+                  <p className='mb2'>Copy explaining how the tool works, 3 pages at a minimum, and 5 at the max.</p></div> 
+                : null)}
+
                   <button className='btn btn-primary flex-end bg-silver' 
                       ref={card => {this.cardElement = card}}
                       onClick={() => {
@@ -166,7 +168,7 @@ export class ArticleCard extends React.Component {
                       ref={card => {this.cardElement = card}}
                       onClick={() => {
                         this.dispatch(updateCurrentEditingArticle(index))
-                        this.dispatch(pushPath('/playlist/article/search'))
+                        this.dispatch(pushPath('/playlists/article/search'))
                       }}>Change Article</button>);
 
     }
@@ -175,7 +177,7 @@ export class ArticleCard extends React.Component {
     // if(editing !== index) {
       return (
         <div className={(has_article ? 'article-card__content' : 'center')} ref={c => {this.cardContent = c}}>
-          {(editing_options ? <ImageSelector/> : this._articleImage())}
+          {(editing_options ? <ImageSelector finishEditing={()=>{this.setState({editing_options: false})}}/> : this._articleImage())}
           <div className={(has_article ? 'article-card__summary' : '')}>
             {content}
             <div className=''>
@@ -282,7 +284,7 @@ export class ArticleCard extends React.Component {
         onComplete: () => {
           this.setState({open: true});
           this.dispatch(updateCurrentEditingArticle(this.props.index));
-          this.dispatch(pushPath('/playlist/article/search'))
+          this.dispatch(pushPath('/playlists/article/search'))
           this.animating = false;
         }
       }
@@ -326,7 +328,7 @@ export class ArticleCard extends React.Component {
 
   _openImageSelector() {
     this.setState({editing_options: false})
-    this.dispatch(pushPath('/playlist/article/images'));
+    this.dispatch(pushPath('/playlists/article/images'));
     this.dispatch(updateCurrentEditingArticle(this.props.index));
   }
 

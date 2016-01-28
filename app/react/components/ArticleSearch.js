@@ -18,7 +18,7 @@ class ArticleSearch extends React.Component {
         <div className='mb1'><strong>Add Article ({editingArticle + 1}/{articles.length})</strong></div>
         <SearchForm index={this.props.Playlist.editingArticle} {...this.props}/>
         {this._currentQuery()}
-        <Link className='close-button' to='/playlist'>&#215;</Link>
+        <Link className='close-button' to='/playlists'>&#215;</Link>
         </div>
       </div>
     )
@@ -27,7 +27,7 @@ class ArticleSearch extends React.Component {
   componentWillReceiveProps(nextProps) {
     const {path} = nextProps.routing;
     const route = _.compact(path.split('/')).pop();
-    if(route === 'playlist' && this.state.editing_options) {
+    if(route === 'playlists' && this.state.editing_options) {
       this.addAnimation(fadeOut)
     }
   }
