@@ -1,5 +1,5 @@
 class PlaylistsController < ApplicationController
-  before_action :set_playlist, only: [:show, :edit, :update, :destroy, :share_image, :get_share_html, :render_share_image, :render_status, :render_success]
+  before_action :set_playlist, only: [:show, :edit, :update, :feature, :destroy, :share_image, :get_share_html, :render_share_image, :render_status, :render_success]
 
   def create
     @playlist = Playlist.new(playlist_params)
@@ -21,7 +21,7 @@ class PlaylistsController < ApplicationController
   end
 
   def index
-    if User.find(current_user.id).admin
+    if current_user && User.find(current_user.id).admin
       @playlists = Playlist.all
     else
       @playlists = Playlist.featured

@@ -17,6 +17,7 @@ import Editor from 'react-medium-editor';
 import { pushPath } from 'redux-simple-router';
 import { Link } from 'react-router';
 import es6BindAll from "es6bindall";
+import PlaylistTitle from './PlaylistTitle';
 
 class PlaylistEditor extends React.Component {
 
@@ -70,20 +71,20 @@ class PlaylistEditor extends React.Component {
 
     let account = null;
     if(logged_in && current_user) {
-      account = <span>By {current_user.username}</span>;
+      account = <span>{current_user.username}</span>;
     }
 
     const {title, caption, editingCaption } = this.props.Playlist;
-    const captionCharRemaining = CAPTION_LIMIT - stripTags(caption).length;
-    const titleCharRemaining = TITLE_LIMIT - title.length;
+    // const captionCharRemaining = CAPTION_LIMIT - stripTags(caption).length;
+    // const titleCharRemaining = TITLE_LIMIT - title.length;
 
    
 
-    const titleCount = (this.state.titleTyping ? <span 
-                className='character-limit'
-                style={{
-                  color: (titleCharRemaining < 1 ? 'red' : 'black')
-                }}>{(titleCharRemaining)}</span> : null)
+    // const titleCount = (this.state.titleTyping ? <span 
+    //             className='character-limit'
+    //             style={{
+    //               color: (titleCharRemaining < 1 ? 'red' : 'black')
+    //             }}>{(titleCharRemaining)}</span> : null)
     const captionCount = (this.state.captionTyping ? <span 
                 className='character-limit'
                 style={{
@@ -95,71 +96,10 @@ class PlaylistEditor extends React.Component {
         <div className="">
           <div className="md-flex flex-justify py2 mb1 md-py4" ref={c => {this.cardContent = c}}>
             <div className={'article-card__header px2 relative'}>
-              
-              {titleCount}
-              <Editor
-                onFocus={()=>{ this.setState({titleTyping: true}) }}
-                onBlur={()=> { this.setState({titleTyping: false}) }}
-                tag="h1"
-                className="m0 mt1 mb1"
-                text={title}
-                onKeyDown={(e)=>{
-                  if(e.which === 13) {
-                    e.preventDefault;
-                    e.target.blur()
-                  }
-                }}
-                onKeyPress={(e) => {
-                  if(titleCharRemaining < 1) {
-                    e.preventDefault();
-                  }
-                }}
-                onChange={(text, medium)=>{
-                  var title = medium.elements[0].innerText;
-                  const count = title.length;
-                  this.setState({ titleLimitHit: (count > CAPTION_LIMIT) });
-                  const truncatedText = title.substr(0, TITLE_LIMIT);
-                  this.dispatch(setPlaylistTitle(truncatedText));
-                }}
-                options={{
-                  disableReturn: true,
-                  disableEditing: this.state.captionLimitHit,
-                  placeholder: {text: 'Add a playlist caption'},
-                  toolbar: {buttons: []}}}/>
+              <PlaylistTitle title={title}/>
               {account}
             </div>
-            <div className='card playlist__caption'>
-              {captionCount}
-              <Editor
-                onFocus={()=>{ this.setState({captionTyping: true}) }}
-                onBlur={()=> { this.setState({captionTyping: false}) }}
-                tag="div"
-                className="p1 m1"
-                text={caption}
-                onKeyDown={(e)=>{
-                  if(e.which === 13) {
-                    e.preventDefault;
-                    e.target.blur()
-                  }
-                }}
-                onKeyPress={(e) => {
-                  if(captionCharRemaining < 1) {
-                    e.preventDefault();
-                  }
-                }}
-                onChange={(text, medium)=>{
-                  const count = medium.elements[0].innerText.length;
-                  this.setState({ captionLimitHit: (count > CAPTION_LIMIT) })
-                  const truncatedText = truncateHTML(text, CAPTION_LIMIT);
-                  this.dispatch(setPlaylistCaption(truncatedText));
-                }}
-                options={{
-                  disableReturn: true,
-                  disableEditing: this.state.captionLimitHit,
-                  placeholder: {text: 'Add a playlist caption'},
-                  toolbar: {buttons: ['bold', 'italic', 'underline']}}}
-              />
-            </div>
+            
           </div>
         </div>
       </div>)

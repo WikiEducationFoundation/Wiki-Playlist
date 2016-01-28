@@ -1,51 +1,87 @@
-import ArticleCard from './ArticleCard';
 import { connect } from 'react-redux';
-import { setPlaylistTitle, editingPlaylistTitle } from '../actions';
-import { pushPath } from 'redux-simple-router';
-import { Link } from 'react-router';
-import TextArea from './TextArea';
-import ContentEditable from 'react-contenteditable';
+import Icon from './Icon';
+import { setPlaylistTitle } from '../actions';
+import { TITLE_LIMIT } from '../constants';
 import es6BindAll from "es6bindall";
+
+function truncateTitle(text) {
+  return text.substring(0, TITLE_LIMIT);
+}
 
 class PlaylistTitle extends React.Component {
   constructor(props) {
     super();
-
     this.dispatch = props.dispatch;
-    const { title } = props.Playlist;
+    this.state = {
+      editing: false,
+      title: props.title
+    }
 
-    es6BindAll(this, [
-      '_saveTitle',
-      '_updateTitle'
+     es6BindAll(this, [
+      '_handleChange',
+      '_save',
+      '_cancel'
     ]);
 
-    this.state = {
-      title: title,
-      html: `<h1>${title}</h1>`
-    }
   }
-
   render() {
+    const { editing, title } = this.state;
+    console.log(title, this.state);
+    const empty = title.length === 0;
     return (
-      <ContentEditable
-          className='white'
-          html={this.state.html}
-          disabled={false}
-          onBlur={this._saveTitle}
-          onChange={this._updateTitle} />
+      <div>
+        {( 
+          editing || empty ? 
+            <span className='flex flex-center'>
+              <input type='text' 
+                   ref='input'
+                   className='h1 invisible-input' 
+                   value={title} 
+                   placeholder='Your Playlist Title'
+                   onChange={this._handleChange}
+                   onFocus={({target})=>{
+                    this.setState({title: truncateTitle(target.value)})
+                   }}
+                   onBlur={(e)=>{
+                    this._handleChange(e);
+                    this.setState({editing: false});
+                    this._save()
+                   }}
+                   onKeyPress={({which})=>{
+                    if(which === 13) {
+                      this._save();
+                    }
+                   }} />
+              <button className='action cancel-button inline-block mr1 ml1' onClick={this._save}>&#215;</button>
+              <button className='action mr1' onClick={this._cancel}><Icon size="2rem" icon="check" fill={'teal'} /></button>
+
+            </span>
+          : 
+            <h1 onClick={()=>{
+              this.setState({editing: true}, ()=>{
+                this.refs.input.focus();
+                const len = this.state.title.length * 2;
+                this.refs.input.setSelectionRange(len, len);
+              })
+            }}>{title} <Icon size="20px" icon="edit" fill={'silver'} /></h1>
+        )}
+
+        
+      </div>
     )
   }
 
-  _updateTitle(e) {
-    console.log(e.target.textContent);
-    this.setState({title: e.target.value})
-    // this.dispatch(setPlaylistTitle(this.state.title))
-    // this.dispatch(editingPlaylistTitle(false))
-    // this.dispatch(pushPath('/playlist'));
+  _handleChange({target}) {
+    this.setState({title: truncateTitle(target.value)});
   }
 
-  _saveTitle() {
-    console.log('save title');
+  _save() {
+    this.dispatch(setPlaylistTitle(this.state.title));
+    this.setState({editing: false})
+  }
+
+  _cancel() {
+    this.setState({title: this.props.title});
   }
 }
 
