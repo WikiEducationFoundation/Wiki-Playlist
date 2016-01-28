@@ -7,7 +7,8 @@ import {
   updateQuery,
   addArticleCard,
   setPlaylistCaption,
-  setPlaylistTitle
+  setPlaylistTitle,
+  updatePlaylistUsername
 } from '../actions';
 
 const TITLE_LIMIT = 40;
@@ -18,6 +19,9 @@ import { pushPath } from 'redux-simple-router';
 import { Link } from 'react-router';
 import es6BindAll from "es6bindall";
 import PlaylistTitle from './PlaylistTitle';
+import PlaylistCaption from './PlaylistCaption';
+import EditableText from './EditableText';
+import SaveButton from './SaveButton';
 
 class PlaylistEditor extends React.Component {
 
@@ -44,6 +48,7 @@ class PlaylistEditor extends React.Component {
         {(!onboarded && step === 0 || step === 1 ? this._onboardingTitle()  : this._titleCard())}
         {this._articles()}
         {this._addArticle()}
+        <div className='center py2'><SaveButton /></div>
         { onboarded ? null : <div className='onboarding__screen'></div>}
       </div>
     )
@@ -68,36 +73,28 @@ class PlaylistEditor extends React.Component {
   _titleCard() {
     const { dispatch } = this.props;
     const { logged_in, current_user } = this.props.Account;
+    const signed_in = logged_in && current_user;
 
-    let account = null;
-    if(logged_in && current_user) {
-      account = <span>{current_user.username}</span>;
-    }
-
-    const {title, caption, editingCaption } = this.props.Playlist;
-    // const captionCharRemaining = CAPTION_LIMIT - stripTags(caption).length;
-    // const titleCharRemaining = TITLE_LIMIT - title.length;
-
-   
-
-    // const titleCount = (this.state.titleTyping ? <span 
-    //             className='character-limit'
-    //             style={{
-    //               color: (titleCharRemaining < 1 ? 'red' : 'black')
-    //             }}>{(titleCharRemaining)}</span> : null)
-    const captionCount = (this.state.captionTyping ? <span 
-                className='character-limit'
-                style={{
-                  color: (captionCharRemaining < 1 ? 'red' : 'green')
-                }}>{(captionCharRemaining)}</span> : null);
+    const {title, caption, editingCaption, username } = this.props.Playlist;
 
     return (
       <div>
         <div className="">
-          <div className="md-flex flex-justify py2 mb1 md-py4" ref={c => {this.cardContent = c}}>
-            <div className={'article-card__header px2 relative'}>
-              <PlaylistTitle title={title}/>
-              {account}
+          <div className="py2 mb1 md-py4" ref={c => {this.cardContent = c}}>
+            <div className={'article-card__header px2 relative md-flex flex-justify'}>
+              <div>
+                {(signed_in ? <EditableText
+                  value={username}
+                  placeholder={'Username'}
+                  limit={50}
+                  inputType='text'
+                  className='text'
+                  save={(username)=>{this.dispatch(updatePlaylistUsername(username))}}/> :  null)}
+                <PlaylistTitle 
+                  title={title}/>
+              </div>
+
+              <div className='card p2 playlist__caption'><PlaylistCaption caption={caption}/></div>
             </div>
             
           </div>

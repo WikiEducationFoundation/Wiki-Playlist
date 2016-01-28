@@ -94,7 +94,7 @@ export function pollPlaylistRenderStatus(id, callback) {
 
 
 export function getAllPlaylists() {
-  return $.ajax({url: '/playlists'});
+  return $.ajax({url: '/all'});
 }
 
 

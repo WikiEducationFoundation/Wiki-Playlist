@@ -26,14 +26,15 @@ class PlaylistTitle extends React.Component {
   }
   render() {
     const { editing, title } = this.state;
-    console.log(title, this.state);
     const empty = title.length === 0;
+    const count = TITLE_LIMIT - title.length;
     return (
       <div>
         {( 
           editing || empty ? 
             <span className='flex flex-center'>
-              <input type='text' 
+              <span className='relative inline-block'>
+                <textarea type='text' 
                    ref='input'
                    className='h1 invisible-input' 
                    value={title} 
@@ -43,17 +44,18 @@ class PlaylistTitle extends React.Component {
                     this.setState({title: truncateTitle(target.value)})
                    }}
                    onBlur={(e)=>{
-                    this._handleChange(e);
-                    this.setState({editing: false});
-                    this._save()
+                    // this._handleChange(e);
+                    // this.setState({editing: false});
+                    // this._save()
                    }}
                    onKeyPress={({which})=>{
                     if(which === 13) {
                       this._save();
                     }
                    }} />
-              <button className='action cancel-button inline-block mr1 ml1' onClick={this._save}>&#215;</button>
-              <button className='action mr1' onClick={this._cancel}><Icon size="2rem" icon="check" fill={'teal'} /></button>
+              <span className='character-limit'>{count}</span></span>
+              <button className='action cancel-button inline-block mr1 ml1' onClick={this._cancel}>&#215;</button>
+              <button className='action mr1' onClick={this._save}><Icon size="2rem" icon="check" fill={'teal'} /></button>
 
             </span>
           : 
@@ -76,11 +78,12 @@ class PlaylistTitle extends React.Component {
   }
 
   _save() {
-    this.dispatch(setPlaylistTitle(this.state.title));
     this.setState({editing: false})
+    this.dispatch(setPlaylistTitle(this.state.title));
   }
 
   _cancel() {
+    this.setState({editing: false})
     this.setState({title: this.props.title});
   }
 }

@@ -34,10 +34,6 @@ class App extends React.Component {
 
         <div className='site__content container'>
           {this.props.children}
-
-          <div className='py2 playlist-actions center'>
-            <SaveButton />
-          </div>
         </div>
         {this._devTools()}
 

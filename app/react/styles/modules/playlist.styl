@@ -3,21 +3,14 @@
   z-index 50
 
 .playlist__caption
-  // flex-basis 100%
   min-height 150px
   
   +above(md)
     max-width 300px
   
-  .field
+  textarea.invisible-input
     width 100%
-    height 125px
-    border none
-    &:focus,
-    &:active
-      outline 0
-      box-shadow none
-      border none
+    height 130px
 
 .playlist-actions
   max-width 300px
