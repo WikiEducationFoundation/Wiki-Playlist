@@ -17,7 +17,6 @@ import Icon from './Icon';
 import es6BindAll from "es6bindall";
 import ImageSelector from './ImageSelector';
 
-
 export class ArticleCard extends React.Component {
 
   constructor(props) {
@@ -66,7 +65,6 @@ export class ArticleCard extends React.Component {
                   <button className='btn btn-primary flex-end bg-silver' 
                       ref={card => {this.cardElement = card}}
                       onClick={() => {
-                        console.log(index);
                         this.dispatch(updateCurrentEditingArticle(index))
                         this.dispatch(pushPath('/playlists/article/search'))
                       }}>
@@ -117,8 +115,10 @@ export class ArticleCard extends React.Component {
   }
 
   _articleContent() {
-    const { editing_options } = this.state;
+    // const { editing_options } = this.state;
     const { title, description, index, editing, open, has_article, caption, url } = this.props;
+    const { editingArticle } = this.props.Playlist;
+    const editing_options = editingArticle === index;
     const { onboarded, step } = this.props.Onboarding;
     const isOnboarding = !onboarded && step === 2 && index === 0;
     const truncated_description = (description !== undefined && description.length > 250 ? `${description.substr(0,250)}...` : description)
@@ -165,12 +165,20 @@ export class ArticleCard extends React.Component {
 
     if(editing_options) { 
 
-      button = (<button className='action' 
-                      ref={card => {this.cardElement = card}}
-                      onClick={() => {
-                        this.dispatch(updateCurrentEditingArticle(index))
-                        this.dispatch(pushPath('/playlists/article/search'))
-                      }}>Change Article</button>);
+      button = (
+        <div className='flex flex-justify'>
+          <button className='btn btn-outline' 
+                  ref={card => {this.cardElement = card}}
+                  onClick={() => {
+                    this.dispatch(updateCurrentEditingArticle(index))
+                    this.dispatch(pushPath('/playlists/article/search'))
+                  }}>Change Article</button>
+
+          <button className='btn' 
+                  onClick={() => {
+                    this.dispatch(updateCurrentEditingArticle(null));
+                  }}>Save</button>
+        </div>);
 
     }
 
@@ -192,8 +200,10 @@ export class ArticleCard extends React.Component {
   }
 
   _articleImage() {
-    const { editing_options } = this.state;
-    const {image, images, open, has_article} = this.props;
+    // const { editing_options } = this.state;
+    const {index, image, images, open, has_article} = this.props;
+    const { editingArticle } = this.props.Playlist;
+    const editing_options = editingArticle === index;
 
     if(this.props.children) {
       return this.props.children;
