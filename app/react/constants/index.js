@@ -38,8 +38,9 @@ export const MD = '756px';
 // MISC
 export const MINIMUM_ARTICLES = (process.env.NODE_ENV === 'development' ? 1 : 3);
 
+
 // LIMITS
-export const TITLE_LIMIT = 40;
+export const TITLE_LIMIT = 70;
 export const CAPTION_LIMIT = 200;
 
 // Sharing

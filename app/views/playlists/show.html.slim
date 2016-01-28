@@ -1,17 +1,17 @@
 - content_for :title do
   = @playlist.title
 - content_for :meta do
-  meta content="summary_large_image" name="twitter:card" /
-  meta content="@wikipedia" name="twitter:site" /
-  meta content="@wikipedia" name="twitter:creator" /
-  meta content=("Wikipedia Playlist | #{@playlist.title}") name="twitter:title" /
-  meta content=("#{@playlist.caption}")
+  meta content="summary_large_image" name="twitter:card"
+  meta content="@wikipedia" name="twitter:site"
+  meta content="@wikipedia" name="twitter:creator"
+  meta content=("Wikipedia Playlist | #{@playlist.title}") name="twitter:title"
+  meta content=("#{@playlist.caption}" name="twitter:text:description")
   meta content="#{@playlist.share_image.url}" name="twitter:image"
-  meta content="#{request.original_url}" property="og:url" /
-  meta content="article" property="og:type" /
-  meta content=("Wikipedia Playlist | #{@playlist.title}") property="og:title" /
-  meta content=("#{@playlist.caption}") property="og:description" /
-  meta content="#{@playlist.share_image.url}" property="og:image" /
+  meta content="#{request.original_url}" property="og:url"
+  meta content="article" property="og:type"
+  meta content=("Wikipedia Playlist | #{@playlist.title}") property="og:title"
+  meta content=("#{@playlist.caption}") property="og:description"
+  meta content="#{@playlist.share_image.url}" property="og:image"
 
 
 nav.py2.site__navigation data-reactid=".0.0"

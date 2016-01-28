@@ -33,7 +33,7 @@ class OnboardingTitle extends React.Component {
     console.log('welcome')
     return(
       <div className='card onboarding__title mt2 mb2 md-flex'>
-        <div className='p3 flex flex-column onboarding__column'>
+        <div className='p2 md-p3 flex flex-column onboarding__column'>
           <h3 className='h3 mb1'>Wikipedia Collection Creator</h3>
           <p className='mb2'>Welcome short paragraph. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.</p>
           <div>
@@ -52,17 +52,19 @@ class OnboardingTitle extends React.Component {
   titleCard() {
     return(
       <div className='card onboarding__title mt2 mb2 md-flex'>
-        <div className='p3 flex flex-column onboarding__column'>
+        <div className='p2 md-p3 flex flex-column onboarding__column'>
           <h3 className='h3 mb1'>Name of your Collection</h3>
           <p className='mb2'>Note! This can be changed at anytime</p>
-          <small>{TITLE_LIMIT - this.state.title.length} characters left</small>
-          <input className='field p1' 
+          <div className='relative'>
+            <small className='char-count'>{TITLE_LIMIT - this.state.title.length}</small>
+            <input className='field p1 mb1' 
                  placeholder='Collection Name'
                  value={this.state.title}
                  onChange={({target})=>{
                   let text = target.value.substr(0, TITLE_LIMIT);
                   this.setState({title: text});
                  }}></input>
+          </div>
           <div>
 
             <button className='action mr2'

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
-  # match "/404" => "errors#error404", via: [ :get, :post, :patch, :delete ]
+  match "/404" => "errors#error404", via: [ :get, :post, :patch, :delete ]
   devise_for :users, :controllers => { :omniauth_callbacks => "callbacks"}
   
   get "/oauth-success" => "auth#auth_success"
@@ -11,11 +11,12 @@ Rails.application.routes.draw do
   
   root 'page#index'
   resources :playlists
+  get "playlists" => "playlists#index"
   get "playlist/render_status/:id" => "playlists#render_status"
   get "playlist/share-image/:id" => "playlists#share_image"
   get "playlist/share-html/:id" => "playlists#get_share_html"
   get "playlist", to: "page#playlist"
   get "playlist/article/search", to: "page#playlist"
   get "/playlist/login", to: "page#playlist"
-  get "/:id" => 'playlists#show'
+  # get "/:id" => 'playlists#show'
 end
