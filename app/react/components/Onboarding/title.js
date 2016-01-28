@@ -33,14 +33,17 @@ class OnboardingTitle extends React.Component {
     console.log('welcome')
     return(
       <div className='card onboarding__title mt2 mb2 md-flex'>
-        <div className='p2 md-p3 flex flex-column onboarding__column'>
-          <h3 className='h3 mb1'>Wikipedia Collection Creator</h3>
-          <p className='mb2'>Welcome short paragraph. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.</p>
+        <div className='p2 flex flex-column onboarding__column'>
+          <div>
+            <h3 className='h3 mb1'>Wikipedia Collection Creator</h3>
+            <p className='mb2'>Welcome short paragraph. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.</p>
+          </div>
           <div>
             <button className='btn btn-primary'
               onClick={()=>{
                 this.dispatch(setOnboardingStep(1));
-              }}>Continue</button></div>
+              }}>Continue</button>
+          </div>
         </div>
         <div className='onboarding__image bg-gallery p4' style={{
           backgroundImage: `url('//upload.wikimedia.org/wikipedia/en/8/80/Wikipedia-logo-v2.svg')`
@@ -56,7 +59,6 @@ class OnboardingTitle extends React.Component {
           <h3 className='h3 mb1'>Name of your Collection</h3>
           <p className='mb2'>Note! This can be changed at anytime</p>
           <div className='relative'>
-            <small className='char-count'>{TITLE_LIMIT - this.state.title.length}</small>
             <input className='field p1 mb1' 
                  placeholder='Collection Name'
                  value={this.state.title}
@@ -64,6 +66,7 @@ class OnboardingTitle extends React.Component {
                   let text = target.value.substr(0, TITLE_LIMIT);
                   this.setState({title: text});
                  }}></input>
+            <small className='character-limit'>{TITLE_LIMIT - this.state.title.length}</small>
           </div>
           <div>
 

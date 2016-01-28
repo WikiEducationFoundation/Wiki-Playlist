@@ -1,11 +1,17 @@
 .character-limit
   position absolute
-  bottom 3px
+  top 3px
   right 5px
   font-size 12px
+  opacity .5
 
-input[type].invisible-input
+input.invisible-input,
+textarea.invisible-input
   border none
   background none
   padding 0
   height auto
+  border 1px solid transparent
+  &:focus
+    outline 0
+    border 1px solid white

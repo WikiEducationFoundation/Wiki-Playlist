@@ -49,9 +49,8 @@ class UserControls extends React.Component {
     const { path } = routing;
     const isPlaylistPage = path.indexOf('playlist') > -1;
     const create_button = (
-      <Link className='btn btn-primary' to="/playlist">
-          Create a Playlist 
-          <Icon size="18px" icon="play-circle" fill={'white'} />
+      <Link className='btn btn-primary' to="/playlists">
+          Create a Playlist
       </Link>);
     return (
       <div>

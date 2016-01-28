@@ -1,22 +1,25 @@
 Rails.application.routes.draw do
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  
 
   match "/404" => "errors#error404", via: [ :get, :post, :patch, :delete ]
   devise_for :users, :controllers => { :omniauth_callbacks => "callbacks"}
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   
   get "/oauth-success" => "auth#auth_success"
   get "/auth/user_status" => "application#user_status"
   get "/csrf-token" => "application#csrf_meta"
 
+
+
   
   root 'page#index'
-  resources :playlists
-  get "playlists" => "playlists#index"
-  get "playlist/render_status/:id" => "playlists#render_status"
-  get "playlist/share-image/:id" => "playlists#share_image"
-  get "playlist/share-html/:id" => "playlists#get_share_html"
-  get "playlist", to: "page#playlist"
-  get "playlist/article/search", to: "page#playlist"
-  get "/playlist/login", to: "page#playlist"
-  # get "/:id" => 'playlists#show'
+  resources :playlists, only: [:show, :edit, :update, :destroy]
+  get "all" => "playlists#index"
+  get "playlists/render_status/:id" => "playlists#render_status"
+  get "playlists/share-image/:id" => "playlists#share_image"
+  get "playlists/share-html/:id" => "playlists#get_share_html"
+  get "playlists", to: "page#playlist"
+  get "playlists/article/search", to: "page#playlist"
+  get "/playlists/login", to: "page#playlist"
+  get "/playlist/:id" => 'playlists#show'
 end

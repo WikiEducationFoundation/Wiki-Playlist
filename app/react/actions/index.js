@@ -32,7 +32,8 @@ import {
   SHOW_LOGIN,
   CLOSE_LOGIN,
   SHOW_SHARE,
-  CLOSE_SHARE 
+  CLOSE_SHARE,
+  UPDATE_PLAYLIST_USERNAME
 } from '../constants';
 
 
@@ -188,6 +189,16 @@ export function setShareImageRendering(bool) {
     bool
   }
 }
+
+
+export function updatePlaylistUsername(username) {
+  return {
+    type: UPDATE_PLAYLIST_USERNAME,
+    username
+  }
+}
+
+
 
 // — Article
 export function addArticleCard() {

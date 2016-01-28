@@ -33,7 +33,8 @@ import {
   SET_USER_ONBOARDING,
   SET_ONBOARDING_STEP,
   SHOW_SHARE,
-  CLOSE_SHARE 
+  CLOSE_SHARE,
+  UPDATE_PLAYLIST_USERNAME
 } from '../constants';
 
 
@@ -178,8 +179,9 @@ function defaultPlaylist() {
   var articles = createInitialArticles();
   return {
     title: 'Editable Playlist Title',
+    username: '',
     editingTitle: false,
-    caption: '',
+    caption: 'Add a caption to your playlist',
     editingCaption: false,
     total_articles: 0,
     articles: articles,
@@ -201,6 +203,12 @@ function Playlist(state = initialPlaylistState, action) {
       var articles = state.articles.slice(0);
       articles.push(_.clone(defaultArticle));
       return _.assign({}, state, {articles: articles})
+
+    case ADD_USER:
+      return _.assign({}, state, {username: action.user.username})
+
+    case UPDATE_PLAYLIST_USERNAME:
+      return _.assign({}, state, {username: action.username})
 
     case SET_PLAYLIST_TITLE:
       var { text } = action;

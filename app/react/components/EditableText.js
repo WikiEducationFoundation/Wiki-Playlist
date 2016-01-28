@@ -1,0 +1,111 @@
+import { connect } from 'react-redux';
+import { PropTypes } from 'react';
+import Icon from './Icon';
+import es6BindAll from "es6bindall";
+
+class EditableText extends React.Component {
+  static propTypes = {
+    save: PropTypes.func.isRequired,
+    value: PropTypes.string.isRequired,
+    placeholder: PropTypes.string.isRequired,
+    limit: PropTypes.number.isRequired
+  }
+
+  constructor(props) {
+    super();
+    this.dispatch = props.dispatch;
+    this.limit = props.limit;
+    this.save = props.save;
+    this.cancel = props.cancel;
+
+    this.state = {
+      editing: false,
+      value: props.value
+    }
+     es6BindAll(this, [
+      '_handleChange',
+      '_save',
+      '_cancel'
+    ]);
+  }
+
+  componentWillReceiveProps(props) {
+    this.setState({value: props.value});
+  }
+
+  truncateValue(text) {
+    return text.substring(0, this.limit);
+  }
+
+  render() {
+    const { editing, value } = this.state;
+    const { inputType, className} = this.props;
+    const empty = value.length === 0;
+    const count = this.limit - value.length;
+
+    const inputProps = {
+      type: 'text',
+      ref: 'input',
+      className: `${className} invisible-input`,
+      value: value,
+      placeholder: this.props.placeholder,
+      onChange: this._handleChange,
+      onFocus: ({target}) =>{
+       this.setState({value: this.truncateValue(target.value)})
+      },
+      onBlur: (e) => {
+       this._handleChange(e);
+       this.setState({editing: false});
+       this._save()
+      },
+      onKeyPress: ({which}) =>{
+        if(which === 13) {
+          this._save();
+        }
+      }
+    }
+
+    return (
+      <div>
+        {( 
+          editing || empty ? 
+            <div className='flex flex-center'>
+              <span className='relative inline-block'>
+                {(inputType !== undefined && inputType === 'text' ? 
+                    <input {...inputProps} /> 
+                  :  
+                    <textarea {...inputProps} />)}
+                <span className='character-limit'>{count}</span>
+              </span>
+              <button className='action cancel-button inline-block mr1 ml1' onClick={this._cancel}>&#215;</button>
+              <button className='action mr1' onClick={this._save}><Icon size="25px" icon="check" fill={'teal'} /></button>
+            </div>
+          : 
+            <span className='inline-block' onClick={()=>{
+              this.setState({editing: true}, ()=>{
+                this.refs.input.focus();
+                const len = this.state.value.length * 2;
+                this.refs.input.setSelectionRange(len, len);
+              })
+            }}>{value} <Icon size="20px" icon="edit" fill={'silver'} /></span>
+        )}
+        
+      </div>
+    )
+  }
+
+  _handleChange({target}) {
+    this.setState({value: this.truncateValue(target.value)});
+  }
+
+  _save() {
+    this.setState({editing: false})
+    this.props.save(this.state.value);
+  }
+
+  _cancel() {
+    this.setState({editing: false, value: this.props.value})
+  }
+}
+
+export default connect( state => {return state})(EditableText);
