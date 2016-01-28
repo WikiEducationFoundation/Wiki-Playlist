@@ -65,7 +65,7 @@ export class ArticleCard extends React.Component {
                       ref={card => {this.cardElement = card}}
                       onClick={() => {
                         this.dispatch(updateCurrentEditingArticle(index))
-                        this.dispatch(pushPath('/playlist/article/search'))
+                        this.dispatch(pushPath('/playlists/article/search'))
                       }}>
                       Add Wikipedia Article</button>
               </div>
