@@ -81,7 +81,7 @@ export function deletePlaylist(id, callback) {
 
 export function pollPlaylistRenderStatus(id, callback) {
   var renderPoll;
-  $.get(`/playlist/render_status/${id}`, (data)=> {
+  $.get(`/playlists/render_status/${id}`, (data)=> {
     if(data.ready) {
       callback(data);
     } else {
