@@ -30,8 +30,6 @@ class App extends React.Component {
 
         <FlashMessage />
 
-        {this._loading()}
-
         <div className='site__content container'>
           {this.props.children}
         </div>

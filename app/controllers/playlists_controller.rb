@@ -1,5 +1,6 @@
 class PlaylistsController < ApplicationController
-  before_action :set_playlist, only: [:show, :edit, :update, :feature, :destroy, :share_image, :get_share_html, :render_share_image, :render_status, :render_success]
+  before_action :set_playlist_id, only: [:edit, :update, :feature, :destroy, :share_image, :get_share_html, :render_share_image, :render_status, :render_success]
+  before_action :set_playlist_slug, only: [:show]
 
   def create
     @playlist = Playlist.new(playlist_params)
@@ -114,7 +115,7 @@ class PlaylistsController < ApplicationController
   
   private
 
-    def set_playlist
+    def set_playlist_id
       if Playlist.where(id: params[:id]).blank?
         redirect_to '/404'
       else
@@ -122,13 +123,23 @@ class PlaylistsController < ApplicationController
         @articles = @playlist.articles.order(:position)
         @user = User.find(@playlist.user_id)
       end
-      
+    end
+
+    def set_playlist_slug
+      if Playlist.where(slug: params[:slug]).blank?
+        redirect_to '/404'
+      else
+        @playlist = Playlist.where(slug: params[:slug]).first
+        @articles = @playlist.articles.order(:position)
+        @user = User.find(@playlist.user_id)
+      end
     end
 
     def playlist_params
       params.require(:playlist).permit(
         :title, 
         :caption,
+        :slug,
         :articles_attributes => [:id, :title, :url, :image, :description, :pageId, :_destroy, :position]
       )
     end
