@@ -2,7 +2,7 @@
 
 
 if [[ "$1" != "" ]]; then
-  MESSAGE="'$1'"
+  MESSAGE="$1"
 else
   MESSAGE="Build and Deploy"
 fi
