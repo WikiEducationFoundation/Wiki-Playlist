@@ -48,8 +48,7 @@ class PlaylistsController < ApplicationController
   # PATCH/PUT /playlists/1
   # PATCH/PUT /playlists/1.json
   def update
-    @playlist.share_image_rendered = false;
-    binding.pry
+    @playlist.share_image_rendered = false
     respond_to do |format|
       if @playlist.update(playlist_params)
         GenerateShareImage.enqueue(@playlist.id, :html => get_share_image_html(@playlist))
@@ -97,7 +96,6 @@ class PlaylistsController < ApplicationController
 
   def render_share_image
     playlist = render_to_string('show', layout: false)
-    binding.pry
     title = @playlist.title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
     render_job = `phantomjs --ignore-ssl-errors=yes --ssl-protocol=TLSv1 --debug=true lib/script/share-image.js "#{playlist}" '#{title}'`
     respond_to do |format|
@@ -166,6 +164,7 @@ class PlaylistsController < ApplicationController
         :caption,
         :slug,
         :featured,
+        :color,
         :articles_attributes => [:id, :title, :url, :image, :description, :pageId, :_destroy, :position]
       )
     end

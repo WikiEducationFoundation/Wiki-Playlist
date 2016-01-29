@@ -11,6 +11,7 @@ import {
   updatePlaylistUsername,
   updatePlaylistCaption
 } from '../actions';
+
 import { TITLE_LIMIT, CAPTION_LIMIT } from '../constants';
 import { pushPath } from 'redux-simple-router';
 import { Link } from 'react-router';
@@ -18,6 +19,8 @@ import es6BindAll from "es6bindall";
 import EditableText from './EditableText';
 import SaveButton from './SaveButton';
 import DeleteButton from './DeleteButton';
+import PlaylistBackgroundColor from './PlaylistBackgroundColor';
+import ColorPicker from './ColorPicker';
 
 class PlaylistEditor extends React.Component {
 
@@ -38,14 +41,21 @@ class PlaylistEditor extends React.Component {
 
   render() {
     const { onboarded, step } = this.props.Onboarding;
+    const { color } = this.props.Playlist;
     const { path } = this.props.routing;
     return (
-      <div className='playlist'>
-        <DeleteButton />
-        {(!onboarded && step === 0 || step === 1 ? this._onboardingTitle()  : this._titleCard())}
-        {this._articles()}
-        {this._addArticle()}
-        <div className='center py2'><SaveButton /></div>
+      <div className='playlist relative'>
+        <div className='container playlist__container relative'>
+          {(!onboarded && step === 0 || step === 1 ? this._onboardingTitle()  : this._titleCard())}
+          {this._articles()}
+          {this._addArticle()}
+          <div className='center py2'><SaveButton /></div>
+          <ColorPicker />
+          <DeleteButton />
+        </div>
+        
+        <PlaylistBackgroundColor color={color}/>
+        
         { onboarded ? null : <div className='onboarding__screen'></div>}
       </div>
     )
@@ -102,7 +112,7 @@ class PlaylistEditor extends React.Component {
                     </EditableText> 
               </div>
 
-              <div className='card p2 playlist__caption'>
+              <div className='p2 playlist__caption'>
                 <EditableText
                     value={caption}
                     placeholder={'Add a caption to your playlist'}

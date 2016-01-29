@@ -2,11 +2,14 @@
   position relative
   z-index 50
 
+.playlist__container
+  z-index 3
+
 .playlist__caption
   min-height 150px
   
   +above(md)
-    max-width 300px
+    width 300px
   
   textarea.invisible-input
     width 100%
@@ -18,3 +21,31 @@
 .playlist-actions
   max-width 300px
   margin auto
+
+.playlist__background-color
+  position absolute
+  z-index 1
+  top 0
+  left 0
+  right 0
+  width 100%
+  height 400px
+
+.playlist__background-color-picker
+  background $gallery
+  display flex
+  padding 5px
+  position absolute
+  z-index 4
+  top 1rem
+  right 1rem
+  border-radius 2px
+
+.color-swatch
+  margin-right .5rem
+  cursor pointer
+  transition 200ms linear
+  &:hover
+    opacity .8
+  &:last-child
+    margin-right 0

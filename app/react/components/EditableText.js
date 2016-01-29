@@ -46,7 +46,7 @@ class EditableText extends React.Component {
     const inputProps = {
       type: 'text',
       ref: 'input',
-      className: `${className} invisible-input`,
+      className: `${className} invisible-input inline-block`,
       value: value,
       placeholder: this.props.placeholder,
       onChange: this._handleChange,
@@ -54,9 +54,9 @@ class EditableText extends React.Component {
        this.setState({value: this.truncateValue(target.value)})
       },
       onBlur: (e) => {
-       this._handleChange(e);
-       this.setState({editing: false});
-       this._save()
+       // this._handleChange(e);
+       // this.setState({editing: false});
+       // this._save()
       },
       onKeyUp: ({which}) =>{
         switch(which) {
@@ -100,7 +100,7 @@ class EditableText extends React.Component {
                 const len = this.state.value.length * 2;
                 this.refs.input.setSelectionRange(len, len);
               })}}>
-              {this.props.children}<Icon className='edit-icon' size="20px" icon="edit" fill={'silver'} />
+              {this.props.children}<Icon className='edit-icon' size="20px" icon="edit" fill={'black'} />
             </div>
         )}
         
