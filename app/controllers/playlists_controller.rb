@@ -28,9 +28,15 @@ class PlaylistsController < ApplicationController
       @playlists = Playlist.featured
     end
 
+    if current_user.nil?
+      @user = false
+    else
+      @user = User.find(current_user.id)
+    end
+    
     respond_to do |format|
       format.json do
-        format.json { render json: { playlists: @playlists } }
+        format.json { render json: { playlists: @playlists, user: @user } }
       end
     end
   end
@@ -53,6 +59,21 @@ class PlaylistsController < ApplicationController
         # format.html { render :edit }
         format.json { render json: @playlist.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+
+  def feature
+    if can? :manage, :all
+      respond_to do |format|
+      if @playlist.update(playlist_params)
+          format.json { render json: { success: true } }
+        else
+          format.json { render json: @playlist.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      format.json { render json: @playlist.errors, status: 'Not authorized' }
     end
   end
 
@@ -137,9 +158,11 @@ class PlaylistsController < ApplicationController
 
     def playlist_params
       params.require(:playlist).permit(
+        :id,
         :title, 
         :caption,
         :slug,
+        :featured,
         :articles_attributes => [:id, :title, :url, :image, :description, :pageId, :_destroy, :position]
       )
     end
