@@ -3,9 +3,6 @@ import { background_colors } from '../data/colors';
 import { setPlaylistColor } from '../actions';
 
 export default class ColorPicker extends React.Component {
-  componentDidMount() {
-    this.props.dispatch(setPlaylistColor(_.sample(background_colors)));
-  }
   render() {
     return (
       <div className='playlist__background-color-picker'>

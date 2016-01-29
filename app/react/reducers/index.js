@@ -1,4 +1,5 @@
 _.mixin(require("lodash-deep"));
+import { background_colors } from '../data/colors';
 import { moveArrayItem } from '../utils/Array';
 import { combineReducers } from 'redux';
 import { routeReducer, UPDATE_PATH } from 'redux-simple-router';
@@ -182,7 +183,7 @@ function defaultPlaylist() {
   var articles = createInitialArticles();
   return {
     title: 'Editable Playlist Title',
-    color: '',
+    color: _.sample(background_colors),
     username: '',
     editingTitle: false,
     caption: 'Add a caption to your playlist',

@@ -17,7 +17,12 @@ export default class Home extends React.Component {
   }
   render() {
     return (
-      <div className='py4 center'>
+      <div className='home center container'>
+        <div className='p2'>
+          <Link className='btn btn-primary' to="/playlists">
+              Create a Playlist
+          </Link>
+        </div>
         {this._renderPlaylists()}
       </div>
     )
@@ -37,14 +42,14 @@ export default class Home extends React.Component {
     
     if(playlists.length) {
       return (
-        <div className='flex flex-wrap py4'>
+        <div className='flex flex-wrap px1'>
         {playlists.map(playlist =>{
           const {title, caption, articles, id, featured} = playlist;
           const permalink = playlist.url;
           return (
             <div key={permalink} className='flex card mb2'>
-              <div className='p2 flex flex-justify flex-grow'>
-                <h2 className='<mr2></mr2>'>{title}</h2>
+              <div className='p2 md-flex flex-justify flex-grow'>
+                <h3 className='mb1'>{title}</h3>
 
                 <div>
                   {(user.admin !== undefined && user.admin ? 
