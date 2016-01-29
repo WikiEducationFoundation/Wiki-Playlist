@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
 
 
-  
+  put "playlists/feature/:id" => "playlists#feature"
   root 'page#index'
   resources :playlists, only: [:show, :create, :edit, :update, :destroy, :delete]
   get "all" => "playlists#index"

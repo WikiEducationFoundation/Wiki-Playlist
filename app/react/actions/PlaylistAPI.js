@@ -5,7 +5,7 @@ import { getCSRFToken } from './rails';
 /* Playlist Actions
 --------------------------------------------- */
 
-const allowed_playlist_attributes = ["title", "caption", "articles_attributes", "id"];
+const allowed_playlist_attributes = ["title", "caption", "articles_attributes", "id", "featured"];
 const allowed_article_attributes = ["pageId", "title", "url", "description", "image", "id", "position"];
 
 function filterArticleKeys(playlist) {
@@ -26,7 +26,9 @@ function filterPlaylistKeys(playlist) {
 
 function prepPlaylistAttributes(_playlist) {
   let playlist = _.assign({}, _playlist);
-  playlist.articles_attributes = filterArticleKeys(playlist);
+  if(playlist.articles !== undefined) {
+    playlist.articles_attributes = filterArticleKeys(playlist);  
+  }
   return {playlist: filterPlaylistKeys(playlist)};
 }
 
@@ -48,11 +50,28 @@ export function createPlaylist(playlist, callback) {
 }
 
 export function updatePlaylist(playlist, callback) {
-  let _playlist = prepPlaylistAttributes(playlist);
+  let data = prepPlaylistAttributes(playlist);
+  const id = playlist.server_info.id;
   getCSRFToken((res)=> {
-    superagent.put(`/playlists/${playlist.server_info.id}`)
+    superagent.put(`/playlists/${id}`)
     .set('X-CSRF-Token', res.token)
-    .send(_playlist)
+    .send(data)
+    .set('Accept', 'application/json')
+    .end(function(err, res) {
+      if(err || !res.ok) {
+        callback({error: `${err.status} - ${err.response.statusText}`})
+      } else {
+        callback({error: null, res});
+      }
+    })
+  });
+}
+
+export function featurePlaylist(id, data, callback) {
+  getCSRFToken((res)=> {
+    superagent.put(`/playlists/${id}`)
+    .set('X-CSRF-Token', res.token)
+    .send(data)
     .set('Accept', 'application/json')
     .end(function(err, res) {
       if(err || !res.ok) {
