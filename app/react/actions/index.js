@@ -12,6 +12,7 @@ import {
   UPDATE_PATH,
   ADD_ARTICLE_CARD,
   ADD_ARTICLE,
+  REMOVE_ARTICLE_CARD,
   ADD_ARTICLE_IMAGES,
   SET_ARTICLE_IMAGE,
   SET_ARTICLE_CAPTION,
@@ -212,6 +213,13 @@ export function addArticle(index, article) {
     type: ADD_ARTICLE,
     index,
     article
+  }
+}
+
+export function removeArticle(index, article) {
+  return {
+    type: REMOVE_ARTICLE_CARD,
+    index
   }
 }
 

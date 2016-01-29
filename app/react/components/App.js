@@ -35,8 +35,8 @@ class App extends React.Component {
         </div>
         {this._devTools()}
 
-        <footer className='container p2 flex flex-center'>
-          {(logged_in && current_user ? <span>&nbsp;|&nbsp;You are logged in. <a href="#" className='' data-sign-out>Logout</a></span> : null)}
+        <footer className='container p2 flex center'>
+          {(logged_in && current_user ? <span>You are logged in. <a href="#" className='' data-sign-out>Logout</a></span> : null)}
         </footer>
 
         {(show_share? <Share/> : null )}

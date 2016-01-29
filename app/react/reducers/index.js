@@ -14,6 +14,7 @@ import {
   SET_EDIT_ARTICLE,
   ADD_ARTICLE_CARD,
   ADD_ARTICLE,
+  REMOVE_ARTICLE_CARD,
   ADD_ARTICLE_IMAGES,
   SET_ARTICLE_IMAGE,
   SET_ARTICLE_CAPTION,
@@ -240,6 +241,12 @@ function Playlist(state = initialPlaylistState, action) {
       var articles = state.articles.slice(0);
       articles[index] = _article;
       return _.assign({}, state, {articles: articles, total_articles: state.total_articles + 1})
+
+    case REMOVE_ARTICLE_CARD:
+
+      let articles = state.articles.slice(0)
+      articles.splice(action.index, 1);
+      return _.assign({}, state, {articles: articles})
 
     case ADD_ARTICLE_IMAGES:
       let {images} = action;
