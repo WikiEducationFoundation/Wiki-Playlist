@@ -116,7 +116,9 @@ class EditableText extends React.Component {
   }
 
   _save() {
-    this.setState({editing: false})
+    if(this.state.value.length > 0) {
+      this.setState({editing: false})
+    }
     this.props.save(this.state.value);
   }
 

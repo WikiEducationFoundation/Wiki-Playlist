@@ -29,7 +29,7 @@ class ImageSelector extends React.Component {
     const total_images = articles[editingArticle].images.length;
 
     const settings = {
-      dots: (total_images < 12 ? true : false),
+      dots: (total_images < 8 ? true : false),
       arrows: true,
       infinite: true,
       speed: 500,
@@ -44,10 +44,8 @@ class ImageSelector extends React.Component {
         <div>
           <Slider {...settings}>{this._images()}</Slider>
         </div>
-        <div className='image-selector__controls flex flex-justify flex-center actions'>
-          <button className='action' onClick={this._cancel}>Cancel</button>
-          {(total_images < 12 ? null : <span className='white'>{currentIndex + 1}/{total_images}</span>)}
-          <button className='action' onClick={this._selectImage}>Select</button>
+        <div className='image-selector__controls p1 center actions'>
+          {(total_images < 8 ? null : <span className='white'>{currentIndex + 1}/{total_images}</span>)}
         </div>
       </div>
     )
@@ -69,7 +67,12 @@ class ImageSelector extends React.Component {
   _updateImage(index) {
     this.setState({
       currentIndex: index
-    })
+    });
+  }
+
+  componentWillUnmount() {
+    const { images, articleIndex, article } = this._getImages();
+    this.dispatch(setArticleImage(articleIndex, images[this.state.currentIndex]));
   }
 
   _getImages() {
