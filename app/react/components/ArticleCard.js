@@ -65,7 +65,7 @@ export class ArticleCard extends React.Component {
                 this.dispatch(removeArticle(index));
               }}>&#215;</button>: null)}
               {(isOnboarding ? 
-                  <div><h3 className='mb1'>Adding Wikipedia Articles</h3>
+                  <div><h3 className='mb1'>Adding Wikipedia Pages</h3>
                   <p className='mb2'>Copy explaining how the tool works, 3 pages at a minimum, and 5 at the max.</p></div> 
                 : null)}
 
@@ -75,7 +75,7 @@ export class ArticleCard extends React.Component {
                         this.dispatch(updateCurrentEditingArticle(index))
                         this.dispatch(pushPath('/playlists/article/search'))
                       }}>
-                      Add Wikipedia Article</button>
+                      Add Wikipedia Page</button>
               </div>
           )}
         
