@@ -30,10 +30,6 @@ export class ArticleCard extends React.Component {
         '_openImageSelector', 
         '_hideContent'
       ]);
-
-    this.state = {
-      editing_options: false
-    }
   }
 
   render() {
@@ -61,9 +57,11 @@ export class ArticleCard extends React.Component {
               : 
               
               <div className='center'>
+
               {(index > 2 ? <button className='action close-button' onClick={()=>{
                 this.dispatch(removeArticle(index));
               }}>&#215;</button>: null)}
+
               {(isOnboarding ? 
                   <div><h3 className='mb1'>Adding Wikipedia Articles</h3>
                   <p className='mb2'>Copy explaining how the tool works, 3 pages at a minimum, and 5 at the max.</p></div> 
@@ -143,7 +141,6 @@ export class ArticleCard extends React.Component {
         <button className='btn btn-outline' 
                 onClick={() => { 
                   this.dispatch(updateCurrentEditingArticle(index))
-                  this.setState({editing_options: true})
                 }}>
                 Edit <Icon size="14px" icon="edit" fill={'teal'} /></button>)
 
@@ -155,23 +152,9 @@ export class ArticleCard extends React.Component {
            View Article &nbsp;
            <Icon size="12px" icon="external-link" fill={'teal'} /></a>
         </div>); }
-    
-    if(isOnboarding) {
-      button = (
-        <div className='flex flex-end'>
-          <div className='onboarding__finish'>{edit_button}
-          <a className='btn btn-primary ml1'
-             onClick={()=>{
-              this.dispatch(setUserOnboarding(true));
-              setOnboardingCookie();
-             }}>Save</a>
-          </div>
-        </div>
-      )
-    }
+
 
     if(editing_options) { 
-
       button = (
         <div className='flex flex-justify'>
           <button className='btn btn-outline' 
@@ -183,6 +166,8 @@ export class ArticleCard extends React.Component {
 
           <button className='btn' 
                   onClick={() => {
+                    this.dispatch(setUserOnboarding(true));
+                    setOnboardingCookie();
                     this.dispatch(updateCurrentEditingArticle(null));
                   }}>Save</button>
         </div>);
