@@ -32,7 +32,7 @@ class OnboardingTitle extends React.Component {
   welcomeCard() {
     console.log('welcome')
     return(
-      <div className='card onboarding__title mt2 mb2 md-flex'>
+      <div className='card onboarding__title mb2 md-flex'>
         <div className='p2 flex flex-column onboarding__column'>
           <div>
             <h3 className='h3 mb1'>Wikipedia Collection Creator</h3>
@@ -54,7 +54,7 @@ class OnboardingTitle extends React.Component {
 
   titleCard() {
     return(
-      <div className='card onboarding__title mt2 mb2 md-flex'>
+      <div className='card onboarding__title mb2 md-flex'>
         <div className='p2 md-p3 flex flex-column onboarding__column'>
           <h3 className='h3 mb1'>Name of your Collection</h3>
           <p className='mb2'>Note! This can be changed at anytime</p>
