@@ -34,7 +34,8 @@ import {
   CLOSE_LOGIN,
   SHOW_SHARE,
   CLOSE_SHARE,
-  UPDATE_PLAYLIST_USERNAME
+  UPDATE_PLAYLIST_USERNAME,
+  SET_PLAYLIST_COLOR
 } from '../constants';
 
 
@@ -199,6 +200,13 @@ export function updatePlaylistUsername(username) {
   }
 }
 
+
+export function setPlaylistColor(color) {
+  return {
+    type: SET_PLAYLIST_COLOR,
+    color
+  }
+}
 
 
 // — Article

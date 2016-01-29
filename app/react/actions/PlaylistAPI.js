@@ -5,7 +5,7 @@ import { getCSRFToken } from './rails';
 /* Playlist Actions
 --------------------------------------------- */
 
-const allowed_playlist_attributes = ["title", "caption", "articles_attributes", "id", "featured"];
+const allowed_playlist_attributes = ["title", "caption", "articles_attributes", "id", "featured", "color"];
 const allowed_article_attributes = ["pageId", "title", "url", "description", "image", "id", "position"];
 
 function filterArticleKeys(playlist) {

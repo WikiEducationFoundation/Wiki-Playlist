@@ -40,7 +40,7 @@
   justify-content center
   display flex
   flex-direction column
-  background rgba($mine-shaft, .05)
+  background $mercury
   
   +above(md)
     height 300px
@@ -104,10 +104,10 @@
   padding-bottom .25rem
   margin-bottom .5rem
 
-// .article-card__header,
-// .article-card__image
-//   border-top-left-radius 9px
-//   border-top-right-radius 9px
+.article-card__header
+  color white
+  +above(md)
+    padding 3rem 0 0
 
 .article-card__image
   position relative

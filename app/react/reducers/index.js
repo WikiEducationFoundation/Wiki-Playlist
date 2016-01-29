@@ -35,7 +35,8 @@ import {
   SET_ONBOARDING_STEP,
   SHOW_SHARE,
   CLOSE_SHARE,
-  UPDATE_PLAYLIST_USERNAME
+  UPDATE_PLAYLIST_USERNAME,
+  SET_PLAYLIST_COLOR
 } from '../constants';
 
 
@@ -181,6 +182,7 @@ function defaultPlaylist() {
   var articles = createInitialArticles();
   return {
     title: 'Editable Playlist Title',
+    color: '',
     username: '',
     editingTitle: false,
     caption: 'Add a caption to your playlist',
@@ -296,6 +298,9 @@ function Playlist(state = initialPlaylistState, action) {
     case HANDLE_DELETE:
       var initialPlaylistState = defaultPlaylist();
       return _.assign({}, initialPlaylistState, {username: state.username});
+
+    case SET_PLAYLIST_COLOR:
+      return _.assign({}, initialPlaylistState, state, {color: action.color});
       
     default:
       return state;
