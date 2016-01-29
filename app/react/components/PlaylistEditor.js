@@ -50,7 +50,7 @@ class PlaylistEditor extends React.Component {
           {this._articles()}
           {this._addArticle()}
           <div className='center py2'><SaveButton /></div>
-          <ColorPicker />
+          {( onboarded ? <ColorPicker /> : null )}
           <DeleteButton />
         </div>
         
@@ -112,7 +112,7 @@ class PlaylistEditor extends React.Component {
                     </EditableText> 
               </div>
 
-              <div className='p2 playlist__caption'>
+              <div className='playlist__caption'>
                 <EditableText
                     value={caption}
                     placeholder={'Add a caption to your playlist'}

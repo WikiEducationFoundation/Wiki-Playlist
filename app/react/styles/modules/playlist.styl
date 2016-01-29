@@ -1,12 +1,15 @@
 .playlist
   position relative
   z-index 50
+  padding 0 1rem
+  +above(md)
+    padding 0
 
 .playlist__container
-  z-index 3
+  padding-top 1rem
 
 .playlist__caption
-  min-height 150px
+  min-height 120px
   
   +above(md)
     width 300px
@@ -24,12 +27,14 @@
 
 .playlist__background-color
   position absolute
-  z-index 1
+  z-index -1
   top 0
   left 0
   right 0
   width 100%
-  height 400px
+  height 300px
+  +above(md)
+    height 400px
 
 .playlist__background-color-picker
   background $gallery
@@ -37,9 +42,13 @@
   padding 5px
   position absolute
   z-index 4
-  top 1rem
-  right 1rem
+  top 0
+  right 0
   border-radius 2px
+  
+  +above(1rem)
+    top 1rem
+    right 1rem
 
 .color-swatch
   margin-right .5rem
