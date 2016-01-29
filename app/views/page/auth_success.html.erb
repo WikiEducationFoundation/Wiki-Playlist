@@ -1,11 +1,14 @@
 <!doctype html>
 <html>
+<header>
+<script>
+  var parent = window.opener.document;
+  var success = new Event('authSuccess');
+  parent.dispatchEvent(success);
+  window.close()
+  window.close()
+</script>
+</header>
 <body>
   <p>Close this window to continue</p>
-  <script>
-    var parent = window.opener.document;
-    var success = new Event('authSuccess');
-    parent.dispatchEvent(success);
-    window.close()
-  </script>
 </body></html>

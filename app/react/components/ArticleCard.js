@@ -150,7 +150,7 @@ export class ArticleCard extends React.Component {
     let button = null;
     if(has_article) { button = (
       <div className='flex flex-justify flex-center'>{edit_button}
-        <a className='action action--external-serif' 
+        <a className='action action--external teal' 
            href={url} target='_blank'>
            View Article &nbsp;
            <Icon size="12px" icon="external-link" fill={'teal'} /></a>
