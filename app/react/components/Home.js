@@ -3,6 +3,9 @@ import Icon from './Icon';
 import { flashMessage } from '../actions';
 import { getAllPlaylists, featurePlaylist } from '../actions/PlaylistAPI';
 import es6BindAll from "es6bindall";
+import {MD} from '../constants';
+import MediaQuery from 'react-responsive';
+
 
 export default class Home extends React.Component {
   constructor() {
@@ -18,11 +21,13 @@ export default class Home extends React.Component {
   render() {
     return (
       <div className='home center container'>
-        <div className='p2'>
-          <Link className='btn btn-primary' to="/playlists">
-              Create a Playlist
-          </Link>
-        </div>
+        <MediaQuery query={`(max-device-width: ${MD})`}>
+          <div className='p2'>
+            <Link className='btn btn-primary' to="/playlists">
+                Create a Playlist
+            </Link>
+          </div>
+        </MediaQuery>
         {this._renderPlaylists()}
       </div>
     )

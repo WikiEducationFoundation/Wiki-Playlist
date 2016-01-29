@@ -23,10 +23,10 @@ nav.py2.site__navigation data-reactid=".0.0"
 
 .p2.container.permalink
   div.py2
+    - if @user && @user.username
+      #{@user.username}
     h1= @playlist.title
     p= @playlist.caption
-    - if @user && @user.username
-      p By #{@user.username}
   - @articles.each do |article|
     .flex-column.flex-stretch.article-card
       .article-card__container

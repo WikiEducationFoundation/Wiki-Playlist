@@ -46,11 +46,6 @@ class App extends React.Component {
           </div>
         </nav>
 
-        <MediaQuery query={`(max-device-width: ${MD})`}>
-          <div className={'site__mobile-navigation center' + (menu_open ? ' open' : '')}>
-            <div className='py2'><UserControls/></div>
-          </div>
-        </MediaQuery>
 
         <FlashMessage />
 
@@ -58,10 +53,6 @@ class App extends React.Component {
           {this.props.children}
         </div>
         {this._devTools()}
-
-        <MediaQuery query={`(max-device-width: ${MD})`}>
-          <div className='p2 mobile-navigation center'><UserControls/></div>
-        </MediaQuery>
 
         <footer className='container p2 flex center'>
           {(logged_in && current_user ? <span>You are logged in. <a href="#" className='' data-sign-out>Logout</a></span> : null)}
