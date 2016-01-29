@@ -51,7 +51,10 @@ export class ArticleCard extends React.Component {
        
           {(has_article ? 
 
-              <div className='article-card__container' ref={card => {this.cardElement = card}}>
+              <div className='article-card__container' ref={card => {this.cardElement = card}}
+                    style={{
+                     background: (has_article ?  'white' : '#F0F0F0')
+                    }}>
                 {this._articleContent()}
               </div> 
 
