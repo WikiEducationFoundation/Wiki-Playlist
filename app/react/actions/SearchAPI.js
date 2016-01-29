@@ -11,12 +11,14 @@ const terms_description_titles = "&wbptterms=description&titles="
 const redirects = "&redirects="
 
 export function search(query, callback) {
-  superagent(opensearch + query)
+  var encoded_query = encodeURIComponent(query);
+  superagent(opensearch + encoded_query)
   .use(jsonp)
   .end((err, res) => {
     if(err) {
       console.log('error fetching search', err);
     } else {
+      console.log(res.body)
       searchTitles(res.body[1])
     }
   })
@@ -24,7 +26,11 @@ export function search(query, callback) {
   function searchTitles(titles) {
     var _redirects = {};
     var articles;
-    superagent(query_titles + titles.length + terms_description_titles + titles.join('|') + redirects).use(jsonp)
+    var encoded_titles = [];
+    titles.map(title => {
+      encoded_titles.push(encodeURIComponent(title));
+    })
+    superagent(query_titles + titles.length + terms_description_titles + encoded_titles.join('|') + redirects).use(jsonp)
     .end((err, res) => {
       if(err) {
         console.log('error fetching titles', err);
