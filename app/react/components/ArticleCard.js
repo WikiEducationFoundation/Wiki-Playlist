@@ -6,6 +6,7 @@ import {
   collapseComplete,
   setOnboardingStep,
   setUserOnboarding,
+  removeArticle
 } from '../actions';
 
 import { setOnboardingCookie } from '../actions/UserAPI';
@@ -46,7 +47,7 @@ export class ArticleCard extends React.Component {
                        this.dispatch(setOnboardingStep(1));
                     }}>back</button></div>);
     return (
-      <div className={'flex-column flex-stretch ' + onboarding_class + (has_article ? 'article-card' : 'article-card--empty editable-container p2 mb2')}>
+      <div className={'flex-column flex-stretch ' + onboarding_class + (has_article ? 'article-card' : 'article-card--empty relative editable-container p2 mb2')}>
        
           {(has_article ? 
 
@@ -57,6 +58,9 @@ export class ArticleCard extends React.Component {
               : 
               
               <div className='center'>
+              {(index > 2 ? <button className='action close-button' onClick={()=>{
+                this.dispatch(removeArticle(index));
+              }}>&#215;</button>: null)}
               {(isOnboarding ? 
                   <div><h3 className='mb1'>Adding Wikipedia Articles</h3>
                   <p className='mb2'>Copy explaining how the tool works, 3 pages at a minimum, and 5 at the max.</p></div> 
