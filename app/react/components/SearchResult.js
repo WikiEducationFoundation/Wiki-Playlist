@@ -24,9 +24,9 @@ class SearchResult extends React.Component {
     const description = (terms !== undefined && terms.description !== undefined ? <p className='search-result__description'>{terms.description}</p> : null)
     return (
       <div className='search-result border mb2 bg-white'>
-        <div className='flex border-bottom p1 pt2'>
+        <div className='flex flex-wrap border-bottom p1 pt2'>
           {thumb}
-          <div className={(thumb ? 'px2' : '')}>
+          <div className={'search-results__summary ' + (thumb ? 'px2' : '')}>
             <h3 style={{margin: 0}}>{title}</h3>
             {description}
           </div>

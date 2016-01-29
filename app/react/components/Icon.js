@@ -85,6 +85,10 @@ export default class Icon extends React.Component {
         return (
           <g><path fill={fillColor} d="M9 16.17l-4.17-4.17-1.42 1.41 5.59 5.59 12-12-1.41-1.41z"></path></g>
         );
+      case 'menu':
+        return (
+          <g><path fill={fillColor} d="M3 18h18v-2h-18v2zm0-5h18v-2h-18v2zm0-7v2h18v-2h-18z"></path></g>
+        );
     }
   }
 

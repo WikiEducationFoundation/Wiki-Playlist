@@ -9,12 +9,21 @@ import LoadingAnimation from './LoadingAnimation';
 import Login from './Login';
 import SaveButton from  './SaveButton';
 import Share from './Share';
+import Icon from './Icon';
 
 class App extends React.Component {
+
+  constructor() {
+    super();
+    this.state = {
+      menu_open: false
+    }
+  }
 
   render() {
     const { logged_in, current_user, show_login } = this.props.Account;
     const { show_share } = this.props.Share;
+    const { menu_open } = this.state;
     const preview_button = <button className='btn btn-outline'>Preview</button>;
     return (
       <div className="">
@@ -24,9 +33,24 @@ class App extends React.Component {
               <img src='//upload.wikimedia.org/wikipedia/en/8/80/Wikipedia-logo-v2.svg' height='30'/>
               <span className='px2'>Wikipedia Playlist</span>
             </Link>
-            <UserControls/>
+            <MediaQuery query={`(min-device-width: ${MD})`}>
+              <UserControls/>
+            </MediaQuery>
+
+            <MediaQuery query={`(max-device-width: ${MD})`}
+                        onClick={()=>{
+                          this.setState({menu_open: !menu_open});
+                        }}>
+              <button className='action'><Icon size="30px" icon="menu" fill={'teal'} /></button>
+            </MediaQuery>
           </div>
         </nav>
+
+        <MediaQuery query={`(max-device-width: ${MD})`}>
+          <div className={'site__mobile-navigation center' + (menu_open ? ' open' : '')}>
+            <div className='py2'><UserControls/></div>
+          </div>
+        </MediaQuery>
 
         <FlashMessage />
 
@@ -34,6 +58,10 @@ class App extends React.Component {
           {this.props.children}
         </div>
         {this._devTools()}
+
+        <MediaQuery query={`(max-device-width: ${MD})`}>
+          <div className='p2 mobile-navigation center'><UserControls/></div>
+        </MediaQuery>
 
         <footer className='container p2 flex center'>
           {(logged_in && current_user ? <span>You are logged in. <a href="#" className='' data-sign-out>Logout</a></span> : null)}

@@ -19,7 +19,7 @@ class Login extends React.Component {
   loginLinks() {
     return (
       <div className='py3 login-dialogue'>
-        <div className='login-dialogue__container bg-white p2 flex flex-column flex-center'
+        <div className='login-dialogue__container bg-white flex flex-column flex-center'
              ref={(container) => {this.container = container}}>
           <div>
             <p>We only access your: </p>
