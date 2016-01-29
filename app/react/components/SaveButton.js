@@ -86,15 +86,14 @@ class SaveButton extends React.Component {
   }
 
   _handleSaveSuccess(data, published) {
-    const { id, articles } = data;
-    var playlist_data = {id: id, articles: articles};
+    const { id, articles, permalink } = data;
+    var playlist_data = {id, permalink, articles};
     this.dispatch(receivePlaylistPermalink(playlist_data));
     this.dispatch(setShareImageRendering(true));
     this.dispatch(showShare(true));
     flashMessage(this.dispatch, {text: `Playlist ${(published ? 'updated' : 'saved')}!`, type: 'success'});
     pollPlaylistRenderStatus(id, (data)=>{
       this.dispatch(receiveShareInfo(data));
-      // flashMessage(this.dispatch, {text: 'Playlist ready to share', type: 'success'});
       this.dispatch(setShareImageRendering(false));
     })
   }

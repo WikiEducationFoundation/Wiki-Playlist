@@ -275,29 +275,14 @@ function Playlist(state = initialPlaylistState, action) {
       var articles = state.articles.slice(0);
       articles.map(article => {article.open = false});
       return _.assign({}, state, {articles: articles, animating: false})
-
-    // case UPDATE_PATH:
-      // if(action.payload.path === '/playlists') {
-      //   var articles = state.articles.slice(0);
-      //   articles.map(article =>{
-      //     if(article.open) {
-      //       article.open = false;
-      //     }
-      //   });
-      //   return _.assign({}, state, {
-      //     articles: articles,
-      //     editingArticle: null
-      //   })
-      // } else {
-      //   return state;
-      // }
-      
       
     case RECEIVE_PLAYLIST_PERMALINK:
       var articles = state.articles.slice(0);
       action.data.articles.map((article, i)=> {
         var index = _.indexOf(articles, _.find(articles, {title: article.title}));
-        articles[index].id = article.id;
+        if(index !== -1) {
+          articles[index] = article.id;
+        }
       });
       return _.assign({}, state, {published: true, server_info: action.data, server_errors:[]})
 
