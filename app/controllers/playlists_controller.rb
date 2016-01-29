@@ -10,6 +10,7 @@ class PlaylistsController < ApplicationController
         GenerateShareImage.enqueue(@playlist.id, :html => get_share_image_html(@playlist))
         format.json { render json: {
           id: @playlist.id,
+          permalink: "#{request.base_url}/playlist/#{@playlist.slug}",
           articles: @playlist.articles
         } }
       else
@@ -48,11 +49,13 @@ class PlaylistsController < ApplicationController
   # PATCH/PUT /playlists/1.json
   def update
     @playlist.share_image_rendered = false;
+    binding.pry
     respond_to do |format|
       if @playlist.update(playlist_params)
         GenerateShareImage.enqueue(@playlist.id, :html => get_share_image_html(@playlist))
         format.json { render json: {
           id: @playlist.id,
+          permalink: "#{request.base_url}/playlist/#{@playlist.slug}",
           articles: @playlist.articles
         } }
       else

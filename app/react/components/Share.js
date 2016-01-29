@@ -21,11 +21,10 @@ class Share extends React.Component {
   }
   render() {
     const { title, caption } = this.props.Playlist;
-    const { id } = this.props.Playlist.server_info;
+    const { id, permalink } = this.props.Playlist.server_info;
     const { copied } = this.state;
     const { share_image_url, share_rendering } = this.props.Share;
     const { protocol, host } = window.location;
-    const permalink = protocol + '//' + host + '/' + id;
 
 
     return (
@@ -49,11 +48,10 @@ class Share extends React.Component {
 
   _sharingButtons() {
     const { title, caption } = this.props.Playlist;
-    const { id } = this.props.Playlist.server_info;
+    const { id, permalink } = this.props.Playlist.server_info;
     const { copied } = this.state;
     const { share_image_url, share_rendering } = this.props.Share;
     const { protocol, host } = window.location;
-    const permalink = protocol + '//' + host + '/' + id;
     return (
         <div>
           <p className='caption mb2'>Share Playlist</p>
