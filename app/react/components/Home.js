@@ -27,26 +27,19 @@ export default class Home extends React.Component {
     this._getPlaylists();
   }
 
-
-
   _renderPlaylists() {
     const { playlists, user } = this.state;
-    console.log(this.state);
     if(playlists.length === 0) {
       return null;
     }
 
-    const feature_button = (user.admin !== undefined && user.admin ? 
-                        <button className='btn mr1'
-                          onClick={()=>{
-                            this._featurePlaylist(id)
-                          }}>Feature</button> : null);
+    
     
     if(playlists.length) {
       return (
         <div className='flex flex-wrap py4'>
         {playlists.map(playlist =>{
-          const {title, caption, articles, id} = playlist;
+          const {title, caption, articles, id, featured} = playlist;
           const permalink = playlist.url;
           return (
             <div key={permalink} className='flex card mb2'>
@@ -54,7 +47,11 @@ export default class Home extends React.Component {
                 <h2 className='<mr2></mr2>'>{title}</h2>
 
                 <div>
-                  {feature_button}
+                  {(user.admin !== undefined && user.admin ? 
+                        <button className={`btn mr1 ${(featured ? '' : 'btn-outline')}`}
+                          onClick={()=>{
+                            this._featurePlaylist(id)
+                          }}>Feature</button> : null)}
                   <a href={permalink} className='btn btn-outline'>View Playlist</a>
                 </div>
               </div>
@@ -70,13 +67,14 @@ export default class Home extends React.Component {
 
   _getPlaylists() {
     getAllPlaylists().done(({data})=>{
-      
       this.setState(data);
     })
   }
 
   _featurePlaylist(id) {
-    featurePlaylist(id, {featured: true}, (data) => {
+    const { playlists } = this.state;
+    const playlist = _.findWhere(playlists, {id: id});
+    featurePlaylist(id, {featured: !playlist.featured}, (data) => {
       if(data.error) {
         flashMessage(this.dispatch,  {text: data.error, type: 'error'});
       } else {
