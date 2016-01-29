@@ -253,9 +253,13 @@ function Playlist(state = initialPlaylistState, action) {
 
     case ADD_ARTICLE_IMAGES:
       let {images} = action;
+      // move svgs to the end
+      let sorted_images = _.sortBy(images, (image) => {
+        return image.url.indexOf('svg') !== -1;
+      });
       var articles = state.articles.slice(0);
-      articles[action.index].image = images[0];
-      articles[action.index].images = images;
+      articles[action.index].image = sorted_images[0];
+      articles[action.index].images = sorted_images;
       return _.assign({}, state, {articles: articles})
 
     case SET_ARTICLE_IMAGE:

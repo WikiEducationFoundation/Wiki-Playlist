@@ -247,7 +247,6 @@ Devise.setup do |config|
                     site: "https://#{Figaro.env.wikipedia_language}.wikipedia.org"
                   }
 
-
   config.omniauth :mediawiki_signup,
                   Figaro.env.wikipedia_token,
                   Figaro.env.wikipedia_secret,
