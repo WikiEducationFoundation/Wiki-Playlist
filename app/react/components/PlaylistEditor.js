@@ -78,6 +78,7 @@ class PlaylistEditor extends React.Component {
   }
 
   _titleCard() {
+    const { color } = this.props.Playlist;
     const { dispatch } = this.props;
     const { logged_in, current_user } = this.props.Account;
     const signed_in = logged_in && current_user;
@@ -90,20 +91,11 @@ class PlaylistEditor extends React.Component {
           <div className="py2 mb1 md-py4" ref={c => {this.cardContent = c}}>
             <div className={'article-card__header px2 relative md-flex flex-justify'}>
               <div>
-                {(signed_in ? 
-                  <EditableText
-                    value={username}
-                    placeholder={'Username'}
-                    limit={50}
-                    inputType='text'
-                    className='text'
-                    save={(username)=>{this.dispatch(updatePlaylistUsername(username))}}>
-                    <p>{username}</p>
-                    </EditableText> 
-                  :  null)}
+                <p>{username}</p>
                 
                 <EditableText
                     value={title}
+                    color={color}
                     placeholder={'Your Playlist Title'}
                     limit={TITLE_LIMIT}
                     className='h1 '
@@ -114,6 +106,7 @@ class PlaylistEditor extends React.Component {
 
               <div className='playlist__caption'>
                 <EditableText
+                    color={color}
                     value={caption}
                     placeholder={'Add a caption to your playlist'}
                     limit={CAPTION_LIMIT}

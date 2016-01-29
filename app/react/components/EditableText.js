@@ -2,13 +2,15 @@ import { connect } from 'react-redux';
 import { PropTypes } from 'react';
 import Icon from './Icon';
 import es6BindAll from "es6bindall";
+import tinycolor from 'tinycolor2';
 
 class EditableText extends React.Component {
   static propTypes = {
     save: PropTypes.func.isRequired,
     value: PropTypes.string.isRequired,
     placeholder: PropTypes.string.isRequired,
-    limit: PropTypes.number.isRequired
+    limit: PropTypes.number.isRequired,
+    color: PropTypes.string.isRequired
   }
 
   constructor(props) {
@@ -39,7 +41,7 @@ class EditableText extends React.Component {
 
   render() {
     const { editing, value } = this.state;
-    const { inputType, className} = this.props;
+    const { inputType, className, color} = this.props;
     const empty = value.length === 0;
     const count = this.limit - value.length;
 
@@ -75,6 +77,7 @@ class EditableText extends React.Component {
     }
 
     const textInput = inputType !== undefined && inputType === 'text';
+    const iconColor = tinycolor(color).darken(25);
 
     return (
       <div className='editable-text'>
@@ -90,7 +93,7 @@ class EditableText extends React.Component {
               </div>
               <div className='flex flex-center'>
                 <button className='action cancel-button inline-block mr1 ml1' onClick={this._cancel}>&#215;</button>
-                <button className='action mr1' onClick={this._save}><Icon size="25px" icon="check" fill={'teal'} /></button>
+                <button className='action mr1' onClick={this._save}><Icon size="25px" icon="check" fill={iconColor} /></button>
               </div>
             </div>
           : 
@@ -100,7 +103,7 @@ class EditableText extends React.Component {
                 const len = this.state.value.length * 2;
                 this.refs.input.setSelectionRange(len, len);
               })}}>
-              {this.props.children}<Icon className='edit-icon' size="20px" icon="edit" fill={'black'} />
+              {this.props.children}<Icon className='edit-icon' size="20px" icon="edit" fill={iconColor} />
             </div>
         )}
         
