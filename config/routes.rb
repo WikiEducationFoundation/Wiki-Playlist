@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   get "/csrf-token" => "application#csrf_meta"
 
 
-
   put "playlists/feature/:id" => "playlists#feature"
   root 'page#index'
   resources :playlists, only: [:show, :create, :edit, :update, :destroy, :delete]
@@ -18,6 +17,7 @@ Rails.application.routes.draw do
   get "playlists/render_status/:id" => "playlists#render_status"
   get "playlists/share-image/:id" => "playlists#share_image"
   get "playlists/share-html/:id" => "playlists#get_share_html"
+  get "styleguide", to: "page#playlist"
   get "playlists", to: "page#playlist"
   get "playlist", to: redirect('/playlists')
   get "playlists/article/search", to: "page#playlist"

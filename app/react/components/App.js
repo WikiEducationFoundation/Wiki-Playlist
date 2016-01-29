@@ -22,7 +22,7 @@ class App extends React.Component {
           <div className='container flex flex-center flex-justify'>
             <Link to="/" className='black'>
               <img src='//upload.wikimedia.org/wikipedia/en/8/80/Wikipedia-logo-v2.svg' height='30'/>
-              <span className='px2'>Wikipedia Collections</span>
+              <span className='px2'>Wikipedia Playlist</span>
             </Link>
             <UserControls/>
           </div>
@@ -36,7 +36,6 @@ class App extends React.Component {
         {this._devTools()}
 
         <footer className='container p2 flex flex-center'>
-          <Link to='/styleguide'>Styleguide</Link>
           {(logged_in && current_user ? <span>&nbsp;|&nbsp;You are logged in. <a href="#" className='' data-sign-out>Logout</a></span> : null)}
         </footer>
 
