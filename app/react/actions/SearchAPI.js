@@ -18,7 +18,6 @@ export function search(query, callback) {
     if(err) {
       console.log('error fetching search', err);
     } else {
-      console.log(res.body)
       searchTitles(res.body[1])
     }
   })
