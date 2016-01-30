@@ -6,7 +6,8 @@ import {
 
 import {
   setOnboardingStep,
-  setPlaylistTitle
+  setPlaylistTitle,
+  updateCurrentEditingArticle,
 } from '../../actions';
 
 class OnboardingTitle extends React.Component {
