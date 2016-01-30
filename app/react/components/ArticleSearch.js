@@ -7,7 +7,7 @@ import { pushPath } from 'redux-simple-router';
 import { PLAYLISTS_PATH } from '../constants';
 
 class ArticleSearch extends React.Component {
-  
+
   componentDidMount() {
     this.addAnimation(fadeIn);
     const { editingArticle } = this.props.Playlist;
@@ -22,7 +22,7 @@ class ArticleSearch extends React.Component {
     return (
       <div className='search__container intially-hidden p2 vertical-overflow'>
         <div className='search__container__card'>
-        <div className='mb1'><strong>Add Article ({editingArticle + 1}/{articles.length})</strong></div>
+        <div className='mb1'><strong>Add Article</strong></div>
         <SearchForm index={this.props.Playlist.editingArticle} {...this.props}/>
         {this._currentQuery()}
         <Link className='close-button' to='/playlists'>&#215;</Link>
@@ -49,7 +49,7 @@ class ArticleSearch extends React.Component {
           <SearchResults dispatch={this.props.dispatch} query={history[query]} isSearching={searching}/>
         </div>
       );
-      
+
     } else {
       return null;
     }

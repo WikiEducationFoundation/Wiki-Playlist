@@ -36,8 +36,8 @@ class OnboardingTitle extends React.Component {
       <div className='card onboarding__title mb2 md-flex'>
         <div className='p2 flex flex-column onboarding__column'>
           <div>
-            <h3 className='h3 mb1'>Wikipedia Collection Creator</h3>
-            <p className='mb2'>Welcome short paragraph. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.</p>
+            <h3 className='h3 mb1'>Wikipedia Playlist Builder</h3>
+            <p className='mb2'>Welcome! Build and share a thematic playlist of 3 to 5 Wikipedia Pages.</p>
           </div>
           <div>
             <button className='btn btn-primary'
@@ -57,10 +57,10 @@ class OnboardingTitle extends React.Component {
     return(
       <div className='card onboarding__title mb2 md-flex'>
         <div className='p2 md-p3 flex flex-column onboarding__column'>
-          <h3 className='h3 mb1'>Name of your Collection</h3>
+          <h3 className='h3 mb1'>Name of your Playlist</h3>
           <p className='mb2'>Note! This can be changed at anytime</p>
           <div className='relative'>
-            <input className='field p1 mb1' 
+            <input className='field p1 mb1'
                  placeholder='Collection Name'
                  value={this.state.title}
                  onChange={({target})=>{
@@ -76,7 +76,7 @@ class OnboardingTitle extends React.Component {
                 this.dispatch(setOnboardingStep(0));
               }}>Back</button>
 
-            <button className='btn btn-primary' 
+            <button className='btn btn-primary'
               onClick={()=>{
                 this.dispatch(setPlaylistTitle(this.state.title));
                 this.dispatch(setOnboardingStep(2));

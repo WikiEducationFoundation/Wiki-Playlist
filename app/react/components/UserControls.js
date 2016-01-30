@@ -11,7 +11,7 @@ import {
   getUserStatus
 } from '../actions/UserAPI';
 
-import { 
+import {
   login,
   logout,
   showLogin,
@@ -60,11 +60,11 @@ class UserControls extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
     const { path } = this.props.routing;
-    
+
     $(document).on('authSuccess', (data) => {
       // auth_success partial doesn't get user data so hit /auth/user_status endpoint
-      if(data.username === undefined) { 
-        getUserStatus(); 
+      if(data.username === undefined) {
+        getUserStatus();
       } else {
         dispatch(login())
         dispatch(addUser({username: data.username}));
@@ -85,9 +85,9 @@ class UserControls extends React.Component {
     const { logged_in, current_user } = this.props.Account;
     const { total_articles } = this.props.Playlist;
     const { routing } = this.props;
-    let account_button_text = (routing.path.indexOf('playlist') !== -1 ? 'to save' : '');
+    let account_button_text = (routing.path.indexOf('playlist') !== -1 ? 'to Publish' : '');
     let account = (
-      <button className='btn btn-primary mr1' 
+      <button className='btn btn-primary mr1'
               onClick={()=>{
                 this.dispatch(showLogin(true));
               }}>Login {account_button_text}</button>
@@ -97,7 +97,7 @@ class UserControls extends React.Component {
       account = null;
     }
     return account;
-  } 
+  }
 }
 
 export default connect( state => {return state})(UserControls)
