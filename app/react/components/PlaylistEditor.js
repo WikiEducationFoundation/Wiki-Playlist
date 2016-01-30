@@ -88,35 +88,36 @@ class PlaylistEditor extends React.Component {
     return (
       <div>
         <div className="">
-          <div className="py2 mb1 md-py4" ref={c => {this.cardContent = c}}>
-            <div className={'article-card__header px2 relative md-flex flex-justify'}>
-              <div>
-                <p>{username}</p>
-                
-                <EditableText
-                    value={title}
-                    color={color}
-                    placeholder={'Your Playlist Title'}
-                    limit={TITLE_LIMIT}
-                    className='h1 '
-                    save={(title)=>{this.dispatch(setPlaylistTitle(title))}}>
-                    <h1>{title}</h1>
-                    </EditableText> 
-              </div>
+          <div className="py2 mb1 md-mt5" ref={c => {this.cardContent = c}}>
 
-              <div className='playlist__caption'>
-                <EditableText
-                    color={color}
-                    value={caption}
-                    placeholder={'Add a caption to your playlist'}
-                    limit={CAPTION_LIMIT}
-                    className=' '
-                    save={(caption)=>{this.dispatch(setPlaylistCaption(caption))}}>
-                    <p>{caption}</p>
-                    </EditableText> 
+            <div className={'article-card__header px2 relative'}>
+              <p>{username}</p>
+              <div className='md-flex flex-justify'>
+                <div className='playlist__title'>
+                  <EditableText
+                      value={title}
+                      color={color}
+                      placeholder={'Your Playlist Title'}
+                      limit={TITLE_LIMIT}
+                      className='h1 inline-block'
+                      save={(title)=>{this.dispatch(setPlaylistTitle(title))}}>
+                      <h1 className='inline-block'>{title}</h1>
+                      </EditableText> 
                 </div>
-            </div>
-            
+  
+                <div className='playlist__caption'>
+                  <EditableText
+                      color={color}
+                      value={caption}
+                      placeholder={'Add a caption to your playlist'}
+                      limit={CAPTION_LIMIT}
+                      className=' '
+                      save={(caption)=>{this.dispatch(setPlaylistCaption(caption))}}>
+                      <p>{caption}</p>
+                      </EditableText> 
+                  </div>
+                </div>
+              </div>
           </div>
         </div>
       </div>)

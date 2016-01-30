@@ -182,11 +182,11 @@ function createInitialArticles() {
 function defaultPlaylist() {
   var articles = createInitialArticles();
   return {
-    title: 'Editable Playlist Title',
+    title: '',
     color: _.sample(background_colors),
     username: '',
     editingTitle: false,
-    caption: 'Add a caption to your playlist',
+    caption: '',
     editingCaption: false,
     total_articles: 0,
     articles: articles,

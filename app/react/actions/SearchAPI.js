@@ -82,13 +82,10 @@ export function fetchArticleImages(title, callback,) {
         console.log('error fetching article images', err);
       } else {
         const continueObj = res.body.continue;
-        
         imageObjects = imageObjects.concat(_.values(res.body.query.pages));
         if(continueObj !== undefined && continueObj.iicontinue !== undefined) {
-            console.log('continue', continueObj)
           getImages(url + '&continue=' + continueObj.continue + '&iicontinue=' + continueObj.iicontinue);
         } else {
-          console.log('before filter')
           filterImages(imageObjects);
         }
       }
@@ -116,7 +113,6 @@ export function fetchArticleImages(title, callback,) {
         images.push(image);
       }
     });
-    console.log(images);
     callback(images);
   }
 }

@@ -68,8 +68,12 @@ class SaveButton extends React.Component {
   }
 
   _savePlaylist() {
-    const { published, total_articles } = this.props.Playlist;
+    const { published, total_articles, title } = this.props.Playlist;
     this.dispatch(updateCurrentEditingArticle(null));
+    if(title === '') {
+      flashMessage(this.dispatch,  {text: "Please give your playlist a title.", type: 'action'});
+      return;
+    }
     // todo:  if 'can publish' instead of comparison here
     if(total_articles < MINIMUM_ARTICLES) {
       flashMessage(this.dispatch,  {text: "Please find at least 3 articles.", type: 'action'});
