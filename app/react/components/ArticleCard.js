@@ -1,5 +1,5 @@
 import GSAP from 'react-gsap-enhancer'
-import { 
+import {
   updateCurrentEditingArticle,
   expandArticle,
   collapseArticle,
@@ -25,9 +25,9 @@ export class ArticleCard extends React.Component {
     this.dispatch = props.dispatch;
 
    es6BindAll(this, [
-        '_expand', 
+        '_expand',
         '_collapse',
-        '_openImageSelector', 
+        '_openImageSelector',
         '_hideContent'
       ]);
   }
@@ -44,30 +44,30 @@ export class ArticleCard extends React.Component {
                     }}>back</button></div>);
     return (
       <div className={'flex-column flex-stretch ' + onboarding_class + (has_article ? 'article-card' : 'article-card--empty relative editable-container p2 mb2')}>
-       
-          {(has_article ? 
+
+          {(has_article ?
 
               <div className='article-card__container' ref={card => {this.cardElement = card}}
                     style={{
                      background: (has_article ?  'white' : '#F0F0F0')
                     }}>
                 {this._articleContent()}
-              </div> 
+              </div>
 
-              : 
-              
+              :
+
               <div className='center'>
 
               {(index > 2 ? <button className='action close-button' onClick={()=>{
                 this.dispatch(removeArticle(index));
               }}>&#215;</button>: null)}
 
-              {(isOnboarding ? 
-                  <div><h3 className='mb1'>Adding Wikipedia Pages</h3>
-                  <p className='mb2'>Copy explaining how the tool works, 3 pages at a minimum, and 5 at the max.</p></div> 
+              {(isOnboarding ?
+                  <div><h3 className='mb3'>Lets add your first Wikipedia page!</h3>
+                  </div>
                 : null)}
 
-                  <button className='btn btn-primary flex-end bg-silver' 
+                  <button className='btn btn-primary flex-end bg-silver'
                       ref={card => {this.cardElement = card}}
                       onClick={() => {
                         this.dispatch(updateCurrentEditingArticle(index))
@@ -76,7 +76,7 @@ export class ArticleCard extends React.Component {
                       Add Wikipedia Page</button>
               </div>
           )}
-        
+
           {(has_article ? null : this.props.children)}
       </div>
     )
@@ -109,7 +109,7 @@ export class ArticleCard extends React.Component {
     // }
 
     if(nextProps.Playlist.all_collapsed && this.controller !== undefined) {
-      
+
       // this.controller.kill()
     }
 
@@ -136,10 +136,10 @@ export class ArticleCard extends React.Component {
         </div>
       );
     }
-    
+
     const edit_button = (
-        <button className='btn btn-outline' 
-                onClick={() => { 
+        <button className='btn btn-outline'
+                onClick={() => {
                   this.dispatch(updateCurrentEditingArticle(index))
                 }}>
                 Edit <Icon size="14px" icon="edit" fill={'teal'} /></button>)
@@ -147,24 +147,24 @@ export class ArticleCard extends React.Component {
     let button = null;
     if(has_article) { button = (
       <div className='flex flex-justify flex-center'>{edit_button}
-        <a className='action action--external teal' 
+        <a className='action action--external teal'
            href={url} target='_blank'>
            View Article &nbsp;
            <Icon size="12px" icon="external-link" fill={'teal'} /></a>
         </div>); }
 
 
-    if(editing_options) { 
+    if(editing_options) {
       button = (
         <div className='flex flex-justify'>
-          <button className='btn btn-outline' 
+          <button className='btn btn-outline'
                   ref={card => {this.cardElement = card}}
                   onClick={() => {
                     this.dispatch(updateCurrentEditingArticle(index))
                     this.dispatch(pushPath('/playlists/article/search'))
                   }}>Change Article</button>
 
-          <button className='btn' 
+          <button className='btn'
                   onClick={() => {
                     this.dispatch(setUserOnboarding(true));
                     setOnboardingCookie();
@@ -213,7 +213,7 @@ export class ArticleCard extends React.Component {
     // Change Thumbnail LInk
     let link = null;
     const link_to_image_selector = (
-        <a href='#' className='article-card__image__edit-button btn btn-outline white' 
+        <a href='#' className='article-card__image__edit-button btn btn-outline white'
                 onClick={this._openImageSelector}>Change Thumbnail</a>
       );
 
@@ -248,10 +248,10 @@ export class ArticleCard extends React.Component {
   _hideContent(callback = null) {
     if(this.cardContent === undefined ) {return;}
     this.addAnimation(() =>{
-      return TweenMax.to(this.cardContent, 1,  
+      return TweenMax.to(this.cardContent, 1,
         {opacity: 0, ease: Power3.easeOut, onComplete: callback})
     });
-    
+
   }
 
   _expand({}) {
@@ -267,17 +267,17 @@ export class ArticleCard extends React.Component {
     return TweenMax.fromTo(target, 1,
       {
         position: 'fixed',
-        top: this.startY, 
+        top: this.startY,
         left: this.startX,
-        width: this.startWidth, 
+        width: this.startWidth,
         height: this.startHeight,
         zIndex: 20,
       },
       {
         position: 'fixed',
-        top: 0, 
+        top: 0,
         left: 0,
-        width: window.innerWidth, 
+        width: window.innerWidth,
         height: window.innerHeight,
         zIndex: 20,
         ease: Power3.easeInOut,
@@ -301,17 +301,17 @@ export class ArticleCard extends React.Component {
     return TweenMax.fromTo(card, 1,
         {
           position: 'fixed',
-          top: 0, 
+          top: 0,
           left: 0,
-          width: window.innerWidth, 
+          width: window.innerWidth,
           height: window.innerHeight,
           zIndex: 20
         },
         {
           position: 'fixed',
-          top: this.startY, 
-          left: this.startX, 
-          width: this.startWidth, 
+          top: this.startY,
+          left: this.startX,
+          width: this.startWidth,
           height: this.startHeight,
           zIndex: 1,
           ease: Power3.easeInOut,
