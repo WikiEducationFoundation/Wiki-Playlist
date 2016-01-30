@@ -1,8 +1,22 @@
-.message--error
-  color tomato
+$success = #16ad52
 
+.message
+  visibility hidden
+  +above(md)
+    position absolute
+    left 50%
+    transform translateX(-50%)
+    width 30%
+    text-align center
+    z-index 75
+
+.message--error
+  color white
+  background tomato
 .message--success
-  color limegreen
+  color white
+  background $success
 
 .message--action
-  color violet
+  background gold
+  color darken(gold, 60%)

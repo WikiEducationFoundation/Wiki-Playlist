@@ -11,6 +11,7 @@ export default class SearchForm extends React.Component {
                onKeyDown={this._handleKeyDown.bind(this)}
                id='Search' 
                type='text'
+               autoComplete='off'
                placeholder='Search Wikipedia'
                defaultValue={this.props.Search.queries[this.props.index]}
                className='field border-bottom search__input'/>
