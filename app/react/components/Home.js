@@ -55,13 +55,12 @@ export default class Home extends React.Component {
             <div key={permalink} className='flex card mb2'>
               <div className='p2 md-flex flex-justify flex-grow'>
                 <h3 className='mb1'>{title}</h3>
-
                 <div>
                   {(user.admin !== undefined && user.admin ? 
-                        <button className={`btn mr1 ${(featured ? '' : 'btn-outline')}`}
-                          onClick={()=>{
-                            this._featurePlaylist(id)
-                          }}>Feature</button> : null)}
+                      <button className={`btn mr1 ${(featured ? '' : 'btn-outline')}`}
+                        onClick={()=> {
+                          this._featurePlaylist(id)
+                        }}>Feature</button> : null)}
                   <a href={permalink} className='btn btn-outline'>View Playlist</a>
                 </div>
               </div>

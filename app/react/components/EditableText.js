@@ -42,7 +42,7 @@ class EditableText extends React.Component {
   render() {
     const { editing, value } = this.state;
     const { inputType, className, color} = this.props;
-    const empty = value.length === 0;
+    const empty = value.length < 1;
     const count = this.limit - value.length;
 
     const inputProps = {
@@ -52,13 +52,14 @@ class EditableText extends React.Component {
       value: value,
       placeholder: this.props.placeholder,
       onChange: this._handleChange,
-      onFocus: ({target}) =>{
+      onFocus: ({target}) => {
+       this.setState({editing: true});
        this.setState({value: this.truncateValue(target.value)})
       },
       onBlur: (e) => {
-       // this._handleChange(e);
-       // this.setState({editing: false});
-       // this._save()
+       this._handleChange(e);
+       this.setState({editing: false});
+       this._save()
       },
       onKeyUp: ({which}) =>{
         switch(which) {
@@ -91,13 +92,13 @@ class EditableText extends React.Component {
                     <textarea {...inputProps} />)}
                 <span className='character-limit'>{count}</span>
               </div>
-              <div className='flex flex-center'>
-                <button className='action cancel-button inline-block mr1 ml1' onClick={this._cancel}>&#215;</button>
-                <button className='action mr1' onClick={this._save}><Icon size="25px" icon="check" fill={iconColor} /></button>
+              <div className='flex flex-center right'>
+                <button className='action cancel-button inline-block mr1' onClick={this._cancel}>&#215;</button>
+                <button className='action' onClick={this._save}><Icon size="25px" icon="check" fill={iconColor} /></button>
               </div>
             </div>
           : 
-            <div className='relative inline-block' onClick={()=>{
+            <div className='relative' onClick={()=>{
               this.setState({editing: true}, ()=>{
                 this.refs.input.focus();
                 const len = this.state.value.length * 2;
