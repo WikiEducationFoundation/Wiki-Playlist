@@ -69,32 +69,54 @@ const exclude_images = require('../data/exclude_images');
 const query_article_images = `${wiki_api}query&redirects&generator=images&list=allimages&prop=imageinfo&&iiprop=url|extmetadata|metadata|commonmetadata&iiurlwidth=600&gimlimit=100&format=json&titles=`
 
 export function fetchArticleImages(title, callback,) {
-  superagent(query_article_images + title)
-  .use(jsonp)
-  .end((err, res) => {
-    if(err) {
-      console.log('error fetching article images', err);
-    } else {
-      const imageObjects = _.values(res.body.query.pages);
-      let images = [];
-      imageObjects.map(obj => {
-        let image = { url: ''}
-        if(obj.imageinfo !== undefined && obj.imageinfo.length) {
-          const {thumburl} = obj.imageinfo[0];
-          image.url = thumburl
-        }
+  const url = query_article_images + title;
+  
+  let imageObjects = [];
+  
+  var getImages = function(url) {
+    console.log(url)
+    superagent(url)
+    .use(jsonp)
+    .end((err, res) => {
+      if(err) {
+        console.log('error fetching article images', err);
+      } else {
+        const continueObj = res.body.continue;
         
-        var exclude = false
-        exclude_images.map(exl => {
-          if(image.url.indexOf(exl) !== -1) {exclude = true;}
-        });
+        imageObjects = imageObjects.concat(_.values(res.body.query.pages));
+        if(continueObj !== undefined && continueObj.iicontinue !== undefined) {
+            console.log('continue', continueObj)
+          getImages(url + '&continue=' + continueObj.continue + '&iicontinue=' + continueObj.iicontinue);
+        } else {
+          console.log('before filter')
+          filterImages(imageObjects);
+        }
+      }
+    });
+  }
 
-        if(!exclude && image.url !== '') {
-          images.push(image);
-        }
-        
+  getImages(url);
+
+  var filterImages = function(imageObjects) {
+    console.log(imageObjects)
+    let images = [];
+    imageObjects.map(obj => {
+      let image = { url: ''}
+      if(obj.imageinfo !== undefined && obj.imageinfo.length) {
+        const {thumburl} = obj.imageinfo[0];
+        image.url = thumburl
+      }
+      
+      var exclude = false;
+      exclude_images.map(exl => {
+        if(image.url.indexOf(exl) !== -1) {exclude = true;}
       });
-      callback(images);
-    }
-  })
+    
+      if(!exclude && image.url !== '') {
+        images.push(image);
+      }
+    });
+    console.log(images);
+    callback(images);
+  }
 }
