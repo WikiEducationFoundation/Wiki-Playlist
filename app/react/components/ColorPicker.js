@@ -16,7 +16,7 @@ export default class ColorPicker extends React.Component {
                  width: 22,
                  height: 22,
                  paddingLeft: 4,
-                 borderRadius: '50%'
+                 borderRadius: '20%'
                }}
                onClick={()=>{
                 this.props.dispatch(setPlaylistColor(color));
