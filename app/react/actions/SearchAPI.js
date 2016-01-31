@@ -5,8 +5,6 @@ const superagent = require('superagent');
 let jsonp = require('superagent-jsonp');
 
 const wiki_api = "https://en.wikipedia.org/w/api.php?action=";
-const generator = `${wiki_api}query&formatversion=2&format=json&generator=prefixsearch&gpslimit=99&prop=pageimages|pageterms|info&piprop=thumbnail&pithumbsize=50&pilimit=99&redirects=&wbptterms=description&gpssearch=`
-const redirects = "&redirects="
 
 const SEARCH_MAX_RESULTS = 50
 const SEARCH_THUMBNAIL_WIDTH = 75
