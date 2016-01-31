@@ -4,7 +4,7 @@ import Icon from './Icon';
 import es6BindAll from "es6bindall";
 
 import {
-  addArticle, 
+  addArticle,
   updateQuery,
   addArticleImages,
   updateCurrentEditingArticle
@@ -20,7 +20,7 @@ class SearchResult extends React.Component {
 
   render() {
     const {title, thumbnail, terms, fullurl} = this.props.article;
-    const thumb = (thumbnail !== undefined ? <div><img src={thumbnail.source}/></div> : null)
+    const thumb = (thumbnail !== undefined ? <div style={{width: 50, height: 50, backgroundImage: `url(${thumbnail.source})`, backgroundSize: 'cover', backgroundPosition: 'center center'}}></div> : null)
     const description = (terms !== undefined && terms.description !== undefined ? <p className='search-result__description'>{terms.description}</p> : null)
     return (
       <div className='search-result border mb2 bg-white'>
@@ -41,7 +41,7 @@ class SearchResult extends React.Component {
   handleAddArticle() {
     const {dispatch, article, Playlist} = this.props;
     const index = Playlist.editingArticle;
-    
+
     let articleData = new Promise((resolve, reject)=>{
       fetchArticleSummary(article.title).done((data)=> {
 
@@ -59,7 +59,7 @@ class SearchResult extends React.Component {
     articleData.then(()=>{
       dispatch(addArticle(index, article));
       fetchArticleImages(article.title, this.addArticleImages.bind(this));
-    }).catch((reason)=> {console.log('Reject promise', reason)});    
+    }).catch((reason)=> {console.log('Reject promise', reason)});
   }
 
   addArticleImages(images) {
