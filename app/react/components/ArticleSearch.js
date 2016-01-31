@@ -28,7 +28,6 @@ class ArticleSearch extends React.Component {
             <Link className='close-button' to='/playlists'>&#215;</Link>
           </div>
           {this._currentQuery()}
-          <p>Search for a Wikipedia Page</p>
         </div>
       </div>
     )
@@ -54,7 +53,7 @@ class ArticleSearch extends React.Component {
       );
 
     } else {
-      return null;
+      return <p className="search__container__empty-state">Search for a Wikipedia Page</p>;
     }
   }
 }
