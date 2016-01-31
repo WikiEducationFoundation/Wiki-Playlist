@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { 
+import {
   handleDelete,
   flashMessage,
 } from '../actions';
@@ -20,14 +20,14 @@ class DeleteButton extends React.Component {
     const { logged_in, current_user } = this.props.Account;
     if(logged_in && published) {
       return (
-        <div className='mt1 px2 right-align'>
+        <div className='right-align'>
           <a href='#'
            className='red'
            style={{
-            opacity: .5
+            opacity: .9
            }}
            onClick={this._confirmDelete.bind(this)}>
-           delete playlist</a></div>)
+           Delete Playlist</a></div>)
     } else {
       return null;
     }

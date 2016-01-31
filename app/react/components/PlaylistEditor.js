@@ -18,7 +18,6 @@ import { Link } from 'react-router';
 import es6BindAll from "es6bindall";
 import EditableText from './EditableText';
 import SaveButton from './SaveButton';
-import DeleteButton from './DeleteButton';
 import PlaylistBackgroundColor from './PlaylistBackgroundColor';
 import ColorPicker from './ColorPicker';
 
@@ -51,7 +50,6 @@ class PlaylistEditor extends React.Component {
           {this._addArticle()}
           <div className='center py2'><SaveButton /></div>
           {( onboarded ? <ColorPicker /> : null )}
-          <DeleteButton />
         </div>
 
         <PlaylistBackgroundColor color={color}/>
