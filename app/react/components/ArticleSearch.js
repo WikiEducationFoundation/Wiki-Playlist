@@ -23,7 +23,7 @@ class ArticleSearch extends React.Component {
       <div className='search__container intially-hidden p2 vertical-overflow'>
         <div className='search__container__card'>
           <div className='search__container-header'>
-            <div className='mb1 white'><strong>Add Article</strong></div>
+            <div className='mb2 white'><strong>Add Article</strong></div>
             <SearchForm index={this.props.Playlist.editingArticle} {...this.props}/>
             <Link className='close-button' to='/playlists'>&#215;</Link>
           </div>
@@ -48,7 +48,7 @@ class ArticleSearch extends React.Component {
     if(query !== undefined && query.length) {
       return (
         <div>
-          <div className='py1'><strong>Search For: "{query}"</strong></div>
+          <div className='py1'><strong>Search Results For: "{query}"</strong></div>
           <SearchResults dispatch={this.props.dispatch} query={history[query]} isSearching={searching}/>
         </div>
       );

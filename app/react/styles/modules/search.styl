@@ -32,14 +32,17 @@
   padding 1rem 1rem 2rem 1rem
   margin -1rem -1rem 1rem -1rem
 
+.search__container-header .close-button
+  color white
+
 .search__input
   display block
   border-radius 0
   width 100%
   border none
-  border 1px solid $gray
-  font-size 22px
-  line-height 22px
+  border 1px solid darken($teal, 10)
+  font-size 18px
+  line-height 20px
 
 .search-icon
   position absolute
@@ -53,16 +56,16 @@
   border-radius 10px
 
   h3
-    font-size 16px
+    font-size 20px
 
   img
     max-width 100%
     height auto
 
   p
-    margin-bottom 0
-    font-size 12px
-    line-height 16px
+    margin-bottom 10
+    font-size 15px
+    line-height 18px
 
 .search-results__summary
   flex-basis 75%
@@ -74,6 +77,8 @@
   text-overflow: ellipsis
 
 .search-result__actions
+  a
+    color $teal
   // align-items stretch
 
 .search-result__actions .btn
