@@ -5,54 +5,32 @@ const superagent = require('superagent');
 let jsonp = require('superagent-jsonp');
 
 const wiki_api = "https://en.wikipedia.org/w/api.php?action=";
-const opensearch = `${wiki_api}opensearch&prop=pageimages|pageterms&format=json&limit=99&redirects=resolve&search=`
-const query_titles = `${wiki_api}query&prop=pageimages|pageterms|info|content|extracts&exintro=&explaintext=&inprop=url&format=json&piprop=thumbnail&pilimit=`
-const terms_description_titles = "&wbptterms=description&titles="
+const generator = `${wiki_api}query&formatversion=2&format=json&generator=prefixsearch&gpslimit=10&prop=pageimages|pageterms|info&inprop=url&piprop=thumbnail&pithumbsize=50&pilimit=10&redirects=&wbptterms=description&gpssearch=`
 const redirects = "&redirects="
 
+let pendingSearch;
+
 export function search(query, callback) {
+  if (pendingSearch) {
+    pendingSearch.cancel();
+  }
+
   var encoded_query = encodeURIComponent(query);
-  superagent(opensearch + encoded_query)
+
+  pendingSearch = superagent(generator + encoded_query)
   .use(jsonp)
   .end((err, res) => {
     if(err) {
       console.log('error fetching search', err);
     } else {
-      searchTitles(res.body[1])
+      if (res.body.query && res.body.query.pages) {
+        res.body.query.pages = _.sortBy(res.body.query.pages, 'index')
+        callback(res.body.query.pages)
+      } else {
+        callback()
+      }
     }
   })
-
-  function searchTitles(titles) {
-    var _redirects = {};
-    var articles;
-    var encoded_titles = [];
-    titles.map(title => {
-      encoded_titles.push(encodeURIComponent(title));
-    })
-    superagent(query_titles + titles.length + terms_description_titles + encoded_titles.join('|') + redirects).use(jsonp)
-    .end((err, res) => {
-      if(err) {
-        console.log('error fetching titles', err);
-      } else {
-        const {pages} = res.body.query;
-        if(pages !== undefined) {
-          articles = _.values(pages);
-        }
-        orderResults(titles, articles)
-      }
-    })
-  }
-
-  function orderResults(titles, results) {
-    let ordered_results = [];
-    titles.map(title => {
-      let found = _.find(results, {title: title});
-      if(found !== undefined) {
-        ordered_results.push(found);
-      }
-    });
-    callback(ordered_results);
-  }
 }
 
 export function fetchArticleSummary(title) {
@@ -70,9 +48,9 @@ const query_article_images = `${wiki_api}query&redirects&generator=images&list=a
 
 export function fetchArticleImages(title, callback,) {
   const url = query_article_images + title;
-  
+
   let imageObjects = [];
-  
+
   var getImages = function(url) {
     console.log(url)
     superagent(url)
@@ -103,12 +81,12 @@ export function fetchArticleImages(title, callback,) {
         const {thumburl} = obj.imageinfo[0];
         image.url = thumburl
       }
-      
+
       var exclude = false;
       exclude_images.map(exl => {
         if(image.url.indexOf(exl) !== -1) {exclude = true;}
       });
-    
+
       if(!exclude && image.url !== '') {
         images.push(image);
       }
