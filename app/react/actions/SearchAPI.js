@@ -7,7 +7,7 @@ let jsonp = require('superagent-jsonp');
 const wiki_api = "https://en.wikipedia.org/w/api.php?action=";
 
 const SEARCH_MAX_RESULTS = 50
-const SEARCH_THUMBNAIL_WIDTH = 75
+const SEARCH_THUMBNAIL_WIDTH = 100
 
 let pendingSearch;
 
