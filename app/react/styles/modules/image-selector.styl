@@ -4,21 +4,20 @@
   +above(md)
     max-width 30%
     overflow hidden
-  
+
 
 .image-selector__image
   display inline-block
   vertical-align top
   position relative
   height 200px
-  width 300px
+  width 100%
   background-position top center
   background-size cover
   background-repeat no-repeat
   +above(md)
-    width 100%
     height 300px
-    
+
   img
     max-height 100%
 
@@ -26,7 +25,7 @@
   white-space normal
   font-size 12px
   line-height 1.2
-  
+
 .slick-slider
   position relative
   width 100%
@@ -42,18 +41,18 @@
   display inline-block
   left 50%
   transform translateX(-50%)
-  
+
   li
     display inline-block
     text-align center
-  
+
   button
     position relative
     background none
     border none
     display inline-block
     color transparent
-    
+
     &:focus
       outline 0
 
@@ -71,13 +70,13 @@
       background white
       border 1px solid rgba(black, .5)
       border-radius 50%
-  
+
   li.slick-active button:after
     background rgba(black, .5)
 
 .image-selector__controls
   padding 0 1rem
-  
+
   +above(md)
     position absolute
     background-color rgba(black, .5)
@@ -88,7 +87,7 @@
     border-bottom-left-radius 10px
     align-items center
     padding 0
-    
+
     .action
       color white
       padding .5rem 1rem
@@ -117,10 +116,10 @@
   background-repeat no-repeat
   background-size contain
   background-color rgba(black, .5)
-  
+
   +above(md)
     top 150px
-  
+
   &:focus
     outline 0
     background-color rgba(black, .7)
