@@ -5,21 +5,44 @@ const superagent = require('superagent');
 let jsonp = require('superagent-jsonp');
 
 const wiki_api = "https://en.wikipedia.org/w/api.php?action=";
-const generator = `${wiki_api}query&formatversion=2&format=json&generator=prefixsearch&gpslimit=99&prop=pageimages|pageterms|info&inprop=url&piprop=thumbnail&pithumbsize=50&pilimit=99&redirects=&wbptterms=description&gpssearch=`
+const generator = `${wiki_api}query&formatversion=2&format=json&generator=prefixsearch&gpslimit=99&prop=pageimages|pageterms|info&piprop=thumbnail&pithumbsize=50&pilimit=99&redirects=&wbptterms=description&gpssearch=`
 const redirects = "&redirects="
+
+const SEARCH_MAX_RESULTS = 50
+const SEARCH_THUMBNAIL_WIDTH = 75
 
 let pendingSearch;
 
 export function search(query, callback) {
+
+   const params = {
+     formatversion: 2,
+     format: 'json',
+     action: 'query',
+     generator: 'prefixsearch',
+     gpssearch: query,
+     gpsnamespace: 0,
+     gpslimit: SEARCH_MAX_RESULTS,
+     prop: 'pageterms|pageimages|info',
+     inprop: 'url',
+     piprop: 'thumbnail',
+     wbptterms: 'description',
+     pithumbsize : SEARCH_THUMBNAIL_WIDTH,
+     pilimit: SEARCH_MAX_RESULTS,
+     list: 'prefixsearch',
+     pssearch: query,
+     pslimit: SEARCH_MAX_RESULTS
+  }
+
   if (pendingSearch) {
     pendingSearch.cancel();
   }
 
-  var encoded_query = encodeURIComponent(query);
-
-  pendingSearch = superagent(generator + encoded_query)
+  pendingSearch = superagent(wiki_api)
   .use(jsonp)
+  .query(params)
   .end((err, res) => {
+    pendingSearch = null
     if(err) {
       console.log('error fetching search', err);
     } else {
