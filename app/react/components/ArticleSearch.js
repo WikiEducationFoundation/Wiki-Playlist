@@ -22,10 +22,13 @@ class ArticleSearch extends React.Component {
     return (
       <div className='search__container intially-hidden p2 vertical-overflow'>
         <div className='search__container__card'>
-        <div className='mb1'><strong>Add Article</strong></div>
-        <SearchForm index={this.props.Playlist.editingArticle} {...this.props}/>
-        {this._currentQuery()}
-        <Link className='close-button' to='/playlists'>&#215;</Link>
+          <div className='search__container-header'>
+            <div className='mb1 white'><strong>Add Article</strong></div>
+            <SearchForm index={this.props.Playlist.editingArticle} {...this.props}/>
+            <Link className='close-button' to='/playlists'>&#215;</Link>
+          </div>
+          {this._currentQuery()}
+          <p>Search for a Wikipedia Page</p>
         </div>
       </div>
     )
