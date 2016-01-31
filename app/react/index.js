@@ -1,6 +1,4 @@
 // Style
-require('medium-editor/dist/css/medium-editor.css');
-require('medium-editor/dist/css/themes/default.css');
 require('./styles/index.styl');
 
 
@@ -55,4 +53,3 @@ class PlaylistApp extends React.Component{
 }
 
 registerComponent('PlaylistApp', PlaylistApp);
-
