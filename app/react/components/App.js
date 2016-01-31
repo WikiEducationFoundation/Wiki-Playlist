@@ -10,6 +10,7 @@ import Login from './Login';
 import SaveButton from  './SaveButton';
 import Share from './Share';
 import Icon from './Icon';
+import DeleteButton from './DeleteButton';
 
 class App extends React.Component {
 
@@ -54,8 +55,9 @@ class App extends React.Component {
         </div>
         {this._devTools()}
 
-        <footer className='container p2 flex center'>
+        <footer className='container p2 mt3 flex center flex-justify'>
           {(logged_in && current_user ? <span>You are logged in. <a href="#" className='' data-sign-out>Logout</a></span> : null)}
+          <DeleteButton />
         </footer>
 
         {(show_share? <Share/> : null )}
@@ -82,7 +84,7 @@ class App extends React.Component {
     }
   }
 
-  
+
 }
 
 export default connect( state => {return state})(App)
