@@ -5,6 +5,7 @@ class PlaylistsController < ApplicationController
   def create
     @playlist = Playlist.new(playlist_params)
     @playlist.user_id = current_user.id
+    binding.pry
     respond_to do |format|
       if @playlist.save
         GenerateShareImage.enqueue(@playlist.id, :html => get_share_image_html(@playlist))
@@ -165,7 +166,7 @@ class PlaylistsController < ApplicationController
         :slug,
         :featured,
         :color,
-        :articles_attributes => [:id, :title, :url, :image, :description, :pageId, :_destroy, :position]
+        :articles_attributes => [:id, :title, :url, :image, :description, :pageId, :_destroy, :position, :commons_url]
       )
     end
 end
