@@ -12,7 +12,7 @@ export default class SearchForm extends React.Component {
     return (
       <form onSubmit={e => e.preventDefault()}>
         <div className='relative'>
-          <input onChange={this._handleKeyUp.bind(this)}
+          <input onChange={this._handleInputChange.bind(this)}
                id='Search'
                type='text'
                autoComplete='off'
@@ -25,7 +25,7 @@ export default class SearchForm extends React.Component {
     );
   }
 
-  _handleKeyUp(e) {
+  _handleInputChange(e) {
     e.persist()
     this._debouncedSearch(e.target.value.trim())
   }
