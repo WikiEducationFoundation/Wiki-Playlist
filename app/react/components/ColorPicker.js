@@ -15,7 +15,7 @@ export default class ColorPicker extends React.Component {
                  background: color,
                  width: 22,
                  height: 22,
-                 paddingLeft: 4,
+                 paddingLeft: 2,
                  borderRadius: '20%'
                }}
                onClick={()=>{
