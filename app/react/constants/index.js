@@ -37,6 +37,7 @@ export const CLOSE_LOGIN = 'CLOSE_LOGIN';
 export const SHOW_SHARE = 'SHOW_SHARE';
 export const CLOSE_SHARE = 'CLOSE_SHARE';
 export const UPDATE_PLAYLIST_USERNAME = 'UPDATE_PLAYLIST_USERNAME';
+export const PLAYLIST_SHOULD_SAVE = 'PLAYLIST_SHOULD_SAVE';
 
 // Breakpoints
 export const MD = '756px';

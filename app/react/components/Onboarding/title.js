@@ -47,7 +47,7 @@ class OnboardingTitle extends React.Component {
           </div>
         </div>
         <div className='onboarding__image bg-gallery p4' style={{
-          backgroundImage: `url('//upload.wikimedia.org/wikipedia/en/8/80/Wikipedia-logo-v2.svg')`
+          backgroundImage: `url('/images/wikipedia-logo.png')`
         }}/>
       </div>
     );
@@ -83,7 +83,7 @@ class OnboardingTitle extends React.Component {
               }}>Next</button></div>
         </div>
         <div className='onboarding__image bg-gallery p4' style={{
-          backgroundImage: `url('//upload.wikimedia.org/wikipedia/en/8/80/Wikipedia-logo-v2.svg')`
+          backgroundImage: `url('/images/wikipedia-logo.png')`
         }}/>
       </div>
     );
