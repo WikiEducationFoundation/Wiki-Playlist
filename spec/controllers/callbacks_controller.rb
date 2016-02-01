@@ -8,4 +8,8 @@ describe CallbacksController do
     request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:twitter] 
   end
 
+  describe "#twitter" do
+    # twitter
+  end
+
 end
