@@ -41,7 +41,7 @@ group :test do
   gem "capybara"
   gem "capybara-webkit"
   gem "rspec-rails", '~> 3.0'
-  gem "cucumber-rails"
+  gem "cucumber-rails", :require => false
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'shoulda'
