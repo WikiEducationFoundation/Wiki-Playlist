@@ -86,7 +86,7 @@ class PlaylistEditor extends React.Component {
     return (
       <div>
         <div className="">
-          <div className="py2 mb1 md-mt5" ref={c => {this.cardContent = c}}>
+          <div className="py3 mb1 md-mt5" ref={c => {this.cardContent = c}}>
 
             <div className={'article-card__header px2 relative'}>
               <p>{username}</p>
@@ -95,7 +95,7 @@ class PlaylistEditor extends React.Component {
                   <EditableText
                       value={title}
                       color={color}
-                      placeholder={'Your Playlist Title'}
+                      placeholder={'Add Playlist Title'}
                       limit={TITLE_LIMIT}
                       className='h1 inline-block'
                       save={(title)=>{this.dispatch(setPlaylistTitle(title))}}>
