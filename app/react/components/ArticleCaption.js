@@ -35,7 +35,7 @@ class ArticleCaption extends React.Component {
             callback={this._storeCaption}
             value={this.state.caption}
             placeholder='Add a caption'/>
-          <div><small className='gray'>Your response will be added to the playlist.</small></div>
+          <div><small className='gray'>Your response will be added to the Playlist.</small></div>
         </div>
         <div className='flex actions border-top'>
           <button className='btn border-right' onClick={this._goToImageSelector}>Back</button>
