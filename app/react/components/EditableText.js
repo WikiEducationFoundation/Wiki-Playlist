@@ -93,10 +93,6 @@ class EditableText extends React.Component {
                     <TextArea {...inputProps} />)}
                 <span className='character-limit'>{count}</span>
               </div>
-              <div className='flex flex-center right'>
-                <button className='action cancel-button inline-block mr1' onClick={this._cancel}>&#215;</button>
-                <button className='action' onClick={this._save}><Icon size="25px" icon="check" fill={iconColor} /></button>
-              </div>
             </div>
           :
             <div className='relative' onClick={()=>{
