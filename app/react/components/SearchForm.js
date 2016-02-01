@@ -12,7 +12,9 @@ export default class SearchForm extends React.Component {
     return (
       <form onSubmit={e => e.preventDefault()}>
         <div className='relative'>
-          <input onKeyUp={this._handleKeyUp.bind(this)}
+          <input 
+               
+               onKeyPress={this._handleKeyUp.bind(this)}
                id='Search'
                type='text'
                autoComplete='off'
