@@ -19,8 +19,9 @@ describe User do
       user = FactoryGirl.create(:user)
       user.save!
       expect(user.username).to eq('joe')
-      user2 = build(:user)
-      expect{ user2.save! }.to raise_error(ActiveRecord::RecordInvalid)
+      user2 = build(:user, :email => 'joe@yahoo.com')
+      user2.save!
+      expect(user2.username).to eq('joe')
     end
 
   end

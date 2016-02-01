@@ -61,6 +61,7 @@ export function fetchArticleSummary(title) {
 }
 
 // Fetch Article images
+const commons_url = 'https://commons.wikimedia.org/wiki/';
 const exclude_images = require('../data/exclude_images');
 const query_article_images = `${wiki_api}query&redirects&generator=images&list=allimages&prop=imageinfo&&iiprop=url|extmetadata|metadata|commonmetadata&iiurlwidth=600&gimlimit=100&format=json&titles=`
 
@@ -70,7 +71,6 @@ export function fetchArticleImages(title, callback,) {
   let imageObjects = [];
 
   var getImages = function(url) {
-    console.log(url)
     superagent(url)
     .use(jsonp)
     .end((err, res) => {
@@ -91,13 +91,13 @@ export function fetchArticleImages(title, callback,) {
   getImages(url);
 
   var filterImages = function(imageObjects) {
-    console.log(imageObjects)
     let images = [];
     imageObjects.map(obj => {
       let image = { url: ''}
       if(obj.imageinfo !== undefined && obj.imageinfo.length) {
         const {thumburl} = obj.imageinfo[0];
-        image.url = thumburl
+        image.url = thumburl;
+        image.commons_url = commons_url + obj.title;
       }
 
       var exclude = false;

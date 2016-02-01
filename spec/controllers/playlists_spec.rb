@@ -36,8 +36,9 @@ describe PlaylistsController do
   describe "#update" do
     it 'updates the playlist without duplicating its associated articles' do
       # binding.pry
-      # playlist = @playlist.to_json(:include => :articles)
-      xhr :put, :update, {id:@playlist.id, playlist: @playlist_json}, format: :json
+      update = {id:@playlist.id, playlist: @playlist_json}
+      # binding.pry
+      xhr :put, :update, update, format: :json
       data = JSON.parse(response.body)
       expect(data).not_to be_empty
       expect(@playlist.articles.length).to eq(3)

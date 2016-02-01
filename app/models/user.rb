@@ -12,12 +12,8 @@ class User < ActiveRecord::Base
 
   has_many :playlists
 
-  validate :validate_username
-  validates :username,
-  :presence => true,
-  :uniqueness => {
-    :case_sensitive => false
-  }
+  # validate :validate_username
+  validates :username, :presence => true
 
   def as_json(options={})
     super(:only => [:email, :username, :admin])
@@ -50,11 +46,11 @@ class User < ActiveRecord::Base
     end
   end
 
-  def validate_username
-    if User.where(email: username).exists?
-      errors.add(:username, 'is already taken')
-    end
-  end
+  # def validate_username
+  #   if User.where(email: username).exists?
+  #     errors.add(:username, 'is already taken')
+  #   end
+  # end
   
   before_validation :create_login
 
@@ -62,7 +58,6 @@ class User < ActiveRecord::Base
   
   def create_login
     if self.username.blank? && self.email
-      binding.pry
       email = self.email.split(/@/)
       login_taken = User.where(:username => email[0]).first
       unless login_taken
