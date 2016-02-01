@@ -33,7 +33,7 @@ export default class Home extends React.Component {
           <li className='mb1'>When you’ve made your list, you can save the list at the bottom of the cards, at which point you’ll be given a chance to either share it on various social media sites, email the list to someone, or copy the permalink for other uses.</li>
         </ol>
 
-        <p><strong>PLEASE DO NOT SHARE YOUR LIST ON SOCIAL MEDIA UNTIL FEBRUARY 8.</strong> Instead, please email a link to <a href='mailto:playlist@wikiedu.org'>playlist@wikiedu.org</a> so we know you’ve completed it, and we can feature it on the playlist.wiki home page. </p>
+        <p><strong>PLEASE DO NOT SHARE YOUR LIST ON SOCIAL MEDIA UNTIL FEBRUARY 8.</strong><br/>Instead, please email a link to <a href='mailto:playlist@wikiedu.org'>playlist@wikiedu.org</a> so we know you’ve completed it, and we can feature it on the playlist.wiki home page. </p>
 
       </div>
     )

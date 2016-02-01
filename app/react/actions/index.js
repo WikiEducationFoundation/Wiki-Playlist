@@ -35,7 +35,8 @@ import {
   SHOW_SHARE,
   CLOSE_SHARE,
   UPDATE_PLAYLIST_USERNAME,
-  SET_PLAYLIST_COLOR
+  SET_PLAYLIST_COLOR,
+  PLAYLIST_SHOULD_SAVE
 } from '../constants';
 
 
@@ -164,6 +165,13 @@ export function setPlaylistTitle(text) {
   return {
     type: SET_PLAYLIST_TITLE,
     text
+  }
+}
+
+export function setPlaylistShouldSave(bool) {
+  return {
+    type: PLAYLIST_SHOULD_SAVE,
+    bool
   }
 }
 
