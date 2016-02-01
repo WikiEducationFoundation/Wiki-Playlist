@@ -34,6 +34,7 @@ export default class Home extends React.Component {
           <p><strong>PLEASE DO NOT SHARE YOUR LIST ON SOCIAL MEDIA UNTIL FEBRUARY 8.</strong> </p>
           <p>Instead, please email a link to <a href='mailto:playlist@wikiedu.org'>playlist@wikiedu.org</a> so we know you’ve completed it, and we can feature it on the playlist.wiki home page. </p>
         </div>
+        {this._renderPlaylists()}
       </div>
     )
   }
@@ -44,15 +45,13 @@ export default class Home extends React.Component {
 
   _renderPlaylists() {
     const { playlists, user } = this.state;
-    if(playlists.length === 0) {
+    if(process.env.NODE_ENV !== 'development') {
       return null;
     }
-
-    
     
     if(playlists.length) {
       return (
-        <div className='flex flex-wrap px1'>
+        <div className='flex flex-wrap py2 px1'>
         {playlists.map(playlist =>{
           const {title, caption, articles, id, featured} = playlist;
           const permalink = playlist.url;
