@@ -34,4 +34,27 @@ RailsAdmin.config do |config|
     # history_index
     # history_show
   end
+
+  config.model 'Playlist' do
+    list do
+      field :title do
+        pretty_value do
+          bindings[:view].tag(:a, href: "/playlist/#{bindings[:object].slug}") << bindings[:object].title
+        end
+      end
+      field :user_id do
+        pretty_value do
+          bindings[:view].render :partial => "admin/user", :locals => {:user => User.find(bindings[:object].user_id) }
+        end
+      end
+      field :share_image do
+        pretty_value do
+          bindings[:view].tag(:img, { :src => bindings[:object].share_image.url, :width => 250, :height => 130 })
+        end
+      end
+      field :created_at
+    end
+  end
+
+
 end
