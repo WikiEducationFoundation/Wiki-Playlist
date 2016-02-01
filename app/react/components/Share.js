@@ -41,7 +41,7 @@ class Share extends React.Component {
   _shareRendering() {
     return (
       <div className='center p2'>
-        <p>Preparing your playlist...</p>
+        <p>Preparing your Playlist...</p>
       </div>
     )
   }

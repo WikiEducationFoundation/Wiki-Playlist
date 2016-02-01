@@ -21,6 +21,7 @@ function filterArticleKeys(playlist) {
     }
     if(article.image.url !== '') {
       articles[i].image = article.image.url;
+      articles[i].commons_url = article.image.commons_url;
     }
   });
 
