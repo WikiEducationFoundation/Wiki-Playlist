@@ -26,10 +26,7 @@ export function search(query, callback) {
      piprop: 'thumbnail',
      wbptterms: 'description',
      pithumbsize : SEARCH_THUMBNAIL_WIDTH,
-     pilimit: SEARCH_MAX_RESULTS,
-     list: 'prefixsearch',
-     pssearch: query,
-     pslimit: SEARCH_MAX_RESULTS
+     pilimit: SEARCH_MAX_RESULTS
   }
 
   if (pendingSearch) {
