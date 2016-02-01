@@ -21,19 +21,19 @@ class SearchResult extends React.Component {
 
   render() {
     const {title, thumbnail, terms, fullurl} = this.props.article;
-    const thumb = (thumbnail !== undefined ? <div style={{width: 50, height: 50, backgroundImage: `url(${thumbnail.source})`, backgroundSize: 'cover', backgroundPosition: 'center center'}}></div> : null)
+    const thumb = (thumbnail !== undefined ? <div style={{width: 60, height: 60, backgroundImage: `url(${thumbnail.source})`, backgroundSize: 'cover', backgroundPosition: 'center center'}}></div> : null)
     const description = (terms !== undefined && terms.description !== undefined ? <p className='search-result__description'>{terms.description}</p> : null)
     return (
       <div className='search-result border mb2 bg-white'>
         <div className='flex flex-wrap border-bottom p1 pt2'>
           {thumb}
           <div className={'search-results__summary ' + (thumb ? 'px2' : '')}>
-            <h3 style={{margin: 0}}>{title}</h3>
+            <h3 style={{margin: 0, marginBottom: 3}}>{title}</h3>
             {description}
           </div>
         </div>
-        <div className='flex flex-justify search-result__actions p1'>
-          <a className='action blue' href={fullurl} target='_blank'>Read Article <Icon size="14px" icon="external-link" fill={'blue'} /></a>
+        <div className='flex flex-justify flex-center search-result__actions p1'>
+          <a className='action' href={fullurl} target='_blank'>Read Article <Icon size="14px" icon="external-link" fill={'#15B5C2'} /></a>
           <button className='btn btn--search-result' onClick={this.handleAddArticle.bind(this)}>Add to Playlist</button>
         </div>
       </div>)

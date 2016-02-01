@@ -13,6 +13,10 @@
   z-index 52
   height 230px
 
+.onboarding__header
+  font-weight 600
+  color $teal
+
 .onboarding__column
   height 100%
   justify-content space-between
@@ -20,10 +24,11 @@
 
   +above(md)
     padding 2rem
-  
+
   .field
     width 100%
-  
+    border-color rgba(0,0,0,.4)
+
   .character-limit
     right 7px
 
@@ -31,7 +36,7 @@
   background-size 50% auto
   background-position center
   background-repeat no-repeat
-  flex-basis 50%
+  flex-basis 30%
 
 .onboarding__finish
   margin-left auto

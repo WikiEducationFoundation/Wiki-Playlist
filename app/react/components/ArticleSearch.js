@@ -7,7 +7,7 @@ import { pushPath } from 'redux-simple-router';
 import { PLAYLISTS_PATH } from '../constants';
 
 class ArticleSearch extends React.Component {
-  
+
   componentDidMount() {
     this.addAnimation(fadeIn);
     const { editingArticle } = this.props.Playlist;
@@ -22,10 +22,12 @@ class ArticleSearch extends React.Component {
     return (
       <div className='search__container intially-hidden p2 vertical-overflow'>
         <div className='search__container__card'>
-        <div className='mb1'><strong>Add Article ({editingArticle + 1}/{articles.length})</strong></div>
-        <SearchForm index={this.props.Playlist.editingArticle} {...this.props}/>
-        {this._currentQuery()}
-        <Link className='close-button' to='/playlists'>&#215;</Link>
+          <div className='search__container-header'>
+            <div className='mb2 white'><strong>Add Article</strong></div>
+            <SearchForm index={this.props.Playlist.editingArticle} {...this.props}/>
+            <Link className='close-button' to='/playlists'>&#215;</Link>
+          </div>
+          {this._currentQuery()}
         </div>
       </div>
     )
@@ -45,13 +47,13 @@ class ArticleSearch extends React.Component {
     if(query !== undefined && query.length) {
       return (
         <div>
-          <div className='py1'><strong>Search For: "{query}"</strong></div>
+          <div className='py1'><strong>Search Results For: "{query}"</strong></div>
           <SearchResults dispatch={this.props.dispatch} query={history[query]} isSearching={searching}/>
         </div>
       );
-      
+
     } else {
-      return null;
+      return <p className="search__container__empty-state">Search for a Wikipedia Page</p>;
     }
   }
 }
