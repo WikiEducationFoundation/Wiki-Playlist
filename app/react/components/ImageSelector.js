@@ -116,7 +116,7 @@ class ArticleImage extends React.Component {
     }
     return (
       <div>
-        <div style={style} className={'image-selector__image' + (this.props.selected ? ' bg-aqua' : '')}></div>
+        <div style={style} className={'image-selector__image bg-gallery'}></div>
       </div>
     )
   }
