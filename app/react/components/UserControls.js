@@ -85,9 +85,10 @@ class UserControls extends React.Component {
     const { logged_in, current_user } = this.props.Account;
     const { total_articles } = this.props.Playlist;
     const { routing } = this.props;
-    let account_button_text = (routing.path.indexOf('playlist') !== -1 ? 'to Save' : '');
+    const isPlaylistPage = routing.path.indexOf('playlist') !== -1;
+    let account_button_text = (isPlaylistPage ? 'to Save' : '');
     let account = (
-      <button className='btn btn-primary mr1'
+      <button className={'btn btn-'+(isPlaylistPage ? 'primary' : 'outline' )+' mr1'}
               onClick={()=>{
                 this.dispatch(showLogin(true));
               }}>Login {account_button_text}</button>
