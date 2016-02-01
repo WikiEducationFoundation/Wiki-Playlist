@@ -37,7 +37,7 @@ class OnboardingTitle extends React.Component {
         <div className='p2 flex flex-column onboarding__column'>
           <div>
             <h3 className='h2 mb2 onboarding__header'>Wikipedia Playlist Builder</h3>
-            <p className='mb2 caption'>Welcome! Build and share a thematic playlist of 3 to 5 Wikipedia Pages.</p>
+            <p className='mb2 caption'>Welcome! Build and share a thematic playlist of 3 to 5 Wikipedia Pages. They can be about anything.</p>
           </div>
           <div>
             <button className='btn btn-primary right'

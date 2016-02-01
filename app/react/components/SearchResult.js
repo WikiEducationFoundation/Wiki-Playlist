@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { pushPath } from 'redux-simple-router';
 import Icon from './Icon';
 import es6BindAll from "es6bindall";
+import Promise from 'promise-polyfill';
 
 import {
   addArticle,
