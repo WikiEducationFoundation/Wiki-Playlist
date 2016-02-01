@@ -11,9 +11,16 @@
 .playlist__title
   max-width 500px
 
+.playlist__title
+  .editable-text
+    textarea.invisible-input
+      margin-bottom 30px
+      +above(md)
+        margin-bottom 0px
+
 .playlist__caption
   word-wrap: break-word
-  margin-top 20px
+  margin-top 0px
   +above(md)
     margin-top 0px
     width 300px
