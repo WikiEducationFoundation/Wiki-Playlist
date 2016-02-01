@@ -132,7 +132,7 @@ export class ArticleCard extends React.Component {
       content = (
         <div>
           <h2 className="article-card__title">{title}</h2>
-          <div className="mb2 article-card__excerpt summary">{truncated_description}</div>
+          <div className="mb2 article-card__excerpt summary flex">{truncated_description}</div>
         </div>
       );
     }
@@ -146,7 +146,7 @@ export class ArticleCard extends React.Component {
 
     let button = null;
     if(has_article) { button = (
-      <div className='flex flex-justify flex-center'>{edit_button}
+      <div className='flex article-card__controls'>{edit_button}
         <a className='action action--external teal'
            href={url} target='_blank'>
            View Article &nbsp;
@@ -156,7 +156,7 @@ export class ArticleCard extends React.Component {
 
     if(editing_options) {
       button = (
-        <div className='flex flex-justify'>
+        <div className='flex article-card__controls'>
           <button className='btn btn-outline'
                   ref={card => {this.cardElement = card}}
                   onClick={() => {

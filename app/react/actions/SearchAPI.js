@@ -108,7 +108,14 @@ export function fetchArticleImages(title, callback,) {
       if(!exclude && image.url !== '') {
         images.push(image);
       }
+
     });
+
+    images.push({
+      url: 'http://wiki-playlist.s3.amazonaws.com/images/wikipedia-page-fallback.png',
+      commons_url: 'https://commons.wikimedia.org/wiki/File:Wikipedia-logo-v2.svg'
+    });
+
     callback(images);
   }
 }
