@@ -7,7 +7,7 @@ let jsonp = require('superagent-jsonp');
 const wiki_api = "https://en.wikipedia.org/w/api.php?action=";
 
 const SEARCH_MAX_RESULTS = 50
-const SEARCH_THUMBNAIL_WIDTH = 75
+const SEARCH_THUMBNAIL_WIDTH = 100
 
 let pendingSearch;
 
@@ -26,10 +26,7 @@ export function search(query, callback) {
      piprop: 'thumbnail',
      wbptterms: 'description',
      pithumbsize : SEARCH_THUMBNAIL_WIDTH,
-     pilimit: SEARCH_MAX_RESULTS,
-     list: 'prefixsearch',
-     pssearch: query,
-     pslimit: SEARCH_MAX_RESULTS
+     pilimit: SEARCH_MAX_RESULTS
   }
 
   if (pendingSearch) {

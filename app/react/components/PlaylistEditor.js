@@ -2,7 +2,7 @@ import ArticleCard from './ArticleCard';
 import { connect } from 'react-redux';
 import { truncateHTML, stripTags } from '../utils/Text';
 import OnboardingTitle from './Onboarding/title';
-import { 
+import {
   updateCurrentEditingArticle,
   updateQuery,
   addArticleCard,
@@ -18,7 +18,6 @@ import { Link } from 'react-router';
 import es6BindAll from "es6bindall";
 import EditableText from './EditableText';
 import SaveButton from './SaveButton';
-import DeleteButton from './DeleteButton';
 import PlaylistBackgroundColor from './PlaylistBackgroundColor';
 import ColorPicker from './ColorPicker';
 
@@ -51,11 +50,10 @@ class PlaylistEditor extends React.Component {
           {this._addArticle()}
           <div className='center py2'><SaveButton /></div>
           {( onboarded ? <ColorPicker /> : null )}
-          <DeleteButton />
         </div>
-        
+
         <PlaylistBackgroundColor color={color}/>
-        
+
         { onboarded ? null : <div className='onboarding__screen'></div>}
       </div>
     )
@@ -102,9 +100,9 @@ class PlaylistEditor extends React.Component {
                       className='h1 inline-block'
                       save={(title)=>{this.dispatch(setPlaylistTitle(title))}}>
                       <h1 className='inline-block'>{title}</h1>
-                      </EditableText> 
+                      </EditableText>
                 </div>
-  
+
                 <div className='playlist__caption'>
                   <EditableText
                       color={color}
@@ -114,7 +112,7 @@ class PlaylistEditor extends React.Component {
                       className=' '
                       save={(caption)=>{this.dispatch(setPlaylistCaption(caption))}}>
                       <p>{caption}</p>
-                      </EditableText> 
+                      </EditableText>
                   </div>
                 </div>
               </div>
@@ -133,7 +131,7 @@ class PlaylistEditor extends React.Component {
       return (
       <div className="editable-container center p2">
           <button className='action teal'
-                    onClick={()=>{this.props.dispatch(addArticleCard())}}>Add Article +</button>
+                    onClick={()=>{this.props.dispatch(addArticleCard())}}>Add Page +</button>
       </div>)
     } else {
       return null;
@@ -167,7 +165,7 @@ class PlaylistEditor extends React.Component {
     })
   }
 
-  
+
 }
 
 export default connect( state => {return state})(PlaylistEditor);

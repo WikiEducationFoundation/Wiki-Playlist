@@ -54,6 +54,7 @@
     "react-dom": "^0.14.0",
     "react-redux": "^4.0.4",
     "react-router": "^1.0.0-rc3",
+    "react-textarea-autosize": "^3.3.0",
     "react-tools": "*",
     "redux": "^3.0.5",
     "redux-devtools": "^3.0.1",

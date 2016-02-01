@@ -3,6 +3,7 @@ import { PropTypes } from 'react';
 import Icon from './Icon';
 import es6BindAll from "es6bindall";
 import tinycolor from 'tinycolor2';
+import TextArea from 'react-textarea-autosize'
 
 class EditableText extends React.Component {
   static propTypes = {
@@ -82,14 +83,14 @@ class EditableText extends React.Component {
 
     return (
       <div className='editable-text'>
-        {( 
-          editing || empty ? 
+        {(
+          editing || empty ?
             <div className={(textInput ? 'flex flex-center' : '')}>
               <div className='relative'>
-                {(textInput ? 
-                    <input {...inputProps} /> 
-                  :  
-                    <textarea {...inputProps} />)}
+                {(textInput ?
+                    <input {...inputProps} />
+                  :
+                    <TextArea {...inputProps} />)}
                 <span className='character-limit'>{count}</span>
               </div>
               <div className='flex flex-center right'>
@@ -97,7 +98,7 @@ class EditableText extends React.Component {
                 <button className='action' onClick={this._save}><Icon size="25px" icon="check" fill={iconColor} /></button>
               </div>
             </div>
-          : 
+          :
             <div className='relative' onClick={()=>{
               this.setState({editing: true}, ()=>{
                 this.refs.input.focus();
@@ -107,7 +108,7 @@ class EditableText extends React.Component {
               {this.props.children}<Icon className='edit-icon' size="20px" icon="edit" fill={iconColor} />
             </div>
         )}
-        
+
       </div>
     )
   }
