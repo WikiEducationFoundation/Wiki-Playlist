@@ -4,7 +4,7 @@
       div.share-image__user #{@user.username}&#39;s
     h1 Wikipedia Playlist
   .share-image__articles.relative
-    - @articles.each do |article, index|
+    - @articles.slice(0,3).each do |article, index|
       div class="flex-column flex-stretch article-card article-card--share card-#{article.position}"
         .article-card__container
           .article-card__content
