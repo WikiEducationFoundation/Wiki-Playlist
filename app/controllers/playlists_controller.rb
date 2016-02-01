@@ -165,7 +165,7 @@ class PlaylistsController < ApplicationController
         :slug,
         :featured,
         :color,
-        :articles_attributes => [:id, :title, :url, :image, :description, :pageId, :_destroy, :position]
+        :articles_attributes => [:id, :title, :url, :image, :description, :pageId, :_destroy, :position, :commons_url]
       )
     end
 end

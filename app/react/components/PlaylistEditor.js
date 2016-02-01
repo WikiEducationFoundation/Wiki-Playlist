@@ -107,7 +107,7 @@ class PlaylistEditor extends React.Component {
                   <EditableText
                       color={color}
                       value={caption}
-                      placeholder={'Add a caption to your playlist'}
+                      placeholder={'Add a caption to your Playlist'}
                       limit={CAPTION_LIMIT}
                       className=' '
                       save={(caption)=>{this.dispatch(setPlaylistCaption(caption))}}>
