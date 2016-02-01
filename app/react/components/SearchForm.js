@@ -12,7 +12,7 @@ export default class SearchForm extends React.Component {
     return (
       <form onSubmit={e => e.preventDefault()}>
         <div className='relative'>
-          <input onKeyUp={this._handleKeyUp.bind(this)}
+          <input onChange={this._handleKeyUp.bind(this)}
                id='Search'
                type='text'
                autoComplete='off'
@@ -27,14 +27,18 @@ export default class SearchForm extends React.Component {
 
   _handleKeyUp(e) {
     e.persist()
-    this._debouncedSearch(e.target.value)
+    this._debouncedSearch(e.target.value.trim())
   }
 
   _debouncedSearch(query) {
     const {dispatch, index} = this.props;
     dispatch(updateQuery(index, query))
     dispatch(isSearching(true))
-    search(query, this._handleResults.bind(this));
+    if (query) {
+      search(query, this._handleResults.bind(this));
+    } else {
+      this._handleResults([])
+    }
   }
   _handleResults(results) {
     this.props.dispatch(addSearch(results, this.props.index))
