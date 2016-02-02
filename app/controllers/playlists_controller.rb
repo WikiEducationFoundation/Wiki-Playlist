@@ -48,7 +48,7 @@ class PlaylistsController < ApplicationController
   # PATCH/PUT /playlists/1
   # PATCH/PUT /playlists/1.json
   def update
-    if can? :manage, :all || @playlist.user_id === current_user.id
+    # if can? :manage, :all || @playlist.user_id === current_user.id
       @playlist.share_image_rendered = false
       respond_to do |format|
         if @playlist.update(playlist_params)
@@ -63,9 +63,9 @@ class PlaylistsController < ApplicationController
           format.json { render json: @playlist.errors, status: :unprocessable_entity }
         end
       end
-    else
-      format.json { render json: @playlist.errors, status: 'Not authorized' }
-    end
+    # else
+    #   format.json { render json: @playlist.errors, status: 'Not authorized' }
+    # end
   end
 
 
@@ -86,15 +86,15 @@ class PlaylistsController < ApplicationController
   # DELETE /playlists/1
   # DELETE /playlists/1.json
   def destroy
-    if can? :manage, :all || @playlist.user_id === current_user.id
+    # if can? :manage, :all || @playlist.user_id === current_user.id
       @playlist.destroy
       respond_to do |format|
         # format.html { redirect_to playlists_url, notice: 'Playlist was successfully destroyed.' }
         format.json { head :no_content, message: 'Playlist was successfully deleted.' }
       end
-    else
-      format.json { render json: @playlist.errors, status: 'Not authorized' }
-    end
+    # else
+    #   format.json { render json: @playlist.errors, status: 'Not authorized' }
+    # end
   end
 
   def preview

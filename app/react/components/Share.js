@@ -52,10 +52,9 @@ class Share extends React.Component {
     const { title, caption } = this.props.Playlist;
     return (
       <div className='center p2'>
-        <a href={`mailto:playlist@wikiedu.org?subject=My Wikipedia Playlist:%20${encodeURIComponent("You're Wikipedia Playlist : " + title)}&body=${encodeURIComponent(permalink)}`} 
+        <a href={`mailto:playlist@wikiedu.org?subject=My Wikipedia Playlist:%20${encodeURIComponent(title)}&body=${encodeURIComponent(permalink)}`} 
                className='btn btn-outline mb1 center'>
                Email</a>
-        <a className='btn btn-primary' href={permalink} target='_blank'>View your Playlist</a>
       </div>
     )
   }
