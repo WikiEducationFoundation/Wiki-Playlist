@@ -1,6 +1,7 @@
 class PlaylistsController < ApplicationController
   before_action :set_playlist_id, only: [:edit, :update, :feature, :destroy, :share_image, :get_share_html, :render_share_image, :render_status, :render_success]
   before_action :set_playlist_slug, only: [:show]
+  before_action :require_permission, only: [:update, :destroy]
 
   def create
     @playlist = Playlist.new(playlist_params)
@@ -136,6 +137,12 @@ class PlaylistsController < ApplicationController
   end
   
   private
+
+    def require_permission
+      if current_user != Playlist.find(params[:id]).user
+        redirect_to root_path
+      end
+    end
 
     def set_playlist_id
       if Playlist.where(id: params[:id]).blank?

@@ -108,6 +108,10 @@ TODO
 
  - [React Icons](http://dmfrancisco.github.io/react-icons/)
 
+**Travis CI**
+
+- [Using PostgreSQL in Builds](https://docs.travis-ci.com/user/using-postgresql/#Using-PostgreSQL-in-your-Builds)
+
 **Testing**
 
 - [Rspec Model Testing Template](https://gist.github.com/kyletcarlson/6234923)
