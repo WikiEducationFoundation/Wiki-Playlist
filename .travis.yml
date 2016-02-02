@@ -2,6 +2,7 @@ install:
   - npm install
   - bundle install
 
+language: node_js
 node_js: '4.0'
 
 script: npm run build
