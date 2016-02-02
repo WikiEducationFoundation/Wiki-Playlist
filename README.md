@@ -79,11 +79,6 @@ $ git push heroku master
 
 1. [Install Travis Gem](https://github.com/travis-ci/travis.rb#installation)
 2. Add heroku auth token to travis.yml: `travis encrypt $(heroku auth:token) --add deploy.api_key`
-3. Add github config info to travis file:
-  1. `travis encrypt 'GIT_NAME="hudakdidit"' --add`
-  2. `travis encrypt 'GIT_EMAIL=hudak.jonathan@gmail.com' --add`
-  3. `travis encrypt 'GH_TOKEN=41f5c44ec19cd5071da7d507b266f77e31ad47fd' --add`
-
 
 ##PhantomJS
 
