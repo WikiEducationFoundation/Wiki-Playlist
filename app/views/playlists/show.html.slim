@@ -25,8 +25,11 @@ nav.py2.site__navigation data-reactid=".0.0"
   .playlist__background-color style="background-color: #{@playlist.color}"
   div.py2.white.article-card__header
     p #{@user.username}
-    h1= @playlist.title
-    p= @playlist.caption
+    .md-flex.flex-justify
+      .playlist__title
+        h1= @playlist.title
+      .playlist__caption
+        p.white= @playlist.caption
   - @articles.each do |article|
     .flex-column.flex-stretch.article-card
       .article-card__container
