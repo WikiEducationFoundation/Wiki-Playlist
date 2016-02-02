@@ -10,10 +10,9 @@ before_install:
   - npm --version
 
 before_script: 
-  - bundle install
   - npm install
   - npm run build
-  
+
 deploy:
   provider: heroku
   api_key:
