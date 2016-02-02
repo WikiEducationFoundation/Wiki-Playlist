@@ -63,7 +63,7 @@ export class ArticleCard extends React.Component {
               }}>&#215;</button>: null)}
 
               {(isOnboarding ?
-                  <div><h3 className='mb3'>Lets add your first Wikipedia page!</h3>
+                  <div><h3 className='mb3'>Lets add your first Wikipedia Article!</h3>
                   </div>
                 : null)}
 
@@ -73,7 +73,7 @@ export class ArticleCard extends React.Component {
                         this.dispatch(updateCurrentEditingArticle(index))
                         this.dispatch(pushPath('/playlists/article/search'))
                       }}>
-                      Add Wikipedia Page</button>
+                      Add Wikipedia Article</button>
               </div>
           )}
 
@@ -149,7 +149,7 @@ export class ArticleCard extends React.Component {
       <div className='flex article-card__controls'>{edit_button}
         <a className='action action--external teal'
            href={url} target='_blank'>
-           View Article &nbsp;
+           View Wikipedia Article &nbsp;
            <Icon size="12px" icon="external-link" fill={'teal'} /></a>
         </div>); }
 
