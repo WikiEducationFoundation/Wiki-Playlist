@@ -39,9 +39,9 @@ export default class Home extends React.Component {
             <Link className='btn btn-primary' to="/playlists">Create a Playlist</Link>
           </div>
         </MediaQuery>
-        {this._renderPlaylists()}
         <a className="center-align mt2" target="_blank" href="http://playlist.wiki/playlist/bizarre-mythological-scottish-creatures">View Playlist Example</a>
         <img src='/images/example-page.png'/>
+        {this._renderPlaylists()}
       </div>
     )
   }
