@@ -1,7 +1,7 @@
 import GSAP from 'react-gsap-enhancer'
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { 
+import {
   showLogin,
   closeLogin
 } from '../actions';
@@ -43,7 +43,7 @@ class Login extends React.Component {
   componentDidMount() {
     this.addAnimation(({target})=> {
       return TweenMax.from(target, 0.5, {
-        opacity: 0, 
+        opacity: 0,
         ease: Power2.easeOut,
         onStart: () => {
           var container = this.container;
@@ -63,7 +63,7 @@ class Login extends React.Component {
     if(props.Account.close_login) {
       this.addAnimation(({target})=> {
         return TweenMax.to(target, 0.5, {
-            opacity: 0, 
+            opacity: 0,
             ease: Power2.easeOut,
             onStart: () => {
               var container = this.container;

@@ -29,8 +29,6 @@ ActiveRecord::Schema.define(version: 20160201211306) do
     t.string   "commons_url"
   end
 
-  add_index "articles", ["playlist_id"], name: "index_articles_on_playlist_id", using: :btree
-
   create_table "playlists", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "title"

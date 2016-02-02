@@ -11,9 +11,18 @@
 .playlist__title
   max-width 500px
 
+.playlist__title
+  .editable-text
+    textarea.invisible-input
+      margin-bottom 30px
+      +above(md)
+        margin-bottom 0px
+
 .playlist__caption
   word-wrap: break-word
+  margin-top 0px
   +above(md)
+    margin-top 0px
     width 300px
     align-self: center;
 
@@ -21,9 +30,6 @@
     padding 4px
     border-bottom 2px solid transparent
     line-height 1.75
-
-  .character-limit
-    // right -30px
 
 .playlist-actions
   max-width 300px
