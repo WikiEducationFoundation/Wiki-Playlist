@@ -35,6 +35,8 @@ export default class Home extends React.Component {
           <p>Instead, please email a link to <a href='mailto:playlist@wikiedu.org'>playlist@wikiedu.org</a> so we know you’ve completed it, and we can feature it on the playlist.wiki home page. </p>
         </div>
         {this._renderPlaylists()}
+        <a className="center-align mt2" target="_blank" href="http://playlist.wiki/playlist/bizarre-mythological-scottish-creatures">View Playlist Example</a>
+        <img src='/images/example-page.png'/>
       </div>
     )
   }
@@ -48,7 +50,7 @@ export default class Home extends React.Component {
     if(process.env.NODE_ENV !== 'development') {
       return null;
     }
-    
+
     if(playlists.length) {
       return (
         <div className='flex flex-wrap py2 px1'>
@@ -60,7 +62,7 @@ export default class Home extends React.Component {
               <div className='p2 md-flex flex-justify flex-grow'>
                 <h3 className='mb1'>{title}</h3>
                 <div>
-                  {(user.admin !== undefined && user.admin ? 
+                  {(user.admin !== undefined && user.admin ?
                       <button className={`btn mr1 ${(featured ? '' : 'btn-outline')}`}
                         onClick={()=> {
                           this._featurePlaylist(id)
