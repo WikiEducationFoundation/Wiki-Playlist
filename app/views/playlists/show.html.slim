@@ -22,7 +22,8 @@ nav.py2.site__navigation data-reactid=".0.0"
     = link_to 'Create your own playlist', root_path, :class => 'btn btn-primary'
 
 .p2.container.permalink
-  div.py2
+  .playlist__background-color style="background-color: #{@playlist.color}"
+  div.py2.white.article-card__header
     p #{@user.username}
     h1= @playlist.title
     p= @playlist.caption
