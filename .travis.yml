@@ -2,6 +2,8 @@ install:
   - npm install
   - bundle install
 
+node_js: '4.0'
+
 script: npm run build
 
 deploy:
@@ -11,7 +13,6 @@ deploy:
   app: 
     master: wiki-playlist-staging
     production: wiki-playlist
-  on: production
   run: "rake db:migrate"
 
 notifications:
