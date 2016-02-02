@@ -7,12 +7,12 @@ var jsxLoader = config.module.loaders.filter(function(loader) { return loader.ke
 jsxLoader.loaders.unshift('react-hot');
 
 config.module.loaders.push({
-  test: /\.styl$/, 
+  test: /\.styl$/,
   loader: "style-loader!css-loader!stylus-loader"
 })
 
 config.module.loaders.push({
-  test: /\.css$/, 
+  test: /\.css$/,
   loader: "style-loader!css-loader"
 })
 
@@ -28,6 +28,10 @@ config.plugins.push(
 )
 
 config.entry.main.push(
+  'webpack/hot/only-dev-server',
+  'webpack-dev-server/client?http://localhost:8080'
+)
+config.entry.polyfills.push(
   'webpack/hot/only-dev-server',
   'webpack-dev-server/client?http://localhost:8080'
 )

@@ -1,4 +1,4 @@
 zeus: echo "Starting Zeus..." && zeus start &> /dev/null
-web: sleep 2 && zeus s
+web: sleep 2 && zeus s --binding=0.0.0.0
 client: npm run start-hot-dev
 worker: que ./config/environment.rb
