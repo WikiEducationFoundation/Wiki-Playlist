@@ -19,6 +19,8 @@ class Share extends React.Component {
       copied: false
     }
   }
+
+
   render() {
     const { title, caption } = this.props.Playlist;
     const { id, permalink } = this.props.Playlist.server_info;
@@ -31,17 +33,31 @@ class Share extends React.Component {
       <div className='sharing__overlay' onClick={this.closeShare.bind(this)}>
         <div className='sharing__container p2 bg-white card mt2 relative'
              ref={(container) => {this.container = container}}>
-             {(share_rendering ? this._shareRendering() : this._sharingButtons())}
+             {(share_rendering ? this._shareRendering() : this._viewPermalink())}
         </div>
       </div>
     )
-    
   }
 
   _shareRendering() {
     return (
       <div className='center p2'>
         <p>Preparing your Playlist...</p>
+      </div>
+    )
+  }
+
+  _viewPermalink() {
+    const { id, permalink } = this.props.Playlist.server_info;
+    if(this.open_link) {
+      this.open_link = false;
+      window.open(permalink, '_blank');
+      this.closeShare();
+    }
+    
+    return (
+      <div className='center p2'>
+        <a className='btn btn-primary' href={permalink} target='_blank'>View your Playlist</a>
       </div>
     )
   }
@@ -110,6 +126,7 @@ class Share extends React.Component {
   }
 
   componentDidMount() {
+    this.open_link = true;
     this.clipboard = new Clipboard('.copy-clipboard');
     this.clipboard.on('success', ()=>{
       this.setState({copied: true}, ()=>{})
@@ -139,27 +156,33 @@ class Share extends React.Component {
     })
   }
 
-  componentWillReceiveProps(props) {
-    if(props.Share.close_share) {
-      this.addAnimation(({target})=> {
-        return TweenMax.to(target, 0.5, {
-            opacity: 0, 
-            ease: Power2.easeOut,
-            onStart: () => {
-              var container = this.container;
-              TweenMax.to(container, .5, {
-                yPercent: 125,
-                ease: Power2.easeOut,
-                onStart: ()=>{
-                  container.style.visibility = 'visible';
-                },
-                onComplete: ()=>{
-                  this.props.dispatch(showShare(false));
-                }
-              })
-            }
-        })
+  closeShare() {
+    this.addAnimation(({target})=> {
+      return TweenMax.to(target, 0.5, {
+          opacity: 0, 
+          ease: Power2.easeOut,
+          onStart: () => {
+            var container = this.container;
+            TweenMax.to(container, .5, {
+              yPercent: 125,
+              ease: Power2.easeOut,
+              onStart: ()=>{
+                container.style.visibility = 'visible';
+              },
+              onComplete: ()=>{
+                this.props.dispatch(showShare(false));
+              }
+            })
+          }
       })
+    })
+  }
+
+  componentWillReceiveProps(props) {
+    const { share_rendering } = this.props.Share;
+    const { id, permalink } = this.props.Playlist.server_info;
+    if(props.Share.close_share) {
+      this.closeShare();
     }
   }
 }

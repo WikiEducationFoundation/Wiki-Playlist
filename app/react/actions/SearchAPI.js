@@ -92,24 +92,26 @@ export function fetchArticleImages(title, callback,) {
 
   var filterImages = function(imageObjects) {
     let images = [];
-    imageObjects.map(obj => {
-      let image = { url: ''}
-      if(obj.imageinfo !== undefined && obj.imageinfo.length) {
-        const {thumburl} = obj.imageinfo[0];
-        image.url = thumburl;
-        image.commons_url = commons_url + obj.title;
-      }
-
-      var exclude = false;
-      exclude_images.map(exl => {
-        if(image.url.indexOf(exl) !== -1) {exclude = true;}
+    if(imageObjects.length) {
+      imageObjects.map(obj => {
+        let image = { url: ''}
+        if(obj.imageinfo !== undefined && obj.imageinfo.length) {
+          const {thumburl} = obj.imageinfo[0];
+          image.url = thumburl;
+          image.commons_url = commons_url + obj.title;
+        }
+  
+        var exclude = false;
+        exclude_images.map(exl => {
+          if(image.url.indexOf(exl) !== -1) {exclude = true;}
+        });
+  
+        if(!exclude && image.url !== '') {
+          images.push(image);
+        }
       });
 
-      if(!exclude && image.url !== '') {
-        images.push(image);
-      }
-
-    });
+    }
 
     images.push({
       url: 'http://wiki-playlist.s3.amazonaws.com/images/wikipedia-page-fallback.png',

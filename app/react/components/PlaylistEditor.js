@@ -38,6 +38,10 @@ class PlaylistEditor extends React.Component {
     };
   }
 
+  componentDidMount() {
+    window.scrollTo(0,0);
+  }
+
   render() {
     const { onboarded, step } = this.props.Onboarding;
     const { color } = this.props.Playlist;
