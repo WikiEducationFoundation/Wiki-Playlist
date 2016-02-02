@@ -1,12 +1,6 @@
 // Style
 require('./styles/index.styl');
 
-
-
-require('./utils/ObjectAssignPolyfill');
-require('./utils/isIntegerPolyfill');
-
-
 window.React = React;
 window.ReactDOM = ReactDOM;
 
