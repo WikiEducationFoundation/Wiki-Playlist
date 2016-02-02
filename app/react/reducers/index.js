@@ -37,7 +37,8 @@ import {
   SHOW_SHARE,
   CLOSE_SHARE,
   UPDATE_PLAYLIST_USERNAME,
-  SET_PLAYLIST_COLOR
+  SET_PLAYLIST_COLOR,
+  PLAYLIST_SHOULD_SAVE
 } from '../constants';
 
 
@@ -194,7 +195,8 @@ function defaultPlaylist() {
     animating: false,
     published: false,
     server_info: {},
-    server_errors: []
+    server_errors: [],
+    should_save: false
   }
 }
 
@@ -289,6 +291,9 @@ function Playlist(state = initialPlaylistState, action) {
       var articles = state.articles.slice(0);
       articles.map(article => {article.open = false});
       return _.assign({}, state, {articles: articles, animating: false})
+
+    case PLAYLIST_SHOULD_SAVE:
+      return _.assign({}, state, {should_save: action.bool})
       
     case RECEIVE_PLAYLIST_PERMALINK:
       var articles = state.articles.slice(0);

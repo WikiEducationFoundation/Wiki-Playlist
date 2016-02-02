@@ -4,6 +4,8 @@ import { pushPath } from 'redux-simple-router';
 import es6BindAll from "es6bindall";
 import ShareButton from './ShareButton';
 import Icon from './Icon';
+import { MINIMUM_ARTICLES } from '../constants';
+
 
 import {
   logoutUser,
@@ -23,7 +25,8 @@ import {
   receiveShareInfo,
   setShareImageRendering,
   setUserOnboarding,
-  setOnboardingStep
+  setOnboardingStep,
+  setPlaylistShouldSave
 } from '../actions';
 
 import {
@@ -83,13 +86,16 @@ class UserControls extends React.Component {
 
   _login() {
     const { logged_in, current_user } = this.props.Account;
-    const { total_articles } = this.props.Playlist;
+    const { total_articles, articles } = this.props.Playlist;
     const { routing } = this.props;
     const isPlaylistPage = routing.path.indexOf('playlist') !== -1;
-    let account_button_text = (isPlaylistPage ? 'to Save' : '');
+    let account_button_text = (isPlaylistPage && total_articles >= MINIMUM_ARTICLES ? 'to Save' : '');
     let account = (
       <button className={'btn btn-'+(isPlaylistPage ? 'primary' : 'outline' )+' mr1'}
               onClick={()=>{
+                if(articles.length >= MINIMUM_ARTICLES) {
+                  this.dispatch(setPlaylistShouldSave(true));
+                }
                 this.dispatch(showLogin(true));
               }}>Login {account_button_text}</button>
       );

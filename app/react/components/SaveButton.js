@@ -25,7 +25,8 @@ import {
   setUserOnboarding,
   setOnboardingStep,
   updateCurrentEditingArticle,
-  showShare
+  showShare,
+  setPlaylistShouldSave
 } from '../actions';
 
 import {
@@ -52,6 +53,16 @@ class SaveButton extends React.Component {
     return this._saveButton();
   }
 
+  componentDidMount() {
+    const { should_save } = this.props.Playlist;
+    $(document).on('authSuccess', (data) => {
+      if(data.username !== undefined && should_save) {
+        this._savePlaylist();
+        this.dispatch(setPlaylistShouldSave(false));
+      }
+    });
+  }
+
   _saveButton() {
     const { logged_in, current_user } = this.props.Account;
     const { published } = this.props.Playlist;
@@ -75,8 +86,10 @@ class SaveButton extends React.Component {
       return;
     }
     // todo:  if 'can publish' instead of comparison here
+    console.log(total_articles, MINIMUM_ARTICLES);
     if(total_articles < MINIMUM_ARTICLES) {
-      flashMessage(this.dispatch,  {text: "Please find at least 3 articles.", type: 'action'});
+      const remainder = MINIMUM_ARTICLES - total_articles;
+      flashMessage(this.dispatch,  {text: `Please find at least ${remainder} more page${(remainder > 1 ? 's' : '')} to save.`, type: 'action'});
     } else {
       const saveMethod = (published ? updatePlaylist : createPlaylist)
       saveMethod(this.props.Playlist, (data) => {
