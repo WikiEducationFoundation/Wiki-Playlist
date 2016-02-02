@@ -1,6 +1,5 @@
 test: &test
   adapter: postgresql
   encoding: unicode
-  username: root
-  password:
-  database: test
+  database: travis_ci_test
+  username: postgres

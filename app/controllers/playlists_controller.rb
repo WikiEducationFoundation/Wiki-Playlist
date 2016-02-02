@@ -48,24 +48,20 @@ class PlaylistsController < ApplicationController
   # PATCH/PUT /playlists/1
   # PATCH/PUT /playlists/1.json
   def update
-    # if can? :manage, :all || @playlist.user_id === current_user.id
-      @playlist.share_image_rendered = false
-      respond_to do |format|
-        if @playlist.update(playlist_params)
-          GenerateShareImage.enqueue(@playlist.id, :html => get_share_image_html(@playlist))
-          format.json { render json: {
-            id: @playlist.id,
-            permalink: "#{request.base_url}/playlist/#{@playlist.slug}",
-            articles: @playlist.articles
-          } }
-        else
-          # format.html { render :edit }
-          format.json { render json: @playlist.errors, status: :unprocessable_entity }
-        end
+    @playlist.share_image_rendered = false
+    respond_to do |format|
+      if @playlist.update(playlist_params)
+        GenerateShareImage.enqueue(@playlist.id, :html => get_share_image_html(@playlist))
+        format.json { render json: {
+          id: @playlist.id,
+          permalink: "#{request.base_url}/playlist/#{@playlist.slug}",
+          articles: @playlist.articles
+        } }
+      else
+        # format.html { render :edit }
+        format.json { render json: @playlist.errors, status: :unprocessable_entity }
       end
-    # else
-    #   format.json { render json: @playlist.errors, status: 'Not authorized' }
-    # end
+    end
   end
 
 
@@ -86,15 +82,11 @@ class PlaylistsController < ApplicationController
   # DELETE /playlists/1
   # DELETE /playlists/1.json
   def destroy
-    # if can? :manage, :all || @playlist.user_id === current_user.id
-      @playlist.destroy
-      respond_to do |format|
-        # format.html { redirect_to playlists_url, notice: 'Playlist was successfully destroyed.' }
-        format.json { head :no_content, message: 'Playlist was successfully deleted.' }
-      end
-    # else
-    #   format.json { render json: @playlist.errors, status: 'Not authorized' }
-    # end
+    @playlist.destroy
+    respond_to do |format|
+      # format.html { redirect_to playlists_url, notice: 'Playlist was successfully destroyed.' }
+      format.json { head :no_content, message: 'Playlist was successfully deleted.' }
+    end
   end
 
   def preview
