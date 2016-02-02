@@ -49,12 +49,6 @@ class Share extends React.Component {
 
   _viewPermalink() {
     const { id, permalink } = this.props.Playlist.server_info;
-    if(this.open_link) {
-      this.open_link = false;
-      window.open(permalink, '_blank');
-      this.closeShare();
-    }
-    
     return (
       <div className='center p2'>
         <a className='btn btn-primary' href={permalink} target='_blank'>View your Playlist</a>
