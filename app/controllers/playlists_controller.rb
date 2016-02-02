@@ -48,6 +48,7 @@ class PlaylistsController < ApplicationController
   # PATCH/PUT /playlists/1
   # PATCH/PUT /playlists/1.json
   def update
+    # TODO Check if owner or admin
     @playlist.share_image_rendered = false
     respond_to do |format|
       if @playlist.update(playlist_params)
@@ -82,6 +83,7 @@ class PlaylistsController < ApplicationController
   # DELETE /playlists/1
   # DELETE /playlists/1.json
   def destroy
+    # TODO: Make sure the current user is the owner or an admin
     @playlist.destroy
     respond_to do |format|
       # format.html { redirect_to playlists_url, notice: 'Playlist was successfully destroyed.' }

@@ -113,3 +113,7 @@ TODO
 - [Rspec Model Testing Template](https://gist.github.com/kyletcarlson/6234923)
 
 
+**Misc Heroku**
+
+- [Upgrade Postgres](https://devcenter.heroku.com/articles/upgrading-heroku-postgres-databases)
+

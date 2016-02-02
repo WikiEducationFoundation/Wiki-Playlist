@@ -8,7 +8,11 @@ before_install:
   - node --version
   - npm --version
 
-before_script: 
+before_script:
+  - cp config.database.travis.yml config.database.yml
+  - psql -e  "CREATE USER root;"
+  - psql -e  "CREATE DATABASE test;"
+  - psql -e  "GRANT ALL PRIVILEGES ON DATABASE test to root;"
   - bundle install
   - npm install
   - npm run build
