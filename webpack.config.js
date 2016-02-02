@@ -3,6 +3,7 @@ var webpack = require('webpack');
 
 module.exports = {
   entry: {
+    polyfills: ['./app/react/utils/polyfills.js'],
     main: ['./app/react/index.js']
   },
   output: {

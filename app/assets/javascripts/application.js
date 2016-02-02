@@ -11,5 +11,6 @@
 // about supported directives.
 //
 //= require jquery
+//= require polyfills
 //= require react_integration
 //= require main
