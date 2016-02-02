@@ -132,7 +132,7 @@ export class ArticleCard extends React.Component {
       content = (
         <div>
           <h2 className="article-card__title">{title}</h2>
-          <div className="mb2 article-card__excerpt summary flex">{truncated_description}</div>
+          <div className="mb2 article-card__excerpt summary">{truncated_description}</div>
         </div>
       );
     }
