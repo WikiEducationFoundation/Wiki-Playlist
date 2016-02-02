@@ -34,16 +34,11 @@ class App extends React.Component {
               <img src='//upload.wikimedia.org/wikipedia/en/8/80/Wikipedia-logo-v2.svg' height='30'/>
               <span className='px2'>Wikipedia Playlist</span>
             </Link>
-            <MediaQuery query={`(min-device-width: ${MD})`}>
-              <UserControls/>
-            </MediaQuery>
+            
+            <UserControls/>
+            
 
-            <MediaQuery query={`(max-device-width: ${MD})`}
-                        onClick={()=>{
-                          this.setState({menu_open: !menu_open});
-                        }}>
-              <button className='action'><Icon size="30px" icon="menu" fill={'teal'} /></button>
-            </MediaQuery>
+            
           </div>
         </nav>
 

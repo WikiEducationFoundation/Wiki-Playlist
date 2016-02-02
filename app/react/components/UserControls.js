@@ -52,9 +52,8 @@ class UserControls extends React.Component {
           Create a Playlist
       </Link>);
     return (
-      <div>
+      <div className='user-controls'>
         {this._login()}
-        {(isPlaylistPage? <ShareButton/> : null)}
         {(isPlaylistPage?  <SaveButton/> : create_button)}
       </div>
     )
@@ -63,6 +62,7 @@ class UserControls extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
     const { path } = this.props.routing;
+
 
     $(document).on('authSuccess', (data) => {
       // auth_success partial doesn't get user data so hit /auth/user_status endpoint
@@ -99,7 +99,7 @@ class UserControls extends React.Component {
                 this.dispatch(showLogin(true));
               }}>Login {account_button_text}</button>
       );
-    if(logged_in && current_user) {
+    if(logged_in && current_user || !isPlaylistPage) {
       // account = (<span>You are logged in. <a href="#" data-sign-out>Logout</a></span>);
       account = null;
     }
