@@ -40,6 +40,8 @@ export default class Home extends React.Component {
           </div>
         </MediaQuery>
         {this._renderPlaylists()}
+        <a className="center-align mt2" target="_blank" href="http://playlist.wiki/playlist/bizarre-mythological-scottish-creatures">View Playlist Example</a>
+        <img src='/images/example-page.png'/>
       </div>
     )
   }
@@ -53,7 +55,7 @@ export default class Home extends React.Component {
     if(process.env.NODE_ENV !== 'development') {
       return null;
     }
-    
+
     if(playlists.length) {
       return (
         <div className='flex flex-wrap py2 px1'>
@@ -65,7 +67,7 @@ export default class Home extends React.Component {
               <div className='p2 md-flex flex-justify flex-grow'>
                 <h3 className='mb1'>{title}</h3>
                 <div>
-                  {(user.admin !== undefined && user.admin ? 
+                  {(user.admin !== undefined && user.admin ?
                       <button className={`btn mr1 ${(featured ? '' : 'btn-outline')}`}
                         onClick={()=> {
                           this._featurePlaylist(id)
