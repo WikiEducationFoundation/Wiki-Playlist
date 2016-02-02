@@ -1,16 +1,10 @@
 #!/usr/bin/env bash
 
-
-if [[ "$1" != "" ]]; then
-  MESSAGE="$1"
-else
-  MESSAGE="Build and Deploy"
-fi
-
+bundle install
+npm install
 npm run build
-wait
+git config user.name ${GIT_NAME}
+git config user.email ${GIT_EMAIL}
 git add .
-eval "git commit -m '$MESSAGE'"
-git push origin master
-git push wintr master
-git push heroku master
+git commit -m "Deploy assets"
+git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" $TRAVIS_BRANCH > /dev/null 2>&1

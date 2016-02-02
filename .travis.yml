@@ -2,17 +2,14 @@ cache:
   bundler: true
   directories:
   - node_modules
+
 before_install:
 - nvm install v4.0
 - nvm use v4.0
 - node --version
 - npm --version
 
-before_script:
-- bundle install
-- npm install
-- npm run build
-- git add . && git commit -m "Assets built for deploy"
+before_script: bash ./deploy
 
 deploy:
   provider: heroku
@@ -22,9 +19,12 @@ deploy:
     master: wiki-playlist-staging
     production: wiki-playlist
   run: rake db:migrate
+
 notifications:
   slack:
     secure: IghShugtOWCE6lWs75otixs90xmMgzdAsQLxsvAxQIydFMiFtgKNq5cxAgA3v1I4aHkvLojeSeGzdCsjPFmX8+f8u8bw2KhuYUu+YvQUc3CDOJknKbj/MNvcgp5v9Lcpc492bZEzYXIGxlfSltKRfMGPhd1vrFgc/HS257ok9C7Cqa8v6l7iqzzYbokLqpakPeybTDToa30mGP++53Pt1RpZrZqBetgGu83Y3tPKRfHkEpciDo7niI77pAmO42lYjHwlXqUrXnigwdPr4iDxW7sjRSho9Uc4NLJDmuVI5T3Y8WCNkNRgwiQs5+DN/bI9eKWDXUKqh51GoqZEg79zOulCTYn6e2RjBfuROvZmAiwVVlmLjy/fnbqopevgsam+n7Cjn0bgaGghhYKsoO6At4PoceiPOxDYN4//GGdltI37l3g9VpEi6f8+LGCXYIXWFqO1eq2yiV2zJHIpB6PDDHL0rF2RRIJ8U3NlsHzffq5V1YykEoduiS9j9+VIhEEr0GJ5pLdctqqQAzE32LkKpIRccS4U/wa10J+VEGqDMHECoBISC50EIknPALkiBpnS41dcuTdOSZHoA9MX2MB7igd4sFExvCPYScJeLzhwn+etMOQiF3U3SJH49FAy8RjVkLKVY5daDpSXtAROvzJEkrgWWNiekdInJwWkU0XL91w=
+
 env:
   global:
+    - GH_REF: github.com:WikiEducationFoundation/WikipediaPlaylist.git
     secure: az29IMjsSTmGwgoLdidcScTpddPRm2WjBGuU2Ue/8EEt9b+JyxuzWEumslRY4xbb0VRIT0CgpDXKWf0azeFS/twN36NfE6p6oBh75SwkGQ6cbkZHeDVEBADUsAcUb+eSDUJOpOsYvdrBn8oywAqfK9IBn38OxdFaugaNsMGa9JNr3UMF+00MMx3LXwDmqFBWEe44XuSY+3KuBCcg3b9n5Wh4oaWUK2ThbdVUMw2rNvma1EgYJuRCo4JJ6KOh9Bws14lLKelUfDUieupOINhk14uCVVwfIMRD5Y9R1g7WP0PXTicWFYVx5ahLcm+GuyJ8lkmzO19HCP29qKG3YCC+RfTHj4LnwN/OfkvmVk5m2FYik0fafIbzNnqUHiDBa0Alml9sOlAyRisq8BkWuAB868j8GqK/nFUM9S/Y7pNY+5QqB5r5C68qy8xV6q//YFe/FKhxhoBi29iVMBfo0ttWhe0Yce0ZVR9LZVy7AIdPYFISWbHe3QiMiD6ZVLY16Jv1erYXhaccitF175bPNGgwRrgSIErEgd88LstZWZPnbgYNoGxqeDq3sJcG5q5ZBU1bEUSi9RYHeqCpww01oydDPmcd8BfOxtwcAj//yWps1uGnE0VcWYswXvsDWnQGuacGQLGg9x52wRQ2s+1E7OS57G2AaI2F8iSvXBKUFWvanZ4=
