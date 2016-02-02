@@ -82,6 +82,7 @@ class SaveButton extends React.Component {
     const { published, total_articles, title } = this.props.Playlist;
     this.dispatch(updateCurrentEditingArticle(null));
     if(title === '') {
+      window.scrollTo(0,0)
       flashMessage(this.dispatch,  {text: "Please give your playlist a title.", type: 'action'});
       return;
     }
@@ -89,6 +90,7 @@ class SaveButton extends React.Component {
     console.log(total_articles, MINIMUM_ARTICLES);
     if(total_articles < MINIMUM_ARTICLES) {
       const remainder = MINIMUM_ARTICLES - total_articles;
+      window.scrollTo(0,0)
       flashMessage(this.dispatch,  {text: `Please find at least ${remainder} more page${(remainder > 1 ? 's' : '')} to save.`, type: 'action'});
     } else {
       const saveMethod = (published ? updatePlaylist : createPlaylist)
