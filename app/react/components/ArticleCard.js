@@ -179,7 +179,7 @@ export class ArticleCard extends React.Component {
       return (
         <div className={(has_article ? 'article-card__content' : 'center')} ref={c => {this.cardContent = c}}>
           {(editing_options ? <ImageSelector finishEditing={()=>{this.setState({editing_options: false})}}/> : this._articleImage())}
-          <div className={(has_article ? 'article-card__summary' : '')}>
+          <div className={(has_article ? 'article-card__summary relative' : '')}>
             {content}
             <div className=''>
               {button}
