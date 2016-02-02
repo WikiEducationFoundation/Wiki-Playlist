@@ -48,13 +48,17 @@ class Share extends React.Component {
   }
 
   _viewPermalink() {
+    const { copied } = this.state;
     const { id, permalink } = this.props.Playlist.server_info;
     const { title, caption } = this.props.Playlist;
     return (
       <div className='center p2'>
+        <p className='mb2'>Please send your playlist to Wiki Edu</p>
         <a href={`mailto:playlist@wikiedu.org?subject=My Wikipedia Playlist:%20${encodeURIComponent(title)}&body=${encodeURIComponent(permalink)}`} 
-               className='btn btn-outline mb1 center'>
-               Email</a>
+               className='btn btn-primary mb1 center'>Email Permalink</a>
+        <button className='btn btn-outline copy-clipboard' data-clipboard-text={permalink}>
+          {(copied ? 'Copied to your clipboard!' : 'Copy Permalink')}
+        </button>
       </div>
     )
   }
