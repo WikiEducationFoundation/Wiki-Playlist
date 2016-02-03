@@ -23,13 +23,9 @@ class Login extends React.Component {
       <div className='py3 login-dialogue'>
         <div className='login-dialogue__container bg-white flex flex-column flex-center'
              ref={(container) => {this.container = container}}>
-          <div>
-            <p>We only access your: </p>
-            <ul>
-              <li>Username</li>
-              <li>Profile Name</li>
-              <li>Account Verification</li>
-            </ul>
+          <div className="center">
+            <h3 className="mb1">Please login to publish your article.</h3>
+            <p className="gray mb3"> We use your account username to add an author to the Playlist</p>
             <div><a className='mb1 btn btn--oauth twitter' data-popup="Login with Twitter" href="/users/auth/twitter">Sign in with Twitter</a></div>
             <div><a className='mb1 btn btn--oauth facebook' data-popup="Login with Facebook" href="/users/auth/facebook">Sign in with Facebook</a></div>
             {wiki_login}
