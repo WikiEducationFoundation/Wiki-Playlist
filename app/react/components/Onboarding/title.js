@@ -4,6 +4,8 @@ import {
   TITLE_LIMIT
 } from '../../constants';
 
+const ONBOARDING_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/8/8c/WIKIPEDIA15_AUSTRIA_JOHANN_STRAUSS.svg';
+
 import {
   setOnboardingStep,
   setPlaylistTitle,
@@ -47,7 +49,7 @@ class OnboardingTitle extends React.Component {
           </div>
         </div>
         <div className='onboarding__image bg-gallery p4' style={{
-          backgroundImage: `url('/images/wikipedia-logo.png')`
+          backgroundImage: `url(${ONBOARDING_IMAGE})`
         }}/>
       </div>
     );
@@ -83,7 +85,7 @@ class OnboardingTitle extends React.Component {
               }}>Next</button></div>
         </div>
         <div className='onboarding__image bg-gallery p4' style={{
-          backgroundImage: `url('/images/wikipedia-logo.png')`
+          backgroundImage: `url(${ONBOARDING_IMAGE})`
         }}/>
       </div>
     );

@@ -1,12 +1,9 @@
 export default class PlaylistFeature extends React.Component {
   render() {
-    const {title, caption, articles, id, featured, color} = this.props;
+    const {title, caption, articles, id, featured, color, author} = this.props;
     if(!color) {
       return null;
     }
-
-    console.log(this.props);
-
     return (
       <div 
       className='playlist-feature'

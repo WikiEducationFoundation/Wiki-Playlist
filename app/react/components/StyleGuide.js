@@ -10,7 +10,7 @@ export default class StyleGuide extends React.Component {
       <nav className="site__navigation">
           <div className='container flex flex-center flex-justify'>
             <Link to="/" className='black'>
-              <img src='//upload.wikimedia.org/wikipedia/en/8/80/Wikipedia-logo-v2.svg' height='30'/>
+              <img src='https://upload.wikimedia.org/wikipedia/en/8/80/Wikipedia-logo-v2.svg' height='30'/>
               <span className='px2'>Wikipedia Playlist</span>
             </Link>
             <UserControls/>
@@ -30,7 +30,7 @@ export default class StyleGuide extends React.Component {
           <button className='action mt2'>Share</button>
         </div>
         <div className='py2 border-bottom md-col-6'>
-          <div className='mb2'><a href='#' className='action action--external-serif'>View Article <Icon size="14px" icon="external-link" fill={'teal'} /></a></div>
+          <div className='mb2'><a href='#' className='action action--external-serif'>View Wikipedia Article <Icon size="14px" icon="external-link" fill={'teal'} /></a></div>
           <div className='mb2'><a href='#' className='action action--external-sans'>View on Wikipedia <span></span></a></div>
           <div className='mb2'><a href='#' className='action action--default'>Add<span></span></a></div>
           <div className='mb2'><a href='#' className='btn btn-primary'>Add Article<span></span></a></div>
@@ -63,7 +63,7 @@ export default class StyleGuide extends React.Component {
       </div>
       </div>
     )
-    
+
   }
-        
+
 }
