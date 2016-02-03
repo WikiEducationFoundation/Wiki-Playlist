@@ -30,15 +30,16 @@ class App extends React.Component {
       <div className="">
         <nav className="md-py2 site__navigation">
           <div className='container flex flex-center flex-justify'>
-            <Link to="/" className='black flex flex-center'>
-              <img className='wiki-globe mr1' src='/images/wikipedia-logo.png' height='34'/>
-              <img className='wiki-text' src='/images/wikipedia-playlist-type.svg' alt='Wikipedia Playlist' height='20'/>
-            </Link>
-            
-            <UserControls/>
-            
 
-            
+            <Link to="/" className='black'>
+              <img src='https://upload.wikimedia.org/wikipedia/en/8/80/Wikipedia-logo-v2.svg' height='30'/>
+              <span className='px2'>Wikipedia Playlist</span>
+            </Link>
+
+            <UserControls/>
+
+
+
           </div>
         </nav>
 
