@@ -27,6 +27,7 @@ gem "paperclip", "~> 4.3"
 gem 'aws-sdk-v1'
 gem 'zeus'
 gem 'friendly_id', '~> 5.1.0'
+gem 'new_relic_ping'
 
 group :development, :test do
   gem 'byebug'
