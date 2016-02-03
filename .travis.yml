@@ -1,0 +1,34 @@
+cache:
+  directories:
+  - node_modules
+language: ruby
+before_install:
+  - nvm install v4.0
+  - nvm use v4.0
+  - node --version
+  - npm --version
+
+addons:
+  postgresql: "9.3"
+
+before_script:
+  - cp config/database.travis.yml config/database.yml
+  - psql -c 'create database travis_ci_test;' -U postgres
+  - rake db:migrate
+  - bundle install
+  - npm install
+  - npm run build
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: K6GGJCpw0bWCUzU4hZZOm3a2BQ/Z0P0bbcxixDaWTS8im0+XwiuqNW4StB/pUBQqN5rQU/JuYxcrGneQMeISqfYZow3IRzq6/+Hv4N4saNJAzPJ95L+kC/6g0ybxmuHuhOq8m59zqpveAOsSlhf1WOcGvAxym0GykM61pMN7yR4bZsNbOWIPXDjCI09BFPR/hh7jinU4F3NYyJYXzG9y+brqGd/6wo7HFDYE+M9o0IgM3k63DE1EZ3OD5AObPAz68hIESvry1sQlbAGJEy2eN1H/01Oc8M5g2ARQsoitRgCSwPpbNFIvXz9MOIxhnQZrzX+9PVsp++2edztOEvGwj+A1iZX15fdDBN0m8gJ5PaFR/K2u3/t3WI3DyXPTiYT5eT2tGh28bnfzoYSrm83W4VvCCOGVe99brF0ctxqr76QF53tWWK0QmGeN9Ve4leH5TL4ZnS9FVEvQ6sayoAKCr03oZwCqF/P/kLuei5m9Ei0Xe/SlnGgGHf/1+OADHSsB5jZy11YRtYwpPeJffp/P8gjQxWsQgjCm5CRyd9dEV3rCPAybDAixBl1elWH1nQqq06GLVUUy9VyIVmLU6EEU0vnjClBSXSvgbrYAKbhm0s3sCqpE0oDfuQJY0lFOkm0nPVntjf67KZShjcMwC2Kz2p4ImlzbmqsQV6QeqF3g1Cc=
+  app:
+    master: wiki-playlist-staging
+    production: wiki-playlist
+  run: rake db:migrate
+  skip_cleanup: true
+
+notifications:
+  slack:
+    secure: IghShugtOWCE6lWs75otixs90xmMgzdAsQLxsvAxQIydFMiFtgKNq5cxAgA3v1I4aHkvLojeSeGzdCsjPFmX8+f8u8bw2KhuYUu+YvQUc3CDOJknKbj/MNvcgp5v9Lcpc492bZEzYXIGxlfSltKRfMGPhd1vrFgc/HS257ok9C7Cqa8v6l7iqzzYbokLqpakPeybTDToa30mGP++53Pt1RpZrZqBetgGu83Y3tPKRfHkEpciDo7niI77pAmO42lYjHwlXqUrXnigwdPr4iDxW7sjRSho9Uc4NLJDmuVI5T3Y8WCNkNRgwiQs5+DN/bI9eKWDXUKqh51GoqZEg79zOulCTYn6e2RjBfuROvZmAiwVVlmLjy/fnbqopevgsam+n7Cjn0bgaGghhYKsoO6At4PoceiPOxDYN4//GGdltI37l3g9VpEi6f8+LGCXYIXWFqO1eq2yiV2zJHIpB6PDDHL0rF2RRIJ8U3NlsHzffq5V1YykEoduiS9j9+VIhEEr0GJ5pLdctqqQAzE32LkKpIRccS4U/wa10J+VEGqDMHECoBISC50EIknPALkiBpnS41dcuTdOSZHoA9MX2MB7igd4sFExvCPYScJeLzhwn+etMOQiF3U3SJH49FAy8RjVkLKVY5daDpSXtAROvzJEkrgWWNiekdInJwWkU0XL91w=

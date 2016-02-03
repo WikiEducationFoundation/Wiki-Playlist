@@ -75,6 +75,11 @@ $ git push heroku master
 
 [Heroku Buildpack PhantomJS 2.0](https://github.com/srbartlett/heroku-buildpack-phantomjs-2.0/blob/master/README.md)
 
+## CI Deployment with Travis CI
+
+1. [Install Travis Gem](https://github.com/travis-ci/travis.rb#installation)
+2. Add heroku auth token to travis.yml: `travis encrypt $(heroku auth:token) --add deploy.api_key`
+
 ##PhantomJS
 
 TODO
@@ -103,8 +108,16 @@ TODO
 
  - [React Icons](http://dmfrancisco.github.io/react-icons/)
 
+**Travis CI**
+
+- [Using PostgreSQL in Builds](https://docs.travis-ci.com/user/using-postgresql/#Using-PostgreSQL-in-your-Builds)
+
 **Testing**
 
 - [Rspec Model Testing Template](https://gist.github.com/kyletcarlson/6234923)
 
+
+**Misc Heroku**
+
+- [Upgrade Postgres](https://devcenter.heroku.com/articles/upgrading-heroku-postgres-databases)
 
