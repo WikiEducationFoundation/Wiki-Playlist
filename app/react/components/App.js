@@ -32,8 +32,8 @@ class App extends React.Component {
           <div className='container flex flex-center flex-justify'>
 
             <Link to="/" className='black'>
-              <img src='https://upload.wikimedia.org/wikipedia/en/8/80/Wikipedia-logo-v2.svg' height='30'/>
-              <span className='px2'>Wikipedia Playlist</span>
+              <img className='logo__image' src='/images/wikiedu-logo.svg' height='30'/>
+              <img className='logo__text' src='/images/wikipedia-playlist-type.svg' height='20'/>
             </Link>
 
             <UserControls/>
