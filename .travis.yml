@@ -14,7 +14,7 @@ addons:
 before_script:
   - cp config/database.travis.yml config/database.yml
   - psql -c 'create database travis_ci_test;' -U postgres
-  - rake db:migrate
+  - bundle exec rake db:migrate
   - bundle install
   - npm install
   - npm run build
@@ -26,7 +26,7 @@ deploy:
   app:
     master: wiki-playlist-staging
     production: wiki-playlist
-  run: rake db:migrate
+  run: bundle exec rake db:migrate
   skip_cleanup: true
 
 notifications:
