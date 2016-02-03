@@ -16,23 +16,47 @@
   height 100%
   top 0
   left 0
+  overflow hidden
 
 .playlist-feature__card
-  width 80px
-  height 100px
+  width 103px
+  border-radius 5px
+  height 150px
   position absolute
-  bottom 0
+  bottom -10%
   left 50%
   background white
-  padding 5px
-
-  &:first-of-type
-    transform translateX(-50%)
-
-  &:nth-child(2)
-    transform translateX(-60%)
+  overflow hidden
+  transform translate(-50%, 0) translateZ(0)
+  z-index 2
+  box-shadow 0 5px 5px rgba($black, .4)
+  backface-visibility hidden
   
-  h3
-    font-size 12px
+
+  &.card-1
+    transform translate(-120%, 5%) rotate(-10deg) translateZ(0)
+    z-index 1
+    
+  &.card-2
+    transform translate(20%, 4.5%) rotate(10deg) translateZ(0)
+    z-index 3
+  
+  h4
+    padding 3px
+    font-size 14px
+    opacity .5
+    font-family $serif
+    
+
+.playlist-feature__card__image
+  height 70px
+  width 100%
+  background-size cover
+  background-position top center
+
+.playlist-feature__title
+  +above(md)
+    font-size 25px
+    line-height 34px
   
   
