@@ -34,11 +34,9 @@ export default class Home extends React.Component {
           <p><strong>PLEASE DO NOT SHARE YOUR LIST ON SOCIAL MEDIA UNTIL FEBRUARY 8.</strong> <br/> Instead, please email a link to <a href='mailto:playlist@wikiedu.org'>playlist@wikiedu.org</a> so we know you’ve completed it, and we can feature it on the playlist.wiki home page. </p>
 
         </div>
-        <MediaQuery query={`(max-device-width: ${MD})`}>
-          <div className='center py2'>
+        <div className='py2'>
             <Link className='btn btn-primary' to="/playlists">Create a Playlist</Link>
-          </div>
-        </MediaQuery>
+        </div>
         <a className="center-align mt2" target="_blank" href="http://playlist.wiki/playlist/bizarre-mythological-scottish-creatures">View Playlist Example</a>
         <img src='/images/example-page.png'/>
         {this._renderPlaylists()}
