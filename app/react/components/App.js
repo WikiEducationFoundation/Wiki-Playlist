@@ -24,10 +24,11 @@ class App extends React.Component {
   render() {
     const { logged_in, current_user, show_login } = this.props.Account;
     const { show_share } = this.props.Share;
+    const { path } = this.props.routing;
     const { menu_open } = this.state;
     const preview_button = <button className='btn btn-outline'>Preview</button>;
     return (
-      <div className="">
+      <div className={'path-' + path.split('/').pop()}>
         <nav className="md-py2 site__navigation">
           <div className='container flex flex-center flex-justify'>
 
