@@ -34,6 +34,7 @@ class Share extends React.Component {
         <div className='sharing__container p2 bg-white card mt2 relative'
              ref={(container) => {this.container = container}}>
              {(share_rendering ? this._shareRendering() : this._viewPermalink())}
+             <div className="loader"></div>
         </div>
       </div>
     )
@@ -52,7 +53,7 @@ class Share extends React.Component {
     const { title, caption } = this.props.Playlist;
     return (
       <div className='center p2'>
-        <a href={`mailto:playlist@wikiedu.org?subject=My Wikipedia Playlist:%20${encodeURIComponent(title)}&body=${encodeURIComponent(permalink)}`} 
+        <a href={`mailto:playlist@wikiedu.org?subject=My Wikipedia Playlist:%20${encodeURIComponent(title)}&body=${encodeURIComponent(permalink)}`}
                className='btn btn-outline mb1 center'>
                Email</a>
       </div>
@@ -101,7 +102,7 @@ class Share extends React.Component {
             </button>
           </div>
           <div className='flex flex-column py1'>
-            <a href={`mailto:?subject=My Wikipedia Playlist:%20${encodeURIComponent(title)}&body=${encodeURIComponent(title)}%0A${encodeURIComponent(permalink)}%0A${encodeURIComponent(caption)}`} 
+            <a href={`mailto:?subject=My Wikipedia Playlist:%20${encodeURIComponent(title)}&body=${encodeURIComponent(title)}%0A${encodeURIComponent(permalink)}%0A${encodeURIComponent(caption)}`}
                className='btn btn-outline mb1 center'>
                Email</a>
             <button className='btn btn-primary copy-clipboard' data-clipboard-text={permalink}>
@@ -119,7 +120,7 @@ class Share extends React.Component {
     if(canClose){
       this.props.dispatch(closeShare(true));
     }
-    
+
   }
 
   componentDidMount() {
@@ -128,7 +129,7 @@ class Share extends React.Component {
     this.clipboard.on('success', ()=>{
       this.setState({copied: true}, ()=>{})
     })
-    
+
     this.sharing = new ShareJS({
       onShare: (platform)=>{
         console.log('sharing on ', platform)
@@ -137,7 +138,7 @@ class Share extends React.Component {
 
     this.addAnimation(({target})=> {
       return TweenMax.from(target, 0.5, {
-        opacity: 0, 
+        opacity: 0,
         ease: Power2.easeOut,
         onStart: () => {
           var container = this.container;
@@ -156,7 +157,7 @@ class Share extends React.Component {
   closeShare() {
     this.addAnimation(({target})=> {
       return TweenMax.to(target, 0.5, {
-          opacity: 0, 
+          opacity: 0,
           ease: Power2.easeOut,
           onStart: () => {
             var container = this.container;
