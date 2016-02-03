@@ -1,0 +1,38 @@
+.playlist-feature
+  position relative
+  width 100%
+  +above(500px)
+    flex-basis 50%
+  +above(800px)
+    flex-basis 33.33%
+  
+  &:after
+    content ''
+    display block
+    padding-bottom 100%
+
+.playlist-feature__content
+  width 100%
+  height 100%
+  top 0
+  left 0
+
+.playlist-feature__card
+  width 80px
+  height 100px
+  position absolute
+  bottom 0
+  left 50%
+  background white
+  padding 5px
+
+  &:first-of-type
+    transform translateX(-50%)
+
+  &:nth-child(2)
+    transform translateX(-60%)
+  
+  h3
+    font-size 12px
+  
+  
