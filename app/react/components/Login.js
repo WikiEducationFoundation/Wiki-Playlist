@@ -32,6 +32,7 @@ class Login extends React.Component {
             </ul>
             <div><a className='mb1 btn btn--oauth twitter' data-popup="Login with Twitter" href="/users/auth/twitter">Sign in with Twitter</a></div>
             <div><a className='mb1 btn btn--oauth facebook' data-popup="Login with Facebook" href="/users/auth/facebook">Sign in with Facebook</a></div>
+            {wiki_login}
             <button className='action close-button' onClick={()=>{
               this.props.dispatch(closeLogin(true));
             }}>&#215;</button>

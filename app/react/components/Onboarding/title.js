@@ -37,7 +37,7 @@ class OnboardingTitle extends React.Component {
         <div className='p2 flex flex-column onboarding__column'>
           <div>
             <h3 className='h2 mb2 onboarding__header'>Wikipedia Playlist Builder</h3>
-            <p className='mb2 caption'>Welcome! Build and share a thematic playlist of 3 to 5 Wikipedia Articles. They can be about anything.</p>
+            <p className='mb2 caption'>Celebrate the joy of knowledge by creating a Playlist of your 3–5 favorite Wikipedia articles, then sharing your Playlist on social media.</p>
           </div>
           <div>
             <button className='btn btn-primary right'
@@ -60,7 +60,7 @@ class OnboardingTitle extends React.Component {
           <h3 className='h2 mb1 onboarding__header'>Name of your Playlist</h3>
           <div className='relative right'>
             <input className='field p1'
-                 placeholder='Collection Name'
+                 placeholder='Playlist Name'
                  value={this.state.title}
                  onChange={({target})=>{
                   let text = target.value.substr(0, TITLE_LIMIT);

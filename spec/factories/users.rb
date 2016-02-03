@@ -16,7 +16,7 @@
 FactoryGirl.define do
 
   factory :user, class: User do
-    username: 'joe'
+    username 'joe'
     password Devise.friendly_token[0,20]
   end
 
