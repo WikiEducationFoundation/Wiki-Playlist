@@ -296,7 +296,7 @@ GEM
     rb-fsevent (0.9.7)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
-    react_webpack_rails (0.1.0)
+    react_webpack_rails (0.0.5)
       rails (>= 3.2)
     remotipart (1.2.1)
     responders (2.1.1)
@@ -418,7 +418,7 @@ DEPENDENCIES
   rails (= 4.2.5)
   rails_12factor
   rails_admin
-  react_webpack_rails
+  react_webpack_rails (~> 0.0.5)
   rspec-rails (~> 3.0)
   sass-rails (~> 5.0)
   shoulda
