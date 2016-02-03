@@ -191,6 +191,8 @@ GEM
     multipart-post (2.0.0)
     nenv (0.2.0)
     nested_form (0.3.2)
+    new_relic_ping (0.1.2)
+      rails (>= 3.2)
     nokogiri (1.6.7.1)
       mini_portile2 (~> 2.0.0.rc2)
     notiffany (0.0.8)
@@ -395,6 +397,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   mediawiki_api
+  new_relic_ping
   omniauth
   omniauth-facebook
   omniauth-mediawiki!
