@@ -5,6 +5,8 @@ export default class PlaylistFeature extends React.Component {
       return null;
     }
 
+    console.log(this.props);
+
     return (
       <div 
       className='playlist-feature'
@@ -12,13 +14,16 @@ export default class PlaylistFeature extends React.Component {
         backgroundColor: color
       }}>
         <div className='playlist-feature__content absolute p2'>
-          <h3 className='white'>{title}</h3>
-          {articles.slice(0,2).map((article, i) => {
+          <div className='playlist-feature__user'>{author.username}</div>
+          <h3 className='white playlist-feature__title'>{title}</h3>
+          {articles.slice(0,3).map((article, i) => {
             const { id, image, title } = article;
             return (
-              <div key={`featured_playlist ${id}${i}`} className='playlist-feature__card'>
-                <img src={image}/>
-                <h3>{title}</h3>
+              <div key={`featured_playlist ${id}${i}`} className={`playlist-feature__card card-${i}`}>
+                <div className='playlist-feature__card__image' style={{
+                  backgroundImage: `url(${image})`
+                }}></div>
+                <h4>{title}</h4>
               </div>
             )
           })}
