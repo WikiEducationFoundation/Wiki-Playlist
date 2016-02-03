@@ -37,7 +37,7 @@ export default class Home extends React.Component {
         <div className='py2'>
             <Link className='btn btn-primary' to="/playlists">Create a Playlist</Link>
         </div>
-        <a className="center-align mt2" target="_blank" href="http://playlist.wiki/playlist/bizarre-mythological-scottish-creatures">View Playlist Example</a>
+        <a className="center-align mt2" target="_blank" href="//playlist.wiki/playlist/bizarre-mythological-scottish-creatures">View Playlist Example</a>
         <img src='/images/example-page.png'/>
         {this._renderPlaylists()}
       </div>

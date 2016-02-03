@@ -101,12 +101,12 @@ export function fetchArticleImages(title, callback,) {
           image.url = thumburl;
           image.commons_url = commons_url + obj.title;
         }
-  
+
         var exclude = false;
         exclude_images.map(exl => {
           if(image.url.indexOf(exl) !== -1) {exclude = true;}
         });
-  
+
         if(!exclude && image.url !== '') {
           images.push(image);
         }
@@ -115,7 +115,7 @@ export function fetchArticleImages(title, callback,) {
     }
 
     images.push({
-      url: 'http://wiki-playlist.s3.amazonaws.com/images/wikipedia-page-fallback.png',
+      url: 'https://wiki-playlist.s3.amazonaws.com/images/wikipedia-page-fallback.png',
       commons_url: 'https://commons.wikimedia.org/wiki/File:Wikipedia-logo-v2.svg'
     });
 
