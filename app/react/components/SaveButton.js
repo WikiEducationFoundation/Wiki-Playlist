@@ -10,7 +10,7 @@ import {
   getUserStatus
 } from '../actions/UserAPI';
 
-import { 
+import {
   login,
   logout,
   showLogin,
@@ -68,10 +68,10 @@ class SaveButton extends React.Component {
     const { published } = this.props.Playlist;
     if(logged_in){
       return (
-        <button 
-          className='btn ml1' 
+        <button
+          className='btn ml1'
           onClick={this._savePlaylist.bind(this)}>
-          {(published ? 'Save Changes' : 'Save Playlist')} 
+          {(published ? 'Save Changes' : 'Save Playlist')}
         </button>);
     } else {
       return null;
@@ -90,7 +90,7 @@ class SaveButton extends React.Component {
     if(total_articles < MINIMUM_ARTICLES) {
       const remainder = MINIMUM_ARTICLES - total_articles;
       window.scrollTo(0,0)
-      flashMessage(this.dispatch,  {text: `Please find at least ${remainder} more page${(remainder > 1 ? 's' : '')} to save.`, type: 'action'});
+      flashMessage(this.dispatch,  {text: `Please find at least ${remainder} more Articles${(remainder > 1 ? 's' : '')} to save.`, type: 'action'});
     } else {
       const saveMethod = (published ? updatePlaylist : createPlaylist)
       saveMethod(this.props.Playlist, (data) => {

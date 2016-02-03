@@ -24,19 +24,20 @@ class App extends React.Component {
   render() {
     const { logged_in, current_user, show_login } = this.props.Account;
     const { show_share } = this.props.Share;
+    const { path } = this.props.routing;
     const { menu_open } = this.state;
     const preview_button = <button className='btn btn-outline'>Preview</button>;
     return (
-      <div className="">
+      <div className={'path-' + path.split('/').pop()}>
         <nav className="md-py2 site__navigation">
           <div className='container flex flex-center flex-justify'>
-            <Link to="/" className='black flex flex-center'>
-              <img className='wiki-globe mr1' src='/images/wikipedia-logo.png' height='34'/>
-              <img className='wiki-text' src='/images/wikipedia-playlist-type.svg' alt='Wikipedia Playlist' height='20'/>
+
+            <Link to="/" className='black'>
+              <img className='logo__image' src='/images/wikiedu-logo.svg' height='30'/>
+              <img className='logo__text' src='/images/wikipedia-playlist-type.svg' height='20'/>
             </Link>
-            
+
             <UserControls/>
-            
           </div>
         </nav>
 
