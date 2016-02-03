@@ -20,7 +20,7 @@ class Login extends React.Component {
 
     const wiki_login = (<div><a className='btn btn--oauth wiki' data-popup="Login with Wikipedia Account" href="/users/auth/mediawiki">Sign in with Wikipedia</a></div>);
     return (
-      <div className='py3 login-dialogue' role="dialog" ariaLabelledby="Login to Save Your Playlsit" ariaDescribedby="Login with your facebook, twitter, or wikipedia account.">
+      <div className='py3 login-dialogue' role="dialog" aria-labelledby="Login to Save Your Playlist" aria-describedby="Login with your facebook, twitter, or wikipedia account.">
         <div className='login-dialogue__container bg-white flex flex-column flex-center'
              ref={(container) => {this.container = container}}>
           <div>
