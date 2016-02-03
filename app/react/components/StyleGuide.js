@@ -21,7 +21,7 @@ export default class StyleGuide extends React.Component {
 
         <h1 className='mb1'>My Favorite Wikipedia Articles</h1>
         <p className='caption mb2'>Add Playlist Caption</p>
-        <h3 className='h3 mb2'>Wikipedia Collection Creator</h3>
+        <h3 className='h3 mb2'>Wikipedia Playlist Builder</h3>
         <div className='py2 border-top border-bottom md-col-6'>
           <h2 className='mb1'>Article Title</h2>
           <p className='summary'>
@@ -30,7 +30,7 @@ export default class StyleGuide extends React.Component {
           <button className='action mt2'>Share</button>
         </div>
         <div className='py2 border-bottom md-col-6'>
-          <div className='mb2'><a href='#' className='action action--external-serif'>View Article <Icon size="14px" icon="external-link" fill={'teal'} /></a></div>
+          <div className='mb2'><a href='#' className='action action--external-serif'>View Wikipedia Article <Icon size="14px" icon="external-link" fill={'teal'} /></a></div>
           <div className='mb2'><a href='#' className='action action--external-sans'>View on Wikipedia <span></span></a></div>
           <div className='mb2'><a href='#' className='action action--default'>Add<span></span></a></div>
           <div className='mb2'><a href='#' className='btn btn-primary'>Add Article<span></span></a></div>
