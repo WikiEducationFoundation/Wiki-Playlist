@@ -51,11 +51,14 @@
   right 0
   width 100%
   height 60%
-  // background-blend-mode: multiply;
-  // background-image url(/images/background-pattern.png)
+  background-image url(/images/pattern-transparent-low-opacity.png)
   background-size 300px auto
   +above(md)
     height 375px
+
+.background-blend-mode .playlist__background-color
+  background-image url(/images/pattern-transparent.png)
+  background-blend-mode: multiply;
 
 .playlist__background-color-picker
   // background white
