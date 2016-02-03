@@ -30,12 +30,16 @@
 
   .character-limit
     right 7px
+    top 2px
 
 .onboarding__image
-  background-size 50% auto
-  background-position center
-  background-repeat no-repeat
-  flex-basis 30%
+  display none
+  +above(md)
+    display block
+    background-size 80% auto
+    background-position center
+    background-repeat no-repeat
+    flex-basis 30%
 
 .onboarding__finish
   margin-left auto
