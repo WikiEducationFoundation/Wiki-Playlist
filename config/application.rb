@@ -23,5 +23,13 @@ module WikiPlaylist
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    NewRelicPing.configure do |c|
+      # This database check is defined for you by default if you're using ActiveRecord
+      # though you can override it by redefining it in your configuration
+      c.monitor('database') do
+        ActiveRecord::Base.connection.execute("select count(*) from schema_migrations")
+      end
+    end
   end
 end

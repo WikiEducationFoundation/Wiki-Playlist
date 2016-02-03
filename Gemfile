@@ -28,6 +28,7 @@ gem 'aws-sdk-v1'
 gem 'zeus'
 gem 'friendly_id', '~> 5.1.0'
 gem 'newrelic_rpm'
+gem 'new_relic_ping'
 
 group :development, :test do
   gem 'byebug'
