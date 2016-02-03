@@ -6,3 +6,41 @@
 .home-copy
   max-width 700px
   line-height 1.5
+
+.color-title
+  font-weight bold
+  animation colors 10s infinite
+  color #00B7C4
+  +above(md)
+    font-size 55px
+    line-height 75px
+    
+.home__introduction
+  max-width 500px
+  margin 1rem auto
+
+@keyframes colors
+  0%
+    color #00B7C4
+  14.3%
+    color #60C3E9
+  28.6%
+    color #FF5B5E
+  42.84%
+    color #F6AE00
+  57.2%
+    color #00DE9A
+  71.5%
+    color #BCBCBC
+
+.playlist-feature
+  width 100%
+  +above(500px)
+    flex-basis 50%
+  +above(800px)
+    flex-basis 33.33%
+  
+  &:after
+    content ''
+    display block
+    padding-bottom 100%

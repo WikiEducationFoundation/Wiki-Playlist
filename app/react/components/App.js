@@ -37,8 +37,6 @@ class App extends React.Component {
             
             <UserControls/>
             
-
-            
           </div>
         </nav>
 

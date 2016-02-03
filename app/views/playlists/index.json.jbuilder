@@ -6,6 +6,7 @@ json.data do
     json.url "#{request.base_url}/playlist/#{playlist.slug}"
     json.featured playlist.featured
     json.title playlist.title
+    json.color playlist.color
     json.articles playlist.articles do |article|
       json.title article.title
       json.description article.description
