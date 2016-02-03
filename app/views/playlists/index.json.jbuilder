@@ -8,6 +8,7 @@ json.data do
     json.title playlist.title
     json.color playlist.color
     json.articles playlist.articles do |article|
+      json.id article.id
       json.title article.title
       json.description article.description
       json.url article.url
