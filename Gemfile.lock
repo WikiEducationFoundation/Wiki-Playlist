@@ -442,6 +442,7 @@ DEPENDENCIES
   guard-zeus
   jbuilder (~> 2.0)
   jquery-rails
+  kaminari
   mediawiki_api
   new_relic_ping
   newrelic_rpm

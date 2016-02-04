@@ -30,6 +30,7 @@ gem 'friendly_id', '~> 5.1.0'
 gem 'newrelic_rpm'
 gem 'new_relic_ping'
 gem 'twitter'
+gem 'kaminari'
 
 group :development, :test do
   gem 'byebug'
