@@ -25,7 +25,7 @@ export default class Home extends React.Component {
     return (
       <div className='home container'>
         <h1 className='color-title center'>Wikipedia Playlists</h1>
-        <p className='home__introduction'>Lorem ipsum In ea nostrud do ullamco veniam officia velit aliqua pariatur fugiat cupidatat labore deserunt eu tempor sunt nulla laborum culpa voluptate laborum pariatur mollit.</p>
+        <p className='home__introduction'>Help the Wiki Education Foundation spread the joy of knowledge! Create a Playlist of 3–5 Wikipedia articles on topics you’re most passionate, curious, or excited about. Then share your Playlist on social media.</p>
         {this._renderPlaylists()}
       </div>
     )
