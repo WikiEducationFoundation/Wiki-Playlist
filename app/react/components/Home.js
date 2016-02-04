@@ -37,10 +37,6 @@ export default class Home extends React.Component {
 
   _renderPlaylists() {
     const { playlists, user } = this.state;
-    // if(process.env.NODE_ENV !== 'development') {
-    //   return null;
-    // }
-    // console.log(playlists);
     if(playlists.length) {
       return (
         <div className='flex flex-wrap py2 px1'>
