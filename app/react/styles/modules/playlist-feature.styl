@@ -10,6 +10,18 @@
     content ''
     display block
     padding-bottom 100%
+  
+  .action
+    position absolute
+    bottom 4px
+    right 4px
+    padding 0 4px
+    border 1px solid white
+    color white
+    font-size 12px
+    &.featured
+      background white
+      color $black
 
 .playlist-feature__content
   width 100%
@@ -17,6 +29,10 @@
   top 0
   left 0
   overflow hidden
+  
+  &:hover, 
+  &:hover *
+    text-decoration none
   
   .avatar
     width 30px
@@ -65,3 +81,7 @@
   +above(md)
     font-size 25px
     line-height 34px
+
+.playlist-feature__name
+  text-tranform uppercase
+  letter-spacing 1px
