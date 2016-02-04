@@ -104,9 +104,12 @@ export function fetchArticleImages(title, callback,) {
           image.url = thumburl;
           image.commons_url = commons_url + obj.title;
 
-          const { extmetadata } =  obj.imageinfo;
-          if(extmetadata !== undefined && AttributionRequired.value) {
-            console.log('show attribution for', thumburl);
+          const { extmetadata } =  obj.imageinfo[0];
+          // console.log(obj.imageinfo)
+          if(extmetadata !== undefined 
+             && extmetadata.AttributionRequired !== undefined
+             && extmetadata.AttributionRequired.value === 'true') {
+            console.log('Show image attribution', extmetadata)
           }
           
 
