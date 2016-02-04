@@ -26,6 +26,7 @@ deploy:
   app:
     master: wiki-playlist-staging
     production: wiki-playlist
+    homepage-gallery: wiki-playlist-staging
   run: bundle exec rake db:migrate
   skip_cleanup: true
 
