@@ -63,6 +63,7 @@ class OnboardingTitle extends React.Component {
           <div className='relative right'>
             <input className='field p1'
                  placeholder='Playlist Name'
+                 name='Playlist Name'
                  value={this.state.title}
                  onChange={({target})=>{
                   let text = target.value.substr(0, TITLE_LIMIT);

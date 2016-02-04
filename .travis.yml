@@ -18,6 +18,7 @@ before_script:
   - bundle install
   - npm install
   - npm run build
+  - rspec -f documentation
 
 deploy:
   provider: heroku

@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 import { pushPath } from 'redux-simple-router';
 import { PLAYLISTS_PATH } from '../constants';
 
-class ArticleSearch extends React.Component {
+class Search extends React.Component {
 
   componentDidMount() {
     this.addAnimation(fadeIn);
@@ -81,4 +81,4 @@ function fadeOut({target}) {
     })
 }
 
-export default connect( state => {return state})(GSAP()(ArticleSearch));
+export default connect( state => {return state})(GSAP()(Search));

@@ -12,7 +12,7 @@ import { syncReduxAndRouter } from 'redux-simple-router'
 import App from './components/App';
 import Home from './components/Home';
 import PlaylistEditor from './components/PlaylistEditor';
-import ArticleSearch from './components/ArticleSearch';
+import Search from './components/Search';
 import ArticlePreview from './components/ArticlePreview';
 import ArticleCaption from './components/ArticleCaption';
 import ImageSelector from './components/ImageSelector';
@@ -39,7 +39,7 @@ class PlaylistApp extends React.Component{
               <Route path="/playlists/article/images" component={ImageSelector} />
               <Route path="/playlists/article/caption" component={ArticleCaption} />
             </Route>
-            <Route path="/playlists/article/search" component={ArticleSearch} />
+            <Route path="/playlists/article/search" component={Search} />
           </Route>
           <Route path="/styleguide" component={StyleGuide}/>
         </Router>

@@ -23,9 +23,11 @@ class App extends React.Component {
 
   componentDidMount() {
     var supportsBackgroundBlendMode = window.getComputedStyle(document.body).backgroundBlendMode;
-    this.supportClasses = {
+    const supportClasses = {
       blendmodes: (supportsBackgroundBlendMode ? '' : 'no-') + 'background-blend-mode'
     }
+
+    this.supportClasses = _.values(supportClasses).join(' ')
   }
 
   render() {
@@ -33,9 +35,12 @@ class App extends React.Component {
     const { show_share } = this.props.Share;
     const { path } = this.props.routing;
     const { menu_open } = this.state;
+    const dir = path.split('/').pop();
+    const pathClass = (dir !== '' ? `path-${dir}` : '');
+    const AppClassNames = [dir, pathClass].join(' ')
     const preview_button = <button className='btn btn-outline'>Preview</button>;
     return (
-      <div className={'path-' + path.split('/').pop() + ' ' + _.values(this.supportClasses).join(' ')}>
+      <div className={AppClassNames}>
         <nav className="md-py2 site__navigation">
           <div className='container flex flex-center flex-justify'>
 

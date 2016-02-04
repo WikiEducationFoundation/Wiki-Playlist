@@ -9,21 +9,6 @@ describe User do
       expect(user.admin?).to be false
     end
 
-    it 'should create a username based on the email (if one exists)' do
-      user = build(:user)
-      user.save
-      expect(user.username).to eq('joe')
-    end
-
-    it 'should validate the uniqueness of the username' do
-      user = FactoryGirl.create(:user)
-      user.save!
-      expect(user.username).to eq('joe')
-      user2 = build(:user, :email => 'joe@yahoo.com')
-      user2.save!
-      expect(user2.username).to eq('joe')
-    end
-
   end
 
   describe 'Admin user creation' do
