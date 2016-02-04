@@ -458,6 +458,7 @@ DEPENDENCIES
   rails_12factor
   rails_admin
   react_webpack_rails (~> 0.0.5)
+  rspec
   rspec-rails (~> 3.0)
   sass-rails (~> 5.0)
   selenium-webdriver
