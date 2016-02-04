@@ -21,6 +21,11 @@ class App extends React.Component {
     }
   }
 
+  componentDidMount() {
+    var addSupportClasses = require('../utils/CSSSupportClasses').addSupportClasses;
+    addSupportClasses();
+  }
+
   render() {
     const { logged_in, current_user, show_login } = this.props.Account;
     const { show_share } = this.props.Share;
