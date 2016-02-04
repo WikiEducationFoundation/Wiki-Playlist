@@ -68,11 +68,14 @@ class ImageSelector extends React.Component {
     this.setState({
       currentIndex: index
     });
+    const { images, articleIndex, article } = this._getImages();
+    this.dispatch(setArticleImage(articleIndex, images[this.state.currentIndex]));
+    // this.dispatch(updateCurrentEditingArticle(null));
   }
 
   componentWillUnmount() {
-    const { images, articleIndex, article } = this._getImages();
-    this.dispatch(setArticleImage(articleIndex, images[this.state.currentIndex]));
+    // const { images, articleIndex, article } = this._getImages();
+    // this.dispatch(setArticleImage(articleIndex, images[this.state.currentIndex]));
   }
 
   _getImages() {

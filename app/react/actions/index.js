@@ -36,7 +36,8 @@ import {
   CLOSE_SHARE,
   UPDATE_PLAYLIST_USERNAME,
   SET_PLAYLIST_COLOR,
-  PLAYLIST_SHOULD_SAVE
+  PLAYLIST_SHOULD_SAVE,
+  REORDER_ARTICLE_IMAGES
 } from '../constants';
 
 
@@ -254,6 +255,15 @@ export function setArticleImage(index, url) {
     url
   }
 }
+
+
+export function reorderArticleImages(index) {
+  return {
+    type: REORDER_ARTICLE_IMAGES,
+    index
+  }
+}
+
 
 export function setArticleCaption(index, text) {
   return {
