@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   validates :username, :presence => true
 
   def as_json(options={})
-    super(:only => [:email, :username, :admin])
+    super(:only => [:username, :admin, :verified, :avatar, :name])
   end
 
   def self.from_omniauth(auth)
@@ -24,8 +24,15 @@ class User < ActiveRecord::Base
       email = nil
       email = auth.info.email
       email = auth.extra.raw_info.email if email.nil?
-      user.username = auth.info.nickname if auth.info.nickname?
-      user.username = auth.info.name if auth.info.name?
+      user.avatar = auth.info.image if auth.info.image?
+      user.verified = auth.extra.raw_info.verified if auth.extra.raw_info.verified?
+      if auth.info.nickname?
+        user.username = auth.info.nickname
+      elsif auth.info.name?
+        user.username = auth.info.name
+      end
+      
+      user.name = auth.info.name if auth.info.name?
       user.provider = auth.provider
       user.uid = auth.uid
       user.email = email
