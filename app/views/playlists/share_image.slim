@@ -1,7 +1,11 @@
-.share-image style="background:#{@playlist.color}"
+.share-image style="background-color:#{@playlist.color}"
   div.share-image__title.center
     - if @user && @user.username
-      div.share-image__user #{@user.username}&#39;s
+      div.share-image__user 
+        span #{truncate_username(@user.username)}&#39;s
+        - if @user.verified 
+          span &nbsp;
+          img src='/images/verified.png'
     h1 Wikipedia Playlist
   .share-image__articles.relative
     - @articles.slice(0,3).each do |article, index|
