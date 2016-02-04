@@ -39,13 +39,10 @@ class App extends React.Component {
 
             <Link to="/" className='black'>
               <img className='logo__image' src='/images/wikiedu-logo.svg' height='30'/>
-              <img className='logo__text' src='/images/wikipedia-playlist-type.svg' height='20'/>
+              <img className='logo__text' src='/images/wiki-playlist-type.svg' height='20'/>
             </Link>
 
             <UserControls/>
-
-
-
           </div>
         </nav>
 
@@ -57,9 +54,12 @@ class App extends React.Component {
         </div>
         {this._devTools()}
 
-        <footer className='container p2 mt3 flex center flex-justify'>
-          {(logged_in && current_user ? <span>You are logged in. <a href="#" className='' data-sign-out>Logout</a></span> : null)}
-          <DeleteButton />
+        <footer className='site__footer container mt3 center flex-justify'>
+          <div className='flex flex-justify border-bottom p2'>
+            {(logged_in && current_user ? <span>You are logged in. <a href="#" className='' data-sign-out>Logout</a></span> : null)}
+            <DeleteButton />
+          </div>
+          <div className='py2 px1'><small>Wiki Playlist is a project of the <a href='https://wikiedu.org/'>Wiki Education Foundation</a>. Text and images on Wikipedia articles are available under free licenses thanks to the tireless work of volunteers at Wikipedia and Wikimedia Commons.</small></div>
         </footer>
 
         {(show_share? <Share/> : null )}
