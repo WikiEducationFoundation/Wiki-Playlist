@@ -10,10 +10,12 @@ namespace :users do
   
     User.where(:provider => 'twitter').each do |user|
       twitter_user = client.user(user.username)
-      user.avatar = twitter_user.profile_image_uri_https.to_s
-      user.verified = twitter_user.verified?
-      user.name = twitter_user.name
-      user.save!
+      if !twitter_user.nil?
+        user.avatar = twitter_user.profile_image_uri_https.to_s
+        user.verified = twitter_user.verified?
+        user.name = twitter_user.name
+        user.save!
+      end
     end
   end
 end
