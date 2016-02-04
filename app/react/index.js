@@ -27,7 +27,6 @@ const history = createHistory();
 
 syncReduxAndRouter(history, store)
 
-
 class PlaylistApp extends React.Component{
   render() {
     return (
