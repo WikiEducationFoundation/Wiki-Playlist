@@ -4,26 +4,28 @@ import { getAllPlaylists, featurePlaylist } from '../actions/PlaylistAPI';
 
 class PlaylistFeature extends React.Component {
   render() {
-    const {title, caption, articles, id, featured, color, user, current_user} = this.props;
+    const {title, caption, articles, id, featured, color, user, current_user, url} = this.props;
     if(!color) {
       return null;
     }
     const { admin } = current_user;
-    const { avatar, username, verified } = user;
+    const { avatar, username, verified, name } = user;
     return (
       <div 
       className='playlist-feature'
       style={{
         backgroundColor: color
       }}>
-        <div className='playlist-feature__content absolute p2'>
+        <a href={url} className='playlist-feature__content absolute p2'>
           <div className='playlist-feature__user flex flex-center'>
             <img className='avatar' src={avatar}/>
-            <span>{username}{(verified ? <img className='ml1' src='/images/verified.png' height={15}/>: null)}</span>
+            <span className='white'>{username}{(verified ? <img className='ml1' src='/images/verified.png' height={15}/>: null)}</span>
           </div>
-          <h3 className='white playlist-feature__title'>{title} </h3>
-
-          {(admin? <button onClick={()=> this._featurePlaylist(id)}>{(featured ? 'Featured' : 'Feature')}</button> : null)}
+          <div className='py3'>
+           {(name !== undefined && name !== null ? <div className='playlist-feature__name white'>{name}</div> : null)}
+           <h3 className='white playlist-feature__title'>{title} </h3>
+          </div>
+          {(admin? <button className={`action ${(featured ? 'featured' : '')}`} onClick={()=> this._featurePlaylist(id)}>{(featured ? 'Featured' : 'Feature')}</button> : null)}
 
           {articles.slice(0,3).map((article, i) => {
             const { id, image, title } = article;
@@ -36,7 +38,7 @@ class PlaylistFeature extends React.Component {
               </div>
             )
           })}
-        </div>
+        </a>
       </div>
     );
   }

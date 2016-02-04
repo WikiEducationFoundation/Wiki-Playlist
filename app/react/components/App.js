@@ -12,17 +12,19 @@ import Share from './Share';
 import Icon from './Icon';
 import DeleteButton from './DeleteButton';
 
-var supportsBackgroundBlendMode = window.getComputedStyle(document.body).backgroundBlendMode;
-var supportClasses = {
-  blendmodes: (supportsBackgroundBlendMode ? '' : 'no-') + 'background-blend-mode'
-}
-
 class App extends React.Component {
 
   constructor() {
     super();
     this.state = {
       menu_open: false
+    }
+  }
+
+  componentDidMount() {
+    var supportsBackgroundBlendMode = window.getComputedStyle(document.body).backgroundBlendMode;
+    this.supportClasses = {
+      blendmodes: (supportsBackgroundBlendMode ? '' : 'no-') + 'background-blend-mode'
     }
   }
 
@@ -33,7 +35,7 @@ class App extends React.Component {
     const { menu_open } = this.state;
     const preview_button = <button className='btn btn-outline'>Preview</button>;
     return (
-      <div className={'path-' + path.split('/').pop() + ' ' + _.values(supportClasses).join(' ')}>
+      <div className={'path-' + path.split('/').pop() + ' ' + _.values(this.supportClasses).join(' ')}>
         <nav className="md-py2 site__navigation">
           <div className='container flex flex-center flex-justify'>
 
