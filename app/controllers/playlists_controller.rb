@@ -25,9 +25,9 @@ class PlaylistsController < ApplicationController
 
   def index
     if current_user && User.find(current_user.id).admin
-      @playlists = Playlist.all
+      @playlists = Playlist.page(params[:page]).per(18)
     else
-      @playlists = Playlist.featured
+      @playlists = Playlist.featured.limit(20)
     end
 
     if current_user.nil?
