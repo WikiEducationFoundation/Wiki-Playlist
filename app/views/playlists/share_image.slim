@@ -3,7 +3,7 @@
     - if @user && @user.username
       div.share-image__user 
         span #{truncate_username(@user.username)}&#39;s
-        - if !@user.verified.nil? && @user.verified 
+        - if @user.try(:verified) && @user.verified 
           span &nbsp;
           img src='/images/verified.png'
     h1 Wikipedia Playlist
