@@ -44,6 +44,8 @@ end
 group :test do
   gem "capybara"
   gem "capybara-webkit"
+  gem "selenium-webdriver"
+  gem 'capybara-screenshot'
   gem "rspec-rails", '~> 3.0'
   gem "cucumber-rails", :require => false
   gem 'factory_girl_rails'

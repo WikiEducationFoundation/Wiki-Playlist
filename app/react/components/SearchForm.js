@@ -14,6 +14,7 @@ export default class SearchForm extends React.Component {
         <div className='relative'>
           <input onChange={this._handleInputChange.bind(this)}
                id='Search'
+               name='Search'
                autoFocus={true}
                type='text'
                autoComplete='off'

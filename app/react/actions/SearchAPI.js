@@ -97,9 +97,19 @@ export function fetchArticleImages(title, callback,) {
       imageObjects.map(obj => {
         let image = { url: ''}
         if(obj.imageinfo !== undefined && obj.imageinfo.length) {
+          // console.log(obj.imageinfo)
+
+
           const {thumburl} = obj.imageinfo[0];
           image.url = thumburl;
           image.commons_url = commons_url + obj.title;
+
+          const { extmetadata } =  obj.imageinfo;
+          if(extmetadata !== undefined && AttributionRequired.value) {
+            console.log('show attribution for', thumburl);
+          }
+          
+
         }
 
         var exclude = false;

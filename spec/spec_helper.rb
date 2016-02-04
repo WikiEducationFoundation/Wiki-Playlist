@@ -19,11 +19,14 @@
 require 'factory_girl_rails'
 require 'omniauth'
 require 'devise'
+require 'capybara/rspec'
 require_relative 'helpers/omniauth_test_helper'
 
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+
+  Capybara.javascript_driver = :webkit
 
   config.include Devise::TestHelpers, :type => :controller
   config.include OmniAuthTestHelpers
@@ -52,6 +55,10 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
+  config.before(:suite) do
+    %x[bundle exec rake assets:precompile]
+  end
+
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin
@@ -73,6 +80,8 @@ RSpec.configure do |config|
   #   - http://www.teaisaweso.me/blog/2013/05/27/rspecs-new-message-expectation-syntax/
   #   - http://rspec.info/blog/2014/05/notable-changes-in-rspec-3/#zero-monkey-patching-mode
   config.disable_monkey_patching!
+  
+
 
   # Many RSpec users commonly either run the entire suite or an individual
   # file, and it's useful to allow more verbose output when running an
