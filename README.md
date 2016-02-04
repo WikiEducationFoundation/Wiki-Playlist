@@ -1,5 +1,7 @@
 # Wikipedia Playlist
 
+<img src='https://travis-ci.org/WikiEducationFoundation/WikipediaPlaylist.svg?branch=master'/>
+
 ## Project Setup
 
 1. Install Ruby 2.3.0 using [RVM](https://rvm.io/rvm/install)
