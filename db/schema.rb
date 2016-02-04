@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160201211306) do
+ActiveRecord::Schema.define(version: 20160204014853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(version: 20160201211306) do
     t.integer  "position"
     t.string   "commons_url"
   end
+
+  add_index "articles", ["playlist_id"], name: "index_articles_on_playlist_id", using: :btree
 
   create_table "playlists", force: :cascade do |t|
     t.integer  "user_id"
@@ -50,14 +52,14 @@ ActiveRecord::Schema.define(version: 20160201211306) do
   add_index "playlists", ["user_id"], name: "index_playlists_on_user_id", using: :btree
 
   create_table "que_jobs", id: false, force: :cascade do |t|
-    t.integer  "priority",    limit: 2, default: 100,                                        null: false
-    t.datetime "run_at",                default: "now()",                                    null: false
-    t.integer  "job_id",      limit: 8, default: "nextval('que_jobs_job_id_seq'::regclass)", null: false
-    t.text     "job_class",                                                                  null: false
-    t.json     "args",                  default: [],                                         null: false
-    t.integer  "error_count",           default: 0,                                          null: false
+    t.integer  "priority",    limit: 2, default: 100,                   null: false
+    t.datetime "run_at",                default: '2016-02-03 22:52:52', null: false
+    t.integer  "job_id",      limit: 8, default: 0,                     null: false
+    t.text     "job_class",                                             null: false
+    t.json     "args",                  default: [],                    null: false
+    t.integer  "error_count",           default: 0,                     null: false
     t.text     "last_error"
-    t.text     "queue",                 default: "",                                         null: false
+    t.text     "queue",                 default: "",                    null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -77,6 +79,9 @@ ActiveRecord::Schema.define(version: 20160201211306) do
     t.string   "uid"
     t.boolean  "admin",                  default: false
     t.string   "username"
+    t.string   "avatar"
+    t.boolean  "verified",               default: false
+    t.string   "name"
   end
 
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree

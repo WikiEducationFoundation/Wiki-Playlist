@@ -7,7 +7,7 @@ json.data do
     json.featured playlist.featured
     json.title playlist.title
     json.color playlist.color
-    json.author playlist.user
+    json.user playlist.user
     json.articles playlist.articles do |article|
       json.id article.id
       json.title article.title

@@ -58,9 +58,9 @@ class EditableText extends React.Component {
        this.setState({value: this.truncateValue(target.value)})
       },
       onBlur: (e) => {
-       // this._handleChange(e);
-       // this.setState({editing: false});
-       // this._save()
+       this._handleChange(e);
+       this.setState({editing: false});
+       this._save()
       },
       onKeyUp: ({which}) =>{
         switch(which) {

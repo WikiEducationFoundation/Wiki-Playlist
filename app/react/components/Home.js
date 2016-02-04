@@ -13,10 +13,12 @@ export default class Home extends React.Component {
     super();
     this.state = {
       user: {},
-      playlists: []
+      playlists: [],
+      loading: true
     }
     es6BindAll(this, [
-        '_featurePlaylist'
+        '_featurePlaylist',
+        '_getPlaylists'
       ]);
   }
   render() {
@@ -38,21 +40,22 @@ export default class Home extends React.Component {
     if(process.env.NODE_ENV !== 'development') {
       return null;
     }
-
-
+    console.log(playlists);
     if(playlists.length) {
       return (
         <div className='flex flex-wrap py2 px1'>
-        {playlists.map(playlist =><PlaylistFeature key={playlist.id} {...playlist}/>)}
+        {playlists.map(playlist =><PlaylistFeature key={playlist.id} current_user={user} {...playlist} getPlaylists={this._getPlaylists} playlists={playlists}/>)}
         </div>);
-    } else {
+    } else if (this.state.loading) {
       return <div>Loading Playlists...</div>;
+    } else {
+      return null;
     }
   }
 
   _getPlaylists() {
     getAllPlaylists().done(({data})=>{
-      this.setState(data);
+      this.setState(_.assign({}, data, {loading: false}));
     })
   }
 

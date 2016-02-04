@@ -29,6 +29,7 @@ gem 'zeus'
 gem 'friendly_id', '~> 5.1.0'
 gem 'newrelic_rpm'
 gem 'new_relic_ping'
+gem 'twitter'
 
 group :development, :test do
   gem 'byebug'
@@ -37,6 +38,7 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'guard-zeus'
   gem 'pry-byebug'
+
 end
 
 group :test do

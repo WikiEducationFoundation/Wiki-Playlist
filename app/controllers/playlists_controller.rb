@@ -33,7 +33,7 @@ class PlaylistsController < ApplicationController
     if current_user.nil?
       @user = false
     else
-      @user = User.find(current_user.id)
+      @user = User.find(current_user.id).as_json
     end
     
     respond_to do |format|
