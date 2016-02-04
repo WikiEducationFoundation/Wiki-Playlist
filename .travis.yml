@@ -10,23 +10,23 @@ before_install:
 
 addons:
   postgresql: "9.3"
-  apt:
-    sources:
-    - ubuntu-sdk-team
-    packages:
-    - libqt5webkit5-dev
-    - qtdeclarative5-dev
-    - pandoc
+  # apt:
+  #   sources:
+  #   - ubuntu-sdk-team
+  #   packages:
+  #   - libqt5webkit5-dev
+  #   - qtdeclarative5-dev
+  #   - pandoc
 
-before_install:
-  # Export QMAKE for libqt5webkit5-dev
-  - export QMAKE=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
-  # Set a dummy sentry url if none is set via environment variable
-  - export sentry_dsn=${sentry_dsn:=http://example.com}
+# before_install:
+#   # Export QMAKE for libqt5webkit5-dev
+#   - export QMAKE=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
+#   # Set a dummy sentry url if none is set via environment variable
+#   - export sentry_dsn=${sentry_dsn:=http://example.com}
 
-  # Set up a headless display so capybara will work.
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
+#   # Set up a headless display so capybara will work.
+#   - export DISPLAY=:99.0
+#   - sh -e /etc/init.d/xvfb start
 
 before_script:
   - cp config/database.travis.yml config/database.yml
@@ -42,14 +42,15 @@ deploy:
     secure: K6GGJCpw0bWCUzU4hZZOm3a2BQ/Z0P0bbcxixDaWTS8im0+XwiuqNW4StB/pUBQqN5rQU/JuYxcrGneQMeISqfYZow3IRzq6/+Hv4N4saNJAzPJ95L+kC/6g0ybxmuHuhOq8m59zqpveAOsSlhf1WOcGvAxym0GykM61pMN7yR4bZsNbOWIPXDjCI09BFPR/hh7jinU4F3NYyJYXzG9y+brqGd/6wo7HFDYE+M9o0IgM3k63DE1EZ3OD5AObPAz68hIESvry1sQlbAGJEy2eN1H/01Oc8M5g2ARQsoitRgCSwPpbNFIvXz9MOIxhnQZrzX+9PVsp++2edztOEvGwj+A1iZX15fdDBN0m8gJ5PaFR/K2u3/t3WI3DyXPTiYT5eT2tGh28bnfzoYSrm83W4VvCCOGVe99brF0ctxqr76QF53tWWK0QmGeN9Ve4leH5TL4ZnS9FVEvQ6sayoAKCr03oZwCqF/P/kLuei5m9Ei0Xe/SlnGgGHf/1+OADHSsB5jZy11YRtYwpPeJffp/P8gjQxWsQgjCm5CRyd9dEV3rCPAybDAixBl1elWH1nQqq06GLVUUy9VyIVmLU6EEU0vnjClBSXSvgbrYAKbhm0s3sCqpE0oDfuQJY0lFOkm0nPVntjf67KZShjcMwC2Kz2p4ImlzbmqsQV6QeqF3g1Cc=
   app:
     master: wiki-playlist-staging
-    production: wiki-playlist
     homepage-gallery: wiki-playlist-staging
+    production: wiki-playlist
+
   run: bundle exec rake db:migrate
   skip_cleanup: true
 
-after_failure:
-  - npm install imgur-uploader-cli -g
-  - find $TRAVIS_BUILD_DIR/tmp/screenshots -name "*.png" -print0 | xargs -n 1 -0 imgur-uploader
+# after_failure:
+#   - npm install imgur-uploader-cli -g
+#   - find $TRAVIS_BUILD_DIR/tmp/screenshots -name "*.png" -print0 | xargs -n 1 -0 imgur-uploader
 
 
 notifications:
