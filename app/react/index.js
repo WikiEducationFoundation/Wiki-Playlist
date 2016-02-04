@@ -7,6 +7,7 @@ window.ReactDOM = ReactDOM;
 import { Provider } from 'react-redux';
 import {Router, Route, Link, browserHistory, IndexRoute} from 'react-router';
 import { syncReduxAndRouter } from 'redux-simple-router'
+import { getSupportClasses } from './utils/CSSSupportClasses';
 
 // Components
 import App from './components/App';
@@ -49,3 +50,5 @@ class PlaylistApp extends React.Component{
 }
 
 registerComponent('PlaylistApp', PlaylistApp);
+
+$('body').addClass(getSupportClasses());
