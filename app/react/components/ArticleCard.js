@@ -132,7 +132,7 @@ export class ArticleCard extends React.Component {
     if(has_article) {
       content = (
         <div>
-          <h2 className="article-card__title">{title}</h2>
+          <h2 className="article-card__title"><a href={url}>{title}</a></h2>
           <div className="mb2 article-card__excerpt summary">{truncated_description}</div>
         </div>
       );
