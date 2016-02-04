@@ -38,7 +38,8 @@ import {
   CLOSE_SHARE,
   UPDATE_PLAYLIST_USERNAME,
   SET_PLAYLIST_COLOR,
-  PLAYLIST_SHOULD_SAVE
+  PLAYLIST_SHOULD_SAVE,
+  REORDER_ARTICLE_IMAGES
 } from '../constants';
 
 
@@ -268,9 +269,15 @@ function Playlist(state = initialPlaylistState, action) {
       var articles = state.articles.slice(0);
       var article = articles[action.index];
       article.image = action.url;
-      const imageIndex = article.images.indexOf(action.url);
-      moveArrayItem(article.images, imageIndex, 0);
+      // const imageIndex = article.images.indexOf(action.url);
+      // moveArrayItem(article.images, imageIndex, 0);
       return _.assign({}, state, {articles: articles})
+
+    case REORDER_ARTICLE_IMAGES:
+      var articles = state.articles.slice(0);
+      var article = articles[action.index];
+      const imageIndex = article.images.indexOf(article.image);
+      moveArrayItem(article.images, imageIndex, 0);
 
     case SET_ARTICLE_CAPTION:
       var articles = state.articles.slice(0);

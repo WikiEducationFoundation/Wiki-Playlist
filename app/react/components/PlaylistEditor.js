@@ -135,7 +135,7 @@ class PlaylistEditor extends React.Component {
       return (
       <div className="editable-container center p2">
           <button className='action teal'
-                    onClick={()=>{this.props.dispatch(addArticleCard())}}>Add Wikipedia Article +</button>
+                    onClick={()=>{this.props.dispatch(addArticleCard())}}>Add Wiki Article +</button>
       </div>)
     } else {
       return null;

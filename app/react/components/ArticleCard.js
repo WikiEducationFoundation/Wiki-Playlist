@@ -6,7 +6,8 @@ import {
   collapseComplete,
   setOnboardingStep,
   setUserOnboarding,
-  removeArticle
+  removeArticle,
+  reorderArticleImages
 } from '../actions';
 
 import { setOnboardingCookie } from '../actions/UserAPI';
@@ -63,7 +64,7 @@ export class ArticleCard extends React.Component {
               }}>&#215;</button>: null)}
 
               {(isOnboarding ?
-                  <div><h3 className='mb3'>Lets add your first Wikipedia Article!</h3>
+                  <div><h3 className='mb3'>Lets add your first Wiki Article!</h3>
                   </div>
                 : null)}
 
@@ -73,7 +74,7 @@ export class ArticleCard extends React.Component {
                         this.dispatch(updateCurrentEditingArticle(index))
                         this.dispatch(pushPath('/playlists/article/search'))
                       }}>
-                      Add Wikipedia Article</button>
+                      Add Wiki Article</button>
               </div>
           )}
 
@@ -140,6 +141,7 @@ export class ArticleCard extends React.Component {
     const edit_button = (
         <button className='btn btn-outline'
                 onClick={() => {
+                  this.dispatch(reorderArticleImages(index));
                   this.dispatch(updateCurrentEditingArticle(index))
                 }}>
                 Edit <Icon size="14px" icon="edit" fill={'teal'} /></button>)

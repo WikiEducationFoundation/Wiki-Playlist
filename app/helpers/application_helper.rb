@@ -8,4 +8,12 @@ module ApplicationHelper
   def truncate_summary(text)
     truncate(text, :length => 300, :omission => '...')
   end
+
+  def playlist_caption(caption)
+    if caption.nil? || caption.empty?
+      return "Share the joy of knowledge"
+    else
+      return caption
+    end
+  end
 end

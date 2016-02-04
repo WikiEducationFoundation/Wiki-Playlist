@@ -38,6 +38,7 @@ export const SHOW_SHARE = 'SHOW_SHARE';
 export const CLOSE_SHARE = 'CLOSE_SHARE';
 export const UPDATE_PLAYLIST_USERNAME = 'UPDATE_PLAYLIST_USERNAME';
 export const PLAYLIST_SHOULD_SAVE = 'PLAYLIST_SHOULD_SAVE';
+export const REORDER_ARTICLE_IMAGES = 'REORDER_ARTICLE_IMAGES';
 
 // Breakpoints
 export const MD = '756px';
