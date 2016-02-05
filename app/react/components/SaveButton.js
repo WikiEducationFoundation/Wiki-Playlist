@@ -87,7 +87,6 @@ class SaveButton extends React.Component {
       return;
     }
     // todo:  if 'can publish' instead of comparison here
-    console.log(total_articles, MINIMUM_ARTICLES);
     if(total_articles < MINIMUM_ARTICLES) {
       const remainder = MINIMUM_ARTICLES - total_articles;
       window.scrollTo(0,0)
