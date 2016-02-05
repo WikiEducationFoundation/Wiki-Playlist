@@ -64,7 +64,7 @@ export class ArticleCard extends React.Component {
               }}>&#215;</button>: null)}
 
               {(isOnboarding ?
-                  <div><h3 className='mb3'>Lets add your first Wiki Article!</h3>
+                  <div><h3 className='mb3'>Lets add your first Wikipedia Article!</h3>
                   </div>
                 : null)}
 
@@ -74,7 +74,7 @@ export class ArticleCard extends React.Component {
                         this.dispatch(updateCurrentEditingArticle(index))
                         this.dispatch(pushPath('/playlists/article/search'))
                       }}>
-                      Add Wiki Article</button>
+                      Add Wikipedia Article</button>
               </div>
           )}
 
