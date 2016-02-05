@@ -39,7 +39,8 @@ import {
   UPDATE_PLAYLIST_USERNAME,
   SET_PLAYLIST_COLOR,
   PLAYLIST_SHOULD_SAVE,
-  REORDER_ARTICLE_IMAGES
+  REORDER_ARTICLE_IMAGES,
+  MINIMUM_ARTICLES
 } from '../constants';
 
 
@@ -190,14 +191,15 @@ function defaultPlaylist() {
     editingTitle: false,
     caption: '',
     editingCaption: false,
-    total_articles: 0,
     articles: articles,
     editingArticle: null,
     animating: false,
     published: false,
     server_info: {},
     server_errors: [],
-    should_save: false
+    should_save: false,
+    can_save: false,
+    remaining_to_save: MINIMUM_ARTICLES
   }
 }
 
@@ -246,10 +248,13 @@ function Playlist(state = initialPlaylistState, action) {
       _article.has_article = true;
       var articles = state.articles.slice(0);
       articles[index] = _article;
-      return _.assign({}, state, {articles: articles, total_articles: state.total_articles + 1})
+      const total_articles = _.where(articles, {has_article: true}).length;
+      console.log('total', total_articles, MINIMUM_ARTICLES)
+      const remaining_to_save = MINIMUM_ARTICLES - total_articles;
+      const can_save = total_articles >= MINIMUM_ARTICLES;
+      return _.assign({}, state, {articles: articles, can_save: can_save, remaining_to_save: remaining_to_save});
 
     case REMOVE_ARTICLE_CARD:
-
       let articles = state.articles.slice(0)
       articles.splice(action.index, 1);
       return _.assign({}, state, {articles: articles})

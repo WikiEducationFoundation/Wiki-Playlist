@@ -62,10 +62,24 @@
     color white
 
 .btn--oauth
-  max-width 300px
+  max-width 220px
   width 100%
   border-radius 3px
   cursor pointer
+  font-weight 300
+  font-size 14px
+  margin .5rem
+  +above(md)
+    display inline-block
+    vertical-align top
+    margin 0 .5rem
+  
+  svg, span
+    display inline-block
+    vertical-align middle
+  
+  svg
+    margin-right 7px
 
   &.twitter
     background $twitter

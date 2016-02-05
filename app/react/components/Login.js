@@ -1,9 +1,11 @@
 import GSAP from 'react-gsap-enhancer'
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import Icon from './Icon';
 import {
   showLogin,
-  closeLogin
+  closeLogin,
+  setPlaylistShouldSave
 } from '../actions';
 
 class Login extends React.Component {
@@ -17,25 +19,28 @@ class Login extends React.Component {
   }
 
   loginLinks() {
-
-    const wiki_login = (<div><a className='btn btn--oauth wiki' data-popup="Login with Wikipedia Account" href="/users/auth/mediawiki">Sign in with Wikipedia</a></div>);
-    return (
-      <div className='py3 login-dialogue' role="dialog" aria-labelledby="Login to Save Your Playlist" aria-describedby="Login with your facebook, twitter, or wikipedia account.">
-        <div className='login-dialogue__container bg-white flex flex-column flex-center'
-             ref={(container) => {this.container = container}}>
-          <div>
-            <p>We only access your: </p>
-            <ul>
-              <li>Username</li>
-              <li>Profile Name</li>
-              <li>Account Verification</li>
-            </ul>
-            <div><a className='mb1 btn btn--oauth twitter' data-popup="Login with Twitter" href="/users/auth/twitter">Sign in with Twitter</a></div>
-            <div><a className='mb1 btn btn--oauth facebook' data-popup="Login with Facebook" href="/users/auth/facebook">Sign in with Facebook</a></div>
-            {wiki_login}
-            <button className='action close-button' onClick={()=>{
+    let { dialog } = this.props;
+    if(dialog === undefined) {
+      dialog = false;
+    }
+    const copy = (dialog ? null : <div><h3 className='mb1'>Ready to share your playlist?</h3>
+            <p>Login to Publish and Share your Playlist</p></div>);
+    const loginClass = (dialog ? 'login-dialogue' : 'login-cta');
+    const close_button = (dialog ? <button className='action close-button' onClick={()=>{
               this.props.dispatch(closeLogin(true));
-            }}>&#215;</button>
+            }}>&#215;</button> : null);
+    return (
+      <div className={loginClass} role="dialog" aria-labelledby="Login to Save Your Playlist" aria-describedby="Login with your facebook, twitter, or wikipedia account.">
+        <div className={loginClass + '__container center card px1 py3'} ref={(container) => {this.container = container}}>
+          <div>
+            {copy}
+            <div className='py2'>
+              <a onClick={this._handleLoginClick.bind(this)} className='mb1 btn btn--oauth twitter' data-popup="Login with Twitter" href="/users/auth/twitter"><Icon size="17px" icon="twitter" fill={'white'} />Sign in with Twitter</a>
+              <a onClick={this._handleLoginClick.bind(this)} className='mb1 btn btn--oauth facebook' data-popup="Login with Facebook" href="/users/auth/facebook"><Icon size="17px" icon="facebook" fill={'white'} />Sign in with Facebook</a>
+              <a onClick={this._handleLoginClick.bind(this)} className='btn btn--oauth wiki' data-popup="Login with Wikipedia Account" href="/users/auth/mediawiki"><Icon size="17px" icon="wiki" fill={'white'} />Sign in with Wikipedia</a>
+            </div>
+            <p className='scorpion px2'><small>We only use your username to add an author name to the playlist.</small></p>
+            {close_button}
           </div>
         </div>
       </div>
@@ -43,26 +48,28 @@ class Login extends React.Component {
   }
 
   componentDidMount() {
-    this.addAnimation(({target})=> {
-      return TweenMax.from(target, 0.5, {
-        opacity: 0,
-        ease: Power2.easeOut,
-        onStart: () => {
-          var container = this.container;
-          TweenMax.from(container, .5, {
-            yPercent: 125,
-            ease: Power2.easeOut,
-            onStart: ()=>{
-              container.style.visibility = 'visible';
-            }
-          })
-        }
+    if(this.props.dialog === true) {
+      this.addAnimation(({target})=> {
+        return TweenMax.from(target, 0.5, {
+          opacity: 0,
+          ease: Power2.easeOut,
+          onStart: () => {
+            var container = this.container;
+            TweenMax.from(container, .5, {
+              yPercent: 125,
+              ease: Power2.easeOut,
+              onStart: ()=>{
+                container.style.visibility = 'visible';
+              }
+            })
+          }
+        })
       })
-    })
+    }
   }
 
   componentWillReceiveProps(props) {
-    if(props.Account.close_login) {
+    if(props.Account.close_login && this.props.dialog === true) {
       this.addAnimation(({target})=> {
         return TweenMax.to(target, 0.5, {
             opacity: 0,
@@ -83,6 +90,10 @@ class Login extends React.Component {
         })
       })
     }
+  }
+
+  _handleLoginClick() {
+    this.props.dispatch(setPlaylistShouldSave(true))
   }
 }
 

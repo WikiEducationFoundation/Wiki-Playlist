@@ -94,6 +94,7 @@
   flex-direction column
   justify-content center
   padding 1rem
+  padding-bottom 2rem
   align-items space-between
   +above(md)
     display flex
@@ -105,6 +106,11 @@
 .article-card__title
   padding-bottom .25rem
   margin-bottom .5rem
+  a
+    color $black
+    &:hover
+      text-decoration none
+      color $teal
 
 .article-card__header
   color white

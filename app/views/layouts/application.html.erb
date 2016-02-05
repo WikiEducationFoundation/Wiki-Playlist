@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>WikiPlaylist <% if content_for?(:title) %> | <%= yield :title %><% end %></title>
+  <title>Wiki Playlist <% if content_for?(:title) %> | <%= yield :title %><% end %></title>
   <meta name="viewport" content="initial-scale=1,user-scalable=yes">
   <% if content_for?(:meta) %>
     <%= yield :meta %>
@@ -11,7 +11,7 @@
   <link rel="apple-touch-icon" href="/images/favicon.png">
   <link rel="shortcut icon" href="/images/favicon.ico">
   <link href="https://d2v52k3cl9vedd.cloudfront.net/basscss/7.0.4/basscss.min.css" rel="stylesheet">
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
   <% if Rails.env.production? || Rails.env.local_production? || Rails.env.test? %>
   <%= stylesheet_link_tag 'application', 'data-turbolinks-track' => true %>
   <% end %>

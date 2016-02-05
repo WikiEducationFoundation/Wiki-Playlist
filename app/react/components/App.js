@@ -1,7 +1,7 @@
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import childrenWithProps from '../utils/childrenWithProps';
-import {MD} from '../constants';
+import {MD, MINIMUM_ARTICLES} from '../constants';
 import MediaQuery from 'react-responsive';
 import FlashMessage from './FlashMessage';
 import UserControls from './UserControls';
@@ -12,21 +12,69 @@ import Share from './Share';
 import Icon from './Icon';
 import DeleteButton from './DeleteButton';
 import {addSupportClasses} from '../utils/CSSSupportClasses';
+import { pushPath } from 'redux-simple-router';
+import es6BindAll from "es6bindall";
 
+import {
+  logoutUser,
+  openLoginPopup,
+  getUserStatus
+} from '../actions/UserAPI';
+
+import {
+  login,
+  logout,
+  showLogin,
+  closeLogin,
+  addUser,
+  handleDelete,
+  receivePlaylistPermalink,
+  addFlashMessage,
+  flashMessage,
+  receiveShareInfo,
+  setShareImageRendering,
+  setUserOnboarding,
+  setOnboardingStep,
+  updateCurrentEditingArticle,
+  showShare,
+  setPlaylistShouldSave
+} from '../actions';
+
+import {
+  createPlaylist,
+  updatePlaylist,
+  deletePlaylist,
+  pollPlaylistRenderStatus
+} from '../actions/PlaylistAPI';
 
 
 class App extends React.Component {
   supportClasses: ''
 
-  constructor() {
+  constructor(props) {
     super();
+    this.dispatch = props.dispatch;
     this.state = {
       menu_open: false
     }
+
+    es6BindAll(this, [
+      '_savePlaylist',
+      '_handleSaveSuccess'
+    ]);
   }
 
   componentDidMount() {
     addSupportClasses();
+
+    $(document).on('authSuccess', (data) => {
+      const { should_save } = this.props.Playlist;
+      console.log('Auth Success', should_save)
+      if(data.username !== undefined && should_save) {
+        this._savePlaylist();
+        this.dispatch(setPlaylistShouldSave(false));
+      }
+    });
   }
 
   render() {
@@ -39,16 +87,13 @@ class App extends React.Component {
       <div className={'path-' + path.split('/').pop() + ' ' + this.supportClasses}>
         <nav className="md-py2 site__navigation">
           <div className='container flex flex-center flex-justify'>
-
             <Link to="/" className='black'>
               <img className='logo__image' src='/images/wikiedu-logo.svg' height='30'/>
               <img className='logo__text' src='/images/wiki-playlist-type.svg' height='20'/>
             </Link>
-
             <UserControls/>
           </div>
         </nav>
-
 
         <FlashMessage />
 
@@ -66,7 +111,7 @@ class App extends React.Component {
         </footer>
 
         {(show_share? <Share/> : null )}
-        {(show_login ? <Login/> : null )}
+        
       </div>
     )
   }
@@ -89,6 +134,44 @@ class App extends React.Component {
     } else {
       return null;
     }
+  }
+
+
+  _savePlaylist() {
+    const { published, can_save, title } = this.props.Playlist;
+    this.dispatch(updateCurrentEditingArticle(null));
+    if(title === '') {
+      window.scrollTo(0,0)
+      flashMessage(this.dispatch,  {text: "Please give your playlist a title.", type: 'action'});
+      return;
+    }
+
+    if(!can_save) {
+      window.scrollTo(0,0)
+      flashMessage(this.dispatch,  {text: `Please find at least ${MINIMUM_ARTICLES} more Articles${(remainder > 1 ? 's' : '')} to save.`, type: 'action'});
+    } else {
+      const saveMethod = (published ? updatePlaylist : createPlaylist)
+      saveMethod(this.props.Playlist, (data) => {
+        if(data.error) {
+          flashMessage(this.dispatch,  {text: data.error, type: 'error'});
+        } else {
+          this._handleSaveSuccess(data.res.body);
+        }
+      })
+    }
+  }
+
+  _handleSaveSuccess(data, published) {
+    const { id, articles, permalink } = data;
+    var playlist_data = {id, permalink, articles};
+    this.dispatch(receivePlaylistPermalink(playlist_data));
+    this.dispatch(setShareImageRendering(true));
+    this.dispatch(showShare(true));
+    flashMessage(this.dispatch, {text: `Playlist ${(published ? 'updated' : 'saved')}!`, type: 'success'});
+    pollPlaylistRenderStatus(id, (data)=>{
+      this.dispatch(receiveShareInfo(data));
+      this.dispatch(setShareImageRendering(false));
+    })
   }
 
 

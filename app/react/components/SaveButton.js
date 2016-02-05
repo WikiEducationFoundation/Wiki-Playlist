@@ -54,8 +54,9 @@ class SaveButton extends React.Component {
   }
 
   componentDidMount() {
-    const { should_save } = this.props.Playlist;
+    
     $(document).on('authSuccess', (data) => {
+      const { should_save } = this.props.Playlist;
       if(data.username !== undefined && should_save) {
         this._savePlaylist();
         this.dispatch(setPlaylistShouldSave(false));
@@ -79,7 +80,7 @@ class SaveButton extends React.Component {
   }
 
   _savePlaylist() {
-    const { published, total_articles, title } = this.props.Playlist;
+    const { published, can_save, title, remaining_to_save } = this.props.Playlist;
     this.dispatch(updateCurrentEditingArticle(null));
     if(title === '') {
       window.scrollTo(0,0)
@@ -87,10 +88,9 @@ class SaveButton extends React.Component {
       return;
     }
     // todo:  if 'can publish' instead of comparison here
-    if(total_articles < MINIMUM_ARTICLES) {
-      const remainder = MINIMUM_ARTICLES - total_articles;
+    if(!can_save) {
       window.scrollTo(0,0)
-      flashMessage(this.dispatch,  {text: `Please find at least ${remainder} more Articles${(remainder > 1 ? 's' : '')} to save.`, type: 'action'});
+      flashMessage(this.dispatch,  {text: `Please find at least ${remaining_to_save} more Articles${(remainder > 1 ? 's' : '')} to save.`, type: 'action'});
     } else {
       const saveMethod = (published ? updatePlaylist : createPlaylist)
       saveMethod(this.props.Playlist, (data) => {

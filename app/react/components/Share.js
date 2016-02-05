@@ -33,7 +33,7 @@ class Share extends React.Component {
       <div className='sharing__overlay' onClick={this.closeShare.bind(this)}>
         <div className='sharing__container p2 bg-white card mt2 relative'
              ref={(container) => {this.container = container}}>
-             {(share_rendering ? this._shareRendering() : this._viewPermalink())}
+             {(share_rendering ? this._shareRendering() : this._sharingButtons())}
         </div>
       </div>
     )
@@ -41,8 +41,9 @@ class Share extends React.Component {
 
   _shareRendering() {
     return (
-      <div className='center p2'>
-        <p>Preparing your Playlist...</p>
+      <div className='center p2 flex flex-column flex-center'>
+        <div className="loader"/>
+        <div>Preparing your playlist...</div>
       </div>
     )
   }
