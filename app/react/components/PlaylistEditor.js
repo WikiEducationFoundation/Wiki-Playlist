@@ -20,6 +20,7 @@ import EditableText from './EditableText';
 import SaveButton from './SaveButton';
 import PlaylistBackgroundColor from './PlaylistBackgroundColor';
 import ColorPicker from './ColorPicker';
+import Login from './Login';
 
 class PlaylistEditor extends React.Component {
 
@@ -43,6 +44,7 @@ class PlaylistEditor extends React.Component {
   }
 
   render() {
+    const { logged_in } = this.props.Account;
     const { onboarded, step } = this.props.Onboarding;
     const { color } = this.props.Playlist;
     const { path } = this.props.routing;
@@ -52,13 +54,19 @@ class PlaylistEditor extends React.Component {
           {(!onboarded && step === 0 || step === 1 ? this._onboardingTitle()  : this._titleCard())}
           {this._articles()}
           {this._addArticle()}
-          <div className='center py2'><SaveButton /></div>
           {( onboarded ? <ColorPicker /> : null )}
+
+          
+          {(logged_in ? <div className='p2 center card mt1'><SaveButton/></div> : <Login/>)}
+
         </div>
+
+
 
         <PlaylistBackgroundColor color={color}/>
 
         { onboarded ? null : <div className='onboarding__screen'></div>}
+
       </div>
     )
   }

@@ -4,8 +4,10 @@ import Cookies from 'js-cookie';
 
 export function openLoginPopup(e) {
   e.preventDefault();
-  var title = $(e.target).data('popup');
-  PopupCenter(e.target.href, title, '1000', '500');
+  var $target = $(e.target).closest('[data-popup]')
+  console.log($target)
+  var title = $target.data('popup');
+  PopupCenter($target.attr('href'), title, '1000', '500');
 }
 
 export function getUserStatus() {

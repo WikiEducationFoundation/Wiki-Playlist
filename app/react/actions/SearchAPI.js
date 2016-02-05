@@ -96,23 +96,11 @@ export function fetchArticleImages(title, callback,) {
     if(imageObjects.length) {
       imageObjects.map(obj => {
         let image = { url: ''}
+        
         if(obj.imageinfo !== undefined && obj.imageinfo.length) {
-          // console.log(obj.imageinfo)
-
-
           const {thumburl} = obj.imageinfo[0];
           image.url = thumburl;
           image.commons_url = commons_url + obj.title;
-
-          const { extmetadata } =  obj.imageinfo[0];
-          // console.log(obj.imageinfo)
-          if(extmetadata !== undefined 
-             && extmetadata.AttributionRequired !== undefined
-             && extmetadata.AttributionRequired.value === 'true') {
-            console.log('Show image attribution', extmetadata)
-          }
-          
-
         }
         const meta = _.get(obj, 'imageinfo[0].extmetadata', null);
         if(meta) {
@@ -135,8 +123,8 @@ export function fetchArticleImages(title, callback,) {
     }
 
     images.push({
-      url: 'https://wiki-playlist.s3.amazonaws.com/images/wikipedia-page-fallback.png',
-      commons_url: 'https://commons.wikimedia.org/wiki/File:Wikipedia-logo-v2.svg'
+      url: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Lightbulb_mark.svg',
+      commons_url: 'https://meta.wikimedia.org/wiki/File:Lightbulb_mark.svg'
     });
 
     callback(images);
