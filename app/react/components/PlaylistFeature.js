@@ -10,7 +10,7 @@ class PlaylistFeature extends React.Component {
     }
   }
   render() {
-    const {title, caption, articles, id, color, user, current_user, url} = this.props;
+    const {title, caption, articles, id, color, user, current_user, url, all} = this.props;
     const {featured} = this.state;
     const { admin } = current_user;
     const { avatar, username, verified, name } = user;
@@ -25,12 +25,12 @@ class PlaylistFeature extends React.Component {
             {(avatar ? <img className='avatar' src={avatar}/> : null)}
             <span className='white'>{username}{(verified ? <img className='ml1' src='/images/verified.png' height={15}/>: null)}</span>
           </div>
-          <div className='py1'>
-           {(name !== undefined && name !== null ? <div className='playlist-feature__name white'>{name}</div> : null)}
+          <div className='py2'>
+           {(name !== undefined && name !== null && name !== username ? <div className='playlist-feature__name white'>{name}</div> : null)}
            <h3 className='white playlist-feature__title'>{title} </h3>
           </div>
-          {(admin? <button className={`action ${(featured ? 'featured' : '')}`} onClick={()=> this._featurePlaylist(id)}>{(featured ? 'Featured' : 'Feature')}</button> : null)}
-
+          {(admin && all? <button className={`action ${(featured ? 'featured' : '')}`} onClick={()=> this._featurePlaylist(id)}>{(featured ? 'Featured' : 'Feature')}</button> : null)}
+          <div className='playlist-feature__cards'>
           {articles.slice(0,3).map((article, i) => {
             const { id, image, title } = article;
             return (
@@ -42,6 +42,7 @@ class PlaylistFeature extends React.Component {
               </div>
             )
           })}
+          </div>
         </a>
       </div>
     );

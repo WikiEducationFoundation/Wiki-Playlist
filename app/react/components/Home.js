@@ -26,7 +26,6 @@ export default class Home extends React.Component {
   render() {
 
     const { playlists, total_playlists, featured_playlists, user, all } = this.state;
-    console.log('all', all)
     const _playlists = (all ? playlists : featured_playlists)
     return (
       <div className='home container'>
@@ -41,7 +40,6 @@ export default class Home extends React.Component {
               this.setState({
                 current_page: this.state.current_page + 1
               }, ()=>{
-                // console.log(this.state.current_page)
                 this._getPlaylists(this.state.current_page);
               })
             }}>Load More</button> : null)}
@@ -64,7 +62,7 @@ export default class Home extends React.Component {
       return (
         <div className='flex flex-wrap py2 px1'>
         {_playlists.map((playlist, i) =>{
-          return <PlaylistFeature key={playlist.id + playlist.url} current_user={user} {...playlist} getPlaylists={this._getPlaylists} playlists={playlists}/>
+          return <PlaylistFeature key={playlist.id + playlist.url} all={all} current_user={user} {...playlist} getPlaylists={this._getPlaylists} playlists={playlists}/>
         })}
         </div>);
     } else if (this.state.loading) {
