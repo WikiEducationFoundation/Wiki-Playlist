@@ -114,6 +114,13 @@ export function fetchArticleImages(title, callback,) {
           
 
         }
+        const meta = _.get(obj, 'imageinfo[0].extmetadata', null);
+        if(meta) {
+          image.attribution_required = _.get(meta, 'AttributionRequired.value', false) === 'true';
+          image.credit = _.get(meta, 'Credit.value', null);
+          image.license_url = _.get(meta, 'LicenseUrl.value', null);
+          image.license = _.get(meta, 'LicenseShortName.value', null);
+        }
 
         var exclude = false;
         exclude_images.map(exl => {
