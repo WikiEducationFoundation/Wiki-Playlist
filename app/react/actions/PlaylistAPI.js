@@ -77,7 +77,8 @@ export function updatePlaylist(playlist, callback) {
 
 export function featurePlaylist(id, data, callback) {
   getCSRFToken((res)=> {
-    superagent.put(`/playlists/${id}`)
+    // console.log(`/playlists/${id}`)
+    superagent.put(`/playlists/feature/${id}`)
     .set('X-CSRF-Token', res.token)
     .send(data)
     .set('Accept', 'application/json')
@@ -120,8 +121,8 @@ export function pollPlaylistRenderStatus(id, callback) {
 }
 
 
-export function getAllPlaylists() {
-  return $.ajax({url: '/all'});
+export function getAllPlaylists(page) {
+  return $.ajax({url: `/all?page=${page}`});
 }
 
 

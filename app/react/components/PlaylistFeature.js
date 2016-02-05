@@ -3,11 +3,15 @@ import { flashMessage } from '../actions';
 import { getAllPlaylists, featurePlaylist } from '../actions/PlaylistAPI';
 
 class PlaylistFeature extends React.Component {
+  constructor(props) {
+    super();
+    this.state = {
+      featured: props.featured
+    }
+  }
   render() {
-    const {title, caption, articles, id, featured, color, user, current_user, url} = this.props;
-    // if(!color) {
-    //   return null;
-    // }
+    const {title, caption, articles, id, color, user, current_user, url} = this.props;
+    const {featured} = this.state;
     const { admin } = current_user;
     const { avatar, username, verified, name } = user;
     return (
@@ -16,9 +20,9 @@ class PlaylistFeature extends React.Component {
       style={{
         backgroundColor: color
       }}>
-        <a href={url} className='playlist-feature__content absolute p2'>
+        <a href={url} className='playlist-feature__content absolute p2' onClick={this._handleClick.bind(this)}>
           <div className='playlist-feature__user flex flex-center'>
-            <img className='avatar' src={avatar}/>
+            {(avatar ? <img className='avatar' src={avatar}/> : null)}
             <span className='white'>{username}{(verified ? <img className='ml1' src='/images/verified.png' height={15}/>: null)}</span>
           </div>
           <div className='py1'>
@@ -44,15 +48,22 @@ class PlaylistFeature extends React.Component {
   }
 
   _featurePlaylist(id) {
+    //optimistic update
+    this.setState({featured: !this.state.featured});
     const { playlists } = this.props;
     const playlist = _.findWhere(playlists, {id: id});
+    console.log(playlist, id)
     featurePlaylist(id, {featured: !playlist.featured}, (data) => {
       if(data.error) {
         flashMessage(this.props.dispatch,  {text: data.error, type: 'error'});
-      } else {
-        this.props.getPlaylists();
       }
     })
+  }
+
+  _handleClick(e) {
+    if($(e.target).hasClass('action')) {
+      e.preventDefault();
+    }
   }
 }
 

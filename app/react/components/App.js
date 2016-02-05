@@ -11,6 +11,7 @@ import SaveButton from  './SaveButton';
 import Share from './Share';
 import Icon from './Icon';
 import DeleteButton from './DeleteButton';
+import {addSupportClasses} from '../utils/CSSSupportClasses';
 
 class App extends React.Component {
 
@@ -22,7 +23,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    var addSupportClasses = require('../utils/CSSSupportClasses').addSupportClasses;
     addSupportClasses();
   }
 
