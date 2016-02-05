@@ -13,7 +13,10 @@ import Icon from './Icon';
 import DeleteButton from './DeleteButton';
 import {addSupportClasses} from '../utils/CSSSupportClasses';
 
+
+
 class App extends React.Component {
+  supportClasses: ''
 
   constructor() {
     super();
@@ -31,12 +34,9 @@ class App extends React.Component {
     const { show_share } = this.props.Share;
     const { path } = this.props.routing;
     const { menu_open } = this.state;
-    const dir = path.split('/').pop();
-    const pathClass = (dir !== '' ? `path-${dir}` : '');
-    const AppClassNames = [dir, pathClass].join(' ')
     const preview_button = <button className='btn btn-outline'>Preview</button>;
     return (
-      <div>
+      <div className={'path-' + path.split('/').pop() + ' ' + this.supportClasses}>
         <nav className="md-py2 site__navigation">
           <div className='container flex flex-center flex-justify'>
 
