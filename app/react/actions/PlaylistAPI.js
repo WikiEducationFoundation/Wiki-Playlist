@@ -6,7 +6,7 @@ import { getCSRFToken } from './rails';
 --------------------------------------------- */
 
 const allowed_playlist_attributes = ["title", "caption", "articles_attributes", "id", "featured", "color"];
-const allowed_article_attributes = ["pageId", "title", "url", "description", "image", "id", "position"];
+const allowed_article_attributes = ["pageId", "title", "url", "description", "image", "id", "position", "image_license", "image_license_url", "commons_url"];
 
 function filterArticleKeys(playlist) {
   let articles = playlist.articles.slice(0);
@@ -14,14 +14,19 @@ function filterArticleKeys(playlist) {
   const server_ids = _.pluck(playlist.server_info.articles, 'id');
 
   articles.map((article, i) => {
+    articles[i].image_license = article.image_info.license;
+    articles[i].image_license_url = article.image_info.license_url;
+    articles[i].commons_url = article.image_info.license_url;
+
+    // Filter To Allowed Keys
     articles[i] = _.pick(article, allowed_article_attributes);
+
     articles[i].position = i;
     if(server_ids !== undefined) {
       articles[i].id = server_ids[i];
     }
     if(article.image.url !== '') {
-      articles[i].image = article.image.url;
-      articles[i].commons_url = article.image.commons_url;
+      articles[i].image = article.image;
     }
   });
 
