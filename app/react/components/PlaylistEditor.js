@@ -57,7 +57,7 @@ class PlaylistEditor extends React.Component {
           {( onboarded ? <ColorPicker /> : null )}
 
           
-          {(logged_in ? <div className='p2 center card mt1'><SaveButton/></div> : <Login/>)}
+          {(logged_in ? <div className='p2 center mt1'><SaveButton/></div> : <Login/>)}
 
         </div>
 

@@ -47,14 +47,14 @@ class UserControls extends React.Component {
     const { Playlist, Account, routing } = this.props;
     const { path } = routing;
     const isPlaylistPage = path.indexOf('playlist') > -1;
-    const saveButton = (isPlaylistPage?  <SaveButton/> : create_button);
+    const saveButton = (Account.logged_in?  <SaveButton/> : null);
     const create_button = (
       <Link className='btn btn-primary' to="/playlists">
           Create a Playlist
       </Link>);
     return (
       <div className='user-controls'>
-        {(isPlaylistPage?  null : create_button)}
+        {(isPlaylistPage? saveButton  : create_button)}
       </div>
     )
   }
