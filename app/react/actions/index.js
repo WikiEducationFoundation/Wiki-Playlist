@@ -248,11 +248,11 @@ export function addArticleImages(index, images) {
   }
 }
 
-export function setArticleImage(index, url) {
+export function setArticleImage(index, image) {
   return {
     type: SET_ARTICLE_IMAGE,
     index,
-    url
+    image
   }
 }
 
