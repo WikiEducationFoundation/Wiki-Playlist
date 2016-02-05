@@ -6,7 +6,7 @@
         - if @user.try(:verified) && @user.verified 
           span &nbsp;
           img src='/images/verified.png'
-    h1 Wikipedia Playlist
+    h1 Wiki Playlist
   .share-image__articles.relative
     - @articles.slice(0,3).each do |article, index|
       div class="flex-column flex-stretch article-card article-card--share card-#{article.position}"

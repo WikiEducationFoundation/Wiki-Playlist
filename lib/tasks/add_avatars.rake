@@ -9,13 +9,17 @@ namespace :users do
     end
   
     User.where(:provider => 'twitter').each do |user|
-      twitter_user = client.user(user.username)
-      if !twitter_user.nil?
+      if client.user?(user.username)
+        twitter_user = client.user(user.username)
+        puts twitter_user
         user.avatar = twitter_user.profile_image_uri_https.to_s
         user.verified = twitter_user.verified?
         user.name = twitter_user.name
-        user.save!
+        puts "Got info for #{user.name}"
+      else
+        user.verified = false
       end
+      user.save!
     end
   end
 end

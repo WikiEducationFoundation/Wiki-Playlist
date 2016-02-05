@@ -1,6 +1,7 @@
 # json.array! @playlists, :id, :title, :caption
 json.data do
   json.user @user
+  json.total_playlists @total_playlists
   json.playlists @playlists do |playlist|
     json.id playlist.id
     json.url "#{request.base_url}/playlist/#{playlist.slug}"
