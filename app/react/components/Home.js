@@ -15,7 +15,8 @@ export default class Home extends React.Component {
       user: {},
       playlists: [],
       loading: true,
-      current_page: 1
+      current_page: 1,
+      all: false
     }
     es6BindAll(this, [
         '_featurePlaylist',
@@ -23,22 +24,31 @@ export default class Home extends React.Component {
       ]);
   }
   render() {
-    const { playlists, total_playlists } = this.state;
+
+    const { playlists, total_playlists, featured_playlists, user, all } = this.state;
+    console.log('all', all)
+    const _playlists = (all ? playlists : featured_playlists)
     return (
       <div className='home container'>
         <h1 className='color-title center'>Wikipedia Playlists</h1>
         <p className='home__introduction'>Help the Wiki Education Foundation spread the joy of knowledge! Create a Playlist of 3–5 Wikipedia articles on topics you’re most passionate, curious, or excited about. Then share your Playlist on social media.</p>
         {this._renderPlaylists()}
-        {(playlists.length  < total_playlists ? 
-          <button onClick={()=>{
-            this.setState({
-              current_page: this.state.current_page + 1
-            }, ()=>{
-              // console.log(this.state.current_page)
-              this._getPlaylists(this.state.current_page);
-            })
-            
-          }}>Load More</button> : null)}
+        <div className='flex flex-justify'>
+        {(all && _playlists.length  < total_playlists ? 
+          <button 
+            className='btn btn-primary'
+            onClick={()=>{
+              this.setState({
+                current_page: this.state.current_page + 1
+              }, ()=>{
+                // console.log(this.state.current_page)
+                this._getPlaylists(this.state.current_page);
+              })
+            }}>Load More</button> : null)}
+        {(user.admin ? <button className='btn btn-outline' onClick={()=>{
+          this.setState({all: !all})
+        }}>{(all ? 'View Featured' : 'Edit Playlists')}</button> : null)}
+        </div>
       </div>
     )
   }
@@ -48,12 +58,12 @@ export default class Home extends React.Component {
   }
 
   _renderPlaylists() {
-    const { playlists, user } = this.state;
-
-    if(playlists.length) {
+    const { playlists, user, all, featured_playlists } = this.state;
+    const _playlists = (all ? playlists : featured_playlists)
+    if(_playlists && _playlists.length) {
       return (
         <div className='flex flex-wrap py2 px1'>
-        {playlists.map((playlist, i) =>{
+        {_playlists.map((playlist, i) =>{
           return <PlaylistFeature key={playlist.id + playlist.url} current_user={user} {...playlist} getPlaylists={this._getPlaylists} playlists={playlists}/>
         })}
         </div>);
@@ -77,6 +87,7 @@ export default class Home extends React.Component {
     const { playlists } = this.state;
     const playlist = _.findWhere(playlists, {id: id});
     featurePlaylist(id, {featured: !playlist.featured}, (data) => {
+      console.log(data);
       if(data.error) {
         flashMessage(this.dispatch,  {text: data.error, type: 'error'});
       } else {

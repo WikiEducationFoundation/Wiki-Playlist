@@ -24,13 +24,16 @@ class PlaylistsController < ApplicationController
   end
 
   def index
+    
     if current_user && current_user.admin
       page = params[:page].nil? ? 0 : params[:page]
       @playlists = Playlist.all.order('updated_at DESC').page(page).per(20)
       @total_playlists = Playlist.all.count()
     else
-      @playlists = Playlist.featured.limit(20).order('updated_at DESC')
+      @playlists = nil
     end
+    
+    @featured_playlists = Playlist.featured.limit(20).order('updated_at DESC')
 
     if current_user.nil?
       @user = false
@@ -40,7 +43,7 @@ class PlaylistsController < ApplicationController
     
     respond_to do |format|
       format.json do
-        format.json { render json: { playlists: @playlists, total_playlists: @total_playlists, user: @user } }
+        format.json { render json: { playlists: @playlists, featured_playlists: @featured_playlists, total_playlists: @total_playlists, user: @user } }
       end
     end
   end
