@@ -180,7 +180,7 @@ export class ArticleCard extends React.Component {
     const { license, license_url, commons_url, credit, attribution_required } = this.props.image_info;
     return (
       <div className='article-card__image-info'>
-        <a href={commons_url}>Image Credit & Info</a>
+        <a href={commons_url} target='_blank'>Image Credit & Info</a>
         &nbsp;&nbsp;
         {(license_url ? <span>License: <a href={license_url} target='_blank'>{license}</a></span> : <span>Image Licence: {license}</span>)}
       </div>
