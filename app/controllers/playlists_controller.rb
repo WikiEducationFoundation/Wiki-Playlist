@@ -51,6 +51,7 @@ class PlaylistsController < ApplicationController
   def update
     @playlist.share_image_rendered = false
     respond_to do |format|
+      binding.pry
       if @playlist.update(playlist_params)
         GenerateShareImage.enqueue(@playlist.id, :html => get_share_image_html(@playlist))
         format.json { render json: {
@@ -172,7 +173,7 @@ class PlaylistsController < ApplicationController
         :slug,
         :featured,
         :color,
-        :articles_attributes => [:id, :title, :url, :image, :description, :pageId, :_destroy, :position, :commons_url]
+        :articles_attributes => [:id, :title, :url, :image, :description, :pageId, :_destroy, :position, :commons_url,  :image_license, :image_license_url]
       )
     end
 end
