@@ -16,7 +16,7 @@ function filterArticleKeys(playlist) {
   articles.map((article, i) => {
     articles[i].image_license = article.image_info.license;
     articles[i].image_license_url = article.image_info.license_url;
-    articles[i].commons_url = article.image_info.license_url;
+    articles[i].commons_url = article.image_info.commons_url;
 
     // Filter To Allowed Keys
     articles[i] = _.pick(article, allowed_article_attributes);
