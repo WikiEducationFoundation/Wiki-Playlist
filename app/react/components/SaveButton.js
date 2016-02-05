@@ -72,7 +72,7 @@ class SaveButton extends React.Component {
         <button
           className='btn ml1'
           onClick={this._savePlaylist.bind(this)}>
-          {(published ? 'Save Changes' : 'Save Playlist')}
+          {(published ? 'Publish Changes' : 'Publish Playlist')}
         </button>);
     } else {
       return null;
