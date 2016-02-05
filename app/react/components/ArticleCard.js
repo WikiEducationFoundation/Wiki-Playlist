@@ -100,20 +100,6 @@ export class ArticleCard extends React.Component {
     const {path} = nextProps.routing;
     const {index, Playlist, open} = this.props;
 
-
-    // if(nextProps.open && !open && !this.animating) {
-    //   this.expandController = this.addAnimation(this._expand);
-    // } else if(!nextProps.open && open && !this.animating) {
-    //   this.collapseController = this.addAnimation(this._collapse);
-    // } else if (!nextProps.open && !open && this.cardElement !== undefined) {
-    //   this.cardElement.removeAttribute('style')
-    // }
-
-    if(nextProps.Playlist.all_collapsed && this.controller !== undefined) {
-
-      // this.controller.kill()
-    }
-
     const route = _.compact(path.split('/')).pop();
     if(route === 'playlist' && this.state.editing_options) {
       this.setState({ editing_options: false });
@@ -177,24 +163,32 @@ export class ArticleCard extends React.Component {
     }
 
 
-    // if(editing !== index) {
-      return (
-        <div className={(has_article ? 'article-card__content' : 'center')} ref={c => {this.cardContent = c}}>
-          {(editing_options ? <ImageSelector finishEditing={()=>{this.setState({editing_options: false})}}/> : this._articleImage())}
-          <div className={(has_article ? 'article-card__summary relative' : '')}>
-            {content}
-            <div className=''>
-              {button}
-            </div>
+    return (
+      <div className={(has_article ? 'article-card__content' : 'center')} ref={c => {this.cardContent = c}}>
+        {(editing_options ? <ImageSelector finishEditing={()=>{this.setState({editing_options: false})}}/> : this._articleImage())}
+        <div className={(has_article ? 'article-card__summary relative' : '')}>
+          {content}
+          <div className=''>
+            {button}
           </div>
-        </div>)
-    // } else {
-    //   return null;
-    // }
+          {this._imageInfo()}
+        </div>
+      </div>)
+  }
+
+  _imageInfo() {
+    const { license, license_url, commons_url, credit, attribution_required } = this.props.image_info;
+    return (
+      <div className='article-card__image-info'>
+        <a href={commons_url}>Image Credit & Info</a>
+        &nbsp;&nbsp;
+        {(license_url ? <span>License: <a href={license_url} target='_blank'>{license}</a></span> : <span>Image Licence: {license}</span>)}
+      </div>
+    );
+    
   }
 
   _articleImage() {
-    // const { editing_options } = this.state;
     const {index, image, images, open, has_article} = this.props;
     const { editingArticle } = this.props.Playlist;
     const editing_options = editingArticle === index;
@@ -212,7 +206,6 @@ export class ArticleCard extends React.Component {
 
     let imageClass = '';
 
-    // Change Thumbnail LInk
     let link = null;
     const link_to_image_selector = (
         <a href='#' className='article-card__image__edit-button btn btn-outline white'
@@ -221,7 +214,7 @@ export class ArticleCard extends React.Component {
 
     // Background Image
     if(image !== undefined && image !== '') {
-      style.backgroundImage = `url(${image.url})`
+      style.backgroundImage = `url(${image})`
     } else if (images.length) {
       style.backgroundImage = `url(${images[0].url})`;
     }
