@@ -5,9 +5,9 @@ import { getAllPlaylists, featurePlaylist } from '../actions/PlaylistAPI';
 class PlaylistFeature extends React.Component {
   render() {
     const {title, caption, articles, id, featured, color, user, current_user, url} = this.props;
-    if(!color) {
-      return null;
-    }
+    // if(!color) {
+    //   return null;
+    // }
     const { admin } = current_user;
     const { avatar, username, verified, name } = user;
     return (
@@ -21,7 +21,7 @@ class PlaylistFeature extends React.Component {
             <img className='avatar' src={avatar}/>
             <span className='white'>{username}{(verified ? <img className='ml1' src='/images/verified.png' height={15}/>: null)}</span>
           </div>
-          <div className='py3'>
+          <div className='py1'>
            {(name !== undefined && name !== null ? <div className='playlist-feature__name white'>{name}</div> : null)}
            <h3 className='white playlist-feature__title'>{title} </h3>
           </div>

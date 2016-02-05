@@ -10,23 +10,23 @@ before_install:
 
 addons:
   postgresql: "9.3"
-  # apt:
-  #   sources:
-  #   - ubuntu-sdk-team
-  #   packages:
-  #   - libqt5webkit5-dev
-  #   - qtdeclarative5-dev
-  #   - pandoc
+  apt:
+    sources:
+    - ubuntu-sdk-team
+    packages:
+    - libqt5webkit5-dev
+    - qtdeclarative5-dev
+    - pandoc
 
-# before_install:
-#   # Export QMAKE for libqt5webkit5-dev
-#   - export QMAKE=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
-#   # Set a dummy sentry url if none is set via environment variable
-#   - export sentry_dsn=${sentry_dsn:=http://example.com}
+before_install:
+  # Export QMAKE for libqt5webkit5-dev
+  - export QMAKE=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
+  # Set a dummy sentry url if none is set via environment variable
+  - export sentry_dsn=${sentry_dsn:=http://example.com}
 
-#   # Set up a headless display so capybara will work.
-#   - export DISPLAY=:99.0
-#   - sh -e /etc/init.d/xvfb start
+  # Set up a headless display so capybara will work.
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
 
 before_script:
   - cp config/database.travis.yml config/database.yml
@@ -48,9 +48,9 @@ deploy:
   run: bundle exec rake db:migrate
   skip_cleanup: true
 
-# after_failure:
-#   - npm install imgur-uploader-cli -g
-#   - find $TRAVIS_BUILD_DIR/tmp/screenshots -name "*.png" -print0 | xargs -n 1 -0 imgur-uploader
+after_failure:
+  - npm install imgur-uploader-cli -g
+  - find $TRAVIS_BUILD_DIR/tmp/screenshots -name "*.png" -print0 | xargs -n 1 -0 imgur-uploader
 
 
 notifications:
