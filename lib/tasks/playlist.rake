@@ -1,7 +1,6 @@
 namespace :playlist do
-  desc "TODO"
   task generate_featured_share_images: :environment do
-    include Rails.application.routes.url_helpers
+    
     ac = ApplicationController.new
     Playlist.featured.each do |playlist|
       html = ac.render_to_string(
