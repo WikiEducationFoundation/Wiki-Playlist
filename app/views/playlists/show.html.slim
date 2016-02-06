@@ -15,4 +15,4 @@
 
 - content_for :body_class, "path-playlists"
 
-= react_component('Permalink', {playlist: @playlist, articles: @articles, user: @user, share_image_url: @playlist.share_image.url})
+= react_component('Permalink', {playlist: @playlist, articles: @articles, user: @user, share_image_url: @playlist.share_image.url, permalink: "#{request.original_url}"})

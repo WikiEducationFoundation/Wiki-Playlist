@@ -28,10 +28,11 @@ export default class Playlist extends React.Component {
 
   render() {
     const { show_share } = this.state;
-    let { playlist, articles, user, share_image_url } = this.props;
+    let { playlist, articles, user, share_image_url, permalink } = this.props;
     playlist.articles = articles;
     playlist.server_info = {
-      id: playlist.id
+      id: playlist.id,
+      permalink: permalink
     }
     const share = {
       share_rendering: false,
@@ -47,9 +48,7 @@ export default class Playlist extends React.Component {
               <img className='logo__image' src='/images/wikiedu-logo.svg' height='30'/>
               <img className='logo__text' src='/images/wiki-playlist-type.svg' height='20'/>
             </a>
-            <button className='btn btn-primary' onClick={()=>{
-              this.setState({show_share: true})
-            }}>Share this Playlist</button>
+            <a href='/playlist' className='btn btn-primary'>Create your own Playlist</a>
           </div>
         </nav>
 
@@ -60,6 +59,12 @@ export default class Playlist extends React.Component {
               {this._articles()}
             </div>
             <PlaylistBackgroundColor color={color}/>
+          </div>
+          <div className='center'>
+            <a href='/playlist' className='btn btn-primary mr2'>Create your own Playlist</a>
+            <button className='btn btn-primary' onClick={()=>{
+                this.setState({show_share: true})
+              }}>Share this Playlist</button>
           </div>
         </div>
 
