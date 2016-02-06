@@ -2,6 +2,7 @@ import { ArticleCard } from './ArticleCard';
 import { connect } from 'react-redux';
 import { truncateHTML, stripTags } from '../utils/Text';
 
+import Icon from './Icon';
 import { TITLE_LIMIT, CAPTION_LIMIT } from '../constants';
 import { pushPath } from 'redux-simple-router';
 import { Link } from 'react-router';
@@ -28,7 +29,6 @@ export default class Playlist extends React.Component {
   render() {
     const { show_share } = this.state;
     let { playlist, articles, user, share_image_url } = this.props;
-    console.log(user);
     playlist.articles = articles;
     playlist.server_info = {
       id: playlist.id
@@ -82,7 +82,7 @@ export default class Playlist extends React.Component {
   _articles() {
     const { articles } = this.props;
     return articles.map((article, i) =>{
-        const { id, title, url, description, image } = article;
+        const { id, title, url, description, image, commons_url, image_license_url, image_license } = article;
         let style =  {
           backgroundImage:`url(${image})`
         }
@@ -98,6 +98,16 @@ export default class Playlist extends React.Component {
                 <div className='article-card__summary relative'>
                   <h2 className="article-card__title"><a href={url}>{title}</a></h2>
                   <div className="mb2 article-card__excerpt summary">{truncated_description}</div>
+                  <div className='md-flex flex-justify'>
+                  <div className='article-card__image-info'>
+                    {(commons_url ? <span><a href={commons_url} target='_blank'>Image Credit & Info</a>&nbsp;&nbsp;</span> : null )}
+                    {(image_license && image_license_url ? <span>License: <a href={image_license_url} target='_blank'>{imag_license}</a></span> : null)}
+                  </div>
+                  <div><a className='action action--external teal'
+                     href={url} target='_blank'>
+                     View Wikipedia Article &nbsp;
+                     <Icon size="12px" icon="external-link" fill={'teal'} /></a></div>
+                  </div>
                 </div>
               </div>
             </div>
