@@ -90,7 +90,6 @@ export class ArticleCard extends React.Component {
 
   componentWillUnmount() {
     this.alive = false;
-    console.log('article card unmounting')
     if(this.controller !== undefined) {
       this.controller.kill()
     }

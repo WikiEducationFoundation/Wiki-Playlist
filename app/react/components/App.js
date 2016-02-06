@@ -69,7 +69,6 @@ class App extends React.Component {
 
     $(document).on('authSuccess', (data) => {
       const { should_save } = this.props.Playlist;
-      console.log('Auth Success', should_save)
       if(data.username !== undefined && should_save) {
         this._savePlaylist();
         this.dispatch(setPlaylistShouldSave(false));
