@@ -79,7 +79,7 @@ export class Share extends React.Component {
             <button className='share-button action'
                     data-share-twitter
                     data-share-url={permalink}
-                    data-share-text={`${title} This is why I love Wikipedia. #wikiplaylist`}>
+                    data-share-text={`This is why I love Wikipedia. #wikiplaylist`}>
               <Icon size="30px" icon="twitter" fill={'twitter'} />
             </button>
             <button className='share-button action'
