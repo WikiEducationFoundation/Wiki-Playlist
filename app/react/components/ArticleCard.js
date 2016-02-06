@@ -183,7 +183,7 @@ export class ArticleCard extends React.Component {
       <div className='article-card__image-info'>
         <a href={commons_url} target='_blank'>Image Credit & Info</a>
         &nbsp;&nbsp;
-        {(license_url ? <span>License: <a href={license_url} target='_blank'>{license}</a></span> : <span>Image Licence: {license}</span>)}
+        {(license_url ? <span>License: <a href={license_url} target='_blank'>{license}</a></span> : ( license ? <span>Image Licence: {license}</span> : null))}
       </div>
     );
     
