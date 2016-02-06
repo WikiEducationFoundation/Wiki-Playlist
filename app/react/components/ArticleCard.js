@@ -19,6 +19,7 @@ import Icon from './Icon';
 import es6BindAll from "es6bindall";
 import ImageSelector from './ImageSelector';
 
+
 export class ArticleCard extends React.Component {
 
   constructor(props) {
