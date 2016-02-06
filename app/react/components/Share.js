@@ -12,7 +12,8 @@ import {
   showShare
 } from '../actions';
 
-class Share extends React.Component {
+@GSAP()
+export class Share extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -171,8 +172,13 @@ class Share extends React.Component {
               onStart: ()=>{
                 container.style.visibility = 'visible';
               },
-              onComplete: ()=>{
-                this.props.dispatch(showShare(false));
+              onComplete: ()=> {
+                if(this.props.dispatch !== undefined) {
+                  this.props.dispatch(showShare(false));
+                } else {
+                  this.props.close()
+                }
+                
               }
             })
           }
@@ -189,4 +195,4 @@ class Share extends React.Component {
   }
 }
 
-export default connect( state => {return state})(GSAP()(Share))
+export default connect( state => {return state})(Share)

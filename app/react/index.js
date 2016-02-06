@@ -11,6 +11,7 @@ import { syncReduxAndRouter } from 'redux-simple-router'
 // Components
 import App from './components/App';
 import Home from './components/Home';
+import Playlist from './components/Playlist';
 import PlaylistEditor from './components/PlaylistEditor';
 import Search from './components/Search';
 import ArticlePreview from './components/ArticlePreview';
@@ -48,3 +49,15 @@ class PlaylistApp extends React.Component{
 }
 
 registerComponent('PlaylistApp', PlaylistApp);
+
+
+class Permalink extends React.Component{
+  render() {
+    return (
+      <Playlist {...this.props}/>
+    );
+  }
+}
+
+registerComponent('Permalink', Permalink);
+
