@@ -60,7 +60,7 @@ export default class Home extends React.Component {
     const _playlists = (all ? playlists : featured_playlists)
     if(_playlists && _playlists.length) {
       return (
-        <div className='flex flex-wrap py2 px1'>
+        <div className='flex flex-wrap mb2'>
         {_playlists.map((playlist, i) =>{
           return <PlaylistFeature key={playlist.id + playlist.url} all={all} current_user={user} {...playlist} getPlaylists={this._getPlaylists} playlists={playlists}/>
         })}
