@@ -106,7 +106,7 @@ export default class Playlist extends React.Component {
                   <div className='md-flex flex-justify'>
                   <div className='article-card__image-info'>
                     {(commons_url ? <span><a href={commons_url} target='_blank'>Image Credit & Info</a>&nbsp;&nbsp;</span> : null )}
-                    {(image_license && image_license_url ? <span>License: <a href={image_license_url} target='_blank'>{imag_license}</a></span> : null)}
+                    {(image_license && image_license_url ? <span>License: <a href={image_license_url} target='_blank'>{image_license}</a></span> : null)}
                   </div>
                   <div><a className='action action--external teal'
                      href={url} target='_blank'>
