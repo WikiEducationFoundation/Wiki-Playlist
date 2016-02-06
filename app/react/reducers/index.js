@@ -249,7 +249,6 @@ function Playlist(state = initialPlaylistState, action) {
       var articles = state.articles.slice(0);
       articles[index] = _article;
       const total_articles = _.where(articles, {has_article: true}).length;
-      console.log('total', total_articles, MINIMUM_ARTICLES)
       const remaining_to_save = MINIMUM_ARTICLES - total_articles;
       const can_save = total_articles >= MINIMUM_ARTICLES;
       return _.assign({}, state, {articles: articles, can_save: can_save, remaining_to_save: remaining_to_save});
