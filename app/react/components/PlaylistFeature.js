@@ -27,7 +27,7 @@ class PlaylistFeature extends React.Component {
           </div>
           <div className='py2'>
            {(name !== undefined && name !== null && name !== username ? <div className='playlist-feature__name white'>{name}</div> : null)}
-           <h3 className='white playlist-feature__title'>{title} </h3>
+           <h3 className='white playlist-feature__title'>{(title.length > 70 ? title.substr(0, 70) + '...' : title)}</h3>
           </div>
           {(admin && all? <button className={`action ${(featured ? 'featured' : '')}`} onClick={()=> this._featurePlaylist(id)}>{(featured ? 'Featured' : 'Feature')}</button> : null)}
           <div className='playlist-feature__cards'>
