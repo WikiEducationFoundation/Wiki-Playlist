@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { truncateHTML, stripTags } from '../utils/Text';
 
 import Icon from './Icon';
-import { TITLE_LIMIT, CAPTION_LIMIT } from '../constants';
+import { TITLE_LIMIT, CAPTION_LIMIT, MD, MINIMUM_ARTICLES } from '../constants';
 import { pushPath } from 'redux-simple-router';
 import { Link } from 'react-router';
 import es6BindAll from "es6bindall";
@@ -15,7 +15,7 @@ import Login from './Login';
 import {addSupportClasses} from '../utils/CSSSupportClasses';
 import { Share } from './Share';
 import GSAP from 'react-gsap-enhancer'
-
+import MediaQuery from 'react-responsive';
 
 
 export default class Playlist extends React.Component {
@@ -60,8 +60,8 @@ export default class Playlist extends React.Component {
             </div>
             <PlaylistBackgroundColor color={color}/>
           </div>
-          <div className='center'>
-            <a href='/playlist' className='btn btn-primary mr2'>Create your own Playlist</a>
+          <div className='center playlist__ctas'>
+            <a href='/playlist' className='btn btn-primary'>Create your own Playlist</a>
             <button className='btn btn-primary' onClick={()=>{
                 this.setState({show_share: true})
               }}>Share this Playlist</button>
@@ -92,6 +92,7 @@ export default class Playlist extends React.Component {
           backgroundImage:`url(${image})`
         }
         const truncated_description = (description !== undefined && description.length > 250 ? `${description.substr(0,250)}...` : description)
+        const mobile_truncated_description = (description !== undefined && description.length > 120 ? `${description.substr(0,120)}...` : description)
         return (
             <div className='flex-column flex-stretch article-card' key={id + i + (Math.random() * (0.120 - 0.0200) + 0.0200).toFixed(4)}>
             <div className='article-card__container' ref={card => {this.cardElement = card}}
@@ -102,7 +103,10 @@ export default class Playlist extends React.Component {
                 <div className={'article-card__image '} style={style}></div>
                 <div className='article-card__summary relative'>
                   <h2 className="article-card__title"><a href={url}>{title}</a></h2>
-                  <div className="mb2 article-card__excerpt summary">{truncated_description}</div>
+                  <div className="mb2 article-card__excerpt summary">
+                    <MediaQuery query={`(max-device-width: ${MD})`}>{mobile_truncated_description}</MediaQuery>
+                    <MediaQuery query={`(min-device-width: ${MD})`}>{truncated_description}</MediaQuery>
+                  </div>
                   <div className='md-flex flex-justify'>
                   <div className='article-card__image-info'>
                     {(commons_url ? <span><a href={commons_url} target='_blank'>Image Credit & Info</a>&nbsp;&nbsp;</span> : null )}

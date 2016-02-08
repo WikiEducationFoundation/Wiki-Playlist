@@ -14,6 +14,9 @@ body
 .logo__text
   position relative
   top 1px
+  height 15px
+  +above(md)
+    height 20px
 
 .site__navigation
   background white
@@ -29,10 +32,14 @@ body
     vertical-align middle
     border none
 
-  .btn-primary
+  .btn, .btn.btn-primary
     border-radius 0
+    font-size 12px
+    padding 9px
+    
     +above(md)
       border-radius 3px
+      padding 9px 15px
 
 .site__content
   padding 0
