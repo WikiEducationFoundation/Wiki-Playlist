@@ -1,4 +1,4 @@
-# Wikipedia Playlist
+# Wiki Playlist
 
 <img src='https://travis-ci.org/WikiEducationFoundation/WikipediaPlaylist.svg?branch=master'/>
 
