@@ -19,7 +19,7 @@ namespace :playlist do
 
   task generate_share_images: :environment do
     ac = ApplicationController.new
-    Playlist.needs_updated_image.each do |playlist|
+    Playlist.needs_image_regeneration.each do |playlist|
       html = ac.render_to_string(
         :template => "/playlists/share_image",
         :formats => [:html],
@@ -30,7 +30,6 @@ namespace :playlist do
           :@user => User.find(playlist.user_id)
         }
       )
-      puts "#{playlist.title} #{html}"
       GenerateShareImage.enqueue(playlist.id, :html => html)
     end
   end
