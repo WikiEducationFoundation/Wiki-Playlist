@@ -143,9 +143,8 @@ export default class Playlist extends React.Component {
                 <div className='playlist__title'>
                   <h1>{title}</h1>
                 </div>
-
                 <div className='playlist__caption'>
-                    <p>{caption}</p>
+                  <p>{caption}</p>
                 </div>
               </div>
             </div>
