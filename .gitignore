@@ -21,3 +21,4 @@ node_modules
 notes/
 public/assets/*
 /vendor/bundle
+latest.dump
