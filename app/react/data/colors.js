@@ -3,6 +3,6 @@ export const background_colors = [
   '#D06BF0',
   '#FF5B5E',
   '#F6AE00',
-  '#00DE9A',
+  '#00D186',
   '#BCBCBC'
 ]
