@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { truncateHTML, stripTags } from '../utils/Text';
 
 import Icon from './Icon';
-import { TITLE_LIMIT, CAPTION_LIMIT, MD, MINIMUM_ARTICLES } from '../constants';
+import { TITLE_LIMIT, CAPTION_LIMIT, MD, MDINT, MINIMUM_ARTICLES } from '../constants';
 import { pushPath } from 'redux-simple-router';
 import { Link } from 'react-router';
 import es6BindAll from "es6bindall";
@@ -40,6 +40,7 @@ export default class Playlist extends React.Component {
     }
 
     const { color } = this.props.playlist;
+
     return (
       <div className={this.supportClasses}>
         <nav className="md-py2 site__navigation">
@@ -87,12 +88,14 @@ export default class Playlist extends React.Component {
   _articles() {
     const { articles } = this.props;
     return articles.map((article, i) =>{
+      
         const { id, title, url, description, image, commons_url, image_license_url, image_license } = article;
         let style =  {
           backgroundImage:`url(${image})`
         }
-        const truncated_description = (description !== undefined && description.length > 250 ? `${description.substr(0,250)}...` : description)
-        const mobile_truncated_description = (description !== undefined && description.length > 120 ? `${description.substr(0,120)}...` : description)
+
+        const limit = (window.innerWidth < MDINT ? 120 : 250)
+        const truncated_description = (description !== undefined && description.length > limit ? <span>{`${description.substr(0,limit)}...`}</span> : description)
         return (
             <div className='flex-column flex-stretch article-card' key={id + i + (Math.random() * (0.120 - 0.0200) + 0.0200).toFixed(4)}>
             <div className='article-card__container' ref={card => {this.cardElement = card}}
@@ -104,8 +107,7 @@ export default class Playlist extends React.Component {
                 <div className='article-card__summary relative'>
                   <h2 className="article-card__title"><a href={url}>{title}</a></h2>
                   <div className="mb2 article-card__excerpt summary">
-                    <MediaQuery query={`(max-device-width: ${MD})`}>{mobile_truncated_description}</MediaQuery>
-                    <MediaQuery query={`(min-device-width: ${MD})`}>{truncated_description}</MediaQuery>
+                    {truncated_description}
                   </div>
                   <div className='md-flex flex-justify'>
                   <div className='article-card__image-info'>
