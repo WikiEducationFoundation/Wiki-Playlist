@@ -1,7 +1,6 @@
 import { ArticleCard } from './ArticleCard';
 import { connect } from 'react-redux';
 import { truncateHTML, stripTags } from '../utils/Text';
-
 import Icon from './Icon';
 import { TITLE_LIMIT, CAPTION_LIMIT, MD, MDINT, MINIMUM_ARTICLES } from '../constants';
 import { pushPath } from 'redux-simple-router';
@@ -24,6 +23,10 @@ export default class Playlist extends React.Component {
     this.state = {
       share_share: false
     }
+  }
+
+  componentDidMount() {
+    addSupportClasses();
   }
 
   render() {
@@ -154,43 +157,5 @@ export default class Playlist extends React.Component {
         </div>
       </div>)
   }
-  _addArticle() {
-    const {articles} = this.props.playlist;
-    if(articles.length < 5) {
-      return (
-      <div className="editable-container center p2">
-          <button className='action teal'
-                    onClick={()=>{this.props.dispatch(addArticleCard())}}>Add Wikipedia Article +</button>
-      </div>)
-    } else {
-      return null;
-    }
-  }
 
-  _captions() {
-    // Don't display captions if currently editing one
-    const { path } = this.props.routing;
-    if(path === '/playlists/article/caption') {
-      return null
-    }
-
-    const { dispatch } = this.props;
-    const { articles } = this.props.playlist;
-    return articles.map((article, i) => {
-      let caption = null;
-      let edit_button = null;
-      if(article.caption !== undefined && !_.isEmpty(article.caption) ) {
-        caption = article.caption;
-        edit_button = (<a href='#' className='gray' onClick={()=> {
-          dispatch(updateCurrentEditingArticle(i));
-          dispatch(pushPath('/playlists/article/caption'));
-        }}>Edit Caption</a>)
-      }
-      return (
-        <div key={`article_caption_${i}`} className='article-card__caption p2'>
-          {caption} {edit_button}
-        </div>
-      )
-    })
-  }
 }
