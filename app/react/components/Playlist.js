@@ -74,7 +74,7 @@ export default class Playlist extends React.Component {
 
         <footer className='site__footer container mt3 center flex-justify border-top'>
           <div className="py2 px1">
-            <small>Wiki Playlist is a project of the <a href='http://wikiedu.org/'>Wiki Education Foundation</a>, and subject to Wiki Ed&#39;s <a href='https://wikiedu.org/terms-of-service/'>Terms of Service</a> and <a href='https://wikiedu.org/privacy-policy/'>Privacy Policy</a>. Text and images on Wikipedia articles are available under free licenses thanks to the tireless work of volunteers at Wikipedia and Wikimedia Commons.</small></div>
+            <small>Wiki Playlist is a project of the <a href='http://wikiedu.org/'>Wiki Education Foundation</a>, and subject to Wiki Ed&#39;s <a href='https://wikiedu.org/terms-of-service/'>Terms of Service</a> and <a href='https://wikiedu.org/privacy-policy/'>Privacy Policy</a>. Text and images on Wikipedia articles are available under free licenses thanks to the tireless work of volunteers at Wikipedia and Wikimedia Commons. Email <a href={`mailto:playlist@wikiedu.org?subject=Wiki Playlist : Inappropriate Content&body=${permalink}`}>playlist@wikiedu.org</a> to report inappropriate content</small></div>
           <div className='py2'></div>
         </footer>
 
