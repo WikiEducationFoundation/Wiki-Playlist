@@ -13,7 +13,8 @@ class PlaylistFeature extends React.Component {
     const {title, caption, articles, id, color, user, current_user, url, all} = this.props;
     const {featured} = this.state;
     const { admin } = current_user;
-    const { avatar, username, verified, name } = user;
+    const { avatar, username, verified, name, provider } = user;
+    const verified_badge = (verified && provider === 'twitter' ? <img className='ml1' src='/images/verified.png' height={15}/>: null);
     return (
       <div 
       className='playlist-feature'
@@ -23,7 +24,7 @@ class PlaylistFeature extends React.Component {
         <a href={url} className='playlist-feature__content absolute p2' onClick={this._handleClick.bind(this)}>
           <div className='playlist-feature__user flex flex-center'>
             {(avatar ? <img className='avatar' src={avatar}/> : null)}
-            <span className='white'>{username}{(verified ? <img className='ml1' src='/images/verified.png' height={15}/>: null)}</span>
+            <span className='white'>{username}{verified_badge}</span>
           </div>
           <div className='py2'>
            {(name !== undefined && name !== null && name !== username ? <div className='playlist-feature__name white'>{name}</div> : null)}

@@ -130,14 +130,15 @@ export default class Playlist extends React.Component {
     const { color } = this.props.playlist;
     const { dispatch } = this.props;
     const {title, caption, editingCaption } = this.props.playlist;
-    const { username, avatar, name } = this.props.user;
+    const { username, avatar, name, provider, verified } = this.props.user;
+    const verified_badge = (verified && provider === 'twitter' ? <img className='ml1' src='/images/verified.png' height={15}/>: null);
     return (
       <div>
         <div className="">
           <div className="py3 md-mb1 md-mt5" ref={c => {this.cardContent = c}}>
 
             <div className={'article-card__header px2 relative'}>
-              <p className='flex flex-center'>{(avatar ? <img className='avatar' src={avatar}/> : null)}{username}</p>
+              <p className='flex flex-center'>{(avatar ? <img className='avatar' src={avatar}/> : null)}{username}{verified_badge}</p>
               <div className='md-flex flex-justify'>
                 <div className='playlist__title'>
                   <h1>{title}</h1>
