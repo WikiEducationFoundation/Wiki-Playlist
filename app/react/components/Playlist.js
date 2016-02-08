@@ -140,7 +140,7 @@ export default class Playlist extends React.Component {
           <div className="py3 md-mb1 md-mt5" ref={c => {this.cardContent = c}}>
 
             <div className={'article-card__header px2 relative'}>
-              <p className='flex flex-center'>{(avatar ? <img className='avatar' src={avatar}/> : null)}{username}{verified_badge}</p>
+              <p className='flex flex-center playlist__user'>{(avatar ? <img className='avatar' src={avatar}/> : null)}{username}{verified_badge}</p>
               <div className='md-flex flex-justify'>
                 <div className='playlist__title'>
                   <h1>{title}</h1>
