@@ -5,7 +5,7 @@
         span #{truncate_username(@user.username)}&#39;s
         - if @user.try(:verified) && @user.verified 
           span &nbsp;
-          img src='/images/verified.png'
+          img src='//w-playlist.s3.amazonaws.com/images/verified.png'
     h1 Wiki Playlist
   .share-image__articles.relative
     - @articles.slice(0,3).each do |article, index|
