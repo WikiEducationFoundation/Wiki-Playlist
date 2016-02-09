@@ -31,7 +31,8 @@ export default class Playlist extends React.Component {
 
   render() {
     const { show_share } = this.state;
-    let { playlist, articles, user, share_image_url, permalink } = this.props;
+    
+    let { content_only, playlist, articles, user, share_image_url, permalink } = this.props;
     playlist.articles = articles;
     playlist.server_info = {
       id: playlist.id,
@@ -43,6 +44,26 @@ export default class Playlist extends React.Component {
     }
 
     const { color } = this.props.playlist;
+
+
+    const site_content = (
+      <div>
+      <div className='playlist relative'>
+        <div className='container playlist__container relative'>
+          {this._titleCard()}
+          {this._articles()}
+        </div>
+        <PlaylistBackgroundColor color={color}/>
+      </div>
+      <div className='center playlist__ctas'>
+        <a href='/playlist' className='btn btn-primary'>Create your own Playlist</a>
+        <button className='btn btn-primary' onClick={()=>{
+            this.setState({show_share: true})
+          }}>Share this Playlist</button>
+      </div>
+      </div>);
+
+    if(content_only) { return site_content; }
 
     return (
       <div className={this.supportClasses}>
@@ -57,19 +78,7 @@ export default class Playlist extends React.Component {
         </nav>
 
         <div className='site__content'>
-          <div className='playlist relative'>
-            <div className='container playlist__container relative'>
-              {this._titleCard()}
-              {this._articles()}
-            </div>
-            <PlaylistBackgroundColor color={color}/>
-          </div>
-          <div className='center playlist__ctas'>
-            <a href='/playlist' className='btn btn-primary'>Create your own Playlist</a>
-            <button className='btn btn-primary' onClick={()=>{
-                this.setState({show_share: true})
-              }}>Share this Playlist</button>
-          </div>
+          {site_content}
         </div>
 
         <footer className='site__footer container mt3 center flex-justify border-top'>

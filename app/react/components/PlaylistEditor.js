@@ -21,6 +21,7 @@ import SaveButton from './SaveButton';
 import PlaylistBackgroundColor from './PlaylistBackgroundColor';
 import ColorPicker from './ColorPicker';
 import Login from './Login';
+import Playlist from './Playlist';
 
 class PlaylistEditor extends React.Component {
 
@@ -44,11 +45,16 @@ class PlaylistEditor extends React.Component {
   }
 
   render() {
-    const { logged_in } = this.props.Account;
+    const { logged_in, current_user } = this.props.Account;
     const { onboarded, step } = this.props.Onboarding;
-    const { color } = this.props.Playlist;
+    const { color, published, articles, server_info } = this.props.Playlist;
+    const { share_image_url } = this.props.Share;
     const { path } = this.props.routing;
     const onboarding = !onboarded && step === 0 || !onboarded && step === 1;
+    if(published) {
+      return <Playlist content_only={true} playlist={this.props.Playlist} articles={articles} user={current_user} share_image_url={share_image_url} permalink={server_info.permalink} />
+    }
+
     return (
       <div className={'playlist relative ' + (onboarding ? 'onboarding' : '')}>
         <div className='container playlist__container relative'>
@@ -56,7 +62,6 @@ class PlaylistEditor extends React.Component {
           {this._articles()}
           {this._addArticle()}
           {( onboarded ? <ColorPicker /> : null )}
-
           
           {(logged_in ? <div className='p2 center mt1'><SaveButton/></div> : <Login/>)}
 

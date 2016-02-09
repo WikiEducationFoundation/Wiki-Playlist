@@ -67,13 +67,16 @@ class SaveButton extends React.Component {
   _saveButton() {
     const { logged_in, current_user } = this.props.Account;
     const { published } = this.props.Playlist;
-    if(logged_in){
+    if(logged_in && !published){
       return (
         <button
           className='btn ml1'
-          onClick={this._savePlaylist.bind(this)}>
-          {(published ? 'Publish Changes' : 'Publish Playlist')}
-        </button>);
+          onClick={this._savePlaylist.bind(this)}>Publish Playlist</button>);
+    } else if(logged_in && published) {
+      return (
+        <Link className='btn btn-primary' to="/playlists">
+          Create a Playlist
+        </Link>);
     } else {
       return null;
     }
@@ -87,7 +90,7 @@ class SaveButton extends React.Component {
       flashMessage(this.dispatch,  {text: "Please give your playlist a title.", type: 'action'});
       return;
     }
-    // todo:  if 'can publish' instead of comparison here
+
     if(!can_save) {
       window.scrollTo(0,0)
       flashMessage(this.dispatch,  {text: `Please find at least ${remaining_to_save} more Articles${(remainder > 1 ? 's' : '')} to save.`, type: 'action'});
