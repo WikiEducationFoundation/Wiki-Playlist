@@ -41,6 +41,7 @@ export const PLAYLIST_SHOULD_SAVE = 'PLAYLIST_SHOULD_SAVE';
 export const REORDER_ARTICLE_IMAGES = 'REORDER_ARTICLE_IMAGES';
 
 // Breakpoints
+export const MDINT = 756;
 export const MD = '756px';
 
 // MISC

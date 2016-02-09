@@ -48,10 +48,11 @@ class PlaylistEditor extends React.Component {
     const { onboarded, step } = this.props.Onboarding;
     const { color } = this.props.Playlist;
     const { path } = this.props.routing;
+    const onboarding = !onboarded && step === 0 || !onboarded && step === 1;
     return (
-      <div className='playlist relative'>
+      <div className={'playlist relative ' + (onboarding ? 'onboarding' : '')}>
         <div className='container playlist__container relative'>
-          {(!onboarded && step === 0 || step === 1 ? this._onboardingTitle()  : this._titleCard())}
+          {( onboarding ? this._onboardingTitle()  : this._titleCard())}
           {this._articles()}
           {this._addArticle()}
           {( onboarded ? <ColorPicker /> : null )}

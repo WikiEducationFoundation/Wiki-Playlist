@@ -4,6 +4,9 @@
   padding 0 1rem
   +above(lg)
     padding 0
+  
+  &.onboarding
+    padding-top 1rem
 
 .avatar
   width 30px
@@ -11,11 +14,16 @@
   border-radius 50%
   margin-right .5rem
     
-// .playlist__container
-//   padding-top 1rem
+.playlist__container
+  padding-top 1rem
+  +above(md)
+    padding-top 0
 
 .playlist__title
   max-width 470px
+
+.playlist__user
+  padding 4px
 
 .playlist__title
   word-wrap: break-word
@@ -47,8 +55,9 @@
 
 .playlist__ctas
   .btn
-    margin-bottom 1rem
-    margin-right 0
+    margin 0 .5rem 1rem
+    +above(md)
+      margin-top 2rem
 
 .playlist__background-color
   position absolute

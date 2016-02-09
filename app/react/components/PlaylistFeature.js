@@ -24,11 +24,11 @@ class PlaylistFeature extends React.Component {
         <a href={url} className='playlist-feature__content absolute p2' onClick={this._handleClick.bind(this)}>
           <div className='playlist-feature__user flex flex-center'>
             {(avatar ? <img className='avatar' src={avatar}/> : null)}
-            <span className='white'>{username}{verified_badge}</span>
+            <span className=''>{username}{verified_badge}</span>
           </div>
           <div className='py2'>
-           {(name !== undefined && name !== null && name !== username ? <div className='playlist-feature__name white'>{name}</div> : null)}
-           <h3 className='white playlist-feature__title'>{(title.length > 70 ? title.substr(0, 70) + '...' : title)}</h3>
+           {(name !== undefined && name !== null && name !== username ? <div className='playlist-feature__name'>{name}</div> : null)}
+           <h3 className='playlist-feature__title'>{(title.length > 70 ? title.substr(0, 70) + '...' : title)}</h3>
           </div>
           {(admin && all? <button className={`action ${(featured ? 'featured' : '')}`} onClick={()=> this._featurePlaylist(id)}>{(featured ? 'Featured' : 'Feature')}</button> : null)}
           <div className='playlist-feature__cards'>

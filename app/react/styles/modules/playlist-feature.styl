@@ -6,12 +6,13 @@
   width 100%
   transition 300ms easeOutExpo box-shadow
   box-shadow 0 0 0 black
-  border .5px solid rgba(0,0,0,0.1)
+  border .2px solid rgba(0,0,0,0.1)
   margin-bottom 1rem
+  
   +above(500px)
     margin-bottom 0
-    border none
     flex-basis 50%
+  
   +above(800px)
     flex-basis 33.33%
   
@@ -37,7 +38,7 @@
       color white
       background black
 
-.background-blend-mode .playlist__background-color
+.background-blend-mode .playlist-feature
   background-image url(/images/pattern-transparent.png)
   background-blend-mode: multiply;
 
@@ -47,6 +48,7 @@
   top 0
   left 0
   overflow hidden
+  color rgba(0,0,0,.75)
   
   &:hover, 
   &:hover *

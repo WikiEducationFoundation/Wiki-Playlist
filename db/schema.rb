@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160205041614) do
+ActiveRecord::Schema.define(version: 20160208233351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20160205041614) do
     t.datetime "share_image_updated_at"
     t.string   "slug"
     t.string   "color"
+    t.boolean  "needs_image_regeneration", default: false
   end
 
   add_index "playlists", ["slug"], name: "index_playlists_on_slug", unique: true, using: :btree
