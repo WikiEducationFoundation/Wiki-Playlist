@@ -1,5 +1,5 @@
 import Clipboard from 'clipboard';
-import ShareJS from 'share-js';
+import ShareJS from '../utils/ShareJS';
 
 import { FACEBOOK_APP_ID } from '../constants';
 import Icon from './Icon'
@@ -89,8 +89,9 @@ export class Share extends React.Component {
             </button>
             <button className='share-button action'
                     data-share-tumblr
-                    data-share-url={permalink}
-                    data-share-image={share_image_url}>
+                    data-share-posttype='photo'
+                    data-share-caption={`${title}\n${caption}\n${permalink}`}
+                    data-share-content={share_image_url} >
               <Icon size="30px" icon="tumblr" fill={'tumblr'} />
             </button>
             <button className='share-button action'
