@@ -37,7 +37,8 @@ import {
   UPDATE_PLAYLIST_USERNAME,
   SET_PLAYLIST_COLOR,
   PLAYLIST_SHOULD_SAVE,
-  REORDER_ARTICLE_IMAGES
+  REORDER_ARTICLE_IMAGES,
+  SHOW_PERMALINK
 } from '../constants';
 
 
@@ -201,7 +202,6 @@ export function setShareImageRendering(bool) {
   }
 }
 
-
 export function updatePlaylistUsername(username) {
   return {
     type: UPDATE_PLAYLIST_USERNAME,
@@ -209,11 +209,17 @@ export function updatePlaylistUsername(username) {
   }
 }
 
-
 export function setPlaylistColor(color) {
   return {
     type: SET_PLAYLIST_COLOR,
     color
+  }
+}
+
+export function showPermalink(bool) {
+  return {
+    type: SHOW_PERMALINK,
+    bool
   }
 }
 

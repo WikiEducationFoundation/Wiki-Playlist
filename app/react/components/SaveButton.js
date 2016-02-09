@@ -26,7 +26,8 @@ import {
   setOnboardingStep,
   updateCurrentEditingArticle,
   showShare,
-  setPlaylistShouldSave
+  setPlaylistShouldSave,
+  showPermalink
 } from '../actions';
 
 import {
@@ -66,17 +67,19 @@ class SaveButton extends React.Component {
 
   _saveButton() {
     const { logged_in, current_user } = this.props.Account;
-    const { published } = this.props.Playlist;
+    const { show_permalink, published } = this.props.Playlist;
+    if(logged_in && show_permalink) {
+      return (
+        <a className='btn btn-primary' href="/playlists">
+          Create a Playlist
+        </a>);
+    }
+
     if(logged_in && !published){
       return (
         <button
           className='btn ml1'
           onClick={this._savePlaylist.bind(this)}>Publish Playlist</button>);
-    } else if(logged_in && published) {
-      return (
-        <Link className='btn btn-primary' to="/playlists">
-          Create a Playlist
-        </Link>);
     } else {
       return null;
     }
@@ -111,6 +114,7 @@ class SaveButton extends React.Component {
     var playlist_data = {id, permalink, articles};
     this.dispatch(receivePlaylistPermalink(playlist_data));
     this.dispatch(setShareImageRendering(true));
+    this.dispatch(showPermalink(true));
     this.dispatch(showShare(true));
     flashMessage(this.dispatch, {text: `Playlist ${(published ? 'updated' : 'saved')}!`, type: 'success'});
     pollPlaylistRenderStatus(id, (data)=>{

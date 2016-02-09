@@ -23,7 +23,7 @@ export class Share extends React.Component {
 
 
   render() {
-    const { title, caption } = this.props.Playlist;
+    const { title, caption, server_info } = this.props.Playlist;
     const { id, permalink } = this.props.Playlist.server_info;
     const { copied } = this.state;
     const { share_image_url, share_rendering } = this.props.Share;
@@ -124,6 +124,7 @@ export class Share extends React.Component {
     const { share_rendering } = this.props.Share;
     const canClose = !share_rendering && $(target).hasClass('sharing__overlay') || $(target).hasClass('close-button')
     if(canClose){
+      $(document).trigger($.Event("closeShare"));
       this.props.dispatch(closeShare(true));
     }
     
@@ -138,7 +139,7 @@ export class Share extends React.Component {
     
     this.sharing = new ShareJS({
       onShare: (platform)=>{
-        console.log('sharing on ', platform)
+        // console.log('sharing on ', platform)
       }
     })
 

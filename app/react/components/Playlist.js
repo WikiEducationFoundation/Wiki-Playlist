@@ -21,12 +21,19 @@ export default class Playlist extends React.Component {
   constructor() {
     super();
     this.state = {
-      share_share: false
+      show_share: false
     }
   }
 
   componentDidMount() {
     addSupportClasses();
+    const { playlist, permalink } = this.props;
+    window.history.pushState({}, `Wiki Playlist | ${playlist.title}`, permalink)
+    $(document).on('closeShare', ()=>{
+      if(this.state.show_share) {
+        this.setState({show_share: false});
+      }
+    });
   }
 
   render() {
@@ -34,10 +41,12 @@ export default class Playlist extends React.Component {
     
     let { content_only, playlist, articles, user, share_image_url, permalink } = this.props;
     playlist.articles = articles;
+
     playlist.server_info = {
       id: playlist.id,
       permalink: permalink
     }
+
     const share = {
       share_rendering: false,
       share_image_url: share_image_url
@@ -61,6 +70,10 @@ export default class Playlist extends React.Component {
             this.setState({show_share: true})
           }}>Share this Playlist</button>
       </div>
+
+      {(show_share ? <Share Playlist={playlist} Share={share} close={()=>{
+          this.setState({show_share: false})
+        }}/> : null )}
       </div>);
 
     if(content_only) { return site_content; }
@@ -87,9 +100,7 @@ export default class Playlist extends React.Component {
           <div className='py2'></div>
         </footer>
 
-        {(show_share ? <Share Playlist={playlist} Share={share} close={()=>{
-          this.setState({show_share: false})
-        }}/> : null )}  
+          
         
       </div>
 
