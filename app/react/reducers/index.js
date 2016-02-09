@@ -41,7 +41,8 @@ import {
   PLAYLIST_SHOULD_SAVE,
   REORDER_ARTICLE_IMAGES,
   MINIMUM_ARTICLES,
-  SHOW_PERMALINK
+  SHOW_PERMALINK,
+  RESET_PLAYLIST
 } from '../constants';
 
 
@@ -320,10 +321,13 @@ function Playlist(state = initialPlaylistState, action) {
       return _.assign({}, state, {published: true, server_info: action.data, server_errors:[]})
 
     case SHOW_PERMALINK:
-      console.log('show permalink')
       return _.assign({}, state, {permalink: state, show_permalink: action.bool })
 
     case HANDLE_DELETE:
+      var initialPlaylistState = defaultPlaylist();
+      return _.assign({}, initialPlaylistState, {username: state.username});
+
+    case RESET_PLAYLIST:
       var initialPlaylistState = defaultPlaylist();
       return _.assign({}, initialPlaylistState, {username: state.username});
 

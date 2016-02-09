@@ -9,7 +9,8 @@ import {
   setPlaylistCaption,
   setPlaylistTitle,
   updatePlaylistUsername,
-  updatePlaylistCaption
+  updatePlaylistCaption,
+  resetPlaylist
 } from '../actions';
 
 import { TITLE_LIMIT, CAPTION_LIMIT } from '../constants';
@@ -60,8 +61,6 @@ class PlaylistEditor extends React.Component {
 
         </div>
 
-
-
         <PlaylistBackgroundColor color={color}/>
 
         { onboarded ? null : <div className='onboarding__screen'></div>}
@@ -76,13 +75,14 @@ class PlaylistEditor extends React.Component {
     const articles = _.where(playlist.articles, {has_article: true});
     const { current_user } = this.props.Account;
     const permalink = playlist.server_info;
-    const share_image_url = this.props;
+    const { share_image_url } = this.props.Share;
 
     return (
       <Playlist content_only={true} 
                 playlist={playlist} 
                 articles={articles} 
                 user={current_user} 
+                share_image_url={share_image_url}
                 permalink={playlist.server_info.permalink}/>);
   }
 
@@ -165,6 +165,12 @@ class PlaylistEditor extends React.Component {
       </div>)
     } else {
       return null;
+    }
+  }
+
+  componentWillUnmount() {
+    if(this.props.Playlist.show_permalink) {
+      this.dispatch(resetPlaylist());
     }
   }
 

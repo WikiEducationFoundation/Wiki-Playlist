@@ -27,7 +27,8 @@ import {
   updateCurrentEditingArticle,
   showShare,
   setPlaylistShouldSave,
-  showPermalink
+  showPermalink,
+  resetPlaylist
 } from '../actions';
 
 import {
@@ -70,9 +71,12 @@ class SaveButton extends React.Component {
     const { show_permalink, published } = this.props.Playlist;
     if(logged_in && show_permalink) {
       return (
-        <a className='btn btn-primary' href="/playlists">
+        <button className='btn btn-primary' onClick={()=>{
+          this.dispatch(resetPlaylist());
+          this.dispatch(pushPath('/playlists'));
+        }}>
           Create a Playlist
-        </a>);
+        </button>);
     }
 
     if(logged_in && !published){

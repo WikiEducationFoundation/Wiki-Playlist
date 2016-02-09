@@ -31,7 +31,7 @@ export class Share extends React.Component {
 
 
     return (
-      <div className='sharing__overlay' onClick={this.closeShare.bind(this)}>
+      <div className='sharing__overlay' onClick={this.closeShareOverlay.bind(this)}>
         <div className='sharing__container p2 bg-white card mt2 relative'
              ref={(container) => {this.container = container}}>
              {(share_rendering ? this._shareRendering() : this._sharingButtons())}
@@ -115,16 +115,15 @@ export class Share extends React.Component {
               {(copied ? 'Copied to your clipboard!' : 'Copy Permalink')}
             </button>
           </div>
-          <button className='action close-button' onClick={this.closeShare.bind(this)}>&#215;</button>
+          <button className='action close-button' onClick={this.closeShareOverlay.bind(this)}>&#215;</button>
         </div>
     );
   }
 
-  closeShare({target}) {
+  closeShareOverlay({target}) {
     const { share_rendering } = this.props.Share;
-    const canClose = !share_rendering && $(target).hasClass('sharing__overlay') || $(target).hasClass('close-button')
+    const canClose = share_rendering === false && $(target).hasClass('sharing__overlay') || $(target).hasClass('close-button')
     if(canClose){
-      $(document).trigger($.Event("closeShare"));
       this.props.dispatch(closeShare(true));
     }
     
