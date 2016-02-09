@@ -23,7 +23,8 @@ class GenerateShareImage < Que::Job
 
     ActiveRecord::Base.transaction do
       @playlist.update_attributes :share_image_rendered => true, 
-                                  :share_image => @attachment
+                                  :share_image => @attachment,
+                                  :needs_image_regeneration => false
       File.delete(path)
       destroy
     end

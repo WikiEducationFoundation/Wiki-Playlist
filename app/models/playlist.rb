@@ -9,4 +9,5 @@ class Playlist < ActiveRecord::Base
   validates_attachment :share_image, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
 
   scope :featured, -> { where(featured: true)}
+  scope :needs_image_regeneration, -> { where(needs_image_regeneration: true)}
 end

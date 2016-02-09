@@ -1,7 +1,6 @@
 import { ArticleCard } from './ArticleCard';
 import { connect } from 'react-redux';
 import { truncateHTML, stripTags } from '../utils/Text';
-
 import Icon from './Icon';
 import { TITLE_LIMIT, CAPTION_LIMIT, MD, MDINT, MINIMUM_ARTICLES } from '../constants';
 import { pushPath } from 'redux-simple-router';
@@ -24,6 +23,10 @@ export default class Playlist extends React.Component {
     this.state = {
       share_share: false
     }
+  }
+
+  componentDidMount() {
+    addSupportClasses();
   }
 
   render() {
@@ -71,7 +74,7 @@ export default class Playlist extends React.Component {
 
         <footer className='site__footer container mt3 center flex-justify border-top'>
           <div className="py2 px1">
-            <small>Wiki Playlist is a project of the <a href='http://wikiedu.org/'>Wiki Education Foundation</a>, and subject to Wiki Ed&#39;s <a href='https://wikiedu.org/terms-of-service/'>Terms of Service</a> and <a href='https://wikiedu.org/privacy-policy/'>Privacy Policy</a>. Text and images on Wikipedia articles are available under free licenses thanks to the tireless work of volunteers at Wikipedia and Wikimedia Commons.</small></div>
+            <small>Wiki Playlist is a project of the <a href='http://wikiedu.org/'>Wiki Education Foundation</a>, and subject to Wiki Ed&#39;s <a href='https://wikiedu.org/terms-of-service/'>Terms of Service</a> and <a href='https://wikiedu.org/privacy-policy/'>Privacy Policy</a>. Text and images on Wikipedia articles are available under free licenses thanks to the tireless work of volunteers at Wikipedia and Wikimedia Commons. Email <a href={`mailto:playlist@wikiedu.org?subject=Wiki Playlist : Inappropriate Content&body=${permalink}`}>playlist@wikiedu.org</a> to report inappropriate content</small></div>
           <div className='py2'></div>
         </footer>
 
@@ -140,7 +143,7 @@ export default class Playlist extends React.Component {
           <div className="py3 md-mb1 md-mt5" ref={c => {this.cardContent = c}}>
 
             <div className={'article-card__header px2 relative'}>
-              <p className='flex flex-center'>{(avatar ? <img className='avatar' src={avatar}/> : null)}{username}{verified_badge}</p>
+              <p className='flex flex-center playlist__user'>{(avatar ? <img className='avatar' src={avatar}/> : null)}{username}{verified_badge}</p>
               <div className='md-flex flex-justify'>
                 <div className='playlist__title'>
                   <h1>{title}</h1>
@@ -154,43 +157,5 @@ export default class Playlist extends React.Component {
         </div>
       </div>)
   }
-  _addArticle() {
-    const {articles} = this.props.playlist;
-    if(articles.length < 5) {
-      return (
-      <div className="editable-container center p2">
-          <button className='action teal'
-                    onClick={()=>{this.props.dispatch(addArticleCard())}}>Add Wikipedia Article +</button>
-      </div>)
-    } else {
-      return null;
-    }
-  }
 
-  _captions() {
-    // Don't display captions if currently editing one
-    const { path } = this.props.routing;
-    if(path === '/playlists/article/caption') {
-      return null
-    }
-
-    const { dispatch } = this.props;
-    const { articles } = this.props.playlist;
-    return articles.map((article, i) => {
-      let caption = null;
-      let edit_button = null;
-      if(article.caption !== undefined && !_.isEmpty(article.caption) ) {
-        caption = article.caption;
-        edit_button = (<a href='#' className='gray' onClick={()=> {
-          dispatch(updateCurrentEditingArticle(i));
-          dispatch(pushPath('/playlists/article/caption'));
-        }}>Edit Caption</a>)
-      }
-      return (
-        <div key={`article_caption_${i}`} className='article-card__caption p2'>
-          {caption} {edit_button}
-        </div>
-      )
-    })
-  }
 }

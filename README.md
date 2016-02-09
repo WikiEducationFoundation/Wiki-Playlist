@@ -106,6 +106,10 @@ $ git push heroku master
 - [Heroku, Ruby on Rails and PhantomJS](https://gist.github.com/edelpero/9257311)
 TODO Add Que Gem
 
+**Social Media**
+
+- [Sharing Tumblr Photo Post](https://www.tumblr.com/examples/share/sharing-images.html)
+
 **Frontend**
 
  - [React Icons](http://dmfrancisco.github.io/react-icons/)
