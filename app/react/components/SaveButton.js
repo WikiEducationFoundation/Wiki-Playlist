@@ -93,7 +93,7 @@ class SaveButton extends React.Component {
 
     if(!can_save) {
       window.scrollTo(0,0)
-      flashMessage(this.dispatch,  {text: `Please find at least ${remaining_to_save} more Articles${(remainder > 1 ? 's' : '')} to save.`, type: 'action'});
+      flashMessage(this.dispatch,  {text: `Please find at least ${remaining_to_save} more Article${(remaining_to_save > 1 ? 's' : '')} to save.`, type: 'action'});
     } else {
       const saveMethod = (published ? updatePlaylist : createPlaylist)
       saveMethod(this.props.Playlist, (data) => {
