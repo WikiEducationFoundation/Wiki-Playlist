@@ -39,7 +39,7 @@ class Login extends React.Component {
               <a onClick={this._handleLoginClick.bind(this)} className='mb1 btn btn--oauth facebook' data-popup="Login with Facebook" href="/users/auth/facebook"><Icon size="17px" icon="facebook" fill={'white'} />Sign in with Facebook</a>
               <a onClick={this._handleLoginClick.bind(this)} className='btn btn--oauth wiki' data-popup="Login with Wikipedia Account" href="/users/auth/mediawiki"><Icon size="17px" icon="wiki" fill={'white'} />Sign in with Wikipedia</a>
             </div>
-            <p className='scorpion px2'><small>We only use your username to add an author name to the playlist.</small></p>
+            <p className='scorpion px2'><small>We use your username to add an author name to the playlist.</small></p>
             {close_button}
           </div>
         </div>
