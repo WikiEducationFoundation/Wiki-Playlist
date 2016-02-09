@@ -26,7 +26,9 @@ import {
   setOnboardingStep,
   updateCurrentEditingArticle,
   showShare,
-  setPlaylistShouldSave
+  setPlaylistShouldSave,
+  showPermalink,
+  resetPlaylist
 } from '../actions';
 
 import {
@@ -66,14 +68,22 @@ class SaveButton extends React.Component {
 
   _saveButton() {
     const { logged_in, current_user } = this.props.Account;
-    const { published } = this.props.Playlist;
-    if(logged_in){
+    const { show_permalink, published } = this.props.Playlist;
+    if(logged_in && show_permalink) {
+      return (
+        <button className='btn btn-primary' onClick={()=>{
+          this.dispatch(resetPlaylist());
+          this.dispatch(pushPath('/playlists'));
+        }}>
+          Create a Playlist
+        </button>);
+    }
+
+    if(logged_in && !published){
       return (
         <button
           className='btn ml1'
-          onClick={this._savePlaylist.bind(this)}>
-          {(published ? 'Publish Changes' : 'Publish Playlist')}
-        </button>);
+          onClick={this._savePlaylist.bind(this)}>Publish Playlist</button>);
     } else {
       return null;
     }
@@ -87,10 +97,10 @@ class SaveButton extends React.Component {
       flashMessage(this.dispatch,  {text: "Please give your playlist a title.", type: 'action'});
       return;
     }
-    // todo:  if 'can publish' instead of comparison here
+
     if(!can_save) {
       window.scrollTo(0,0)
-      flashMessage(this.dispatch,  {text: `Please find at least ${remaining_to_save} more Articles${(remainder > 1 ? 's' : '')} to save.`, type: 'action'});
+      flashMessage(this.dispatch,  {text: `Please find at least ${remaining_to_save} more Article${(remaining_to_save > 1 ? 's' : '')} to save.`, type: 'action'});
     } else {
       const saveMethod = (published ? updatePlaylist : createPlaylist)
       saveMethod(this.props.Playlist, (data) => {
@@ -108,6 +118,7 @@ class SaveButton extends React.Component {
     var playlist_data = {id, permalink, articles};
     this.dispatch(receivePlaylistPermalink(playlist_data));
     this.dispatch(setShareImageRendering(true));
+    this.dispatch(showPermalink(true));
     this.dispatch(showShare(true));
     flashMessage(this.dispatch, {text: `Playlist ${(published ? 'updated' : 'saved')}!`, type: 'success'});
     pollPlaylistRenderStatus(id, (data)=>{

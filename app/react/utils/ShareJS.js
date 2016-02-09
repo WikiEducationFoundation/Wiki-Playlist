@@ -177,7 +177,7 @@
           url = (function() {
             switch (posttype) {
               case 'photo':
-                return "//www.tumblr.com/share/photo?source=" + content + "&caption=" + title + "%3A" + caption + "%0A" + url;
+                return "//www.tumblr.com/share/photo?source=" + content + "&caption=" + title + "%3A%20" + caption + "%0A" + url;
             }
           })();
           return _this.openWindowAndCenter({

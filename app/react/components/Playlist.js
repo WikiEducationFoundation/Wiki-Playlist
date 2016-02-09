@@ -21,28 +21,62 @@ export default class Playlist extends React.Component {
   constructor() {
     super();
     this.state = {
-      share_share: false
+      show_share: false
     }
   }
 
   componentDidMount() {
     addSupportClasses();
+    const { playlist, permalink } = this.props;
+    window.history.pushState({}, `Wiki Playlist | ${playlist.title}`, permalink)
+    $(document).on('closeShare', ()=>{
+      if(this.state.show_share) {
+        this.setState({show_share: false});
+      }
+    });
   }
 
   render() {
     const { show_share } = this.state;
-    let { playlist, articles, user, share_image_url, permalink } = this.props;
+    
+    let { content_only, playlist, articles, user, share_image_url, permalink } = this.props;
     playlist.articles = articles;
+
     playlist.server_info = {
       id: playlist.id,
       permalink: permalink
     }
+
     const share = {
       share_rendering: false,
       share_image_url: share_image_url
     }
 
     const { color } = this.props.playlist;
+
+
+    const site_content = (
+      <div>
+      <div className='playlist relative'>
+        <div className='container playlist__container relative'>
+          {this._titleCard()}
+          {this._articles()}
+        </div>
+        <PlaylistBackgroundColor color={color}/>
+      </div>
+      <div className='center playlist__ctas'>
+        <a href='/playlist' className='btn btn-primary'>Create your own Playlist</a>
+        <button className='btn btn-primary' onClick={()=>{
+            this.setState({show_share: true})
+          }}>Share this Playlist</button>
+      </div>
+
+      {(show_share ? <Share Playlist={playlist} Share={share} close={()=>{
+          this.setState({show_share: false})
+        }}/> : null )}
+      </div>);
+
+    if(content_only) { return site_content; }
 
     return (
       <div className={this.supportClasses}>
@@ -57,19 +91,7 @@ export default class Playlist extends React.Component {
         </nav>
 
         <div className='site__content'>
-          <div className='playlist relative'>
-            <div className='container playlist__container relative'>
-              {this._titleCard()}
-              {this._articles()}
-            </div>
-            <PlaylistBackgroundColor color={color}/>
-          </div>
-          <div className='center playlist__ctas'>
-            <a href='/playlist' className='btn btn-primary'>Create your own Playlist</a>
-            <button className='btn btn-primary' onClick={()=>{
-                this.setState({show_share: true})
-              }}>Share this Playlist</button>
-          </div>
+          {site_content}
         </div>
 
         <footer className='site__footer container mt3 center flex-justify border-top'>
@@ -78,9 +100,7 @@ export default class Playlist extends React.Component {
           <div className='py2'></div>
         </footer>
 
-        {(show_share ? <Share Playlist={playlist} Share={share} close={()=>{
-          this.setState({show_share: false})
-        }}/> : null )}  
+          
         
       </div>
 
