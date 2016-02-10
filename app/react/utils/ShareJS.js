@@ -65,6 +65,7 @@
       return $(document).on('click', "[data-share-" + platform.name + "]", (function(_this) {
         return function(e) {
           var $this, url;
+          console.log(platform.name);
           e.preventDefault();
           $this = $(e.currentTarget);
           url = "" + platform.share_url;
