@@ -47,7 +47,14 @@ class SearchResult extends React.Component {
         var pages = data.query.pages;
         const result = pages[_.keys(pages)[0]];
         let extract =  result.extract;
-        const short_summary = _.get(Search.history[result.title][0], "terms.description[0]", null)
+
+        const searchHistory = Search.history[result.title];
+        
+        var short_summary = null;
+        if(searchHistory !== undefined) {
+          short_summary = _.get(searchHistory[0], "terms.description[0]", null)
+        }
+        
         if(extract === "" && short_summary) {
           extract = short_summary;
         }
@@ -62,7 +69,7 @@ class SearchResult extends React.Component {
 
     articleData.then(()=>{
       dispatch(addArticle(index, article));
-      fetchArticleImages(article.title, this.addArticleImages.bind(this));
+      fetchArticleImages(article, this.addArticleImages.bind(this));
     }).catch((reason)=> {console.log('Reject promise', reason)});
   }
 

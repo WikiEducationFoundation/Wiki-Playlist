@@ -66,8 +66,8 @@ const commons_url = 'https://commons.wikimedia.org/wiki/';
 const exclude_images = require('../data/exclude_images');
 const query_article_images = `${wiki_api}query&redirects&generator=images&list=allimages&prop=imageinfo&&iiprop=url|extmetadata|metadata|commonmetadata&iiurlwidth=600&gimlimit=100&format=json&titles=`
 
-export function fetchArticleImages(title, callback,) {
-  const url = query_article_images + encodeURIComponent(title);
+export function fetchArticleImages(article, callback,) {
+  const url = query_article_images + encodeURIComponent(article.title);
 
   let imageObjects = [];
 
@@ -87,6 +87,11 @@ export function fetchArticleImages(title, callback,) {
         }
       }
     });
+  }
+
+  let thumbnail = null;
+  if(article.thumbnail !== undefined) {
+    thumbnail = article.thumbnail.source;
   }
 
   getImages(url);
@@ -118,6 +123,15 @@ export function fetchArticleImages(title, callback,) {
         if(!exclude && image.url !== '') {
           images.push(image);
         }
+
+        // Find thumbnail in images and move to index 0
+        // if(thumbnail) {
+        //   let thumbnail_pieces = thumbnail.split('.')
+        //   thumbnail_pieces.pop();
+        //   const filename = thumbnail_pieces.join('').split('/').pop();
+        // }
+
+        
       });
 
     }
