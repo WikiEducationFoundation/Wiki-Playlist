@@ -5,7 +5,6 @@ import Cookies from 'js-cookie';
 export function openLoginPopup(e) {
   e.preventDefault();
   var $target = $(e.target).closest('[data-popup]')
-  console.log($target)
   var title = $target.data('popup');
   PopupCenter($target.attr('href'), title, '1000', '500');
 }

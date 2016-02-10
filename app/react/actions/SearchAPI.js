@@ -129,6 +129,11 @@ export function fetchArticleImages(article, callback,) {
         //   let thumbnail_pieces = thumbnail.split('.')
         //   thumbnail_pieces.pop();
         //   const filename = thumbnail_pieces.join('').split('/').pop();
+        //   // console.log(filename);
+        //   console.log(_.find(images, (img) => { 
+        //     // console.log(img.url)
+        //     return img.url.indexOf(filename) > -1; 
+        //   }));
         // }
 
         
