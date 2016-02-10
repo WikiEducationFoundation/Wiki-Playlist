@@ -18,34 +18,36 @@ class PlaylistFeature extends React.Component {
     const { avatar, username, verified, name, provider } = user;
     const verified_badge = (verified  ? <img className='ml1' src={VerifiedBadge(provider)} height={15} /> : null );
     return (
-      <div 
-      className='playlist-feature'
-      style={{
-        backgroundColor: color
-      }}>
-        <a href={url} className='playlist-feature__content absolute p2' onClick={this._handleClick.bind(this)}>
-          <div className='playlist-feature__user'>
-            <UserInfo {...user} />
-          </div>
-          <div className='py2'>
-           {(name !== undefined && name !== null && name !== username ? <div className='playlist-feature__name'>{name}</div> : null)}
-           <h3 className='playlist-feature__title'>{(title.length > 70 ? title.substr(0, 70) + '...' : title)}</h3>
-          </div>
-          {(admin && all? <button className={`action ${(featured ? 'featured' : '')}`} onClick={()=> this._featurePlaylist(id)}>{(featured ? 'Featured' : 'Feature')}</button> : null)}
-          <div className='playlist-feature__cards'>
-          {articles.slice(0,3).map((article, i) => {
-            const { id, image, title } = article;
-            return (
-              <div key={`featured_playlist ${id}${i}`} className={`playlist-feature__card card-${i}`}>
-                <div className='playlist-feature__card__image' style={{
-                  backgroundImage: `url(${image})`
-                }}></div>
-                <h4>{title}</h4>
-              </div>
-            )
-          })}
-          </div>
-        </a>
+      <div className='p1 playlist-feature--container'>
+        <div
+        className='playlist-feature'
+        style={{
+          backgroundColor: color
+        }}>
+          <a href={url} className='playlist-feature__content absolute p2' onClick={this._handleClick.bind(this)}>
+            <div className='playlist-feature__user'>
+              <UserInfo {...user} />
+            </div>
+            <div className='py2'>
+             {(name !== undefined && name !== null && name !== username ? <div className='playlist-feature__name'>{name}</div> : null)}
+             <h3 className='playlist-feature__title'>{(title.length > 70 ? title.substr(0, 70) + '...' : title)}</h3>
+            </div>
+            {(admin && all? <button className={`action ${(featured ? 'featured' : '')}`} onClick={()=> this._featurePlaylist(id)}>{(featured ? 'Featured' : 'Feature')}</button> : null)}
+            <div className='playlist-feature__cards'>
+            {articles.slice(0,3).map((article, i) => {
+              const { id, image, title } = article;
+              return (
+                <div key={`featured_playlist ${id}${i}`} className={`playlist-feature__card card-${i}`}>
+                  <div className='playlist-feature__card__image' style={{
+                    backgroundImage: `url(${image})`
+                  }}></div>
+                  <h4>{title}</h4>
+                </div>
+              )
+            })}
+            </div>
+          </a>
+        </div>
       </div>
     );
   }

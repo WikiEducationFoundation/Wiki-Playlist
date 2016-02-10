@@ -1,30 +1,35 @@
+.playlist-feature--container
+  position relative
+  flex-basis 100%
+  padding .5rem
+  +above(600px)
+    margin-bottom 0
+    flex-basis 50%
+
+  +above(800px)
+    flex-basis 33.33%
+
 .playlist-feature
   position relative
   background $teal
-  background-image url(/images/pattern-transparent-low-opacity.png)
-  background-size 300px auto
+  // background-image url(/images/pattern-transparent-low-opacity.png)
+  // background-size 300px auto
   width 100%
   transition 300ms easeOutExpo box-shadow
-  box-shadow 0 0 0 black
-  border .2px solid rgba(0,0,0,0.1)
-  margin-bottom 1rem
-  
-  +above(500px)
-    margin-bottom 0
-    flex-basis 50%
-  
-  +above(800px)
-    flex-basis 33.33%
-  
+  box-shadow 0 2px 2px rgba(0,0,0,.15)
+  border-radius 5px
+  // border .2px solid rgba(0,0,0,0.1)
+  // margin-bottom 1rem
+
   &:hover
     z-index 10
-    box-shadow 0 0 5px black
-  
+    box-shadow 0 2px 4px rgba(0,0,0,.55)
+
   &:after
     content ''
     display block
     padding-bottom 100%
-  
+
   .action
     position absolute
     z-index 4
@@ -39,8 +44,8 @@
       background black
 
 .background-blend-mode .playlist-feature
-  background-image url(/images/pattern-transparent.png)
-  background-blend-mode: multiply;
+  // background-image url(/images/pattern-transparent.png)
+  // background-blend-mode: multiply;
 
 .playlist-feature__content
   width 100%
@@ -49,14 +54,14 @@
   left 0
   overflow hidden
   color rgba(0,0,0,.75)
-  
-  &:hover, 
+
+  &:hover,
   &:hover *
     text-decoration none
-  
+
   .avatar
-    width 30px
-    height 30px
+    width 22px
+    height 22px
     display inline-block
     border-radius 50%
     margin-right .5rem
@@ -79,27 +84,31 @@
   backface-visibility hidden
 
   &.card-1
-    transform translate(-120%, 5%) rotate(-10deg) translateZ(0)
+    transform translate(-120%, 4.5%) rotate(-10deg) translateZ(0)
     z-index 1
-    
+
   &.card-2
-    transform translate(20%, 4.5%) rotate(10deg) translateZ(0)
+    transform translate(20%, 3.5%) rotate(10deg) translateZ(0)
     z-index 3
-  
+
   h4
     padding 7px 3px
-    font-size 14px
+    font-size 13px
     opacity .5
     font-family $serif
-    color rgba($black, .6)
+    color rgba($black, .7)
     text-align center
-    
+
 
 .playlist-feature__card__image
   height 70px
   width 100%
   background-size cover
   background-position top center
+
+.playlist-feature .playlist__user-info
+  font-size 14px
+  font-weight 600
 
 .playlist-feature__title
   font-size 28px
@@ -110,4 +119,6 @@
 
 .playlist-feature__name
   text-tranform uppercase
-  letter-spacing 1px
+  font-weight 600
+  font-size 14px
+  opacity .9
