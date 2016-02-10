@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   validates :username, :presence => true
 
   def as_json(options={})
-    super(:only => [:username, :admin, :verified, :avatar, :name, :provider])
+    super(:only => [:username, :admin, :verified, :avatar, :name, :provider, :uid])
   end
 
   def self.from_omniauth(auth)
