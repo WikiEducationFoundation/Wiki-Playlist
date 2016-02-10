@@ -157,7 +157,7 @@ export default class Playlist extends React.Component {
     const { dispatch } = this.props;
     const {title, caption, editingCaption } = this.props.playlist;
     const { username, avatar, name, provider, verified } = this.props.user;
-    const verified_badge = (verified ? <img className='ml1' src={VerifiedBadge(provider)} height={15}/>: null);
+    
     return (
       <div>
         <div className="">

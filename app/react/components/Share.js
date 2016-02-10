@@ -14,8 +14,10 @@ import {
 
 @GSAP()
 export class Share extends React.Component {
-  constructor() {
+  
+  constructor(props) {
     super();
+    this.dispatch = props.dispatch;
     this.state = {
       copied: false
     }
@@ -126,7 +128,11 @@ export class Share extends React.Component {
     const { share_rendering } = this.props.Share;
     const canClose = share_rendering === false && $(target).hasClass('sharing__overlay') || $(target).hasClass('close-button')
     if(canClose){
-      this.props.dispatch(closeShare(true));
+      if(this.dispatch !== undefined) {
+        this.dispatch(closeShare(true));
+      } else {
+        $(document).trigger($.Event("closeShare"));
+      }
     }
     
   }
