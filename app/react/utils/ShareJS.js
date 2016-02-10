@@ -165,27 +165,31 @@
     Share.prototype.initTumblrInteractions = function() {
       return $(document).on('click', '[data-share-tumblr]', (function(_this) {
         return function(e) {
-          var $this, caption, content, posttype, title, url;
           e.preventDefault();
-          $this = $(e.currentTarget);
-          content = encodeURIComponent($this.data('share-content'));
-          posttype = encodeURIComponent($this.data('share-posttype'));
-          caption = encodeURIComponent($this.data('share-caption'));
-          title = encodeURIComponent($this.data('share-title'));
-          url = encodeURIComponent($this.data('share-url'));
-          url = (function() {
-            switch (posttype) {
-              case 'photo':
-                return "//www.tumblr.com/share/photo?source=" + content + "&caption=" + title + "%3A%20" + caption + "%0A" + url;
-            }
-          })();
-          return _this.openWindowAndCenter({
-            url: url,
-            width: 800,
-            height: 400
-          });
+          return _this.openTumblrShare(e);
         };
       })(this));
+    };
+
+    Share.prototype.openTumblrShare = function(e) {
+      var $this, caption, content, posttype, title, url;
+      $this = $(e.currentTarget);
+      content = encodeURIComponent($this.data('share-content'));
+      posttype = encodeURIComponent($this.data('share-posttype'));
+      caption = encodeURIComponent($this.data('share-caption'));
+      title = encodeURIComponent($this.data('share-title'));
+      url = encodeURIComponent($this.data('share-url'));
+      url = (function() {
+        switch (posttype) {
+          case 'photo':
+            return "//www.tumblr.com/share/photo?source=" + content + "&caption=" + title + "%3A%20" + caption + "%0A" + url;
+        }
+      })();
+      return this.openWindowAndCenter({
+        url: url,
+        width: 800,
+        height: 400
+      });
     };
 
     return Share;

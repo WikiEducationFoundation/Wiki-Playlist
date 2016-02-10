@@ -95,7 +95,8 @@ export class Share extends React.Component {
                     data-share-title={title}
                     data-share-caption={caption}
                     data-share-url={permalink}
-                    data-share-content={share_image_url} >
+                    data-share-content={share_image_url} 
+                    onClick={(e)=>{this.sharing.openTumblrShare(e)}}>
               <Icon size="30px" icon="tumblr" fill={'tumblr'} />
             </button>
             <button className='share-button action'
