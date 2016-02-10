@@ -1,5 +1,5 @@
 import Clipboard from 'clipboard';
-import ShareJS from '../utils/ShareJS';
+import ShareJS from 'share-js';
 
 import { FACEBOOK_APP_ID } from '../constants';
 import Icon from './Icon'
@@ -12,12 +12,9 @@ import {
   showShare
 } from '../actions';
 
-@GSAP()
-export class Share extends React.Component {
-  
-  constructor(props) {
+class Share extends React.Component {
+  constructor() {
     super();
-    this.dispatch = props.dispatch;
     this.state = {
       copied: false
     }
@@ -25,7 +22,7 @@ export class Share extends React.Component {
 
 
   render() {
-    const { title, caption, server_info } = this.props.Playlist;
+    const { title, caption } = this.props.Playlist;
     const { id, permalink } = this.props.Playlist.server_info;
     const { copied } = this.state;
     const { share_image_url, share_rendering } = this.props.Share;
@@ -33,10 +30,11 @@ export class Share extends React.Component {
 
 
     return (
-      <div className='sharing__overlay' onClick={this.closeShareOverlay.bind(this)}>
+      <div className='sharing__overlay' onClick={this.closeShare.bind(this)}>
         <div className='sharing__container p2 bg-white card mt2 relative'
              ref={(container) => {this.container = container}}>
-             {(share_rendering ? this._shareRendering() : this._sharingButtons())}
+             {(share_rendering ? this._shareRendering() : this._viewPermalink())}
+             <div className="loader"></div>
         </div>
       </div>
     )
@@ -44,25 +42,20 @@ export class Share extends React.Component {
 
   _shareRendering() {
     return (
-      <div className='center p2 flex flex-column flex-center'>
-        <div className="loader"/>
-        <div>Preparing your playlist...</div>
+      <div className='center p2'>
+        <p>Preparing your Playlist...</p>
       </div>
     )
   }
 
   _viewPermalink() {
-    const { copied } = this.state;
     const { id, permalink } = this.props.Playlist.server_info;
     const { title, caption } = this.props.Playlist;
     return (
       <div className='center p2'>
-        <p className='mb2'>Please send your Playlist to Wiki Ed. We recommend you also save the link to your Playlist so you can find it again.</p>
-        <a href={`mailto:playlist@wikiedu.org?subject=My Wikipedia Playlist:%20${encodeURIComponent(title)}&body=${encodeURIComponent(permalink)}`} 
-               className='btn btn-primary mb1 center'>Email Permalink</a>
-        <button className='btn btn-outline copy-clipboard' data-clipboard-text={permalink}>
-          {(copied ? 'Copied to your clipboard!' : 'Copy Permalink')}
-        </button>
+        <a href={`mailto:playlist@wikiedu.org?subject=My Wikipedia Playlist:%20${encodeURIComponent(title)}&body=${encodeURIComponent(permalink)}`}
+               className='btn btn-outline mb1 center'>
+               Email</a>
       </div>
     )
   }
@@ -81,7 +74,7 @@ export class Share extends React.Component {
             <button className='share-button action'
                     data-share-twitter
                     data-share-url={permalink}
-                    data-share-text={`This is why I love Wikipedia. #wikiplaylist`}>
+                    data-share-text={title}>
               <Icon size="30px" icon="twitter" fill={'twitter'} />
             </button>
             <button className='share-button action'
@@ -91,11 +84,8 @@ export class Share extends React.Component {
             </button>
             <button className='share-button action'
                     data-share-tumblr
-                    data-share-posttype='photo'
-                    data-share-title={title}
-                    data-share-caption={caption}
                     data-share-url={permalink}
-                    data-share-content={share_image_url} >
+                    data-share-image={share_image_url}>
               <Icon size="30px" icon="tumblr" fill={'tumblr'} />
             </button>
             <button className='share-button action'
@@ -112,29 +102,25 @@ export class Share extends React.Component {
             </button>
           </div>
           <div className='flex flex-column py1'>
-            <a href={`mailto:?subject=My Wikipedia Playlist:%20${encodeURIComponent(title)}&body=${encodeURIComponent(title)}%0A${encodeURIComponent(permalink)}%0A${encodeURIComponent(caption)}`} 
+            <a href={`mailto:?subject=My Wikipedia Playlist:%20${encodeURIComponent(title)}&body=${encodeURIComponent(title)}%0A${encodeURIComponent(permalink)}%0A${encodeURIComponent(caption)}`}
                className='btn btn-outline mb1 center'>
                Email</a>
             <button className='btn btn-primary copy-clipboard' data-clipboard-text={permalink}>
               {(copied ? 'Copied to your clipboard!' : 'Copy Permalink')}
             </button>
           </div>
-          <button className='action close-button' onClick={this.closeShareOverlay.bind(this)}>&#215;</button>
+          <button className='action close-button' onClick={this.closeShare.bind(this)}>&#215;</button>
         </div>
     );
   }
 
-  closeShareOverlay({target}) {
+  closeShare({target}) {
     const { share_rendering } = this.props.Share;
-    const canClose = share_rendering === false && $(target).hasClass('sharing__overlay') || $(target).hasClass('close-button')
+    const canClose = !share_rendering && $(target).hasClass('sharing__overlay') || $(target).hasClass('close-button')
     if(canClose){
-      if(this.dispatch !== undefined) {
-        this.dispatch(closeShare(true));
-      } else {
-        $(document).trigger($.Event("closeShare"));
-      }
+      this.props.dispatch(closeShare(true));
     }
-    
+
   }
 
   componentDidMount() {
@@ -143,16 +129,16 @@ export class Share extends React.Component {
     this.clipboard.on('success', ()=>{
       this.setState({copied: true}, ()=>{})
     })
-    
+
     this.sharing = new ShareJS({
       onShare: (platform)=>{
-        // console.log('sharing on ', platform)
+        console.log('sharing on ', platform)
       }
     })
 
     this.addAnimation(({target})=> {
       return TweenMax.from(target, 0.5, {
-        opacity: 0, 
+        opacity: 0,
         ease: Power2.easeOut,
         onStart: () => {
           var container = this.container;
@@ -171,7 +157,7 @@ export class Share extends React.Component {
   closeShare() {
     this.addAnimation(({target})=> {
       return TweenMax.to(target, 0.5, {
-          opacity: 0, 
+          opacity: 0,
           ease: Power2.easeOut,
           onStart: () => {
             var container = this.container;
@@ -181,13 +167,8 @@ export class Share extends React.Component {
               onStart: ()=>{
                 container.style.visibility = 'visible';
               },
-              onComplete: ()=> {
-                if(this.props.dispatch !== undefined) {
-                  this.props.dispatch(showShare(false));
-                } else {
-                  this.props.close()
-                }
-                
+              onComplete: ()=>{
+                this.props.dispatch(showShare(false));
               }
             })
           }
@@ -204,4 +185,4 @@ export class Share extends React.Component {
   }
 }
 
-export default connect( state => {return state})(Share)
+export default connect( state => {return state})(GSAP()(Share))
