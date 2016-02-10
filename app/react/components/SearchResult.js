@@ -39,14 +39,19 @@ class SearchResult extends React.Component {
   }
 
   handleAddArticle() {
-    const {dispatch, article, Playlist} = this.props;
+    const {dispatch, article, Playlist, Search} = this.props;
     const index = Playlist.editingArticle;
 
     let articleData = new Promise((resolve, reject)=>{
       fetchArticleSummary(article.title).done((data)=> {
         console.log('summary', data)
         var pages = data.query.pages;
-        const extract =  pages[_.keys(pages)[0]].extract;
+        const result = pages[_.keys(pages)[0]];
+        let extract =  result.extract;
+        const short_summary = _.get(Search.history[result.title][0], "terms.description[0]", null)
+        if(extract === "" && short_summary) {
+          extract = short_summary;
+        }
         if(extract !== undefined) {
           article.extract = extract;
           resolve();

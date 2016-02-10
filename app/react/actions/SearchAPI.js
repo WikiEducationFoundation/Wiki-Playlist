@@ -53,7 +53,7 @@ export function search(query, callback) {
 }
 
 export function fetchArticleSummary(title) {
-  const query_article_summary = `${wiki_api}query&prop=extracts&exintro=&explaintext=&format=json&titles=`;
+  const query_article_summary = `${wiki_api}query&prop=extracts|info&exintro=&explaintext=&format=json&titles=`;
   return $.ajax({
     url: `${query_article_summary}${encodeURIComponent(title)}`,
     jsonp: "callback",
