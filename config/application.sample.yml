@@ -8,3 +8,4 @@ facebook_app_secret: <secret>
 twitter_key: <id>
 twitter_secret: <secret>
 
+aws_bucket: '<bucket>'
