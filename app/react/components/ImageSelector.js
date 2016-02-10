@@ -26,6 +26,7 @@ class ImageSelector extends React.Component {
 
     const { currentIndex } = this.state;
     const { editingArticle, articles } = this.props.Playlist;
+    if(editingArticle === null) { return null; }
     const total_images = articles[editingArticle].images.length;
 
     const settings = {

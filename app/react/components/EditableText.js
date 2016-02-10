@@ -55,6 +55,8 @@ class EditableText extends React.Component {
       onChange: this._handleChange,
       onFocus: ({target}) => {
        this.setState({editing: true});
+       const len = this.state.value.length * 2;
+       target.setSelectionRange(len, len);
        this.setState({value: this.truncateValue(target.value)})
       },
       onBlur: (e) => {
@@ -96,10 +98,8 @@ class EditableText extends React.Component {
             </div>
           :
             <div className='relative' onClick={()=>{
-              this.setState({editing: true}, ()=>{
+              this.setState({editing: true}, (e)=>{
                 this.refs.input.focus();
-                const len = this.state.value.length * 2;
-                this.refs.input.setSelectionRange(len, len);
               })}}>
               {this.props.children}<Icon className='edit-icon' size="20px" icon="edit" fill={iconColor} />
             </div>

@@ -111,7 +111,7 @@ function Account(state = {
     case LOGIN:
       return _.assign({}, state, {logged_in: true});
     case LOGOUT:
-      return _.assign({}, state, {logged_in: false});
+      return _.assign({}, state, {logged_in: false, current_user: null});
     case SHOW_LOGIN:
       return _.assign({}, state, {show_login: action.bool})
     case CLOSE_LOGIN:
@@ -335,9 +335,10 @@ function Playlist(state = initialPlaylistState, action) {
       return _.assign({}, initialPlaylistState, state, {color: action.color});
 
     case RECEIVE_SHARE_INFO:
-      let permalink = state.permalink;
-      permalink.share = action.data;
-      return _.assign({}, initialPlaylistState, { permalink: permalink, show_permalink: true, server_info: permalink.server_info });
+      // let permalink = state.permalink;
+      // console.log('RECEIVE_SHARE_INFO', state, permalink)
+      // permalink.share = action.data;
+      return _.assign({}, initialPlaylistState, { permalink: state, show_permalink: true, server_info: state.server_info });
       
     default:
       return state;
