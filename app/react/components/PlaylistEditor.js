@@ -9,7 +9,8 @@ import {
   setPlaylistCaption,
   setPlaylistTitle,
   updatePlaylistUsername,
-  updatePlaylistCaption
+  updatePlaylistCaption,
+  resetPlaylist
 } from '../actions';
 
 import { TITLE_LIMIT, CAPTION_LIMIT } from '../constants';
@@ -21,6 +22,8 @@ import SaveButton from './SaveButton';
 import PlaylistBackgroundColor from './PlaylistBackgroundColor';
 import ColorPicker from './ColorPicker';
 import Login from './Login';
+import Playlist from './Playlist';
+import UserInfo from './UserInfo';
 
 class PlaylistEditor extends React.Component {
 
@@ -30,13 +33,6 @@ class PlaylistEditor extends React.Component {
     es6BindAll(this, [
       '_onboardingTitle'
     ]);
-
-    this.state = {
-      titleLimitHit: false,
-      captionLimitHit: false,
-      titleTyping: false,
-      captionTyping: false
-    };
   }
 
   componentDidMount() {
@@ -44,11 +40,16 @@ class PlaylistEditor extends React.Component {
   }
 
   render() {
-    const { logged_in } = this.props.Account;
+    const { logged_in, current_user } = this.props.Account;
     const { onboarded, step } = this.props.Onboarding;
-    const { color } = this.props.Playlist;
+    const { color, published, articles, server_info, show_permalink } = this.props.Playlist;
+    const { share_image_url } = this.props.Share;
     const { path } = this.props.routing;
     const onboarding = !onboarded && step === 0 || !onboarded && step === 1;
+    if(show_permalink) {
+      return this._permalink();
+    }
+
     return (
       <div className={'playlist relative ' + (onboarding ? 'onboarding' : '')}>
         <div className='container playlist__container relative'>
@@ -56,13 +57,10 @@ class PlaylistEditor extends React.Component {
           {this._articles()}
           {this._addArticle()}
           {( onboarded ? <ColorPicker /> : null )}
-
           
           {(logged_in ? <div className='p2 center mt1'><SaveButton/></div> : <Login/>)}
 
         </div>
-
-
 
         <PlaylistBackgroundColor color={color}/>
 
@@ -72,10 +70,30 @@ class PlaylistEditor extends React.Component {
     )
   }
 
-  _articles() {
+  _permalink() {
+    let playlist = this.props.Playlist.permalink;
+    playlist.id = playlist.server_info.id;
+    const articles = _.where(playlist.articles, {has_article: true});
+    const { current_user } = this.props.Account;
+    const permalink = playlist.server_info;
+    const { share_image_url } = this.props.Share;
 
-    const {articles, editingArticle} = this.props.Playlist;
+    return (
+      <Playlist content_only={true} 
+                playlist={playlist} 
+                articles={articles} 
+                user={current_user} 
+                share_image_url={share_image_url}
+                permalink={playlist.server_info.permalink}/>);
+  }
+
+  _articles() {
+    const { editingArticle } = this.props.Playlist;
+
     let _articles = [];
+
+    let articles = (arguments[0] === undefined ? this.props.Playlist.articles : arguments[0])
+
     articles.map((article, i) =>{
       _articles.push(
         <ArticleCard index={i}
@@ -102,7 +120,7 @@ class PlaylistEditor extends React.Component {
           <div className="py3 md-mb1 md-mt5" ref={c => {this.cardContent = c}}>
 
             <div className={'article-card__header px2 relative'}>
-              <p>{username}</p>
+              <div><UserInfo {...current_user} /></div>
               <div className='md-flex flex-justify'>
                 <div className='playlist__title'>
                   <EditableText
@@ -151,33 +169,11 @@ class PlaylistEditor extends React.Component {
     }
   }
 
-  _captions() {
-    // Don't display captions if currently editing one
-    const { path } = this.props.routing;
-    if(path === '/playlists/article/caption') {
-      return null
+  componentWillUnmount() {
+    if(this.props.Playlist.show_permalink) {
+      this.dispatch(resetPlaylist());
     }
-
-    const { dispatch } = this.props;
-    const { articles } = this.props.Playlist;
-    return articles.map((article, i) => {
-      let caption = null;
-      let edit_button = null;
-      if(article.caption !== undefined && !_.isEmpty(article.caption) ) {
-        caption = article.caption;
-        edit_button = (<a href='#' className='gray' onClick={()=> {
-          dispatch(updateCurrentEditingArticle(i));
-          dispatch(pushPath('/playlists/article/caption'));
-        }}>Edit Caption</a>)
-      }
-      return (
-        <div key={`article_caption_${i}`} className='article-card__caption p2'>
-          {caption} {edit_button}
-        </div>
-      )
-    })
   }
-
 
 }
 

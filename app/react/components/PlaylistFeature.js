@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import { flashMessage } from '../actions';
 import { getAllPlaylists, featurePlaylist } from '../actions/PlaylistAPI';
+import VerifiedBadge from '../utils/VerifiedBadge';
+import UserInfo from './UserInfo';
 
 class PlaylistFeature extends React.Component {
   constructor(props) {
@@ -14,7 +16,7 @@ class PlaylistFeature extends React.Component {
     const {featured} = this.state;
     const { admin } = current_user;
     const { avatar, username, verified, name, provider } = user;
-    const verified_badge = (verified && provider === 'twitter' ? <img className='ml1' src='/images/verified.png' height={15}/>: null);
+    const verified_badge = (verified  ? <img className='ml1' src={VerifiedBadge(provider)} height={15} /> : null );
     return (
       <div 
       className='playlist-feature'
@@ -22,9 +24,8 @@ class PlaylistFeature extends React.Component {
         backgroundColor: color
       }}>
         <a href={url} className='playlist-feature__content absolute p2' onClick={this._handleClick.bind(this)}>
-          <div className='playlist-feature__user flex flex-center'>
-            {(avatar ? <img className='avatar' src={avatar}/> : null)}
-            <span className=''>{username}{verified_badge}</span>
+          <div className='playlist-feature__user'>
+            <UserInfo {...user} />
           </div>
           <div className='py2'>
            {(name !== undefined && name !== null && name !== username ? <div className='playlist-feature__name'>{name}</div> : null)}
@@ -47,6 +48,14 @@ class PlaylistFeature extends React.Component {
         </a>
       </div>
     );
+  }
+
+  _verifiedBadge(provider) {
+    const verified_image = {
+      facebook: 'https://w-playlist.s3.amazonaws.com/images/facebook-verified.png',
+      twitter: 'https://w-playlist.s3.amazonaws.com/images/verified.png'
+    }
+    return <img className='ml1' src={verified_image[provider]} height={15}/>
   }
 
   _featurePlaylist(id) {

@@ -40,7 +40,9 @@ import {
   SET_PLAYLIST_COLOR,
   PLAYLIST_SHOULD_SAVE,
   REORDER_ARTICLE_IMAGES,
-  MINIMUM_ARTICLES
+  MINIMUM_ARTICLES,
+  SHOW_PERMALINK,
+  RESET_PLAYLIST
 } from '../constants';
 
 
@@ -199,7 +201,10 @@ function defaultPlaylist() {
     server_errors: [],
     should_save: false,
     can_save: false,
-    remaining_to_save: MINIMUM_ARTICLES
+    remaining_to_save: MINIMUM_ARTICLES,
+    show_permalink: false,
+    permalink: {},
+    share_info: {}
   }
 }
 
@@ -315,12 +320,24 @@ function Playlist(state = initialPlaylistState, action) {
       });
       return _.assign({}, state, {published: true, server_info: action.data, server_errors:[]})
 
+    case SHOW_PERMALINK:
+      return _.assign({}, state, {permalink: state, show_permalink: action.bool })
+
     case HANDLE_DELETE:
+      var initialPlaylistState = defaultPlaylist();
+      return _.assign({}, initialPlaylistState, {username: state.username});
+
+    case RESET_PLAYLIST:
       var initialPlaylistState = defaultPlaylist();
       return _.assign({}, initialPlaylistState, {username: state.username});
 
     case SET_PLAYLIST_COLOR:
       return _.assign({}, initialPlaylistState, state, {color: action.color});
+
+    case RECEIVE_SHARE_INFO:
+      let permalink = state.permalink;
+      permalink.share = action.data;
+      return _.assign({}, initialPlaylistState, { permalink: permalink, show_permalink: true, server_info: permalink.server_info });
       
     default:
       return state;

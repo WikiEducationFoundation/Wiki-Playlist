@@ -39,14 +39,25 @@ class SearchResult extends React.Component {
   }
 
   handleAddArticle() {
-    const {dispatch, article, Playlist} = this.props;
+    const {dispatch, article, Playlist, Search} = this.props;
     const index = Playlist.editingArticle;
 
     let articleData = new Promise((resolve, reject)=>{
       fetchArticleSummary(article.title).done((data)=> {
-
         var pages = data.query.pages;
-        const extract =  pages[_.keys(pages)[0]].extract;
+        const result = pages[_.keys(pages)[0]];
+        let extract =  result.extract;
+
+        const searchHistory = Search.history[result.title];
+        
+        var short_summary = null;
+        if(searchHistory !== undefined) {
+          short_summary = _.get(searchHistory[0], "terms.description[0]", null)
+        }
+        
+        if(extract === "" && short_summary) {
+          extract = short_summary;
+        }
         if(extract !== undefined) {
           article.extract = extract;
           resolve();
@@ -58,7 +69,7 @@ class SearchResult extends React.Component {
 
     articleData.then(()=>{
       dispatch(addArticle(index, article));
-      fetchArticleImages(article.title, this.addArticleImages.bind(this));
+      fetchArticleImages(article, this.addArticleImages.bind(this));
     }).catch((reason)=> {console.log('Reject promise', reason)});
   }
 

@@ -1,5 +1,5 @@
 import Clipboard from 'clipboard';
-import ShareJS from 'share-js';
+import ShareJS from '../utils/ShareJS';
 
 import { FACEBOOK_APP_ID } from '../constants';
 import Icon from './Icon'
@@ -14,8 +14,10 @@ import {
 
 @GSAP()
 export class Share extends React.Component {
-  constructor() {
+  
+  constructor(props) {
     super();
+    this.dispatch = props.dispatch;
     this.state = {
       copied: false
     }
@@ -23,7 +25,7 @@ export class Share extends React.Component {
 
 
   render() {
-    const { title, caption } = this.props.Playlist;
+    const { title, caption, server_info } = this.props.Playlist;
     const { id, permalink } = this.props.Playlist.server_info;
     const { copied } = this.state;
     const { share_image_url, share_rendering } = this.props.Share;
@@ -31,7 +33,7 @@ export class Share extends React.Component {
 
 
     return (
-      <div className='sharing__overlay' onClick={this.closeShare.bind(this)}>
+      <div className='sharing__overlay' onClick={this.closeShareOverlay.bind(this)}>
         <div className='sharing__container p2 bg-white card mt2 relative'
              ref={(container) => {this.container = container}}>
              {(share_rendering ? this._shareRendering() : this._sharingButtons())}
@@ -89,8 +91,11 @@ export class Share extends React.Component {
             </button>
             <button className='share-button action'
                     data-share-tumblr
+                    data-share-posttype='photo'
+                    data-share-title={title}
+                    data-share-caption={caption}
                     data-share-url={permalink}
-                    data-share-image={share_image_url}>
+                    data-share-content={share_image_url} >
               <Icon size="30px" icon="tumblr" fill={'tumblr'} />
             </button>
             <button className='share-button action'
@@ -114,16 +119,20 @@ export class Share extends React.Component {
               {(copied ? 'Copied to your clipboard!' : 'Copy Permalink')}
             </button>
           </div>
-          <button className='action close-button' onClick={this.closeShare.bind(this)}>&#215;</button>
+          <button className='action close-button' onClick={this.closeShareOverlay.bind(this)}>&#215;</button>
         </div>
     );
   }
 
-  closeShare({target}) {
+  closeShareOverlay({target}) {
     const { share_rendering } = this.props.Share;
-    const canClose = !share_rendering && $(target).hasClass('sharing__overlay') || $(target).hasClass('close-button')
+    const canClose = share_rendering === false && $(target).hasClass('sharing__overlay') || $(target).hasClass('close-button')
     if(canClose){
-      this.props.dispatch(closeShare(true));
+      if(this.dispatch !== undefined) {
+        this.dispatch(closeShare(true));
+      } else {
+        $(document).trigger($.Event("closeShare"));
+      }
     }
     
   }
@@ -137,7 +146,7 @@ export class Share extends React.Component {
     
     this.sharing = new ShareJS({
       onShare: (platform)=>{
-        console.log('sharing on ', platform)
+        // console.log('sharing on ', platform)
       }
     })
 
