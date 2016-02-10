@@ -46,7 +46,7 @@ class Search extends React.Component {
     const query = queries[this.props.Playlist.editingArticle];
     if(query !== undefined && query.length) {
       return (
-        <div>
+        <div className='search-results__container'>
           <div className='py1'><strong>Search Results For: "{query}"</strong></div>
           <SearchResults dispatch={this.props.dispatch} query={history[query]} isSearching={searching}/>
         </div>
