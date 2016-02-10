@@ -26,11 +26,10 @@ class User < ActiveRecord::Base
       email = auth.extra.raw_info.email if email.nil?
       user.avatar = auth.info.image if auth.info.image?
       user.verified = auth.extra.raw_info.verified if auth.extra.raw_info.verified?
-      if auth.info.nickname?
-        user.username = auth.info.nickname
-      elsif auth.info.name?
-        user.username = auth.info.name
-      end
+      
+      # User Name
+      user.username = auth.info.name if auth.info.name?
+      user.username = auth.extra.raw_info.screen_name if auth.extra.raw_info.screen_name?
       
       user.name = auth.info.name if auth.info.name?
       user.provider = auth.provider
