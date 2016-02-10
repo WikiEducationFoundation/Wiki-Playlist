@@ -66,7 +66,7 @@ export default class Home extends React.Component {
         })}
         </div>);
     } else if (this.state.loading) {
-      return <div>Loading Playlists...</div>;
+      return <div><div className="loader"/></div>;
     } else {
       return null;
     }
@@ -85,7 +85,6 @@ export default class Home extends React.Component {
     const { playlists } = this.state;
     const playlist = _.findWhere(playlists, {id: id});
     featurePlaylist(id, {featured: !playlist.featured}, (data) => {
-      console.log(data);
       if(data.error) {
         flashMessage(this.dispatch,  {text: data.error, type: 'error'});
       } else {
