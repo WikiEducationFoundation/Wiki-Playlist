@@ -44,7 +44,6 @@ class SearchResult extends React.Component {
 
     let articleData = new Promise((resolve, reject)=>{
       fetchArticleSummary(article.title).done((data)=> {
-        console.log('summary', data)
         var pages = data.query.pages;
         const result = pages[_.keys(pages)[0]];
         let extract =  result.extract;
