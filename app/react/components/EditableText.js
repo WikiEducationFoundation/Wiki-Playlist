@@ -33,7 +33,9 @@ class EditableText extends React.Component {
   }
 
   componentWillReceiveProps(props) {
-    this.setState({value: props.value});
+    if(!this.state.editing) {
+      this.setState({value: props.value});
+    }
   }
 
   truncateValue(text) {
