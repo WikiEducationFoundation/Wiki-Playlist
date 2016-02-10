@@ -335,10 +335,7 @@ function Playlist(state = initialPlaylistState, action) {
       return _.assign({}, initialPlaylistState, state, {color: action.color});
 
     case RECEIVE_SHARE_INFO:
-      // let permalink = state.permalink;
-      // console.log('RECEIVE_SHARE_INFO', state, permalink)
-      // permalink.share = action.data;
-      return _.assign({}, initialPlaylistState, { permalink: state, show_permalink: true, server_info: state.server_info });
+      return _.assign({}, state, { permalink: state, show_permalink: true, server_info: state.server_info });
       
     default:
       return state;

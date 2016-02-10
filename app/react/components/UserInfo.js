@@ -20,7 +20,6 @@ function userLink(user) {
 export default class UserInfo extends React.Component {
   render() {
     if(this.props.username === undefined ){ return null; }
-    console.log(this.props)
     const { verified, provider, avatar, username, className } = this.props;
     const verified_badge = (verified ? <img className='ml1' src={VerifiedBadge(provider)} height={15}/>: null);
     return( 
