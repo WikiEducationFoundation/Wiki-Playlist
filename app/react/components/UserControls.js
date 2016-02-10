@@ -70,7 +70,7 @@ class UserControls extends React.Component {
         getUserStatus();
       } else {
         dispatch(login())
-        dispatch(addUser({username: data.username}));
+        dispatch(addUser(_.pick(data, ['username', 'avatar', 'provider', 'verified', 'admin'])));
         dispatch(closeLogin(true));
       }
     });

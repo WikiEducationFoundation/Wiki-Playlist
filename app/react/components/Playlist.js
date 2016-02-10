@@ -15,6 +15,7 @@ import {addSupportClasses} from '../utils/CSSSupportClasses';
 import { Share } from './Share';
 import GSAP from 'react-gsap-enhancer'
 import MediaQuery from 'react-responsive';
+import UserInfo from './UserInfo';
 
 
 export default class Playlist extends React.Component {
@@ -156,14 +157,16 @@ export default class Playlist extends React.Component {
     const { dispatch } = this.props;
     const {title, caption, editingCaption } = this.props.playlist;
     const { username, avatar, name, provider, verified } = this.props.user;
-    const verified_badge = (verified && provider === 'twitter' ? <img className='ml1' src='/images/verified.png' height={15}/>: null);
+    const verified_badge = (verified ? <img className='ml1' src={VerifiedBadge(provider)} height={15}/>: null);
     return (
       <div>
         <div className="">
           <div className="py3 md-mb1 md-mt5" ref={c => {this.cardContent = c}}>
 
             <div className={'article-card__header px2 relative'}>
-              <p className='flex flex-center playlist__user'>{(avatar ? <img className='avatar' src={avatar}/> : null)}{username}{verified_badge}</p>
+              <p className='flex flex-center playlist__user'>
+                <UserInfo {...this.props.user} />
+              </p>
               <div className='md-flex flex-justify'>
                 <div className='playlist__title'>
                   <h1>{title}</h1>

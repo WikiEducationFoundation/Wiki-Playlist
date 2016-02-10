@@ -23,6 +23,7 @@ import PlaylistBackgroundColor from './PlaylistBackgroundColor';
 import ColorPicker from './ColorPicker';
 import Login from './Login';
 import Playlist from './Playlist';
+import UserInfo from './UserInfo';
 
 class PlaylistEditor extends React.Component {
 
@@ -119,7 +120,7 @@ class PlaylistEditor extends React.Component {
           <div className="py3 md-mb1 md-mt5" ref={c => {this.cardContent = c}}>
 
             <div className={'article-card__header px2 relative'}>
-              <p>{username}</p>
+              <div><UserInfo {...current_user} /></div>
               <div className='md-flex flex-justify'>
                 <div className='playlist__title'>
                   <EditableText
