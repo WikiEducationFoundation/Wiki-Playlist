@@ -55,7 +55,7 @@ export function search(query, callback) {
 export function fetchArticleSummary(title) {
   const query_article_summary = `${wiki_api}query&prop=extracts&exintro=&explaintext=&format=json&titles=`;
   return $.ajax({
-    url: `${query_article_summary}${title}`,
+    url: `${query_article_summary}${encodeURIComponent(title)}`,
     jsonp: "callback",
     dataType: "jsonp"
   })
@@ -67,7 +67,7 @@ const exclude_images = require('../data/exclude_images');
 const query_article_images = `${wiki_api}query&redirects&generator=images&list=allimages&prop=imageinfo&&iiprop=url|extmetadata|metadata|commonmetadata&iiurlwidth=600&gimlimit=100&format=json&titles=`
 
 export function fetchArticleImages(title, callback,) {
-  const url = query_article_images + title;
+  const url = query_article_images + encodeURIComponent(title);
 
   let imageObjects = [];
 

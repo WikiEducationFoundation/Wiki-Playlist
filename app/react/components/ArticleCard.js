@@ -10,6 +10,8 @@ import {
   reorderArticleImages
 } from '../actions';
 
+import { MDINT } from '../constants';
+
 import { setOnboardingCookie } from '../actions/UserAPI';
 
 import { Link } from 'react-router';
@@ -113,7 +115,8 @@ export class ArticleCard extends React.Component {
     const editing_options = editingArticle === index;
     const { onboarded, step } = this.props.Onboarding;
     const isOnboarding = !onboarded && step === 2 && index === 0;
-    const truncated_description = (description !== undefined && description.length > 250 ? `${description.substr(0,250)}...` : description)
+    const limit = (window.innerWidth < MDINT ? 120 : 190)
+    const truncated_description = (description !== undefined && description.length > limit ? `${description.substr(0,limit)}...` : description)
     let content = null;
     if(has_article) {
       content = (

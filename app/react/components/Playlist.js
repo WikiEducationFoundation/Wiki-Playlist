@@ -57,7 +57,7 @@ export default class Playlist extends React.Component {
 
     const site_content = (
       <div>
-      <div className='playlist relative'>
+      <div className='playlist relative permalink'>
         <div className='container playlist__container relative'>
           {this._titleCard()}
           {this._articles()}
