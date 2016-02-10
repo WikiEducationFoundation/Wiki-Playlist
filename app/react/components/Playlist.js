@@ -165,7 +165,7 @@ export default class Playlist extends React.Component {
 
             <div className={'article-card__header px2 relative'}>
               <p className='flex flex-center playlist__user'>
-                <UserInfo {...this.props.user} />
+                <UserInfo {...this.props.user} link={true}/>
               </p>
               <div className='md-flex flex-justify'>
                 <div className='playlist__title'>

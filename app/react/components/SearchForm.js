@@ -29,6 +29,7 @@ export default class SearchForm extends React.Component {
 
   _handleInputChange(e) {
     e.persist()
+    console.log(e.which)
     this._debouncedSearch(e.target.value.trim())
   }
 

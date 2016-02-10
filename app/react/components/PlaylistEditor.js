@@ -120,7 +120,7 @@ class PlaylistEditor extends React.Component {
           <div className="py3 md-mb1 md-mt5" ref={c => {this.cardContent = c}}>
 
             <div className={'article-card__header px2 relative'}>
-              <div><UserInfo {...current_user} /></div>
+              <div><UserInfo {...current_user} link={true} /></div>
               <div className='md-flex flex-justify'>
                 <div className='playlist__title'>
                   <EditableText
