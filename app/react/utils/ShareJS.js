@@ -52,13 +52,11 @@
         return function(index, platform) {
           if (platform.name === "facebook" && _this.settings.facebookShareViaAPI) {
             _this.initFacebook();
-            return;
-          }
-          if (platform.name === "tumblr") {
+          } else if (platform.name === "tumblr") {
             _this.initTumblr(platform);
-            return;
+          } else {
+            return _this.registerPlatform(platform);
           }
-          return _this.registerPlatform(platform);
         };
       })(this));
     };
