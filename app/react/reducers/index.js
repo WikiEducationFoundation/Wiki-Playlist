@@ -286,15 +286,13 @@ function Playlist(state = initialPlaylistState, action) {
     case REORDER_ARTICLE_IMAGES:
       var articles = state.articles.slice(0);
       var article = articles[action.index];
-      const imageIndex = article.images.indexOf(article.image);
-      console.log(imageIndex)
+      const imageIndex = _.indexOf(article.images, _.findWhere(article.images, {url: article.image}));
       if(imageIndex < 1) {
         return state;
       } else {
         article.images = moveArrayItem(article.images, imageIndex, 0);
         return _.assign({}, state, {articles: articles})
       }
-      
 
     case SET_ARTICLE_CAPTION:
       var articles = state.articles.slice(0);

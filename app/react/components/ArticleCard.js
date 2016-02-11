@@ -89,7 +89,7 @@ export class ArticleCard extends React.Component {
               </div>
           )}
 
-          {(has_article ? null : this.props.children)}
+          {this.props.children}
       </div>
     )
   }
