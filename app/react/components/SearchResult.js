@@ -7,7 +7,8 @@ import {
   addArticle,
   updateQuery,
   addArticleImages,
-  updateCurrentEditingArticle
+  updateCurrentEditingArticle,
+  articleLoading
 } from '../actions';
 
 import { fetchArticleImages, fetchArticleSummary } from '../actions/SearchAPI';

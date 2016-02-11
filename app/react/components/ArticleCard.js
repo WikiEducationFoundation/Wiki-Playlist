@@ -37,7 +37,7 @@ export class ArticleCard extends React.Component {
   }
 
   render() {
-    const { has_article, index } = this.props;
+    const { has_article, index, loading } = this.props;
     const { onboarded, step } = this.props.Onboarding;
     const isOnboarding = !onboarded && step === 2 && index === 0;
     const onboarding_class = ( isOnboarding ? 'onboarding ' : '')
@@ -71,13 +71,19 @@ export class ArticleCard extends React.Component {
                   </div>
                 : null)}
 
+                {(loading ? 
+
+                  <div className="loader"/>
+
+                  :
+
                   <button className='btn btn-primary flex-end bg-silver'
                       ref={card => {this.cardElement = card}}
                       onClick={() => {
                         this.dispatch(updateCurrentEditingArticle(index))
                         this.dispatch(pushPath('/playlists/article/search'))
                       }}>
-                      Add Wikipedia Article</button>
+                      Add Wikipedia Article</button>)}
               </div>
           )}
 
