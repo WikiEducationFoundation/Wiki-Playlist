@@ -80,8 +80,10 @@
     height 400px
 
 .background-blend-mode .playlist__background-color
-  background-image url(/images/pattern-transparent.png)
   background-blend-mode: multiply;
+  
+  +above(md)
+    background-image url(/images/pattern-transparent.png)
 
 .playlist__background-color-picker
   // background white

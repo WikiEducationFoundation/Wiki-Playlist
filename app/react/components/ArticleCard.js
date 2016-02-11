@@ -103,9 +103,9 @@ export class ArticleCard extends React.Component {
     const {index, Playlist, open} = this.props;
 
     const route = _.compact(path.split('/')).pop();
-    if(route === 'playlist' && this.state.editing_options) {
-      this.setState({ editing_options: false });
-    }
+    // if(route === 'playlist' && this.state.editing_options) {
+    //   this.setState({ editing_options: false });
+    // }
   }
 
   _articleContent() {
