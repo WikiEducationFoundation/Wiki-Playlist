@@ -80,8 +80,13 @@ export function fetchArticleImages(article, callback,) {
       } else {
         const continueObj = res.body.continue;
         imageObjects = imageObjects.concat(_.values(res.body.query.pages));
+        // continue image query
         if(continueObj !== undefined && continueObj.iicontinue !== undefined) {
-          getImages(url + '&continue=' + continueObj.continue + '&iicontinue=' + continueObj.iicontinue);
+          const continueUrl = url + '&continue=' + continueObj.continue + '&iicontinue=' + continueObj.iicontinue;
+          getImages(continueUrl);
+        } else if (continueObj !== undefined && continueObj.gimcontinue !== undefined) {
+          const continueUrl = url + '&continue=' + continueObj.continue + '&gimcontinue=' + continueObj.gimcontinue;
+          getImages(continueUrl);
         } else {
           filterImages(imageObjects);
         }
