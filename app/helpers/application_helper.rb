@@ -14,7 +14,7 @@ module ApplicationHelper
   end
 
   def playlist_caption(caption)
-    if caption.nil? || caption.empty?
+    if caption.empty? || caption.nil?
       return "Share the joy of knowledge"
     else
       return caption
