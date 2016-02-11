@@ -20,7 +20,11 @@ class Search extends React.Component {
   render() {
     const { editingArticle, articles } = this.props.Playlist;
     return (
-      <div className='search__container intially-hidden p2 vertical-overflow'>
+      <div className='search__container intially-hidden p2 vertical-overflow' onClick={({target})=>{
+        if($(target).hasClass('search__container')) {
+          this.props.dispatch(pushPath('/playlists'));
+        }
+      }}>
         <div className='search__container__card'>
           <div className='search__container-header'>
             <div className='mb2 white'><strong>Add Article</strong></div>
