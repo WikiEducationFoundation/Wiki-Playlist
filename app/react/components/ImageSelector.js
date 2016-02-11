@@ -27,6 +27,13 @@ class ImageSelector extends React.Component {
     const { currentIndex } = this.state;
     const { editingArticle, articles } = this.props.Playlist;
     if(editingArticle === null) { return null; }
+    if(articles[editingArticle].images === undefined) { 
+      return (<div className='image-selector flex flex-column flex-justify center'>
+        <div>Fetching Images...</div>
+        <div className='loader'/>
+      </div>);
+    }
+
     const total_images = articles[editingArticle].images.length;
 
     const settings = {

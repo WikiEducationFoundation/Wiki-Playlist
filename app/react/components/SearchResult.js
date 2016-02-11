@@ -72,6 +72,8 @@ class SearchResult extends React.Component {
       })
     });
 
+
+
     articleData.then(()=>{
       dispatch(addArticle(index, article));
       fetchArticleImages(article, this.addArticleImages.bind(this));
