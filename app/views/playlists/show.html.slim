@@ -5,7 +5,7 @@
   meta content="@wikiedu" name="twitter:site"
   meta content="@wikiedu" name="twitter:creator"
   meta content=("Wiki Playlist | #{@playlist.title}") name="twitter:title"
-  meta content="#{@playlist.caption}" name="twitter:text:description"
+  meta content="#{playlist_caption(@playlist.caption)}" name="twitter:text:description"
   meta content="#{@playlist.share_image.url}" name="twitter:image"
   meta content="#{request.original_url}" property="og:url"
   meta content="article" property="og:type"

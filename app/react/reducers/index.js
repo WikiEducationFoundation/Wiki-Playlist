@@ -287,7 +287,14 @@ function Playlist(state = initialPlaylistState, action) {
       var articles = state.articles.slice(0);
       var article = articles[action.index];
       const imageIndex = article.images.indexOf(article.image);
-      moveArrayItem(article.images, imageIndex, 0);
+      console.log(imageIndex)
+      if(imageIndex < 1) {
+        return state;
+      } else {
+        article.images = moveArrayItem(article.images, imageIndex, 0);
+        return _.assign({}, state, {articles: articles})
+      }
+      
 
     case SET_ARTICLE_CAPTION:
       var articles = state.articles.slice(0);
