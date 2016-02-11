@@ -42,7 +42,11 @@ class SearchResult extends React.Component {
     const {dispatch, article, Playlist, Search} = this.props;
     const index = Playlist.editingArticle;
 
+    dispatch(articleLoading(index, true));
+    dispatch(pushPath('/playlists'))
+
     let articleData = new Promise((resolve, reject)=>{
+
       fetchArticleSummary(article.title).done((data)=> {
         var pages = data.query.pages;
         const result = pages[_.keys(pages)[0]];
@@ -77,8 +81,7 @@ class SearchResult extends React.Component {
     const {dispatch, Playlist} = this.props;
     const index = Playlist.editingArticle;
     dispatch(addArticleImages(index, images))
-    dispatch(pushPath('/playlists'))
-    // dispatch(updateCurrentEditingArticle(null));
+    dispatch(articleLoading(index, false));
     dispatch(updateQuery(index, ''));
   }
 }

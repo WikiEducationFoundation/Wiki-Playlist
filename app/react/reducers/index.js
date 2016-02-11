@@ -15,6 +15,7 @@ import {
   SET_EDIT_ARTICLE,
   ADD_ARTICLE_CARD,
   ADD_ARTICLE,
+  ARTICLE_LOADING,
   REMOVE_ARTICLE_CARD,
   ADD_ARTICLE_IMAGES,
   SET_ARTICLE_IMAGE,
@@ -170,7 +171,8 @@ var defaultArticle = {
   url: '',
   open: false,
   has_article: false,
-  pageId: null
+  pageId: null,
+  loading: false
 }
 
 function createInitialArticles() {
@@ -290,6 +292,11 @@ function Playlist(state = initialPlaylistState, action) {
     case SET_ARTICLE_CAPTION:
       var articles = state.articles.slice(0);
       articles[action.index].caption = action.text;
+      return _.assign({}, state, {articles: articles})
+
+    case ARTICLE_LOADING:
+      var articles = state.articles.slice(0);
+      articles[action.index].loading = action.bool;
       return _.assign({}, state, {articles: articles})
 
     case EXPAND_ARTICLE:

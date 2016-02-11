@@ -180,6 +180,7 @@ export class ArticleCard extends React.Component {
   }
 
   _imageInfo() {
+    if(this.props.image_info !== undefined) { return null }
     const { license, license_url, commons_url, credit, attribution_required } = this.props.image_info;
     return (
       <div className='article-card__image-info'>

@@ -15,10 +15,7 @@ import Playlist from './components/Playlist';
 import PlaylistEditor from './components/PlaylistEditor';
 import Search from './components/Search';
 import ArticlePreview from './components/ArticlePreview';
-import ArticleCaption from './components/ArticleCaption';
-import ImageSelector from './components/ImageSelector';
 import Login from './components/Login';
-import StyleGuide from './components/StyleGuide';
 
 import { createHistory } from 'history';
 import configureStore from './store/configureStore';
@@ -36,12 +33,9 @@ class PlaylistApp extends React.Component{
           <Route path="/" component={App}>
             <IndexRoute component={Home} />
             <Route path="/playlists" component={PlaylistEditor}>
-              <Route path="/playlists/article/images" component={ImageSelector} />
-              <Route path="/playlists/article/caption" component={ArticleCaption} />
+              <Route path="/playlists/article/search" component={Search} />
             </Route>
-            <Route path="/playlists/article/search" component={Search} />
           </Route>
-          <Route path="/styleguide" component={StyleGuide}/>
         </Router>
       </Provider>
     )

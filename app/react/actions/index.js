@@ -39,7 +39,8 @@ import {
   PLAYLIST_SHOULD_SAVE,
   REORDER_ARTICLE_IMAGES,
   SHOW_PERMALINK,
-  RESET_PLAYLIST
+  RESET_PLAYLIST,
+  ARTICLE_LOADING
 } from '../constants';
 
 
@@ -142,6 +143,14 @@ export function receiveResults(results) {
 }
 
 // — Playlist
+
+export function articleLoading(index, bool) {
+  return {
+    type: ARTICLE_LOADING,
+    index,
+    bool
+  }
+}
 
 export function editingPlaylistCaption(bool) {
   return {
