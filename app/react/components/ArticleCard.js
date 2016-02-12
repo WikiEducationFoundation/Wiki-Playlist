@@ -68,6 +68,8 @@ export class ArticleCard extends React.Component {
                 this.dispatch(removeArticle(index));
               }}>&#215;</button>: null)}
 
+              <span className='article-card__number'>{index + 1}</span>
+
               {(isOnboarding ?
                   <div><h3 className='mb3'>Lets add your first Wikipedia Article!</h3>
                   </div>

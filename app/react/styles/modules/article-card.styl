@@ -14,7 +14,6 @@
     margin-left auto
     margin-right auto
 
-
 .article-card,
 .article-card--empty
   max-width 350px
@@ -34,9 +33,28 @@
 
   +above(md)
     max-width none
+  
+  .btn
+    position relative
+    z-index 3
+  
+  .close-button
+    z-index 5
+
+.article-card__number
+  position absolute
+  top 50%
+  left 50%
+  transform translate(-50%, -50%)
+  opacity .05
+  z-index 2
+  font-weight bold
+  font-size 175px
+  +above(md)
+    font-size 250px
 
 .article-card--empty
-  height 150px
+  height 200px
   align-items center
   justify-content center
   display flex
@@ -44,13 +62,28 @@
   background-color $mercury
   box-shadow 0 0 0 4px $gallery
 
-
   +above(md)
     height 300px
     background-color $mercury
 
   .article-card__container
     background-color $mercury
+
+.background-blend-mode .article-card--empty:after
+  content ''
+  opacity .75
+  display block
+  position absolute
+  top 0
+  left 0
+  width 100%
+  height 100%
+  background $mercury
+  z-index 1
+  background-image url(/images/pattern-transparent-low-opacity.png)
+  background-size 300px auto
+  background-blend-mode: multiply;
+  background-image url(/images/pattern-transparent.png)
 
 .card,
 .article-card__container
@@ -247,8 +280,6 @@
       font-size 25px
       line-height 1.15
       color rgba(black, .38)
-      
-      
 
 .article-card--share.card-0
   left 30%
