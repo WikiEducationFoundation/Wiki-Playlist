@@ -29,6 +29,8 @@ class PlaylistEditor extends React.Component {
 
   constructor(props) {
     super();
+    this.articles = [];
+    this.scrolling = false;
     this.dispatch = props.dispatch;
     es6BindAll(this, [
       '_onboardingTitle'
@@ -49,6 +51,8 @@ class PlaylistEditor extends React.Component {
     if(show_permalink) {
       return this._permalink();
     }
+
+
 
     return (
       <div className={'playlist relative ' + (onboarding ? 'onboarding' : '')}>
@@ -97,6 +101,7 @@ class PlaylistEditor extends React.Component {
     articles.map((article, i) =>{
       _articles.push(
         <ArticleCard index={i}
+            ref={article => this.articles.push(article)}
             key={`article_${i}`}
             dispatch={this.props.dispatch}
             editing={editingArticle}
@@ -166,6 +171,24 @@ class PlaylistEditor extends React.Component {
       </div>)
     } else {
       return null;
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { onboarded } = nextProps.Onboarding;
+    const { editingArticle, articles } = nextProps.Playlist;
+    const nextArticleIndex = _.where(articles, {has_article: true}).length;
+    var $target = $(`#article-${nextArticleIndex}`)
+    if(editingArticle === null &&
+       !this.scrolling &&
+       nextArticleIndex > 0 &&
+       onboarded &&
+       $target !== undefined) {
+      this.scrolling = true;
+      $('html, body').animate({
+          scrollTop: $target.offset().top - 100
+      }, 1000);
+      this.scrolling = false;
     }
   }
 

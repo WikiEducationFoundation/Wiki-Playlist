@@ -47,9 +47,8 @@ export class ArticleCard extends React.Component {
                        this.dispatch(setOnboardingStep(1));
                     }}>back</button></div>);
 
-
     return (
-      <div className={'flex-column flex-stretch ' + onboarding_class + (has_article ? 'article-card' : 'article-card--empty relative editable-container p2 mb2')}>
+      <div id={'article-'+index} className={'flex-column flex-stretch ' + onboarding_class + (has_article ? 'article-card' : 'article-card--empty relative editable-container p2 mb2')}>
 
           {(has_article ?
 
@@ -273,7 +272,6 @@ export class ArticleCard extends React.Component {
     this.startX = left;
     this.startWidth = width;
     this.startHeight = height;
-
 
     return TweenMax.fromTo(target, 1,
       {
