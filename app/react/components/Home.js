@@ -6,6 +6,7 @@ import es6BindAll from "es6bindall";
 import {MD} from '../constants';
 import MediaQuery from 'react-responsive';
 import PlaylistFeature from './PlaylistFeature';
+import LoadingAnimation from './LoadingAnimation';
 
 
 export default class Home extends React.Component {
@@ -66,7 +67,7 @@ export default class Home extends React.Component {
         })}
         </div>);
     } else if (this.state.loading) {
-      return <div><div className="loader"/></div>;
+      return <div><LoadingAnimation/></div>;
     } else {
       return null;
     }

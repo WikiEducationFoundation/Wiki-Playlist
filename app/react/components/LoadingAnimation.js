@@ -1,5 +1,11 @@
 export default class LoadingAnimation extends React.Component {
   render() {
-    return (<div className='container'><p>Rendering your share image...</p></div>);
+    return (
+      <div className="spinner">
+        <div className="bounce1"></div>
+        <div className="bounce2"></div>
+        <div className="bounce3"></div>
+      </div>
+    );
   }
 }

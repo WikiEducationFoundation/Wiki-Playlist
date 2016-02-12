@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { setArticleImage, updateCurrentEditingArticle } from '../actions';
 import { pushPath } from 'redux-simple-router';
 import es6BindAll from "es6bindall";
+import LoadingAnimation from './LoadingAnimation';
 
 class ImageSelector extends React.Component {
 
@@ -31,7 +32,7 @@ class ImageSelector extends React.Component {
       return (<div className='image-selector flex flex-column flex-justify center full-height flex-justify-center'>
         <div>
           <div>Fetching Images...</div>
-          <div className='loader'/>
+          <LoadingAnimation/>
         </div>
       </div>);
     }

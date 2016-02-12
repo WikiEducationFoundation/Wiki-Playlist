@@ -5,7 +5,7 @@ import { FACEBOOK_APP_ID } from '../constants';
 import Icon from './Icon'
 import GSAP from 'react-gsap-enhancer'
 import { connect } from 'react-redux';
-
+import LoadingAnimation from './LoadingAnimation';
 
 import {
   closeShare,
@@ -45,7 +45,7 @@ export class Share extends React.Component {
   _shareRendering() {
     return (
       <div className='center p2 flex flex-column flex-center'>
-        <div className="loader"/>
+        <LoadingAnimation/>
         <div>Preparing your playlist...</div>
       </div>
     )

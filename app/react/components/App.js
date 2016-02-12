@@ -82,8 +82,9 @@ class App extends React.Component {
     const { path } = this.props.routing;
     const { menu_open } = this.state;
     const preview_button = <button className='btn btn-outline'>Preview</button>;
+    const current_path = path.split('/').pop();
     return (
-      <div className={'path-' + path.split('/').pop() + ' ' + this.supportClasses}>
+      <div className={'path-' + current_path}>
         <nav className="md-py2 site__navigation">
           <div className='container flex flex-center flex-justify'>
             <Link to="/" className='black'>
@@ -96,7 +97,7 @@ class App extends React.Component {
 
         <FlashMessage />
 
-        <div className='site__content'>
+        <div className={'site__content ' + current_path}>
           {this.props.children}
         </div>
         {this._devTools()}
