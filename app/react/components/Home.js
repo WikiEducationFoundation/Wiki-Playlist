@@ -31,7 +31,12 @@ export default class Home extends React.Component {
     return (
       <div className='home container'>
         <h1 className='color-title center'>Wiki Playlists</h1>
-        <p className='home__introduction'>Help the Wiki Education Foundation spread the joy of knowledge! Create a Playlist of 3–5 Wikipedia articles on topics you’re most passionate, curious, or excited about. Then share your Playlist on social media.</p>
+        <div className='home__introduction'>
+          <p>Help the Wiki Education Foundation spread the joy of knowledge! Create a Playlist of 3–5 Wikipedia articles on topics you’re most passionate, curious, or excited about. Then share your Playlist on social media.</p>
+          <Link className='btn btn-primary' to="/playlists">
+            Create a Playlist
+          </Link>
+        </div>
         {this._renderPlaylists()}
         <div className='flex flex-justify'>
         {(all && _playlists.length  < total_playlists ? 
