@@ -13,7 +13,7 @@ import {
   resetPlaylist
 } from '../actions';
 
-import { TITLE_LIMIT, CAPTION_LIMIT } from '../constants';
+import { TITLE_LIMIT, CAPTION_LIMIT, MAX_ARTICLES } from '../constants';
 import { pushPath } from 'redux-simple-router';
 import { Link } from 'react-router';
 import es6BindAll from "es6bindall";
@@ -163,7 +163,7 @@ class PlaylistEditor extends React.Component {
 
   _addArticle() {
     const {articles} = this.props.Playlist;
-    if(articles.length < 5) {
+    if(articles.length < MAX_ARTICLES) {
       return (
       <div className="editable-container center p2">
           <button className='action teal'
