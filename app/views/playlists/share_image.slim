@@ -2,7 +2,8 @@
   div.share-image__title.center
     - if @user && @user.username
       div.share-image__user 
-        span #{truncate_username(@user.username)}&#39;s
+        span #{truncate_username(@user.username.strip)}
+        span.lowercase &#39;s
         - if @user.try(:verified) && @user.verified 
           span &nbsp;
           img src='https://w-playlist.s3.amazonaws.com/images/verified.png'
