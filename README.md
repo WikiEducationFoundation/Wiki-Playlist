@@ -1,6 +1,6 @@
 # Wiki Playlist
 
-<img src='https://travis-ci.org/WikiEducationFoundation/WikipediaPlaylist.svg?branch=master'/>
+<img src='https://travis-ci.org/WikiEducationFoundation/Wiki-Playlist.svg?branch=master'/>
 
 ## Project Setup
 
