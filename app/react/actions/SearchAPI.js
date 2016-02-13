@@ -3,6 +3,7 @@
 
 const superagent = require('superagent');
 let jsonp = require('superagent-jsonp');
+import { moveArrayItem } from '../utils/Array';
 
 const wiki_api = "https://en.wikipedia.org/w/api.php?action=";
 
@@ -128,29 +129,31 @@ export function fetchArticleImages(article, callback,) {
         if(!exclude && image.url !== '') {
           images.push(image);
         }
-
-        // Find thumbnail in images and move to index 0
-        // if(thumbnail) {
-        //   let thumbnail_pieces = thumbnail.split('.')
-        //   thumbnail_pieces.pop();
-        //   const filename = thumbnail_pieces.join('').split('/').pop();
-        //   // console.log(filename);
-        //   console.log(_.find(images, (img) => { 
-        //     // console.log(img.url)
-        //     return img.url.indexOf(filename) > -1; 
-        //   }));
-        // }
-
-        
       });
 
     }
 
-    images.push({
+
+    const sorted_images = _.sortBy(images, (image) => {
+      return image.url.indexOf('svg') !== -1;
+    });
+
+    if(thumbnail) {
+      const thumb = thumbnail.split('/').pop();
+      const thumbnailName = thumb.split('.')[0]
+      const fileName = thumbnailName.split('-').pop();
+      const filenameRE = new RegExp(fileName, "i")
+      const thumbnailIndex = _.indexOf(sorted_images, _.find(images, (img) =>{
+        return filenameRE.exec(img.url);
+      }));
+      moveArrayItem(sorted_images, thumbnailIndex, 0);
+    }
+
+    sorted_images.push({
       url: 'http://w-playlist.s3.amazonaws.com/images/lightbulb.png',
       commons_url: 'https://meta.wikimedia.org/wiki/File:Lightbulb_mark.svg'
     });
 
-    callback(images);
+    callback(sorted_images);
   }
 }
