@@ -85,7 +85,9 @@ class SaveButton extends React.Component {
           className='btn ml1'
           onClick={this._savePlaylist.bind(this)}>Publish Playlist</button>);
     } else {
-      return null;
+      return <button className='action teal' onClick={()=>{
+        this.dispatch(showLogin(true));
+      }}>Login</button>;
     }
   }
 

@@ -111,6 +111,7 @@ class App extends React.Component {
         </footer>
 
         {(show_share? <Share/> : null )}
+        {(show_login? <Login dialog={true} /> : null )}
         
       </div>
     )

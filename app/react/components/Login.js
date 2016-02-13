@@ -34,7 +34,7 @@ class Login extends React.Component {
         <div className={loginClass + '__container center card px1 py3'} ref={(container) => {this.container = container}}>
           <div>
             {copy}
-            <div className='py2'>
+            <div className='py2 login__buttons'>
               <a onClick={this._handleLoginClick.bind(this)} className='mb1 btn btn--oauth twitter' data-popup="Login with Twitter" href="/users/auth/twitter"><Icon size="17px" icon="twitter" fill={'white'} />Sign in with Twitter</a>
               <a onClick={this._handleLoginClick.bind(this)} className='mb1 btn btn--oauth facebook' data-popup="Login with Facebook" href="/users/auth/facebook"><Icon size="17px" icon="facebook" fill={'white'} />Sign in with Facebook</a>
               <a onClick={this._handleLoginClick.bind(this)} className='btn btn--oauth wiki' data-popup="Login with Wikipedia Account" href="/users/auth/mediawiki"><Icon size="17px" icon="wiki" fill={'white'} />Sign in with Wikipedia</a>
@@ -93,7 +93,9 @@ class Login extends React.Component {
   }
 
   _handleLoginClick() {
-    this.props.dispatch(setPlaylistShouldSave(true))
+    if(this.props.dialog === undefined) {
+      this.props.dispatch(setPlaylistShouldSave(true))
+    }
   }
 }
 
