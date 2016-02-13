@@ -43,7 +43,8 @@ import {
   REORDER_ARTICLE_IMAGES,
   MINIMUM_ARTICLES,
   SHOW_PERMALINK,
-  RESET_PLAYLIST
+  RESET_PLAYLIST,
+  GO_TO_NEXT_ARTICLE
 } from '../constants';
 
 
@@ -206,7 +207,8 @@ function defaultPlaylist() {
     remaining_to_save: MINIMUM_ARTICLES,
     show_permalink: false,
     permalink: {},
-    share_info: {}
+    share_info: {},
+    next_article: false
   }
 }
 
@@ -215,6 +217,9 @@ function Playlist(state = initialPlaylistState, action) {
   switch (action.type) {
     case SET_EDIT_ARTICLE:
       return _.assign({}, state, {editingArticle: action.index})
+
+    case GO_TO_NEXT_ARTICLE: 
+      return _.assign({}, state, {next_article: action.bool})
 
     case ADD_ARTICLE_CARD:
       var articles = state.articles.slice(0);

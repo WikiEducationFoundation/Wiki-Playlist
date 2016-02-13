@@ -40,7 +40,8 @@ import {
   REORDER_ARTICLE_IMAGES,
   SHOW_PERMALINK,
   RESET_PLAYLIST,
-  ARTICLE_LOADING
+  ARTICLE_LOADING,
+  GO_TO_NEXT_ARTICLE
 } from '../constants';
 
 
@@ -148,6 +149,13 @@ export function articleLoading(index, bool) {
   return {
     type: ARTICLE_LOADING,
     index,
+    bool
+  }
+}
+
+export function nextArticle(bool) {
+  return {
+    type: GO_TO_NEXT_ARTICLE,
     bool
   }
 }

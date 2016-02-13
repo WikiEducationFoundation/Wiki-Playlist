@@ -7,7 +7,8 @@ import {
   setOnboardingStep,
   setUserOnboarding,
   removeArticle,
-  reorderArticleImages
+  reorderArticleImages,
+  nextArticle
 } from '../actions';
 
 import { MDINT } from '../constants';
@@ -169,6 +170,7 @@ export class ArticleCard extends React.Component {
                     this.dispatch(setUserOnboarding(true));
                     setOnboardingCookie();
                     this.dispatch(updateCurrentEditingArticle(null));
+                    this.dispatch(nextArticle(true))
                   }}>Save</button>
         </div>);
 

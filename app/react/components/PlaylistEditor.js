@@ -10,7 +10,8 @@ import {
   setPlaylistTitle,
   updatePlaylistUsername,
   updatePlaylistCaption,
-  resetPlaylist
+  resetPlaylist,
+  nextArticle
 } from '../actions';
 
 import { TITLE_LIMIT, CAPTION_LIMIT, MAX_ARTICLES } from '../constants';
@@ -175,20 +176,17 @@ class PlaylistEditor extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { onboarded } = nextProps.Onboarding;
-    const { editingArticle, articles } = nextProps.Playlist;
+    const { next_article, editingArticle, articles } = nextProps.Playlist;
     const nextArticleIndex = _.where(articles, {has_article: true}).length;
     var $target = $(`#article-${nextArticleIndex}`)
-    if(editingArticle === null &&
-       !this.scrolling &&
-       nextArticleIndex > 0 &&
-       onboarded &&
-       $target !== undefined) {
+    if(next_article && !this.scrolling) {
       this.scrolling = true;
       $('html, body').animate({
           scrollTop: $target.offset().top - 100
-      }, 1000);
-      this.scrolling = false;
+      }, 1000, ()=>{
+        this.dispatch(nextArticle(false))
+        this.scrolling = false;
+      });
     }
   }
 
