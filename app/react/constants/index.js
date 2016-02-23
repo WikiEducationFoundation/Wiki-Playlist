@@ -50,7 +50,7 @@ export const MD = '756px';
 
 // MISC
 export const MINIMUM_ARTICLES = (process.env.NODE_ENV === 'development' ? 1 : 3);
-export const MAX_ARTICLES = 10;
+export const MAX_ARTICLES = 1000;
 
 // LIMITS
 export const TITLE_LIMIT = 60;
