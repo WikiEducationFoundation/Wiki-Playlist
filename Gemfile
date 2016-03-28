@@ -33,6 +33,9 @@ gem 'twitter'
 gem 'kaminari'
 
 # Deployment
+gem 'capistrano'
+gem 'capistrano-rvm'
+gem 'capistrano-bundler'
 gem 'capistrano3-puma'
 
 group :development, :test do

@@ -3,6 +3,8 @@ lock '3.4.0'
 
 set :branch, 'production'
 set :application, 'Wiki-Playlist'
+set :repo_url, 'git@github.com:WikiEducationFoundation/Wiki-Playlist.git'
+
 set :rails_env, 'production'
 
 role :app, %w(root@playlist.wikiedu.org)
@@ -14,6 +16,14 @@ set :address, 'playlist.wikiedu.org'
 
 set :deploy_to, '/var/www/Wiki-Playlist'
 set :rvm_type, :system
+
+# Default value for :linked_files is []
+set :linked_files, fetch(:linked_files, []).push('config/application.yml',
+                                                 'config/database.yml',
+                                                 'config/secrets.yml')
+
+# Default value for linked_dirs is []
+set :linked_dirs, fetch(:linked_dirs, []).push('bin', 'log', 'tmp')
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
