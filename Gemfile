@@ -36,7 +36,7 @@ gem 'kaminari'
 gem 'capistrano'
 gem 'capistrano-rvm'
 gem 'capistrano-bundler'
-gem 'capistrano3-puma'
+gem 'capistrano3-puma', github: "seuros/capistrano-puma"
 
 group :development, :test do
   gem 'byebug'
