@@ -74,8 +74,16 @@ $ git commit -m 'Frontend Asset Build'
 $ git push heroku master
 ```
 
-
 [Heroku Buildpack PhantomJS 2.0](https://github.com/srbartlett/heroku-buildpack-phantomjs-2.0/blob/master/README.md)
+
+## Deploy Elsewhere
+
+Compile production assets with sprockets by running:
+```shell
+rake assets:precompile
+```
+(Heroku runs this automatically with the ruby buildpack)
+
 
 ## CI Deployment with Travis CI
 

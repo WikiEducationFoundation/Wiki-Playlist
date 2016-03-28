@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 20160208233351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "pg_stat_statements"
 
   create_table "articles", force: :cascade do |t|
     t.integer  "playlist_id"

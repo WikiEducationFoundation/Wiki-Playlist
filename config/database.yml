@@ -23,7 +23,11 @@ default: &default
 
 development:
   <<: *default
+  port: 5432
+  host: localhost
   database: wiki_playlist_development
+  username: jonathan
+  password: tacoma
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -82,6 +86,9 @@ test:
 local_production:
   <<: *default
   database: wiki_playlist_production
+  username: jonathan
+  password: tacoma
+  host: localhost
 
 production:
   <<: *default
