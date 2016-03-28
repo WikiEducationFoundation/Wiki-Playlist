@@ -32,6 +32,9 @@ gem 'new_relic_ping'
 gem 'twitter'
 gem 'kaminari'
 
+# Deployment
+gem 'capistrano3-puma'
+
 group :development, :test do
   gem 'byebug'
   gem 'guard'
