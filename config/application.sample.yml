@@ -1,0 +1,26 @@
+wikipedia_token: <token>
+wikipedia_secret: <secret>
+wikipedia_language: en
+
+facebook_app_id: <id>
+facebook_app_secret: <secret>
+
+twitter_key: <id>
+twitter_secret: <secret>
+
+aws_bucket: '<bucket>'
+
+local_production:
+  aws_bucket: '<bucket>'
+
+production:
+  wikipedia_token: '<token>'
+  wikipedia_secret: '<secret>'
+  wikipedia_language: 'en'
+  aws_bucket: '<bucket>'
+  
+  facebook_app_id: '<app_id>'
+  facebook_app_secret: '<app_secret>'
+  
+  twitter_key: '<app_key>'
+  twitter_secret: '<app_secret>'
