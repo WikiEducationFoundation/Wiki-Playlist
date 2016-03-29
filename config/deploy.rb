@@ -24,7 +24,7 @@ set :linked_files, fetch(:linked_files, []).push('config/application.yml',
                                                  'config/secrets.yml')
 
 # Default value for linked_dirs is []
-set :linked_dirs, fetch(:linked_dirs, []).push('bin', 'log', 'tmp')
+set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp')
 
 set :puma_threads, [2, 4]
 set :puma_workers, 2
