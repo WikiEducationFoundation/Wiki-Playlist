@@ -29,6 +29,7 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp')
 set :puma_threads, [2, 4]
 set :puma_workers, 2
 set :puma_preload_app, true
+set :puma_init_active_record, true
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
