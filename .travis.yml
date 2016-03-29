@@ -36,17 +36,17 @@ before_script:
   - npm install
   - npm run build
 
-deploy:
-  provider: heroku
-  api_key:
-    secure: K6GGJCpw0bWCUzU4hZZOm3a2BQ/Z0P0bbcxixDaWTS8im0+XwiuqNW4StB/pUBQqN5rQU/JuYxcrGneQMeISqfYZow3IRzq6/+Hv4N4saNJAzPJ95L+kC/6g0ybxmuHuhOq8m59zqpveAOsSlhf1WOcGvAxym0GykM61pMN7yR4bZsNbOWIPXDjCI09BFPR/hh7jinU4F3NYyJYXzG9y+brqGd/6wo7HFDYE+M9o0IgM3k63DE1EZ3OD5AObPAz68hIESvry1sQlbAGJEy2eN1H/01Oc8M5g2ARQsoitRgCSwPpbNFIvXz9MOIxhnQZrzX+9PVsp++2edztOEvGwj+A1iZX15fdDBN0m8gJ5PaFR/K2u3/t3WI3DyXPTiYT5eT2tGh28bnfzoYSrm83W4VvCCOGVe99brF0ctxqr76QF53tWWK0QmGeN9Ve4leH5TL4ZnS9FVEvQ6sayoAKCr03oZwCqF/P/kLuei5m9Ei0Xe/SlnGgGHf/1+OADHSsB5jZy11YRtYwpPeJffp/P8gjQxWsQgjCm5CRyd9dEV3rCPAybDAixBl1elWH1nQqq06GLVUUy9VyIVmLU6EEU0vnjClBSXSvgbrYAKbhm0s3sCqpE0oDfuQJY0lFOkm0nPVntjf67KZShjcMwC2Kz2p4ImlzbmqsQV6QeqF3g1Cc=
-  app:
-    master: wiki-playlist-staging
-    homepage-gallery: wiki-playlist-staging
-    production: wiki-playlist
-
-  run: bundle exec rake db:migrate
-  skip_cleanup: true
+# deploy:
+#   provider: heroku
+#   api_key:
+#     secure: K6GGJCpw0bWCUzU4hZZOm3a2BQ/Z0P0bbcxixDaWTS8im0+XwiuqNW4StB/pUBQqN5rQU/JuYxcrGneQMeISqfYZow3IRzq6/+Hv4N4saNJAzPJ95L+kC/6g0ybxmuHuhOq8m59zqpveAOsSlhf1WOcGvAxym0GykM61pMN7yR4bZsNbOWIPXDjCI09BFPR/hh7jinU4F3NYyJYXzG9y+brqGd/6wo7HFDYE+M9o0IgM3k63DE1EZ3OD5AObPAz68hIESvry1sQlbAGJEy2eN1H/01Oc8M5g2ARQsoitRgCSwPpbNFIvXz9MOIxhnQZrzX+9PVsp++2edztOEvGwj+A1iZX15fdDBN0m8gJ5PaFR/K2u3/t3WI3DyXPTiYT5eT2tGh28bnfzoYSrm83W4VvCCOGVe99brF0ctxqr76QF53tWWK0QmGeN9Ve4leH5TL4ZnS9FVEvQ6sayoAKCr03oZwCqF/P/kLuei5m9Ei0Xe/SlnGgGHf/1+OADHSsB5jZy11YRtYwpPeJffp/P8gjQxWsQgjCm5CRyd9dEV3rCPAybDAixBl1elWH1nQqq06GLVUUy9VyIVmLU6EEU0vnjClBSXSvgbrYAKbhm0s3sCqpE0oDfuQJY0lFOkm0nPVntjf67KZShjcMwC2Kz2p4ImlzbmqsQV6QeqF3g1Cc=
+#   app:
+#     master: wiki-playlist-staging
+#     homepage-gallery: wiki-playlist-staging
+#     production: wiki-playlist
+#
+#   run: bundle exec rake db:migrate
+#   skip_cleanup: true
 
 # after_failure:
 #   - npm install imgur-uploader-cli -g
