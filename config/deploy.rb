@@ -10,6 +10,7 @@ set :rails_env, 'production'
 role :app, %w(root@playlist.wikiedu.org)
 role :web, %w(root@playlist.wikiedu.org)
 role :db,  %w(root@playlist.wikiedu.org)
+set :assets_roles, [:web, :app]
 
 set :user, 'root'
 set :address, 'playlist.wikiedu.org'
@@ -24,6 +25,10 @@ set :linked_files, fetch(:linked_files, []).push('config/application.yml',
 
 # Default value for linked_dirs is []
 set :linked_dirs, fetch(:linked_dirs, []).push('bin', 'log', 'tmp')
+
+set :puma_threads, [2, 4]
+set :puma_workers, 2
+set :puma_preload_app, true
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp

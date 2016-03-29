@@ -34,6 +34,7 @@ gem 'kaminari'
 
 # Deployment
 gem 'capistrano'
+gem 'capistrano-rails'
 gem 'capistrano-rvm'
 gem 'capistrano-bundler'
 gem 'capistrano3-puma', github: "seuros/capistrano-puma"
