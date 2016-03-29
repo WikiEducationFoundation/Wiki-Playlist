@@ -24,7 +24,7 @@ class PlaylistsController < ApplicationController
   end
 
   def index
-
+    
     if current_user && current_user.admin
       page = params[:page].nil? ? 0 : params[:page]
       @playlists = Playlist.all.order('updated_at DESC').page(page).per(20)
@@ -32,7 +32,7 @@ class PlaylistsController < ApplicationController
     else
       @playlists = nil
     end
-
+    
     @featured_playlists = Playlist.featured.limit(20).order('updated_at DESC')
 
     if current_user.nil?
@@ -40,7 +40,7 @@ class PlaylistsController < ApplicationController
     else
       @user = User.find(current_user.id).as_json
     end
-
+    
     respond_to do |format|
       format.json do
         format.json { render json: { playlists: @playlists, featured_playlists: @featured_playlists, total_playlists: @total_playlists, user: @user } }
@@ -128,7 +128,7 @@ class PlaylistsController < ApplicationController
     render :json => { :preview => get_share_image_html(@playlist) }
   end
 
-  def self.get_share_image_html(playlist)
+  def get_share_image_html(playlist)
     render_to_string(
       :template => '/playlists/share_image',
       :formats => [:html],
@@ -140,7 +140,7 @@ class PlaylistsController < ApplicationController
       }
     )
   end
-
+  
   private
 
     def require_permission
@@ -172,7 +172,7 @@ class PlaylistsController < ApplicationController
     def playlist_params
       params.require(:playlist).permit(
         :id,
-        :title,
+        :title, 
         :caption,
         :slug,
         :featured,
