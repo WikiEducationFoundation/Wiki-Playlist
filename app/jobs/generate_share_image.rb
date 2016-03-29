@@ -10,7 +10,7 @@ class GenerateShareImage < Que::Job
     @playlist = Playlist.find(playlist_id)
     playlist_html = options[:html]
     title = @playlist.title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
-    render_job = `phantomjs --ignore-ssl-errors=yes --ssl-protocol=TLSv1 --debug=true lib/script/share-image.js '#{playlist_html}' '#{title}'`
+    render_job = `xvfb-run phantomjs --ignore-ssl-errors=yes --ssl-protocol=TLSv1 --debug=true lib/script/share-image.js '#{playlist_html}' '#{title}'`
     image_info = JSON.parse(render_job)
     rendered = image_info['rendered']
     path = image_info['path']
@@ -22,12 +22,12 @@ class GenerateShareImage < Que::Job
     @attachment = File.open path
 
     ActiveRecord::Base.transaction do
-      @playlist.update_attributes :share_image_rendered => true, 
+      @playlist.update_attributes :share_image_rendered => true,
                                   :share_image => @attachment,
                                   :needs_image_regeneration => false
       File.delete(path)
       destroy
     end
-    
+
   end
 end
