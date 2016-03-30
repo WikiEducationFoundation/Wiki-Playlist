@@ -8,7 +8,7 @@ class GenerateShareImage < Que::Job
 
   def run(playlist_id, options)
     Rails.logger.warn "Playlist #{playlist_id}: Started image generation"
-    Rails.loger.warn "Playlist #{playlist_id} options: #{options}"
+    Rails.logger.warn "Playlist #{playlist_id} options: #{options}"
     @playlist = Playlist.find(playlist_id)
     playlist_html = options[:html]
     title = @playlist.title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
