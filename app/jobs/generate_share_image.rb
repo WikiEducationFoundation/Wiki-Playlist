@@ -7,6 +7,8 @@ class GenerateShareImage < Que::Job
   @run_at = proc { 1.second.from_now }
 
   def run(playlist_id, options)
+    Rails.logger.warn "Playlist #{playlist_id}: Started image generation"
+    Rails.loger.warn "Playlist #{playlist_id} options: #{{options}}"
     @playlist = Playlist.find(playlist_id)
     playlist_html = options[:html]
     title = @playlist.title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
@@ -20,6 +22,7 @@ class GenerateShareImage < Que::Job
     end
 
     @attachment = File.open path
+    Rails.logger.warn "Playlist #{playlist_id} attachment: #{@attachment}}"
 
     ActiveRecord::Base.transaction do
       @playlist.update_attributes :share_image_rendered => true,
@@ -27,7 +30,8 @@ class GenerateShareImage < Que::Job
                                   :needs_image_regeneration => false
       File.delete(path)
       destroy
+      Rails.logger.warn "Playlist #{playlist_id}: destroyed job"
     end
-
+    Rails.logger.warn "Playlist #{playlist_id}: ended image generation"
   end
 end
