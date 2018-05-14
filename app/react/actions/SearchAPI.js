@@ -150,7 +150,7 @@ export function fetchArticleImages(article, callback,) {
     }
 
     sorted_images.push({
-      url: 'http://w-playlist.s3.amazonaws.com/images/lightbulb.png',
+      url: 'https://w-playlist.s3.amazonaws.com/images/lightbulb.png',
       commons_url: 'https://meta.wikimedia.org/wiki/File:Lightbulb_mark.svg'
     });
 
