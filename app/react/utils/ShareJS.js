@@ -109,7 +109,7 @@
         return $.getScript(this.platforms[0].sdk_url, (function(_this) {
           return function() {
             return window.fbAsyncInit = function() {
-              FB_https = true;
+              FB._https = true;
               FB.init({
                 appId: _this.settings.facebookAppID,
                 status: true,
