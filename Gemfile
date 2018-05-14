@@ -37,7 +37,7 @@ gem 'capistrano'
 gem 'capistrano-rails'
 gem 'capistrano-rvm'
 gem 'capistrano-bundler'
-gem 'capistrano3-puma', github: "seuros/capistrano-puma"
+gem 'capistrano3-puma' , group: :development
 
 group :development, :test do
   gem 'byebug'
