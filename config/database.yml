@@ -26,7 +26,7 @@ development:
   port: 5432
   host: localhost
   database: wiki_playlist_development
-  username: jonathan
+  username: playlist
   password: tacoma
 
   # The specified database role being used to connect to postgres.
